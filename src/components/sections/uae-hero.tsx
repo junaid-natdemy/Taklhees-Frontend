@@ -3,15 +3,15 @@
 import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ShieldCheck, Award, Briefcase } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Briefcase, FileCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { DriftWall } from '@/components/ui/drift-wall';
 import { LiquidButton } from '@/components/ui/liquid-glass-button';
 
-const CREDENTIALS = [
-  { icon: ShieldCheck, title: 'ICV', sub: 'Certification' },
-  { icon: Award, title: 'ISO', sub: 'Certification' },
-  { icon: Briefcase, title: 'Trade Mark', sub: 'Registration' },
+const TRUST_HIGHLIGHTS = [
+  { icon: Briefcase, title: 'Business Setup' },
+  { icon: ShieldCheck, title: 'PRO Services' },
+  { icon: FileCheck, title: 'Documentation Support' },
 ];
 
 /* 36-point scalloped starburst rosette points for vintage seal stamp */
@@ -275,14 +275,16 @@ export function UAEHero() {
             <div className="flex items-center gap-3">
               <span className="h-[2px] w-7 shrink-0 rounded-full bg-[#A31C1B]" />
               <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-neutral-700 dark:text-[#F5F5F2] sm:text-[11px]">
-                Business Setup &amp; Certification in UAE
+                BUSINESS SETUP &amp; PRO SERVICES IN UAE
               </span>
             </div>
 
             {/* Headline */}
-            <h1 className="font-sans text-[32px] font-extrabold leading-[1.08] tracking-[-0.02em] text-neutral-900 dark:text-[#F5F5F2] sm:text-[40px] lg:text-[42px] xl:text-[46px]">
-              <span className="block">Your Trusted</span>
-              <span className="block">Business Partner</span>
+            <h1 className="font-sans text-[28px] font-extrabold leading-[1.12] tracking-[-0.02em] text-neutral-900 dark:text-[#F5F5F2] sm:text-[34px] lg:text-[36px] xl:text-[40px]">
+              <span className="block">Your Trusted Partner for</span>
+              <span className="block text-neutral-800 dark:text-[#E2E8F0]">
+                PRO Services &amp; Business Setup
+              </span>
               <span className="block">
                 in{' '}
                 <span className="relative inline-block">
@@ -302,21 +304,17 @@ export function UAEHero() {
               </span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="max-w-[400px] text-sm sm:text-[15px] leading-relaxed text-neutral-600 dark:text-[#A5AAA7] pt-0.5">
-              We build your ideal business solution
-              <br className="hidden sm:block" /> with passion for lasting success.
+            {/* Supporting Description */}
+            <p className="max-w-[460px] text-sm sm:text-[15px] leading-relaxed text-neutral-600 dark:text-[#A5AAA7] pt-0.5">
+              Simplify your business journey in the UAE with Takhlees. From business setup support and government documentation to visa and typing services, we help you navigate essential business processes with confidence.
             </p>
 
-            {/* Credentials */}
+            {/* Trust & Service Highlights */}
             <div className="flex flex-wrap items-center gap-y-3 divide-neutral-300 dark:divide-[#303432] sm:divide-x">
-              {CREDENTIALS.map(({ icon: Icon, title, sub }) => (
-                <div key={title} className="flex items-center gap-2.5 pr-4 sm:px-4 sm:first:pl-0 sm:last:pr-0">
-                  <Icon className="h-5 w-5 shrink-0 text-[#0B6B35] dark:text-[#16A05A]" strokeWidth={1.75} />
-                  <div className="flex flex-col leading-tight">
-                    <span className="text-xs font-bold text-neutral-900 dark:text-[#F5F5F2]">{title}</span>
-                    <span className="text-[11px] text-neutral-500 dark:text-[#A5AAA7]">{sub}</span>
-                  </div>
+              {TRUST_HIGHLIGHTS.map(({ icon: Icon, title }) => (
+                <div key={title} className="flex items-center gap-2 pr-4 sm:px-4 sm:first:pl-0 sm:last:pr-0">
+                  <Icon className="h-4 w-4 shrink-0 text-[#0B6B35] dark:text-[#16A05A]" strokeWidth={2} />
+                  <span className="text-xs font-bold text-neutral-900 dark:text-[#F5F5F2]">{title}</span>
                 </div>
               ))}
             </div>
@@ -331,7 +329,7 @@ export function UAEHero() {
               </LiquidButton>
               <LiquidButton variant="glass" size="md" asChild>
                 <Link href="/ae/services">
-                  <span>View Our Services</span>
+                  <span>Explore Our Services</span>
                 </Link>
               </LiquidButton>
             </div>

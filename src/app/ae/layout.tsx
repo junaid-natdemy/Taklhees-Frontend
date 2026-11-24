@@ -3,14 +3,18 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 
 export const metadata: Metadata = {
-  title: 'Your Trusted Business Partner in UAE — Takhlees Business',
+  metadataBase: new URL('https://takhleesbusiness.com'),
+  title: {
+    default: 'Takhlees Business | PRO Services & Business Setup in UAE',
+    template: '%s | Takhlees Business',
+  },
   description:
-    'Business setup, ICV & ISO certification, and government PRO services across the United Arab Emirates. Empowering businesses with 10+ years of excellence.',
+    'Looking for PRO services or business setup support in the UAE? Explore Takhlees services for business documentation, visa support and more.',
   openGraph: {
-    title: 'Takhlees Business — UAE Business Setup & PRO Services',
+    title: 'Takhlees Business | PRO Services & Business Setup in UAE',
     description:
-      'Your trusted business partner in UAE. We build your ideal business solution with passion for lasting success.',
-    url: 'https://takhlees.ae',
+      'Looking for PRO services or business setup support in the UAE? Explore Takhlees services for business documentation, visa support and more.',
+    url: 'https://takhleesbusiness.com/ae',
     siteName: 'Takhlees Business',
     images: [
       {

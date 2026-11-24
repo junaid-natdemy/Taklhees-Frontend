@@ -11,7 +11,7 @@ import { LiquidButton } from '@/components/ui/liquid-glass-button';
 const TRUST_HIGHLIGHTS = [
   { icon: Briefcase, title: 'Business Setup' },
   { icon: ShieldCheck, title: 'PRO Services' },
-  { icon: FileCheck, title: 'Documentation Support' },
+  { icon: FileCheck, title: 'Documentation' },
 ];
 
 /* 36-point scalloped starburst rosette points for vintage seal stamp */
@@ -280,11 +280,9 @@ export function UAEHero() {
             </div>
 
             {/* Headline */}
-            <h1 className="font-sans text-[28px] font-extrabold leading-[1.12] tracking-[-0.02em] text-neutral-900 dark:text-[#F5F5F2] sm:text-[34px] lg:text-[36px] xl:text-[40px]">
-              <span className="block">Your Trusted Partner for</span>
-              <span className="block text-neutral-800 dark:text-[#E2E8F0]">
-                PRO Services &amp; Business Setup
-              </span>
+            <h1 className="font-sans text-[32px] font-extrabold leading-[1.08] tracking-[-0.02em] text-neutral-900 dark:text-[#F5F5F2] sm:text-[38px] lg:text-[40px] xl:text-[44px]">
+              <span className="block">Your Trusted</span>
+              <span className="block">Business Partner</span>
               <span className="block">
                 in{' '}
                 <span className="relative inline-block">
@@ -305,8 +303,8 @@ export function UAEHero() {
             </h1>
 
             {/* Supporting Description */}
-            <p className="max-w-[460px] text-sm sm:text-[15px] leading-relaxed text-neutral-600 dark:text-[#A5AAA7] pt-0.5">
-              Simplify your business journey in the UAE with Takhlees. From business setup support and government documentation to visa and typing services, we help you navigate essential business processes with confidence.
+            <p className="max-w-[400px] text-sm sm:text-[15px] leading-relaxed text-neutral-600 dark:text-[#A5AAA7] pt-0.5">
+              Simplifying business setup, PRO services and documentation across the UAE.
             </p>
 
             {/* Trust & Service Highlights */}

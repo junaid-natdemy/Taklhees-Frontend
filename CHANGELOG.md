@@ -630,6 +630,47 @@ This document is the **single source of truth** for all architectural, database,
   - `npm run lint`: 0 errors.
   - `python manage.py check`: 0 issues (0 silenced).
 
+---
+
+### Entry #026 — Custom Three-Part Connected Navbar Architecture & UAE Brand Curved Ribbon Geometry
+* **Date & Time:** 2026-11-24 22:00 (IST)
+* **Scope:** Custom Three-Part Connected Navbar Redesign, Sculpted Curved Ribbon Connectors (UAE Green & Red), Interactive Glass Services Dropdown & Responsive Multi-Viewport Optimization
+* **Files Modified:**
+  - `frontend-takhlees/src/components/layout/header.tsx`
+  - `CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Single Continuous Pill Architecture Limitation:** The existing single pill navbar lacked distinct structural zoning between the corporate brand identity, the primary navigation routes, and the internationalization/theme utilities.
+- **Brand Geometry Alignment:** The approved creative direction required a custom connected capsule architecture reflecting the flowing curves of the Takhlees logo and the four UAE national/brand colors (Red, Green, White, Black).
+
+#### 2. Changes Applied:
+- **Architected Three Independent Aligned Capsules (48px Height):**
+  1. **Left Section — Logo Capsule:** Rounded capsule (`rounded-full`) housing the original Takhlees emblem (32x32), Arabic typography `تـخـلـيـص`, and uppercase `TAKHLEES` branding on off-white/charcoal glass surfaces with subtle borders (`border-black/[0.08]` / `border-[#303432]`).
+  2. **Center Section — Main Navigation Capsule:** Flexible dominant center capsule hosting all 8 routes (`Home`, `About Us`, `Services`, `Branches`, `Gallery`, `Career`, `Blog`, `Contact`) with refined active indicator (`#00843D` / `#16A05A`), subtle backlight hover, and an interactive glass dropdown for UAE Corporate Services (Company Setup, PRO, Visas, ICV/ISO, Trademark).
+  3. **Right Section — Utility Capsule:** Compact rounded capsule housing the internationalization country selector (`UAE` / `India` flags with animated dropdown), vertical divider, and 26px Nimbus Liquid Theme Toggle (`LiquidToggle`).
+- **Engineered Custom Flowing Curved Ribbon Connectors:**
+  - **Connection A (Logo → Nav):** Flowing forest-green / luminous emerald curved ribbon emerging from the bottom-right of the Logo Capsule and sweeping up into the top-left shoulder of the Navigation Capsule with specular meniscus highlight and drop shadow.
+  - **Connection B (Nav → Utility):** Flowing crimson-red curved ribbon emerging from the top-right of the Navigation Capsule and sweeping down into the bottom-left shoulder of the Utility Capsule with specular meniscus highlight and drop shadow.
+- **Mobile & Tablet Responsive Strategy:**
+  - On desktop (`lg`+ / 1024px+): Displays all three connected capsules with the dual sculpted ribbon connectors in one continuous horizontal architecture.
+  - On mobile (`< lg` / < 1024px): Adapts into a streamlined dual-capsule layout (Logo Capsule on left, Utility Capsule with mobile menu toggle on right), with a smooth animated slide-down navigation drawer.
+
+#### 3. Technical Rationale:
+- Breaking the navigation into three purpose-built capsules linked by physical-looking SVG ribbons elevates the navbar from a generic template into a distinctive, proprietary brand asset. The 48px height constraint is strictly preserved to maintain the optimal vertical spacing established in Entry #025.
+
+#### 4. Verification & Proof:
+- **Playwright Live Verification:**
+  - `crop_3part_live_1440_light.png`: Light mode rendering with ivory surfaces and rich green/red ribbons.
+  - `crop_3part_live_1440_dark.png`: Dark mode rendering with `#111313` blackout surfaces and luminous emerald/crimson ribbons.
+  - `crop_3part_live_1280_dark.png`: Verified on 13" laptop viewport (1280x800).
+  - `crop_3part_live_dropdown_services.png`: Verified interactive services dropdown with 5 corporate offerings.
+  - `crop_3part_live_mobile_drawer.png`: Verified compact mobile layout with animated drawer at 390x844.
+- **Quality Checks:**
+  - `npm run type-check`: 0 errors.
+  - `npm run lint`: 0 warnings / 0 errors.
+  - `python manage.py check`: 0 issues (0 silenced).
+
+
 - **Visual Validation:** Verified Burj Khalifa spire, stepped setbacks, and surrounding towers appear crisp, sharp, and unmistakably visible as glowing emerald architectural line-art in dark mode.
 
 ---
@@ -807,6 +848,47 @@ This document is the **single source of truth** for all architectural, database,
   - `npm run type-check`: 0 errors.
   - `npm run lint`: 0 errors.
   - `python manage.py check`: 0 issues (0 silenced).
+
+---
+
+### Entry #026 — Custom Three-Part Connected Navbar Architecture & UAE Brand Curved Ribbon Geometry
+* **Date & Time:** 2026-11-24 22:00 (IST)
+* **Scope:** Custom Three-Part Connected Navbar Redesign, Sculpted Curved Ribbon Connectors (UAE Green & Red), Interactive Glass Services Dropdown & Responsive Multi-Viewport Optimization
+* **Files Modified:**
+  - `frontend-takhlees/src/components/layout/header.tsx`
+  - `CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Single Continuous Pill Architecture Limitation:** The existing single pill navbar lacked distinct structural zoning between the corporate brand identity, the primary navigation routes, and the internationalization/theme utilities.
+- **Brand Geometry Alignment:** The approved creative direction required a custom connected capsule architecture reflecting the flowing curves of the Takhlees logo and the four UAE national/brand colors (Red, Green, White, Black).
+
+#### 2. Changes Applied:
+- **Architected Three Independent Aligned Capsules (48px Height):**
+  1. **Left Section — Logo Capsule:** Rounded capsule (`rounded-full`) housing the original Takhlees emblem (32x32), Arabic typography `تـخـلـيـص`, and uppercase `TAKHLEES` branding on off-white/charcoal glass surfaces with subtle borders (`border-black/[0.08]` / `border-[#303432]`).
+  2. **Center Section — Main Navigation Capsule:** Flexible dominant center capsule hosting all 8 routes (`Home`, `About Us`, `Services`, `Branches`, `Gallery`, `Career`, `Blog`, `Contact`) with refined active indicator (`#00843D` / `#16A05A`), subtle backlight hover, and an interactive glass dropdown for UAE Corporate Services (Company Setup, PRO, Visas, ICV/ISO, Trademark).
+  3. **Right Section — Utility Capsule:** Compact rounded capsule housing the internationalization country selector (`UAE` / `India` flags with animated dropdown), vertical divider, and 26px Nimbus Liquid Theme Toggle (`LiquidToggle`).
+- **Engineered Custom Flowing Curved Ribbon Connectors:**
+  - **Connection A (Logo → Nav):** Flowing forest-green / luminous emerald curved ribbon emerging from the bottom-right of the Logo Capsule and sweeping up into the top-left shoulder of the Navigation Capsule with specular meniscus highlight and drop shadow.
+  - **Connection B (Nav → Utility):** Flowing crimson-red curved ribbon emerging from the top-right of the Navigation Capsule and sweeping down into the bottom-left shoulder of the Utility Capsule with specular meniscus highlight and drop shadow.
+- **Mobile & Tablet Responsive Strategy:**
+  - On desktop (`lg`+ / 1024px+): Displays all three connected capsules with the dual sculpted ribbon connectors in one continuous horizontal architecture.
+  - On mobile (`< lg` / < 1024px): Adapts into a streamlined dual-capsule layout (Logo Capsule on left, Utility Capsule with mobile menu toggle on right), with a smooth animated slide-down navigation drawer.
+
+#### 3. Technical Rationale:
+- Breaking the navigation into three purpose-built capsules linked by physical-looking SVG ribbons elevates the navbar from a generic template into a distinctive, proprietary brand asset. The 48px height constraint is strictly preserved to maintain the optimal vertical spacing established in Entry #025.
+
+#### 4. Verification & Proof:
+- **Playwright Live Verification:**
+  - `crop_3part_live_1440_light.png`: Light mode rendering with ivory surfaces and rich green/red ribbons.
+  - `crop_3part_live_1440_dark.png`: Dark mode rendering with `#111313` blackout surfaces and luminous emerald/crimson ribbons.
+  - `crop_3part_live_1280_dark.png`: Verified on 13" laptop viewport (1280x800).
+  - `crop_3part_live_dropdown_services.png`: Verified interactive services dropdown with 5 corporate offerings.
+  - `crop_3part_live_mobile_drawer.png`: Verified compact mobile layout with animated drawer at 390x844.
+- **Quality Checks:**
+  - `npm run type-check`: 0 errors.
+  - `npm run lint`: 0 warnings / 0 errors.
+  - `python manage.py check`: 0 issues (0 silenced).
+
 
 
 

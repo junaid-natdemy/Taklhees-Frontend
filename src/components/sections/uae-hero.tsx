@@ -224,7 +224,7 @@ function DubaiSkylineSkeleton() {
 
 export function UAEHero() {
   return (
-    <section className="relative flex min-h-[calc(100vh-92px)] items-center overflow-hidden bg-transparent transition-colors duration-300">
+    <section className="relative flex min-h-[calc(100vh-76px)] sm:min-h-[calc(100vh-78px)] lg:min-h-[calc(100vh-76px)] xl:min-h-[calc(100vh-76px)] 2xl:min-h-[calc(100vh-84px)] items-center overflow-hidden bg-transparent transition-colors duration-300">
       {/* ================= BACKGROUND ================= */}
       <div className="pointer-events-none absolute inset-0 select-none overflow-hidden">
         {/* Dark mode subtle charcoal tonal depth (Zero green background wash) */}

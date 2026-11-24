@@ -585,6 +585,51 @@ This document is the **single source of truth** for all architectural, database,
   - Skyline Green Line RGB: `[28, 93, 56]` (over **10x brightness contrast increase** over background).
   - Line Pixel Count: **20,424 visible green edge pixels** confirmed in lower-left hero crop.
 - **Type Checking & Linting:** `npm run type-check` (0 errors), `npm run lint` (0 errors), Django `manage.py check` (0 issues).
+
+---
+
+### Entry #025 — Responsive Liquid Glass Navbar Height Calibration & Small Laptop Viewport Optimization
+* **Date & Time:** 2026-11-24 21:40 (IST)
+* **Scope:** Responsive Liquid Glass Navbar Height Calibration, Small Laptop Viewport Optimization (1024px–1440px), Visual Clearance Tuning
+* **Files Modified:**
+  - `frontend-takhlees/src/components/layout/header.tsx`
+  - `frontend-takhlees/src/components/sections/uae-hero.tsx`
+  - `CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Excessive Navbar Height on Laptops:** On compact and 13"/14" laptop viewports (1024px to 1440px wide with 768px to 800px display height, e.g. 13" MacBook Air/Pro, ThinkPad, Chromebooks), the previous 72px total header height (56px pill height + 16px wrapper padding) consumed excessive vertical screen height (~10% of the viewport).
+- **Hero & Drift Wall Vertical Crowding:** The vertical space compression caused tight visual proximity between the navbar pill, the hero eyebrow headline, and the adjacent 3D Drift Wall collage on standard laptop screens.
+
+#### 2. Changes Applied:
+- **Calibrated Inner Liquid Glass Pill Height:**
+  - Standardized pill height to `48px` across `lg` (1024px–1279px) and `xl` (1280px–1535px) laptop viewports (`h-[48px] sm:h-[50px] lg:h-[48px] xl:h-[48px] 2xl:h-[52px]`), scaling to `52px` only on `2xl` (1536px+) large desktop monitors.
+- **Optimized Header Container Vertical Spacing:**
+  - Streamlined wrapper padding to `pt-2 sm:pt-2 lg:pt-2 xl:pt-2 2xl:pt-3 pb-1`, bringing total header height down from 72px to **60px** on all laptop viewports.
+- **Proportionate Scaling of Inner Elements:**
+  - Brand Emblem: Scaled to `h-7 w-7 xl:h-7.5 xl:w-7.5 2xl:h-8 2xl:w-8`.
+  - Brand Typography: Scaled Arabic to `text-[11.5px] lg:text-[12px] xl:text-[12.5px] 2xl:text-[13px]` and English to `text-[13.5px] lg:text-[14px] xl:text-[14.5px] 2xl:text-[15px]`.
+  - Curved Swoosh Divider: Compacted SVG width to `w-[56px] lg:w-[60px] xl:w-[68px] 2xl:w-[84px]`.
+  - Navigation Links: Adjusted typography and padding to `px-2.5 py-1 text-[12px] xl:text-[12.5px] 2xl:text-[13px]`.
+  - Theme Toggle: 26px Nimbus LiquidToggle maintains comfortable 11px vertical clearance above and below with zero clipping.
+- **Aligned Hero Container Height Formula:**
+  - Updated `uae-hero.tsx` container calculation to `min-h-[calc(100vh-76px)] sm:min-h-[calc(100vh-78px)] lg:min-h-[calc(100vh-76px)] xl:min-h-[calc(100vh-76px)] 2xl:min-h-[calc(100vh-84px)]` to utilize the reclaimed 12px vertical space for hero vertical centering.
+
+#### 3. Technical Rationale:
+- A total header height reduction from 72px to 60px (a 16.7% height reduction) reclaims 12px of valuable screen height on 768px–800px laptop screens. This provides ample vertical breathing room for the hero headline and Drift Wall without sacrificing touch target standards or visual elegance.
+
+#### 4. Verification & Proof:
+- **Playwright Live DOM Bounding Box Measurements:**
+  - `1024x768` (compact laptop): Total header height = **60.0px**, pill height = **48.0px**.
+  - `1280x800` (13" MacBook): Total header height = **60.0px**, pill height = **48.0px**.
+  - `1366x768` (14" laptop): Total header height = **60.0px**, pill height = **48.0px**.
+  - `1440x900` (15" laptop): Total header height = **60.0px**, pill height = **48.0px**.
+  - `1920x1080` (desktop monitor): Total header height = **68.0px**, pill height = **52.0px**.
+- **Visual Evidence:** High-resolution screenshots captured and verified at `laptop_compact_1024x768_nav_verified.png`, `laptop_13_inch_1280x800_nav_verified.png`, `laptop_small_1366x768_nav_verified.png`, `laptop_1440x900_nav_verified.png`, and `desktop_1920x1080_nav_verified.png`.
+- **Quality Checks:**
+  - `npm run type-check`: 0 errors.
+  - `npm run lint`: 0 errors.
+  - `python manage.py check`: 0 issues (0 silenced).
+
 - **Visual Validation:** Verified Burj Khalifa spire, stepped setbacks, and surrounding towers appear crisp, sharp, and unmistakably visible as glowing emerald architectural line-art in dark mode.
 
 ---
@@ -718,6 +763,51 @@ This document is the **single source of truth** for all architectural, database,
   10. JSON-LD structured data: Present and verified (`ProfessionalService` schema with 3 offer items).
 - **Production Build:** `npm run build` completed cleanly in 3.8s (all 13 pages statically prerendered; `/ae` bundle: 20.7 kB).
 - **Type Checking & Linting:** `npm run type-check` (0 errors), `npm run lint` (0 errors), Django `manage.py check` (0 issues).
+
+---
+
+### Entry #025 — Responsive Liquid Glass Navbar Height Calibration & Small Laptop Viewport Optimization
+* **Date & Time:** 2026-11-24 21:40 (IST)
+* **Scope:** Responsive Liquid Glass Navbar Height Calibration, Small Laptop Viewport Optimization (1024px–1440px), Visual Clearance Tuning
+* **Files Modified:**
+  - `frontend-takhlees/src/components/layout/header.tsx`
+  - `frontend-takhlees/src/components/sections/uae-hero.tsx`
+  - `CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Excessive Navbar Height on Laptops:** On compact and 13"/14" laptop viewports (1024px to 1440px wide with 768px to 800px display height, e.g. 13" MacBook Air/Pro, ThinkPad, Chromebooks), the previous 72px total header height (56px pill height + 16px wrapper padding) consumed excessive vertical screen height (~10% of the viewport).
+- **Hero & Drift Wall Vertical Crowding:** The vertical space compression caused tight visual proximity between the navbar pill, the hero eyebrow headline, and the adjacent 3D Drift Wall collage on standard laptop screens.
+
+#### 2. Changes Applied:
+- **Calibrated Inner Liquid Glass Pill Height:**
+  - Standardized pill height to `48px` across `lg` (1024px–1279px) and `xl` (1280px–1535px) laptop viewports (`h-[48px] sm:h-[50px] lg:h-[48px] xl:h-[48px] 2xl:h-[52px]`), scaling to `52px` only on `2xl` (1536px+) large desktop monitors.
+- **Optimized Header Container Vertical Spacing:**
+  - Streamlined wrapper padding to `pt-2 sm:pt-2 lg:pt-2 xl:pt-2 2xl:pt-3 pb-1`, bringing total header height down from 72px to **60px** on all laptop viewports.
+- **Proportionate Scaling of Inner Elements:**
+  - Brand Emblem: Scaled to `h-7 w-7 xl:h-7.5 xl:w-7.5 2xl:h-8 2xl:w-8`.
+  - Brand Typography: Scaled Arabic to `text-[11.5px] lg:text-[12px] xl:text-[12.5px] 2xl:text-[13px]` and English to `text-[13.5px] lg:text-[14px] xl:text-[14.5px] 2xl:text-[15px]`.
+  - Curved Swoosh Divider: Compacted SVG width to `w-[56px] lg:w-[60px] xl:w-[68px] 2xl:w-[84px]`.
+  - Navigation Links: Adjusted typography and padding to `px-2.5 py-1 text-[12px] xl:text-[12.5px] 2xl:text-[13px]`.
+  - Theme Toggle: 26px Nimbus LiquidToggle maintains comfortable 11px vertical clearance above and below with zero clipping.
+- **Aligned Hero Container Height Formula:**
+  - Updated `uae-hero.tsx` container calculation to `min-h-[calc(100vh-76px)] sm:min-h-[calc(100vh-78px)] lg:min-h-[calc(100vh-76px)] xl:min-h-[calc(100vh-76px)] 2xl:min-h-[calc(100vh-84px)]` to utilize the reclaimed 12px vertical space for hero vertical centering.
+
+#### 3. Technical Rationale:
+- A total header height reduction from 72px to 60px (a 16.7% height reduction) reclaims 12px of valuable screen height on 768px–800px laptop screens. This provides ample vertical breathing room for the hero headline and Drift Wall without sacrificing touch target standards or visual elegance.
+
+#### 4. Verification & Proof:
+- **Playwright Live DOM Bounding Box Measurements:**
+  - `1024x768` (compact laptop): Total header height = **60.0px**, pill height = **48.0px**.
+  - `1280x800` (13" MacBook): Total header height = **60.0px**, pill height = **48.0px**.
+  - `1366x768` (14" laptop): Total header height = **60.0px**, pill height = **48.0px**.
+  - `1440x900` (15" laptop): Total header height = **60.0px**, pill height = **48.0px**.
+  - `1920x1080` (desktop monitor): Total header height = **68.0px**, pill height = **52.0px**.
+- **Visual Evidence:** High-resolution screenshots captured and verified at `laptop_compact_1024x768_nav_verified.png`, `laptop_13_inch_1280x800_nav_verified.png`, `laptop_small_1366x768_nav_verified.png`, `laptop_1440x900_nav_verified.png`, and `desktop_1920x1080_nav_verified.png`.
+- **Quality Checks:**
+  - `npm run type-check`: 0 errors.
+  - `npm run lint`: 0 errors.
+  - `python manage.py check`: 0 issues (0 silenced).
+
 
 
 

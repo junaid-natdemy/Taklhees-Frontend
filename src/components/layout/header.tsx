@@ -103,11 +103,11 @@ export function Header({ country = 'ae' }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full px-3 pb-1 pt-3 sm:px-5">
+    <header className="sticky top-0 z-50 w-full px-3 pb-1 pt-2 sm:pt-2 lg:pt-2 xl:pt-2 2xl:pt-3 sm:px-5">
       <div className="mx-auto max-w-[1140px]">
         {/* ============ ONE CONTINUOUS PILL (TAKHLEES LIQUID GLASS NAVBAR) ============ */}
         <div
-          className={`relative flex h-[52px] sm:h-[56px] items-center rounded-full pl-3.5 pr-2.5 transition-all duration-300 sm:pl-5 lg:pl-6 ${
+          className={`relative flex h-[48px] sm:h-[50px] lg:h-[48px] xl:h-[48px] 2xl:h-[52px] items-center rounded-full pl-3 pr-2 sm:pl-4 lg:pl-5 transition-all duration-300 ${
             isUAE ? 'nav-uae-pill' : 'nav-in-pill'
           }`}
         >
@@ -115,7 +115,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
           <Link
             href={`/${country}`}
             aria-label="Takhlees Business Home"
-            className="group flex shrink-0 items-center gap-2.5 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+            className="group flex shrink-0 items-center gap-2 sm:gap-2.5 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
           >
             <Image
               src="/icons/takhlees-emblem.png"
@@ -123,20 +123,20 @@ export function Header({ country = 'ae' }: HeaderProps) {
               width={32}
               height={32}
               priority
-              className="h-8 w-8 object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-7 w-7 xl:h-7.5 xl:w-7.5 2xl:h-8 2xl:w-8 object-contain transition-transform duration-300 group-hover:scale-105"
             />
             <div className="flex flex-col justify-center leading-none">
-              <span className="text-right text-[13px] font-bold text-neutral-900 dark:text-[#A5AAA7]">
+              <span className="text-right text-[11.5px] lg:text-[12px] xl:text-[12.5px] 2xl:text-[13px] font-bold text-neutral-900 dark:text-[#A5AAA7]">
                 تـخـلـيـص
               </span>
-              <span className="mt-0.5 text-[15px] font-extrabold uppercase tracking-wide text-neutral-900 dark:text-[#F5F5F2]">
+              <span className="mt-0.5 text-[13.5px] lg:text-[14px] xl:text-[14.5px] 2xl:text-[15px] font-extrabold uppercase tracking-wide text-neutral-900 dark:text-[#F5F5F2]">
                 TAKHLEES
               </span>
             </div>
           </Link>
 
           {/* Green swoosh divider (desktop only - compact) */}
-          <div className="ml-1 hidden h-full w-[80px] shrink-0 lg:block xl:w-[96px]" aria-hidden="true">
+          <div className="ml-1 hidden h-full w-[56px] shrink-0 lg:block xl:w-[68px] 2xl:w-[84px]" aria-hidden="true">
             <svg viewBox="0 0 150 68" preserveAspectRatio="none" fill="none" className="h-full w-full">
               <defs>
                 <linearGradient id="navSwoosh" x1="0" y1="68" x2="150" y2="0" gradientUnits="userSpaceOnUse">
@@ -162,7 +162,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`group relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] tracking-normal transition-colors duration-200 select-none ${
+                  className={`group relative inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] xl:text-[12.5px] 2xl:text-[13px] tracking-normal transition-colors duration-200 select-none ${
                     active
                       ? 'font-semibold text-[#00843D] dark:text-[#16A05A]'
                       : 'font-medium text-neutral-700 hover:text-neutral-900 dark:text-[#A5AAA7] dark:hover:text-[#F5F5F2]'

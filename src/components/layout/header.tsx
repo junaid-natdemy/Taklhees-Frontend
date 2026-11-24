@@ -104,10 +104,10 @@ function IndiaFlag() {
 }
 
 /**
- * EmeraldRibbonConnector — Left 3D Satin Ribbon Connector
+ * EmeraldRibbonConnector — Left UAE Satin Ribbon Connector
  * Connects the Logo Capsule directly to the Central Navigation Capsule.
- * Single continuous emerald-green ribbon with one smooth, controlled S-shaped twist,
- * physical layered depth, underside fold shadow, and specular crest sheen.
+ * Single continuous emerald-green ribbon with smooth, controlled S-shaped curve,
+ * pure satin gradient, specular crest highlight, soft lustrous core beam, and ZERO dark creases.
  */
 function EmeraldRibbonConnector() {
   return (
@@ -122,79 +122,51 @@ function EmeraldRibbonConnector() {
         fill="none"
       >
         <defs>
-          {/* Light Mode: Emerald Front Satin Gradient */}
-          <linearGradient id="emeraldSatinFrontLight" x1="0" y1="36" x2="56" y2="10" gradientUnits="userSpaceOnUse">
+          {/* Light Mode: Pure Emerald Satin Gradient */}
+          <linearGradient id="emeraldSatinPureLight" x1="0" y1="40" x2="56" y2="10" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#007A38" />
-            <stop offset="20%" stopColor="#00843D" />
-            <stop offset="52%" stopColor="#109A52" />
-            <stop offset="80%" stopColor="#00843D" />
+            <stop offset="25%" stopColor="#00843D" />
+            <stop offset="50%" stopColor="#0FA958" />
+            <stop offset="75%" stopColor="#00843D" />
             <stop offset="100%" stopColor="#006830" />
           </linearGradient>
 
-          {/* Light Mode: Underside Twist Fold Shading (creates physical 3D twist depth) */}
-          <linearGradient id="emeraldSatinUnderLight" x1="16" y1="24" x2="36" y2="32" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#004720" />
-            <stop offset="60%" stopColor="#003517" />
-            <stop offset="100%" stopColor="#00240E" />
-          </linearGradient>
-
-          {/* Dark Mode: Luminous Emerald Front Satin Gradient */}
-          <linearGradient id="emeraldSatinFrontDark" x1="0" y1="36" x2="56" y2="10" gradientUnits="userSpaceOnUse">
+          {/* Dark Mode: Luminous Pure Emerald Satin Gradient */}
+          <linearGradient id="emeraldSatinPureDark" x1="0" y1="40" x2="56" y2="10" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#00843D" />
-            <stop offset="22%" stopColor="#109A52" />
-            <stop offset="52%" stopColor="#22C55E" />
-            <stop offset="78%" stopColor="#16A05A" />
-            <stop offset="100%" stopColor="#087A43" />
+            <stop offset="25%" stopColor="#16A05A" />
+            <stop offset="50%" stopColor="#22C55E" />
+            <stop offset="75%" stopColor="#16A05A" />
+            <stop offset="100%" stopColor="#0FA958" />
           </linearGradient>
 
-          {/* Dark Mode: Underside Twist Fold Shading */}
-          <linearGradient id="emeraldSatinUnderDark" x1="16" y1="24" x2="36" y2="32" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#005426" />
-            <stop offset="60%" stopColor="#00401C" />
-            <stop offset="100%" stopColor="#003015" />
-          </linearGradient>
-
-          {/* Ambient Drop Shadow for Physical Depth */}
-          <filter id="emeraldRibbonShadowLight" x="-25%" y="-25%" width="150%" height="150%">
-            <feDropShadow dx="0" dy="2" stdDeviation="2.2" floodColor="#002B13" floodOpacity="0.32" />
+          {/* Clean Ambient Drop Shadow */}
+          <filter id="emeraldRibbonDropShadowLight" x="-25%" y="-25%" width="150%" height="150%">
+            <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" floodColor="#00401C" floodOpacity="0.28" />
           </filter>
-          <filter id="emeraldRibbonShadowDark" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#16A05A" floodOpacity="0.45" />
+          <filter id="emeraldRibbonDropShadowDark" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="0" stdDeviation="3.5" floodColor="#16A05A" floodOpacity="0.45" />
           </filter>
         </defs>
 
-        {/* 1. Underside / Receding Fold of the S-Twist (Layer 1 - behind) */}
+        {/* 1. Continuous Emerald Satin Ribbon Body (Thickness 9.5px, smooth S-curve) */}
         <path
-          d="M 2 37 C 14 37, 20 29, 28 22 L 34 26 C 26 32, 19 44, 2 45.5 Z"
-          className="fill-[url(#emeraldSatinUnderLight)] dark:fill-[url(#emeraldSatinUnderDark)]"
+          d="M 0 35.5 C 15 35.5, 24 22.5, 33 13.5 C 41 7, 48 7, 54 7 L 54 16.5 C 48 16.5, 41 16.5, 33 23 C 24 32, 15 45, 0 45 Z"
+          className="fill-[url(#emeraldSatinPureLight)] dark:fill-[url(#emeraldSatinPureDark)] filter-[url(#emeraldRibbonDropShadowLight)] dark:filter-[url(#emeraldRibbonDropShadowDark)]"
         />
 
-        {/* 2. Leading Satin Surface (Layer 2 - front: sweeps across, twists through center, merges into nav capsule) */}
+        {/* 2. Top Satin Specular Sheen (Reflective highlight along upper crest) */}
         <path
-          d="M 0 36 C 16 36, 25 23, 34 14 C 42 7, 49 7, 56 7 L 56 15.5 C 49 15.5, 43 17, 36 24 C 27 34, 16 44.5, 0 44.5 Z"
-          className="fill-[url(#emeraldSatinFrontLight)] dark:fill-[url(#emeraldSatinFrontDark)] filter-[url(#emeraldRibbonShadowLight)] dark:filter-[url(#emeraldRibbonShadowDark)]"
-        />
-
-        {/* 3. Fold Edge Shadow / Crease (Defines the 3D twist crossover) */}
-        <path
-          d="M 27 21 C 29 24, 32 26, 34 25"
-          className="stroke-[rgba(0,30,12,0.55)] dark:stroke-[rgba(0,20,10,0.7)]"
-          strokeWidth="0.9"
+          d="M 0 35.5 C 15 35.5, 24 22.5, 33 13.5 C 41 7, 48 7, 54 7"
+          className="stroke-white/95 dark:stroke-white/85"
+          strokeWidth="1.4"
           strokeLinecap="round"
         />
 
-        {/* 4. Top Satin Spine Specular Sheen (Reflective highlight along the upper crest) */}
+        {/* 3. Longitudinal Lustrous Core Light Beam */}
         <path
-          d="M 0 36 C 16 36, 25 23, 34 14 C 42 7, 49 7, 56 7"
-          className="stroke-white/90 dark:stroke-white/80"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-
-        {/* 5. Longitudinal Lustrous Satin Beam (Soft core reflection) */}
-        <path
-          d="M 4 38.5 C 18 37, 26 25, 35 16.5 C 43 11, 49 11, 55 11"
-          className="stroke-white/25 dark:stroke-white/30"
+          d="M 2 39 C 16 38, 25 25, 34 16.5 C 42 11, 48 11, 53 11"
+          className="stroke-white/35 dark:stroke-white/30"
           strokeWidth="1.6"
           strokeLinecap="round"
         />
@@ -204,10 +176,10 @@ function EmeraldRibbonConnector() {
 }
 
 /**
- * CrimsonRibbonConnector — Right 3D Satin Ribbon Connector
+ * CrimsonRibbonConnector — Right UAE Satin Ribbon Connector
  * Connects the Central Navigation Capsule directly to the Utility Capsule.
- * Single continuous crimson-red ribbon with one elegant minimal twist,
- * mirrored naturally, physical layered depth, underside fold shadow, and specular crest sheen.
+ * Single continuous crimson-red ribbon with elegant mirrored curve,
+ * pure satin gradient, specular crest highlight, soft lustrous core beam, and ZERO dark creases.
  */
 function CrimsonRibbonConnector() {
   return (
@@ -222,79 +194,51 @@ function CrimsonRibbonConnector() {
         fill="none"
       >
         <defs>
-          {/* Light Mode: Crimson Front Satin Gradient */}
-          <linearGradient id="crimsonSatinFrontLight" x1="0" y1="6" x2="56" y2="38" gradientUnits="userSpaceOnUse">
+          {/* Light Mode: Pure Crimson Satin Gradient */}
+          <linearGradient id="crimsonSatinPureLight" x1="0" y1="8" x2="56" y2="38" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#B81D24" />
-            <stop offset="20%" stopColor="#E4002B" />
-            <stop offset="52%" stopColor="#F82643" />
-            <stop offset="80%" stopColor="#E4002B" />
-            <stop offset="100%" stopColor="#A31218" />
-          </linearGradient>
-
-          {/* Light Mode: Underside Twist Fold Shading */}
-          <linearGradient id="crimsonSatinUnderLight" x1="16" y1="24" x2="36" y2="16" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#690B0F" />
-            <stop offset="60%" stopColor="#4D070A" />
-            <stop offset="100%" stopColor="#330406" />
-          </linearGradient>
-
-          {/* Dark Mode: Luminous Crimson Front Satin Gradient */}
-          <linearGradient id="crimsonSatinFrontDark" x1="0" y1="6" x2="56" y2="38" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#C2242B" />
-            <stop offset="22%" stopColor="#E4002B" />
-            <stop offset="52%" stopColor="#FF2D4B" />
-            <stop offset="78%" stopColor="#E4002B" />
+            <stop offset="25%" stopColor="#E4002B" />
+            <stop offset="50%" stopColor="#FA203B" />
+            <stop offset="75%" stopColor="#E4002B" />
             <stop offset="100%" stopColor="#B81D24" />
           </linearGradient>
 
-          {/* Dark Mode: Underside Twist Fold Shading */}
-          <linearGradient id="crimsonSatinUnderDark" x1="16" y1="24" x2="36" y2="16" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#7A0E13" />
-            <stop offset="60%" stopColor="#610A0E" />
-            <stop offset="100%" stopColor="#4A070A" />
+          {/* Dark Mode: Luminous Pure Crimson Satin Gradient */}
+          <linearGradient id="crimsonSatinPureDark" x1="0" y1="8" x2="56" y2="38" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#C2242B" />
+            <stop offset="25%" stopColor="#E4002B" />
+            <stop offset="50%" stopColor="#FF3352" />
+            <stop offset="75%" stopColor="#E4002B" />
+            <stop offset="100%" stopColor="#D1182A" />
           </linearGradient>
 
-          {/* Ambient Drop Shadow */}
-          <filter id="crimsonRibbonShadowLight" x="-25%" y="-25%" width="150%" height="150%">
-            <feDropShadow dx="0" dy="2" stdDeviation="2.2" floodColor="#4D070A" floodOpacity="0.32" />
+          {/* Clean Ambient Drop Shadow */}
+          <filter id="crimsonRibbonDropShadowLight" x="-25%" y="-25%" width="150%" height="150%">
+            <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" floodColor="#590408" floodOpacity="0.28" />
           </filter>
-          <filter id="crimsonRibbonShadowDark" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#E4002B" floodOpacity="0.45" />
+          <filter id="crimsonRibbonDropShadowDark" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="0" stdDeviation="3.5" floodColor="#E4002B" floodOpacity="0.45" />
           </filter>
         </defs>
 
-        {/* 1. Underside / Receding Fold of the Red Twist (Layer 1 - behind) */}
+        {/* 1. Continuous Crimson Satin Ribbon Body (Thickness 9.5px, mirrored curve down into util capsule) */}
         <path
-          d="M 2 11 C 14 11, 20 19, 28 26 L 34 22 C 26 16, 19 4, 2 2.5 Z"
-          className="fill-[url(#crimsonSatinUnderLight)] dark:fill-[url(#crimsonSatinUnderDark)]"
+          d="M 0 3 C 15 3, 24 16, 33 25 C 41 31.5, 48 31.5, 54 31.5 L 54 41 C 48 41, 41 41, 33 34.5 C 24 25.5, 15 12.5, 0 12.5 Z"
+          className="fill-[url(#crimsonSatinPureLight)] dark:fill-[url(#crimsonSatinPureDark)] filter-[url(#crimsonRibbonDropShadowLight)] dark:filter-[url(#crimsonRibbonDropShadowDark)]"
         />
 
-        {/* 2. Leading Crimson Satin Surface (Layer 2 - front: sweeps across, twists through center, merges into util capsule) */}
+        {/* 2. Top Satin Specular Sheen (Reflective highlight along upper crest) */}
         <path
-          d="M 0 3 C 16 3, 25 16, 34 25 C 42 31.5, 49 31.5, 56 31.5 L 56 41 C 49 41, 42 41, 34 34.5 C 25 25.5, 16 12.5, 0 12.5 Z"
-          className="fill-[url(#crimsonSatinFrontLight)] dark:fill-[url(#crimsonSatinFrontDark)] filter-[url(#crimsonRibbonShadowLight)] dark:filter-[url(#crimsonRibbonShadowDark)]"
-        />
-
-        {/* 3. Fold Edge Shadow / Crease */}
-        <path
-          d="M 27 27 C 29 24, 32 22, 34 23"
-          className="stroke-[rgba(50,4,6,0.55)] dark:stroke-[rgba(30,2,4,0.7)]"
-          strokeWidth="0.9"
+          d="M 0 3 C 15 3, 24 16, 33 25 C 41 31.5, 48 31.5, 54 31.5"
+          className="stroke-white/95 dark:stroke-white/85"
+          strokeWidth="1.4"
           strokeLinecap="round"
         />
 
-        {/* 4. Satin Spine Specular Sheen */}
+        {/* 3. Longitudinal Lustrous Core Light Beam */}
         <path
-          d="M 0 3 C 16 3, 25 16, 34 25 C 42 31.5, 49 31.5, 56 31.5"
-          className="stroke-white/90 dark:stroke-white/80"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-
-        {/* 5. Longitudinal Lustrous Satin Beam */}
-        <path
-          d="M 4 5.5 C 18 5.5, 26 17, 35 25.5 C 43 31.5, 49 31.5, 55 31.5"
-          className="stroke-white/25 dark:stroke-white/30"
+          d="M 3 6 C 17 6, 25 18, 34 26.5 C 42 32.5, 48 32.5, 53 32.5"
+          className="stroke-white/35 dark:stroke-white/30"
           strokeWidth="1.6"
           strokeLinecap="round"
         />
@@ -348,8 +292,8 @@ export function Header({ country = 'ae' }: HeaderProps) {
         {/* ============ THREE-PART CONNECTED NAVBAR ARCHITECTURE (DUAL SATIN RIBBONS & LIQUID GLASS) ============ */}
         <div className="relative flex items-center justify-between lg:justify-center w-full">
           
-          {/* ================= 1. LEFT SECTION — LOGO CAPSULE (LIQUID GLASS) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/85 px-3.5 sm:px-4 lg:px-4.5 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
+          {/* ================= 1. LEFT SECTION — LOGO CAPSULE (UAE GREEN BRAND BORDER) ================= */}
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/90 px-3.5 sm:px-4 lg:w-[216px] lg:px-4.5 backdrop-blur-2xl border-2 border-[#00843D] dark:border-[#16A05A] shadow-[0_4px_16px_-2px_rgba(0,132,61,0.22),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/90 dark:shadow-[0_0_18px_rgba(22,160,90,0.35),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-all duration-300">
             <Link
               href={`/${country}`}
               aria-label="Takhlees Business Home"
@@ -379,7 +323,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
 
           {/* ================= 2. CENTER SECTION — MAIN NAVIGATION CAPSULE (LIQUID GLASS) ================= */}
           <nav
-            className="relative z-20 hidden flex-1 max-w-[650px] xl:max-w-[680px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/85 px-3 lg:flex xl:px-4 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300"
+            className="relative z-20 hidden flex-1 max-w-[650px] xl:max-w-[680px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/90 px-3 lg:flex xl:px-4 backdrop-blur-2xl border border-black/[0.08] dark:border-white/12 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,0,0,0.04),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300"
             aria-label="Main Navigation"
           >
             {links.map((link) => {
@@ -516,8 +460,8 @@ export function Header({ country = 'ae' }: HeaderProps) {
           {/* ================= 2ND FLOWING RIBBON: CRIMSON RED SATIN CONNECTOR ================= */}
           <CrimsonRibbonConnector />
 
-          {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE (LIQUID GLASS) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/85 px-2.5 sm:px-3 lg:px-3.5 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
+          {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE (UAE CRIMSON RED BRAND BORDER) ================= */}
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center justify-between gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/90 px-3 sm:px-3.5 lg:w-[204px] lg:px-4 backdrop-blur-2xl border-2 border-[#E4002B] dark:border-[#E4002B] shadow-[0_4px_16px_-2px_rgba(228,0,43,0.22),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/90 dark:shadow-[0_0_18px_rgba(228,0,43,0.35),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-all duration-300">
             {/* Country Selector */}
             <div className="relative" ref={dropdownRef}>
               <button

@@ -946,3 +946,41 @@ This document is the **single source of truth** for all architectural, database,
 
 
 
+
+---
+
+### Entry #030 — Classic UAE Theme Navbar Restoration: Removal of Dark Ribbon Creases & Brand Color Capsule Borders
+* **Date & Time:** 2026-11-24 23:15 (IST)
+* **Scope:** Ribbon Color Purity, Dark Crease Elimination, UAE Brand Border Restoration (#00843D Green & #E4002B Red)
+* **Files Modified:**
+  - `frontend-takhlees/src/components/layout/header.tsx`
+  - `CHANGELOG.md`
+  - `frontend-takhlees/CHANGELOG.md`
+  - `backend-takhlees/CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Dark/Black Smudges on Ribbons:** The previous 3D twist implementation contained dark crease strokes (`stroke="rgba(0,30,12,0.55)"` and `stroke="rgba(50,4,6,0.55)"`) and deep underside fold fills (`#00240E` and `#330406`), which rendered as visible black slashes/cuts across both ribbons in the browser.
+- **Missing UAE Brand Themed Borders:** The Logo Capsule and Utility Capsule had reverted to neutral `border-white/90` borders, eliminating the signature UAE Emerald Green border on the Logo capsule and Crimson Red border on the Utility capsule that unified the ribbon connectors into a cohesive national color aesthetic.
+
+#### 2. Changes Applied:
+- **Pure Radiant Satin Ribbon Connectors (`header.tsx`):**
+  - **Left Connector (`EmeraldRibbonConnector`):** Removed all dark fold fills and crease lines. Replaced with pure luminous satin gradient (`#007A38` to `#0FA958`), crisp white specular crest highlight (`stroke="rgba(255,255,255,0.95)"`), longitudinal core luster beam, and soft ambient drop shadow (`#00401C`).
+  - **Right Connector (`CrimsonRibbonConnector`):** Removed all dark fold fills and crease lines. Replaced with pure luminous crimson gradient (`#B81D24` to `#FA203B`), crisp white specular crest highlight (`stroke="rgba(255,255,255,0.95)"`), longitudinal core luster beam, and soft ambient drop shadow (`#590408`).
+- **Signature UAE Brand Themed Capsule Borders:**
+  - **Logo Capsule:** Restored vibrant 2px UAE Green border: `border-2 border-[#00843D] dark:border-[#16A05A]` with brand ambient glow `shadow-[0_4px_16px_-2px_rgba(0,132,61,0.22),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)]`.
+  - **Utility Capsule:** Restored vibrant 2px UAE Red border: `border-2 border-[#E4002B] dark:border-[#E4002B]` with brand ambient glow `shadow-[0_4px_16px_-2px_rgba(228,0,43,0.22),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)]`.
+  - **Navigation Capsule:** Preserved pure liquid glass pill with active Home water drop meniscus (`border border-black/[0.08] dark:border-white/12`).
+
+#### 3. Technical Rationale:
+- Removing the dark crease paths completely eliminates any black visual artifacts, while the restored brand-colored borders on the outer capsules give the ribbon connectors a natural, seamless origin point that hugs the capsule geometry in a clean, classic corporate look.
+
+#### 4. Verification & Proof:
+- **Playwright Headless Chrome Verification:**
+  - `crop_live_classic_light.png`: Verified zero dark pixels (`dark_pixels == 0`) in ribbons; Logo capsule border `#00843D` and Utility capsule border `#E4002B` confirmed.
+  - `crop_live_classic_dark.png`: Verified luminous ribbons and borders against obsidian liquid glass.
+  - `crop_live_classic_laptop.png`: Verified 1280px laptop viewport.
+  - `live_classic_mobile.png`: Verified 375px mobile responsive layout.
+- **Code Quality Checks:**
+  - `npm run type-check`: 0 errors.
+  - `npm run lint`: 0 warnings / 0 errors.
+  - `python manage.py check`: 0 issues (0 silenced).

@@ -104,120 +104,153 @@ function IndiaFlag() {
 }
 
 /**
- * Connection A: Flowing Forest-Green Curved Ribbon
- * Emerge naturally from the right edge of Logo Capsule and integrate smoothly
- * into the left edge of Main Navigation Capsule.
+ * Desktop Wrapping Border & Ribbon Clasp for Logo Capsule (Green)
+ * Wraps completely around the Logo Capsule border and smoothly flows
+ * into an S-curve ribbon that clasps onto the top-left of the Main Nav Capsule.
  */
-function GreenRibbonConnector() {
+function LogoCapsuleBorderSvg() {
   return (
-    <div
-      className="relative z-10 hidden h-[48px] w-[50px] shrink-0 items-center justify-center -mx-2.5 xl:w-[56px] xl:-mx-3 lg:flex pointer-events-none select-none"
+    <svg
+      viewBox="0 0 270 56"
+      className="absolute -top-1 -left-1 w-[270px] h-[56px] overflow-visible pointer-events-none z-20 hidden lg:block"
+      fill="none"
       aria-hidden="true"
     >
-      <svg
-        viewBox="0 0 52 48"
-        className="h-full w-full overflow-visible"
-        preserveAspectRatio="none"
-        fill="none"
-      >
-        <defs>
-          {/* Light Mode Forest-Green Gradient */}
-          <linearGradient id="connGreenLight" x1="0" y1="48" x2="52" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#087A43" />
-            <stop offset="45%" stopColor="#00843D" />
-            <stop offset="100%" stopColor="#16A05A" />
-          </linearGradient>
+      <defs>
+        {/* Light Mode Green Gradient */}
+        <linearGradient id="gPillGradLight" x1="0" y1="28" x2="270" y2="28" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#00843D" />
+          <stop offset="50%" stopColor="#087A43" />
+          <stop offset="82%" stopColor="#00843D" />
+          <stop offset="100%" stopColor="#16A05A" />
+        </linearGradient>
 
-          {/* Dark Mode Luminous Emerald Gradient */}
-          <linearGradient id="connGreenDark" x1="0" y1="48" x2="52" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#087A43" />
-            <stop offset="50%" stopColor="#16A05A" />
-            <stop offset="100%" stopColor="#2EB04B" />
-          </linearGradient>
+        {/* Dark Mode Luminous Emerald Gradient */}
+        <linearGradient id="gPillGradDark" x1="0" y1="28" x2="270" y2="28" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#087A43" />
+          <stop offset="50%" stopColor="#16A05A" />
+          <stop offset="100%" stopColor="#2EB04B" />
+        </linearGradient>
 
-          {/* Ambient Drop Shadow & Subtle Glow */}
-          <filter id="greenRibbonShadow" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="#087A43" floodOpacity="0.35" />
-          </filter>
-          <filter id="greenRibbonGlowDark" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="0" dy="0" stdDeviation="3.5" floodColor="#16A05A" floodOpacity="0.55" />
-          </filter>
-        </defs>
+        {/* Ambient Drop Shadows */}
+        <filter id="gPillShadowLight" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2.5" stdDeviation="3" floodColor="#00843D" floodOpacity="0.32" />
+        </filter>
+        <filter id="gPillShadowDark" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#16A05A" floodOpacity="0.55" />
+        </filter>
+      </defs>
 
-        {/* Sculpted 10px flowing ribbon: Sweeps from bottom-right of Logo Capsule to top-left of Nav Capsule */}
-        <path
-          d="M 0 48 C 14 48, 25 32, 34 16 C 40 6, 46 0, 52 0 L 52 11 C 45 13, 38 22, 30 34 C 22 44, 12 48, 0 48 Z"
-          className="fill-[url(#connGreenLight)] dark:fill-[url(#connGreenDark)] filter-[url(#greenRibbonShadow)] dark:filter-[url(#greenRibbonGlowDark)]"
-        />
+      {/* 1. Sculpted 3D Green Border wrapping around Logo Capsule (216x48 pill at x=4, y=4) */}
+      <rect
+        x="4"
+        y="4"
+        width="216"
+        height="48"
+        rx="24"
+        strokeWidth="3.2"
+        className="stroke-[url(#gPillGradLight)] dark:stroke-[url(#gPillGradDark)] filter-[url(#gPillShadowLight)] dark:filter-[url(#gPillShadowDark)]"
+      />
 
-        {/* Upper Meniscus Light Reflection Rim */}
-        <path
-          d="M 0 48 C 14 48, 25 32, 34 16 C 40 6, 46 0, 52 0"
-          className="stroke-white/95 dark:stroke-white/60"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-        />
-      </svg>
-    </div>
+      {/* 2. Meniscus Light Reflection along top curvature of the Logo Capsule border */}
+      <path
+        d="M 28 4 L 192 4"
+        stroke="rgba(255,255,255,0.95)"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        className="dark:stroke-white/60"
+      />
+
+      {/* 3. Flowing S-Ribbon Clasp: emerges from bottom of logo border (x=184, y=52) and loops up to top-left of nav capsule (x=266, y=4) */}
+      <path
+        d="M 184 52 C 210 52, 224 44, 234 28 C 242 14, 252 4, 266 4 L 266 14.5 C 254 14.5, 246 24, 238 36 C 228 48, 212 52, 184 52 Z"
+        className="fill-[url(#gPillGradLight)] dark:fill-[url(#gPillGradDark)] filter-[url(#gPillShadowLight)] dark:filter-[url(#gPillShadowDark)]"
+      />
+
+      {/* 4. Meniscus light highlight along outer crest of the S-Ribbon */}
+      <path
+        d="M 184 52 C 210 52, 224 44, 234 28 C 242 14, 252 4, 266 4"
+        stroke="rgba(255,255,255,0.95)"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        className="dark:stroke-white/70"
+      />
+    </svg>
   );
 }
 
 /**
- * Connection B: Flowing Crimson-Red Curved Ribbon
- * Emerge naturally from the right edge of Main Navigation Capsule and integrate smoothly
- * into the left edge of Utility Capsule.
+ * Desktop Wrapping Border & Ribbon Clasp for Utility Capsule (Red)
+ * Wraps completely around the Utility Capsule border and extends backwards
+ * into an S-curve ribbon that clasps onto the bottom-right of the Main Nav Capsule.
  */
-function RedRibbonConnector() {
+function UtilityCapsuleBorderSvg() {
   return (
-    <div
-      className="relative z-10 hidden h-[48px] w-[50px] shrink-0 items-center justify-center -mx-2.5 xl:w-[56px] xl:-mx-3 lg:flex pointer-events-none select-none"
+    <svg
+      viewBox="0 0 262 56"
+      className="absolute -top-1 -left-[54px] w-[262px] h-[56px] overflow-visible pointer-events-none z-20 hidden lg:block"
+      fill="none"
       aria-hidden="true"
     >
-      <svg
-        viewBox="0 0 52 48"
-        className="h-full w-full overflow-visible"
-        preserveAspectRatio="none"
-        fill="none"
-      >
-        <defs>
-          {/* Light Mode Crimson-Red Gradient */}
-          <linearGradient id="connRedLight" x1="0" y1="0" x2="52" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#E4002B" />
-            <stop offset="45%" stopColor="#C2242B" />
-            <stop offset="100%" stopColor="#A31C1B" />
-          </linearGradient>
+      <defs>
+        {/* Light Mode Crimson-Red Gradient */}
+        <linearGradient id="rPillGradLight" x1="0" y1="28" x2="262" y2="28" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#E4002B" />
+          <stop offset="45%" stopColor="#C2242B" />
+          <stop offset="100%" stopColor="#A31C1B" />
+        </linearGradient>
 
-          {/* Dark Mode Crimson-Red Gradient */}
-          <linearGradient id="connRedDark" x1="0" y1="0" x2="52" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#E4002B" />
-            <stop offset="45%" stopColor="#C2242B" />
-            <stop offset="100%" stopColor="#8A1417" />
-          </linearGradient>
+        {/* Dark Mode Luminous Crimson Gradient */}
+        <linearGradient id="rPillGradDark" x1="0" y1="28" x2="262" y2="28" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#E4002B" />
+          <stop offset="45%" stopColor="#C2242B" />
+          <stop offset="100%" stopColor="#8A1417" />
+        </linearGradient>
 
-          {/* Ambient Drop Shadow & Subtle Glow */}
-          <filter id="redRibbonShadow" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="#C2242B" floodOpacity="0.35" />
-          </filter>
-          <filter id="redRibbonGlowDark" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="0" dy="0" stdDeviation="3.5" floodColor="#C2242B" floodOpacity="0.55" />
-          </filter>
-        </defs>
+        {/* Ambient Drop Shadows */}
+        <filter id="rPillShadowLight" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2.5" stdDeviation="3" floodColor="#C2242B" floodOpacity="0.32" />
+        </filter>
+        <filter id="rPillShadowDark" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#C2242B" floodOpacity="0.55" />
+        </filter>
+      </defs>
 
-        {/* Sculpted 10px flowing ribbon: Sweeps from top-right of Nav Capsule to bottom-left of Utility Capsule */}
-        <path
-          d="M 0 0 C 14 0, 25 16, 34 32 C 40 42, 46 48, 52 48 L 52 37 C 45 35, 38 26, 30 14 C 22 4, 12 0, 0 0 Z"
-          className="fill-[url(#connRedLight)] dark:fill-[url(#connRedDark)] filter-[url(#redRibbonShadow)] dark:filter-[url(#redRibbonGlowDark)]"
-        />
+      {/* 1. Flowing S-Ribbon Clasp: emerges from bottom-right of nav capsule (x=0, y=52) and loops up to top-left of utility capsule (x=76, y=4) */}
+      <path
+        d="M 0 52 C 22 52, 38 44, 48 28 C 56 14, 64 4, 78 4 L 78 14.5 C 66 14.5, 58 24, 50 36 C 40 48, 24 52, 0 52 Z"
+        className="fill-[url(#rPillGradLight)] dark:fill-[url(#rPillGradDark)] filter-[url(#rPillShadowLight)] dark:filter-[url(#rPillShadowDark)]"
+      />
 
-        {/* Upper Meniscus Light Reflection Rim */}
-        <path
-          d="M 0 0 C 14 0, 25 16, 34 32 C 40 42, 46 48, 52 48"
-          className="stroke-white/95 dark:stroke-white/55"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-        />
-      </svg>
-    </div>
+      {/* 2. Meniscus light highlight along outer crest of the Red S-Ribbon */}
+      <path
+        d="M 0 52 C 22 52, 38 44, 48 28 C 56 14, 64 4, 78 4"
+        stroke="rgba(255,255,255,0.95)"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        className="dark:stroke-white/70"
+      />
+
+      {/* 3. Sculpted 3D Red Border wrapping around Utility Capsule (204x48 pill at x=54, y=4) */}
+      <rect
+        x="54"
+        y="4"
+        width="204"
+        height="48"
+        rx="24"
+        strokeWidth="3.2"
+        className="stroke-[url(#rPillGradLight)] dark:stroke-[url(#rPillGradDark)] filter-[url(#rPillShadowLight)] dark:filter-[url(#rPillShadowDark)]"
+      />
+
+      {/* 4. Meniscus Light Reflection along top curvature of the Utility Capsule border */}
+      <path
+        d="M 78 4 L 234 4"
+        stroke="rgba(255,255,255,0.95)"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        className="dark:stroke-white/60"
+      />
+    </svg>
   );
 }
 
@@ -263,15 +296,18 @@ export function Header({ country = 'ae' }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full px-3 pb-1 pt-2 sm:pt-2.5 lg:pt-2 xl:pt-2.5 sm:px-5">
       <div className="mx-auto max-w-[1160px]">
-        {/* ============ THREE-PART CONNECTED NAVBAR ARCHITECTURE (LIQUID GLASS SYSTEM) ============ */}
+        {/* ============ THREE-PART CONNECTED NAVBAR ARCHITECTURE (WRAPPING BORDER CLASP & LIQUID GLASS) ============ */}
         <div className="relative flex items-center justify-between lg:justify-center w-full">
           
-          {/* ================= 1. LEFT SECTION — LOGO CAPSULE (LIQUID GLASS) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/85 px-3.5 sm:px-4 lg:px-4.5 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
+          {/* ================= 1. LEFT SECTION — LOGO CAPSULE (LIQUID GLASS + WRAPPING GREEN BORDER) ================= */}
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/90 px-3.5 sm:px-4 lg:w-[216px] lg:px-4.5 backdrop-blur-2xl border-2 border-[#00843D] lg:border-0 dark:border-[#16A05A] shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/92 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
+            {/* Desktop Sculpted Wrapping Border & S-Ribbon Clasp */}
+            <LogoCapsuleBorderSvg />
+
             <Link
               href={`/${country}`}
               aria-label="Takhlees Business Home"
-              className="group flex items-center gap-2 sm:gap-2.5 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+              className="relative z-10 group flex items-center gap-2 sm:gap-2.5 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
             >
               <Image
                 src="/icons/takhlees-emblem.png"
@@ -292,14 +328,54 @@ export function Header({ country = 'ae' }: HeaderProps) {
             </Link>
           </div>
 
-          {/* ================= CONNECTION A: GREEN CURVED RIBBON ================= */}
-          <GreenRibbonConnector />
-
           {/* ================= 2. CENTER SECTION — MAIN NAVIGATION CAPSULE (LIQUID GLASS) ================= */}
           <nav
-            className="relative z-20 hidden flex-1 max-w-[660px] xl:max-w-[700px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/85 px-3 lg:flex xl:px-4 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300"
+            className="relative z-10 hidden flex-1 max-w-[640px] xl:max-w-[670px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/85 px-3 lg:flex xl:px-4 backdrop-blur-2xl border border-black/[0.08] dark:border-white/12 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300 mx-2.5 xl:mx-3"
             aria-label="Main Navigation"
           >
+            {/* Clasp Overlay: Top-Left Green Clasp */}
+            <svg
+              viewBox="0 0 80 48"
+              className="absolute top-0 left-0 w-[80px] h-[48px] pointer-events-none overflow-visible z-0"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M 0 24 C 0 10, 10 0, 24 0 L 76 0"
+                strokeWidth="3.2"
+                className="stroke-[#00843D] dark:stroke-[#16A05A]"
+                strokeLinecap="round"
+              />
+              <path
+                d="M 14 0 L 76 0"
+                stroke="rgba(255,255,255,0.95)"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                className="dark:stroke-white/60"
+              />
+            </svg>
+
+            {/* Clasp Overlay: Bottom-Right Red Clasp */}
+            <svg
+              viewBox="0 0 80 48"
+              className="absolute bottom-0 right-0 w-[80px] h-[48px] pointer-events-none overflow-visible z-0"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M 4 48 L 56 48 C 70 48, 80 38, 80 24"
+                strokeWidth="3.2"
+                className="stroke-[#E4002B] dark:stroke-[#E4002B]"
+                strokeLinecap="round"
+              />
+              <path
+                d="M 4 48 L 56 48"
+                stroke="rgba(255,255,255,0.7)"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                className="dark:stroke-white/40"
+              />
+            </svg>
             {links.map((link) => {
               const active = isActive(link.href);
 
@@ -431,11 +507,10 @@ export function Header({ country = 'ae' }: HeaderProps) {
             })}
           </nav>
 
-          {/* ================= CONNECTION B: RED CURVED RIBBON ================= */}
-          <RedRibbonConnector />
-
-          {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE (LIQUID GLASS) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/85 px-2.5 sm:px-3 lg:px-3.5 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
+          {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE (LIQUID GLASS + WRAPPING RED BORDER) ================= */}
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center justify-between gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/90 px-3 sm:px-3.5 lg:w-[204px] lg:px-4 backdrop-blur-2xl border-2 border-[#E4002B] lg:border-0 dark:border-[#C2242B] shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/92 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
+            {/* Desktop Sculpted Wrapping Border & S-Ribbon Clasp */}
+            <UtilityCapsuleBorderSvg />
             {/* Country Selector */}
             <div className="relative" ref={dropdownRef}>
               <button

@@ -588,129 +588,7 @@ This document is the **single source of truth** for all architectural, database,
 
 ---
 
-### Entry #025 — Responsive Liquid Glass Navbar Height Calibration & Small Laptop Viewport Optimization
-* **Date & Time:** 2026-11-24 21:40 (IST)
-* **Scope:** Responsive Liquid Glass Navbar Height Calibration, Small Laptop Viewport Optimization (1024px–1440px), Visual Clearance Tuning
-* **Files Modified:**
-  - `frontend-takhlees/src/components/layout/header.tsx`
-  - `frontend-takhlees/src/components/sections/uae-hero.tsx`
-  - `CHANGELOG.md`
-
-#### 1. Problem Description:
-- **Excessive Navbar Height on Laptops:** On compact and 13"/14" laptop viewports (1024px to 1440px wide with 768px to 800px display height, e.g. 13" MacBook Air/Pro, ThinkPad, Chromebooks), the previous 72px total header height (56px pill height + 16px wrapper padding) consumed excessive vertical screen height (~10% of the viewport).
-- **Hero & Drift Wall Vertical Crowding:** The vertical space compression caused tight visual proximity between the navbar pill, the hero eyebrow headline, and the adjacent 3D Drift Wall collage on standard laptop screens.
-
-#### 2. Changes Applied:
-- **Calibrated Inner Liquid Glass Pill Height:**
-  - Standardized pill height to `48px` across `lg` (1024px–1279px) and `xl` (1280px–1535px) laptop viewports (`h-[48px] sm:h-[50px] lg:h-[48px] xl:h-[48px] 2xl:h-[52px]`), scaling to `52px` only on `2xl` (1536px+) large desktop monitors.
-- **Optimized Header Container Vertical Spacing:**
-  - Streamlined wrapper padding to `pt-2 sm:pt-2 lg:pt-2 xl:pt-2 2xl:pt-3 pb-1`, bringing total header height down from 72px to **60px** on all laptop viewports.
-- **Proportionate Scaling of Inner Elements:**
-  - Brand Emblem: Scaled to `h-7 w-7 xl:h-7.5 xl:w-7.5 2xl:h-8 2xl:w-8`.
-  - Brand Typography: Scaled Arabic to `text-[11.5px] lg:text-[12px] xl:text-[12.5px] 2xl:text-[13px]` and English to `text-[13.5px] lg:text-[14px] xl:text-[14.5px] 2xl:text-[15px]`.
-  - Curved Swoosh Divider: Compacted SVG width to `w-[56px] lg:w-[60px] xl:w-[68px] 2xl:w-[84px]`.
-  - Navigation Links: Adjusted typography and padding to `px-2.5 py-1 text-[12px] xl:text-[12.5px] 2xl:text-[13px]`.
-  - Theme Toggle: 26px Nimbus LiquidToggle maintains comfortable 11px vertical clearance above and below with zero clipping.
-- **Aligned Hero Container Height Formula:**
-  - Updated `uae-hero.tsx` container calculation to `min-h-[calc(100vh-76px)] sm:min-h-[calc(100vh-78px)] lg:min-h-[calc(100vh-76px)] xl:min-h-[calc(100vh-76px)] 2xl:min-h-[calc(100vh-84px)]` to utilize the reclaimed 12px vertical space for hero vertical centering.
-
-#### 3. Technical Rationale:
-- A total header height reduction from 72px to 60px (a 16.7% height reduction) reclaims 12px of valuable screen height on 768px–800px laptop screens. This provides ample vertical breathing room for the hero headline and Drift Wall without sacrificing touch target standards or visual elegance.
-
-#### 4. Verification & Proof:
-- **Playwright Live DOM Bounding Box Measurements:**
-  - `1024x768` (compact laptop): Total header height = **60.0px**, pill height = **48.0px**.
-  - `1280x800` (13" MacBook): Total header height = **60.0px**, pill height = **48.0px**.
-  - `1366x768` (14" laptop): Total header height = **60.0px**, pill height = **48.0px**.
-  - `1440x900` (15" laptop): Total header height = **60.0px**, pill height = **48.0px**.
-  - `1920x1080` (desktop monitor): Total header height = **68.0px**, pill height = **52.0px**.
-- **Visual Evidence:** High-resolution screenshots captured and verified at `laptop_compact_1024x768_nav_verified.png`, `laptop_13_inch_1280x800_nav_verified.png`, `laptop_small_1366x768_nav_verified.png`, `laptop_1440x900_nav_verified.png`, and `desktop_1920x1080_nav_verified.png`.
-- **Quality Checks:**
-  - `npm run type-check`: 0 errors.
-  - `npm run lint`: 0 errors.
-  - `python manage.py check`: 0 issues (0 silenced).
-
----
-
-### Entry #026 — Custom Three-Part Connected Navbar Architecture & UAE Brand Curved Ribbon Geometry
-* **Date & Time:** 2026-11-24 22:00 (IST)
-* **Scope:** Custom Three-Part Connected Navbar Redesign, Sculpted Curved Ribbon Connectors (UAE Green & Red), Interactive Glass Services Dropdown & Responsive Multi-Viewport Optimization
-* **Files Modified:**
-  - `frontend-takhlees/src/components/layout/header.tsx`
-  - `CHANGELOG.md`
-
-#### 1. Problem Description:
-- **Single Continuous Pill Architecture Limitation:** The existing single pill navbar lacked distinct structural zoning between the corporate brand identity, the primary navigation routes, and the internationalization/theme utilities.
-- **Brand Geometry Alignment:** The approved creative direction required a custom connected capsule architecture reflecting the flowing curves of the Takhlees logo and the four UAE national/brand colors (Red, Green, White, Black).
-
-#### 2. Changes Applied:
-- **Architected Three Independent Aligned Capsules (48px Height):**
-  1. **Left Section — Logo Capsule:** Rounded capsule (`rounded-full`) housing the original Takhlees emblem (32x32), Arabic typography `تـخـلـيـص`, and uppercase `TAKHLEES` branding on off-white/charcoal glass surfaces with subtle borders (`border-black/[0.08]` / `border-[#303432]`).
-  2. **Center Section — Main Navigation Capsule:** Flexible dominant center capsule hosting all 8 routes (`Home`, `About Us`, `Services`, `Branches`, `Gallery`, `Career`, `Blog`, `Contact`) with refined active indicator (`#00843D` / `#16A05A`), subtle backlight hover, and an interactive glass dropdown for UAE Corporate Services (Company Setup, PRO, Visas, ICV/ISO, Trademark).
-  3. **Right Section — Utility Capsule:** Compact rounded capsule housing the internationalization country selector (`UAE` / `India` flags with animated dropdown), vertical divider, and 26px Nimbus Liquid Theme Toggle (`LiquidToggle`).
-- **Engineered Custom Flowing Curved Ribbon Connectors:**
-  - **Connection A (Logo → Nav):** Flowing forest-green / luminous emerald curved ribbon emerging from the bottom-right of the Logo Capsule and sweeping up into the top-left shoulder of the Navigation Capsule with specular meniscus highlight and drop shadow.
-  - **Connection B (Nav → Utility):** Flowing crimson-red curved ribbon emerging from the top-right of the Navigation Capsule and sweeping down into the bottom-left shoulder of the Utility Capsule with specular meniscus highlight and drop shadow.
-- **Mobile & Tablet Responsive Strategy:**
-  - On desktop (`lg`+ / 1024px+): Displays all three connected capsules with the dual sculpted ribbon connectors in one continuous horizontal architecture.
-  - On mobile (`< lg` / < 1024px): Adapts into a streamlined dual-capsule layout (Logo Capsule on left, Utility Capsule with mobile menu toggle on right), with a smooth animated slide-down navigation drawer.
-
-#### 3. Technical Rationale:
-- Breaking the navigation into three purpose-built capsules linked by physical-looking SVG ribbons elevates the navbar from a generic template into a distinctive, proprietary brand asset. The 48px height constraint is strictly preserved to maintain the optimal vertical spacing established in Entry #025.
-
-#### 4. Verification & Proof:
-- **Playwright Live Verification:**
-  - `crop_3part_live_1440_light.png`: Light mode rendering with ivory surfaces and rich green/red ribbons.
-  - `crop_3part_live_1440_dark.png`: Dark mode rendering with `#111313` blackout surfaces and luminous emerald/crimson ribbons.
-  - `crop_3part_live_1280_dark.png`: Verified on 13" laptop viewport (1280x800).
-  - `crop_3part_live_dropdown_services.png`: Verified interactive services dropdown with 5 corporate offerings.
-  - `crop_3part_live_mobile_drawer.png`: Verified compact mobile layout with animated drawer at 390x844.
-- **Quality Checks:**
-  - `npm run type-check`: 0 errors.
-  - `npm run lint`: 0 warnings / 0 errors.
-  - `python manage.py check`: 0 issues (0 silenced).
-
----
-
-### Entry #027 — Three-Part Connected Navbar: Liquid Glass Material & Active Water Drop Meniscus Restoration
-* **Date & Time:** 2026-11-24 22:07 (IST)
-* **Scope:** Liquid Glass Material Restoration, Active Navigation Water Drop Meniscus & Fluid Specular Reflections
-* **Files Modified:**
-  - `frontend-takhlees/src/components/layout/header.tsx`
-  - `CHANGELOG.md`
-
-#### 1. Problem Description:
-- **Loss of Liquid Glass Tactility:** Following the restructuring to the three-part connected capsule architecture, the signature **Liquid Glass Effect** was missing: the capsules rendered with flat opaque surfaces, and the active navigation link lost its 3D water drop meniscus, specular refraction, and fluid spring transition.
-
-#### 2. Changes Applied:
-- **Restored Liquid Glass Material to All Three Capsules:**
-  - Light mode: Translucent frosted ivory glass (`bg-[#FAF8F5]/85 backdrop-blur-2xl border-white/90`) with dual inset specular rims (`inset 0 1.5px 2px 0 rgba(255,255,255,0.95), inset 0 -1.5px 2px 0 rgba(0,132,61,0.06)`) and multi-layer fluid shadows.
-  - Dark mode: Translucent obsidian liquid glass (`bg-[#111313]/90 backdrop-blur-2xl border-white/12`) with dual inset specular rims (`inset 0 1.5px 2px 0 rgba(255,255,255,0.16), inset 0 -1px 2px 0 rgba(0,0,0,0.6)`) and deep liquid glass depth shadows (`0 12px 36px -4px rgba(0,0,0,0.75)`).
-- **Reinstated Signature Liquid Water Drop on Active Navigation Link:**
-  - Implemented multi-gradient radial water droplet with surface tension highlights (`from-white/95 via-white/40 to-emerald-500/15` in light; `from-white/20 via-white/5 to-[#16A05A]/25` in dark).
-  - Restored top curvature water meniscus reflection (`h-[40%] rounded-full bg-gradient-to-b from-white/80 to-transparent`).
-  - Powered by Framer Motion `layoutId="liquid-glass-water-drop"` with spring physics (`stiffness: 420, damping: 30`) for fluid liquid movement between tabs.
-- **Synced Liquid Glass Styling to Services Dropdown & Connectors:**
-  - Matched the interactive services dropdown to the new liquid glass backdrop.
-  - Ensured flowing green and red curved ribbon connectors maintain glossy liquid meniscus specular rims.
-
-#### 3. Technical Rationale:
-- Reinstating the liquid glass material and water drop meniscus honors the original design language while harmonizing perfectly with the three-part connected capsule geometry and the Nimbus liquid toggle.
-
-#### 4. Verification & Proof:
-- **Playwright Live Verification:**
-  - `crop_3part_liquid_live_light.png`: Light mode rendering with liquid glass capsules and active water drop.
-  - `crop_3part_liquid_live_dark.png`: Dark mode rendering with obsidian liquid glass and luminous emerald water drop.
-  - `3part_liquid_live_laptop.png`: Verified on 13" laptop viewport (1280x800).
-- **Quality Checks:**
-  - `npm run type-check`: 0 errors.
-  - `npm run lint`: 0 warnings / 0 errors.
-  - `python manage.py check`: 0 issues (0 silenced).
-
-
-
 - **Visual Validation:** Verified Burj Khalifa spire, stepped setbacks, and surrounding towers appear crisp, sharp, and unmistakably visible as glowing emerald architectural line-art in dark mode.
-
 ---
 
 ### Entry #022 — Architecture & DevOps: Dedicated GitHub Repositories Initialization & Push
@@ -963,6 +841,54 @@ This document is the **single source of truth** for all architectural, database,
   - `npm run type-check`: 0 errors.
   - `npm run lint`: 0 warnings / 0 errors.
   - `python manage.py check`: 0 issues (0 silenced).
+
+---
+
+### Entry #028 — Three-Part Connected Navbar: Wrapping Border Clasp Architecture & Dual S-Ribbon Clasp Flow
+* **Date & Time:** 2026-11-24 22:21 (IST)
+* **Scope:** Wrapping Border Clasp Architecture, Full-Perimeter Green & Red Sculpted Borders, Continuous S-Ribbon Clasps & Responsive Continuity
+* **Files Modified:**
+  - `frontend-takhlees/src/components/layout/header.tsx`
+  - `CHANGELOG.md`
+  - `frontend-takhlees/CHANGELOG.md`
+  - `backend-takhlees/CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Disconnected Floating Connector Appearance:** Previous ribbon connectors floated as detached segments between capsules, whereas the approved brand reference (`media_1795538393249_c056198c.jpg`) specifies that the ribbon must wrap all the way around the capsule perimeters ("boarder chuttunna style, catch chyunna look").
+- **Missing Clasp Interaction:** The Center Navigation Capsule lacked visual clasping details at the contact points, diminishing the impression of an interconnected physical ribbon architecture.
+
+#### 2. Changes Applied:
+- **Logo Capsule Wrapping Green Border & S-Ribbon Clasp:**
+  - Integrated `LogoCapsuleBorderSvg`: A sculpted 3D green border (`#00843D` / `#087A43` / `#16A05A`) wrapping around the entire Logo Capsule perimeter (`rect x="4" y="4" width="216" height="48" rx="24"`), with a top meniscus reflection line (`d="M 28 4 L 192 4"`).
+  - From the bottom-right of the logo capsule border at $(x=184, y=52)$, the green stroke flows out as a continuous S-curve ribbon across the gap and clasps firmly onto the top-left edge of the Center Navigation Capsule $(x=266, y=4)$, with a pristine white specular crest highlight (`stroke="rgba(255,255,255,0.95)"`).
+- **Center Navigation Capsule Clasp Accents:**
+  - Added dedicated corner clasp SVG accents:
+    - Top-left green clasp stroke (`d="M 0 24 C 0 10, 10 0, 24 0 L 76 0"`) seamlessly receiving the green ribbon.
+    - Bottom-right red clasp stroke (`d="M 4 48 L 56 48 C 70 48, 80 38, 80 24"`) seamlessly feeding into the red ribbon.
+- **Utility Capsule Wrapping Red Border & S-Ribbon Clasp:**
+  - Integrated `UtilityCapsuleBorderSvg`: A sculpted 3D crimson-red border (`#E4002B` / `#C2242B` / `#A31C1B`) wrapping around the entire Utility Capsule perimeter (`rect x="54" y="4" width="204" height="48" rx="24"`), with a top meniscus reflection line (`d="M 78 4 L 234 4"`).
+  - Extending backwards from the utility border across the gap to the bottom-right of the Center Navigation Capsule $(x=0, y=52)$, the red stroke forms a continuous S-curve ribbon with specular crest reflection.
+- **Dual-Mode Luminosity & Responsive Preservation:**
+  - Light mode: Forest-green (`#00843D`) and Crimson (`#E4002B`) with ambient drop shadows.
+  - Dark mode: Luminous emerald (`#16A05A` / `#2EB04B`) and crimson (`#E4002B`) with glowing drop shadow filters (`feDropShadow`).
+  - Mobile (`< lg`): Gracefully hides desktop SVG overlays, presenting clean dual capsules with brand border strokes (Green on Logo, Red on Utility) and animated slide-down navigation drawer.
+
+#### 3. Technical Rationale:
+- Unifying the ribbon stroke with the capsule perimeter borders eliminates the seam between the connectors and the capsules, producing the exact tactile "clasping / catching" ribbon architecture illustrated in the user's reference mockup.
+
+#### 4. Verification & Proof:
+- **Playwright Live Verification:**
+  - `crop_live_wrap_light.png`: Light mode rendering showing continuous green ribbon wrapping logo capsule and clasping center nav, and red ribbon wrapping utility capsule and clasping center nav.
+  - `crop_live_wrap_dark.png`: Dark mode rendering with obsidian liquid glass and luminous glowing borders.
+  - `crop_live_wrap_laptop.png`: Verified on 13" laptop viewport (1280x800) with continuous pixel profiles.
+  - `compare_user_vs_live.png`: Side-by-side comparison with the user's uploaded reference mockup.
+  - `services_dropdown_live.png`: Verified interactive services dropdown functionality.
+  - `live_wrap_mobile.png`: Verified mobile dual-capsule responsive layout.
+- **Quality Checks:**
+  - `npm run type-check`: 0 errors.
+  - `npm run lint`: 0 warnings / 0 errors.
+  - `python manage.py check`: 0 issues (0 silenced).
+
 
 
 

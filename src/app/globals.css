@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 43 30% 95.5%;
+    --foreground: 0 0% 13%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
+
+    /* Takhlees Green as Primary */
+    --primary: 145 67% 24%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Takhlees Charcoal as Secondary */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 13%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    /* Takhlees Red as Accent */
+    --accent: 356 68% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 356 68% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 145 67% 24%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* TAKHLEES BLACKOUT PREMIUM DARK PALETTE */
+    --background: 0 0% 3.1%; /* #080909 */
+    --foreground: 60 9% 95.5%; /* #F5F5F2 */
+
+    --card: 0 0% 6.7%; /* #101111 */
+    --card-foreground: 60 9% 95.5%; /* #F5F5F2 */
+
+    --popover: 0 0% 9%; /* #171717 */
+    --popover-foreground: 60 9% 95.5%; /* #F5F5F2 */
+
+    /* Emerald Accent #16A05A */
+    --primary: 150 76% 36%;
+    --primary-foreground: 60 9% 95.5%;
+
+    /* Surface #171717 */
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 60 9% 95.5%;
+
+    /* Elevated Surface #202222 & Secondary Text #A5AAA7 */
+    --muted: 180 3% 13%;
+    --muted-foreground: 144 3% 66%;
+
+    /* Crimson Red #A31C1B */
+    --accent: 359 71% 37%;
+    --accent-foreground: 60 9% 95.5%;
+
+    --destructive: 359 71% 37%;
+    --destructive-foreground: 60 9% 95.5%;
+
+    /* Subtle Border #303432 */
+    --border: 150 3% 20%;
+    --input: 150 3% 20%;
+    --ring: 150 76% 36%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-green-600 ring-offset-2 ring-offset-background;
+  }
+}
+
+/* Custom Brand Utilities */
+.takhlees-gradient-subtle {
+  background: linear-gradient(135deg, rgba(20, 103, 54, 0.05) 0%, rgba(194, 36, 43, 0.05) 100%);
+}
+
+.takhlees-hero-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(20, 103, 54, 0.15) 0%, transparent 60%);
+}
+
+/* ===== Editorial motion =====
+   Durations stay inside the 150–300ms interaction band for UI feedback, while
+   the entrance sequence is allowed a slightly longer settle. The global
+   prefers-reduced-motion rule already collapses every duration to ~0. */
+@keyframes takhlees-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes takhlees-settle {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes takhlees-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes takhlees-drop {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@layer utilities {
+  .motion-rise {
+    animation: takhlees-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .motion-settle {
+    animation: takhlees-settle 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .motion-reveal {
+    animation: takhlees-reveal 0.9s ease-out both;
+  }
+  .motion-drop {
+    animation: takhlees-drop 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .motion-delay-1 {
+    animation-delay: 80ms;
+  }
+  .motion-delay-2 {
+    animation-delay: 160ms;
+  }
+  .motion-delay-3 {
+    animation-delay: 240ms;
+  }
+  .motion-delay-4 {
+    animation-delay: 330ms;
+  }
+  .motion-delay-5 {
+    animation-delay: 420ms;
+  }
+}
+
+/* ================= TAKHLEES LIQUID GLASS NAVBAR PILL ================= */
+.nav-uae-pill {
+  position: relative;
+  background: rgba(247, 245, 240, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), 0 6px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+.dark .nav-uae-pill {
+  position: relative;
+  background: rgba(17, 19, 19, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08), 0 12px 36px rgba(0, 0, 0, 0.65);
+}
+
+.nav-uae-pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 1.5px;
+  background: linear-gradient(90deg, rgba(214, 33, 40, 0.45) 0%, rgba(23, 23, 23, 0.15) 50%, rgba(0, 132, 61, 0.45) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.dark .nav-uae-pill::before {
+  background: linear-gradient(90deg, rgba(163, 28, 27, 0.55) 0%, rgba(48, 52, 50, 0.45) 45%, rgba(22, 160, 90, 0.45) 100%);
+}
+
+.nav-in-pill {
+  position: relative;
+  background: rgba(247, 245, 240, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), 0 6px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+.dark .nav-in-pill {
+  position: relative;
+  background: rgba(17, 19, 19, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08), 0 12px 36px rgba(0, 0, 0, 0.65);
+}
+
+.nav-in-pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 1.5px;
+  background: linear-gradient(90deg, rgba(255, 153, 51, 0.45) 0%, rgba(23, 23, 23, 0.15) 50%, rgba(18, 136, 7, 0.45) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.dark .nav-in-pill::before {
+  background: linear-gradient(90deg, rgba(255, 153, 51, 0.45) 0%, rgba(48, 52, 50, 0.45) 45%, rgba(18, 136, 7, 0.45) 100%);
+}

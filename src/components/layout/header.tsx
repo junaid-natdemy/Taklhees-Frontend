@@ -106,8 +106,9 @@ function IndiaFlag() {
 /**
  * EmeraldRibbonConnector — Left UAE Satin Ribbon Connector
  * Connects the Logo Capsule directly to the Central Navigation Capsule.
- * Single continuous emerald-green ribbon with smooth, controlled S-shaped curve,
- * pure satin gradient, specular crest highlight, soft lustrous core beam, and ZERO dark creases.
+ * Single continuous emerald-green ribbon with controlled S-shaped twist,
+ * pure satin gradient, specular crest highlight, soft lustrous core beam,
+ * and zero protrusion outside capsule borders (starts X=0 Y=26..34.5 inside Logo, ends X=54 Y=13..21.5 inside Nav).
  */
 function EmeraldRibbonConnector() {
   return (
@@ -123,16 +124,16 @@ function EmeraldRibbonConnector() {
       >
         <defs>
           {/* Light Mode: Pure Emerald Satin Gradient */}
-          <linearGradient id="emeraldSatinPureLight" x1="-8" y1="44" x2="64" y2="6" gradientUnits="userSpaceOnUse">
+          <linearGradient id="emeraldSatinPureLight" x1="0" y1="35" x2="56" y2="13" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#007A38" />
             <stop offset="25%" stopColor="#00843D" />
             <stop offset="50%" stopColor="#0FA958" />
             <stop offset="75%" stopColor="#00843D" />
-            <stop offset="100%" stopColor="#006830" />
+            <stop offset="100%" stopColor="#007A38" />
           </linearGradient>
 
           {/* Dark Mode: Luminous Pure Emerald Satin Gradient */}
-          <linearGradient id="emeraldSatinPureDark" x1="-8" y1="44" x2="64" y2="6" gradientUnits="userSpaceOnUse">
+          <linearGradient id="emeraldSatinPureDark" x1="0" y1="35" x2="56" y2="13" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#00843D" />
             <stop offset="25%" stopColor="#16A05A" />
             <stop offset="50%" stopColor="#22C55E" />
@@ -142,32 +143,32 @@ function EmeraldRibbonConnector() {
 
           {/* Clean Ambient Drop Shadow */}
           <filter id="emeraldRibbonDropShadowLight" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" floodColor="#00401C" floodOpacity="0.28" />
+            <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#00401C" floodOpacity="0.25" />
           </filter>
           <filter id="emeraldRibbonDropShadowDark" x="-30%" y="-30%" width="160%" height="160%">
             <feDropShadow dx="0" dy="0" stdDeviation="3.5" floodColor="#16A05A" floodOpacity="0.45" />
           </filter>
         </defs>
 
-        {/* 1. Continuous Emerald Satin Ribbon Body (Extended -8px to 64px, exact mathematical tangent fit) */}
+        {/* 1. Continuous Emerald Satin Ribbon Body (Zero Protrusion: Tucked cleanly inside capsule contours) */}
         <path
-          d="M -8 39 C 4 39, 14 26, 36 12 C 46 5.5, 54 2, 64 2 L 64 11.5 C 54 11.5, 46 14.5, 36 21 C 14 35, 4 48, -8 48 Z"
+          d="M 0 26 C 18 27.5, 36 13, 54 13 L 54 21.5 C 36 21.5, 18 36, 0 34.5 Z"
           className="fill-[url(#emeraldSatinPureLight)] dark:fill-[url(#emeraldSatinPureDark)] filter-[url(#emeraldRibbonDropShadowLight)] dark:filter-[url(#emeraldRibbonDropShadowDark)]"
         />
 
         {/* 2. Top Satin Specular Sheen (Reflective highlight along upper crest) */}
         <path
-          d="M -8 39 C 4 39, 14 26, 36 12 C 46 5.5, 54 2, 64 2"
+          d="M 2 26 C 18 27.5, 36 13, 54 13"
           className="stroke-white/95 dark:stroke-white/85"
-          strokeWidth="1.4"
+          strokeWidth="1.3"
           strokeLinecap="round"
         />
 
         {/* 3. Longitudinal Lustrous Core Light Beam */}
         <path
-          d="M -6 41.5 C 5 41.5, 15 28.5, 37 14.5 C 47 8, 54 5, 62 5"
+          d="M 4 28.5 C 20 30, 36 15.5, 52 15.5"
           className="stroke-white/35 dark:stroke-white/30"
-          strokeWidth="1.6"
+          strokeWidth="1.5"
           strokeLinecap="round"
         />
       </svg>
@@ -179,7 +180,8 @@ function EmeraldRibbonConnector() {
  * CrimsonRibbonConnector — Right UAE Satin Ribbon Connector
  * Connects the Central Navigation Capsule directly to the Utility Capsule.
  * Single continuous crimson-red ribbon with elegant mirrored curve,
- * pure satin gradient, specular crest highlight, soft lustrous core beam, and ZERO dark creases.
+ * pure satin gradient, specular crest highlight, soft lustrous core beam,
+ * and zero protrusion outside capsule borders (starts X=2 Y=13..21.5 inside Nav, ends X=56 Y=26..34.5 inside Utility).
  */
 function CrimsonRibbonConnector() {
   return (
@@ -195,7 +197,7 @@ function CrimsonRibbonConnector() {
       >
         <defs>
           {/* Light Mode: Pure Crimson Satin Gradient */}
-          <linearGradient id="crimsonSatinPureLight" x1="-8" y1="6" x2="64" y2="44" gradientUnits="userSpaceOnUse">
+          <linearGradient id="crimsonSatinPureLight" x1="0" y1="13" x2="56" y2="35" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#B81D24" />
             <stop offset="25%" stopColor="#E4002B" />
             <stop offset="50%" stopColor="#FA203B" />
@@ -204,7 +206,7 @@ function CrimsonRibbonConnector() {
           </linearGradient>
 
           {/* Dark Mode: Luminous Pure Crimson Satin Gradient */}
-          <linearGradient id="crimsonSatinPureDark" x1="-8" y1="6" x2="64" y2="44" gradientUnits="userSpaceOnUse">
+          <linearGradient id="crimsonSatinPureDark" x1="0" y1="13" x2="56" y2="35" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#C2242B" />
             <stop offset="25%" stopColor="#E4002B" />
             <stop offset="50%" stopColor="#FF3352" />
@@ -214,32 +216,32 @@ function CrimsonRibbonConnector() {
 
           {/* Clean Ambient Drop Shadow */}
           <filter id="crimsonRibbonDropShadowLight" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" floodColor="#590408" floodOpacity="0.28" />
+            <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#590408" floodOpacity="0.25" />
           </filter>
           <filter id="crimsonRibbonDropShadowDark" x="-30%" y="-30%" width="160%" height="160%">
             <feDropShadow dx="0" dy="0" stdDeviation="3.5" floodColor="#E4002B" floodOpacity="0.45" />
           </filter>
         </defs>
 
-        {/* 1. Continuous Crimson Satin Ribbon Body (Extended -8px to 64px, exact mathematical tangent fit) */}
+        {/* 1. Continuous Crimson Satin Ribbon Body (Zero Protrusion: Tucked cleanly inside capsule contours) */}
         <path
-          d="M -8 2 C 2 2, 10 5.5, 20 12 C 42 26, 52 39, 64 39 L 64 48 C 52 48, 42 35, 20 21 C 10 14.5, 2 11.5, -8 11.5 Z"
+          d="M 2 13 C 20 13, 38 27.5, 56 26 L 56 34.5 C 38 36, 20 21.5, 2 21.5 Z"
           className="fill-[url(#crimsonSatinPureLight)] dark:fill-[url(#crimsonSatinPureDark)] filter-[url(#crimsonRibbonDropShadowLight)] dark:filter-[url(#crimsonRibbonDropShadowDark)]"
         />
 
         {/* 2. Top Satin Specular Sheen (Reflective highlight along upper crest) */}
         <path
-          d="M -8 2 C 2 2, 10 5.5, 20 12 C 42 26, 52 39, 64 39"
+          d="M 2 13 C 20 13, 38 27.5, 54 26"
           className="stroke-white/95 dark:stroke-white/85"
-          strokeWidth="1.4"
+          strokeWidth="1.3"
           strokeLinecap="round"
         />
 
         {/* 3. Longitudinal Lustrous Core Light Beam */}
         <path
-          d="M -6 5 C 2 5, 9 8, 19 14.5 C 41 28.5, 51 41.5, 62 41.5"
+          d="M 4 15.5 C 20 15.5, 36 30, 52 28.5"
           className="stroke-white/35 dark:stroke-white/30"
-          strokeWidth="1.6"
+          strokeWidth="1.5"
           strokeLinecap="round"
         />
       </svg>

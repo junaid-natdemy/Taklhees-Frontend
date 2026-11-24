@@ -987,6 +987,41 @@ This document is the **single source of truth** for all architectural, database,
 
 ---
 
+### Entry #033 — Elimination of Ribbon Boundary Protrusions: Mathematical Anchor Calibration & Zero Overhang Beyond Capsule Borders
+* **Date & Time:** 2026-11-25 00:00 (IST)
+* **Scope:** Ribbon Edge Containment, Zero Protrusion Outside Capsule Perimeter, Pure Internal Anchor Points (`Y = 26..34.5` and `Y = 13..21.5`)
+* **Files Modified:**
+  - `src/components/layout/header.tsx`
+  - `CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Protruding Flaps at Capsule Curved Bottoms:** In Entry #031, tangent paths were drawn to `Y = 48` at `X = -8` and `X = 64`. Because the capsules are semi-circular pills (`rounded-full`, radius = 24px), the curved border rounds inward by 24px as $Y$ approaches the bottom edge ($Y = 48$). Consequently, drawing ribbon paths at $Y = 48$ created visible 8px green and red corner flaps that poked out beneath the rounded capsule borders in the transparent space below the navbar.
+
+#### 2. Changes Applied:
+- **Mathematical Internal Contour Anchoring (`header.tsx`):**
+  - **Emerald Ribbon Connector (`EmeraldRibbonConnector`):**
+    - Repositioned the left anchor to enter the Logo Capsule strictly in the lower-middle quadrant where the capsule is wide: starts at `X = 0, Y = 26` (top) to `Y = 34.5` (bottom). Since the Logo capsule at $X = 0$ extends to $Y = 43.49$, the ribbon bottom edge ($Y = 34.5$) is 9px inside the bottom border.
+    - Repositioned the right anchor to enter the Center Nav Capsule at `X = 54, Y = 13` (top) to `Y = 21.5` (bottom). Since the Center Nav capsule at $X = 54$ extends to $Y = 6.09$, the ribbon top edge ($Y = 13$) is 7px inside the top border.
+    - Updated Bézier curves (`M 0 26 C 18 27.5, 36 13, 54 13 L 54 21.5 C 36 21.5, 18 36, 0 34.5 Z`) to maintain a constant 8.5px satin ribbon ribbon width throughout the continuous twist.
+  - **Crimson Ribbon Connector (`CrimsonRibbonConnector`):**
+    - Symmetrically anchored to enter Center Nav Capsule at `X = 2, Y = 13..21.5` and enter the Utility Capsule at `X = 56, Y = 26..34.5`.
+    - At $X = 56$, the Utility Capsule bottom border is at $Y = 43.49$, ensuring the ribbon bottom edge ($Y = 34.5$) is buried 9px inside the opaque capsule body.
+    - Updated Bézier curves (`M 2 13 C 20 13, 38 27.5, 56 26 L 56 34.5 C 38 36, 20 21.5, 2 21.5 Z`) with specular highlights and lustrous core beams.
+
+#### 3. Technical Rationale:
+- Confining the ribbon endpoints to the vertical range $Y \in [13, 34.5]$ ensures that the ribbon enters the capsules well within their circular curvature, where the capsule body is thick and opaque. Because the capsules are mounted at `z-20` and the ribbons at `z-10`, the ribbon ends are cleanly hidden behind the capsules with mathematically zero overhang.
+
+#### 4. Verification & Proof:
+- **Headless Chrome Playwright Verification:**
+  - `zero_protrusion_comparison.png`: Direct before-and-after comparison confirming 100% elimination of both the green flap under Logo Capsule and the red flap under Utility Capsule.
+  - `crop_zero_protrusion_nav_light.png` & `crop_zero_protrusion_nav_dark.png`: Full desktop light and dark mode renders verifying clean, flush capsule perimeters.
+  - Mathematical simulation script (`/tmp/verify_both_ribbons.py`): 1000 sampled points along all 4 contours yielded 0 geometric violations.
+- **Code Quality Checks:**
+  - `npm run type-check`: 0 errors.
+  - `npm run lint`: 0 warnings / 0 errors.
+
+---
+
 ### Entry #032 — Complete UAE Flag & Takhlees Logo Color Integration Across All 3 Navbar Capsules & Uniform Light Thin Border Refinement
 * **Date & Time:** 2026-11-24 23:45 (IST)
 * **Scope:** All 3 Navbar Capsules Unified into UAE Flag & Logo Brand Color Theme, Light Thin 1.5px Border Weight, Cohesive Left-to-Right National Color Flow
@@ -1058,6 +1093,41 @@ This document is the **single source of truth** for all architectural, database,
   - `npm run type-check`: 0 errors.
   - `npm run lint`: 0 warnings / 0 errors.
   - `python manage.py check`: 0 issues (0 silenced).
+
+---
+
+### Entry #033 — Elimination of Ribbon Boundary Protrusions: Mathematical Anchor Calibration & Zero Overhang Beyond Capsule Borders
+* **Date & Time:** 2026-11-25 00:00 (IST)
+* **Scope:** Ribbon Edge Containment, Zero Protrusion Outside Capsule Perimeter, Pure Internal Anchor Points (`Y = 26..34.5` and `Y = 13..21.5`)
+* **Files Modified:**
+  - `src/components/layout/header.tsx`
+  - `CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Protruding Flaps at Capsule Curved Bottoms:** In Entry #031, tangent paths were drawn to `Y = 48` at `X = -8` and `X = 64`. Because the capsules are semi-circular pills (`rounded-full`, radius = 24px), the curved border rounds inward by 24px as $Y$ approaches the bottom edge ($Y = 48$). Consequently, drawing ribbon paths at $Y = 48$ created visible 8px green and red corner flaps that poked out beneath the rounded capsule borders in the transparent space below the navbar.
+
+#### 2. Changes Applied:
+- **Mathematical Internal Contour Anchoring (`header.tsx`):**
+  - **Emerald Ribbon Connector (`EmeraldRibbonConnector`):**
+    - Repositioned the left anchor to enter the Logo Capsule strictly in the lower-middle quadrant where the capsule is wide: starts at `X = 0, Y = 26` (top) to `Y = 34.5` (bottom). Since the Logo capsule at $X = 0$ extends to $Y = 43.49$, the ribbon bottom edge ($Y = 34.5$) is 9px inside the bottom border.
+    - Repositioned the right anchor to enter the Center Nav Capsule at `X = 54, Y = 13` (top) to `Y = 21.5` (bottom). Since the Center Nav capsule at $X = 54$ extends to $Y = 6.09$, the ribbon top edge ($Y = 13$) is 7px inside the top border.
+    - Updated Bézier curves (`M 0 26 C 18 27.5, 36 13, 54 13 L 54 21.5 C 36 21.5, 18 36, 0 34.5 Z`) to maintain a constant 8.5px satin ribbon ribbon width throughout the continuous twist.
+  - **Crimson Ribbon Connector (`CrimsonRibbonConnector`):**
+    - Symmetrically anchored to enter Center Nav Capsule at `X = 2, Y = 13..21.5` and enter the Utility Capsule at `X = 56, Y = 26..34.5`.
+    - At $X = 56$, the Utility Capsule bottom border is at $Y = 43.49$, ensuring the ribbon bottom edge ($Y = 34.5$) is buried 9px inside the opaque capsule body.
+    - Updated Bézier curves (`M 2 13 C 20 13, 38 27.5, 56 26 L 56 34.5 C 38 36, 20 21.5, 2 21.5 Z`) with specular highlights and lustrous core beams.
+
+#### 3. Technical Rationale:
+- Confining the ribbon endpoints to the vertical range $Y \in [13, 34.5]$ ensures that the ribbon enters the capsules well within their circular curvature, where the capsule body is thick and opaque. Because the capsules are mounted at `z-20` and the ribbons at `z-10`, the ribbon ends are cleanly hidden behind the capsules with mathematically zero overhang.
+
+#### 4. Verification & Proof:
+- **Headless Chrome Playwright Verification:**
+  - `zero_protrusion_comparison.png`: Direct before-and-after comparison confirming 100% elimination of both the green flap under Logo Capsule and the red flap under Utility Capsule.
+  - `crop_zero_protrusion_nav_light.png` & `crop_zero_protrusion_nav_dark.png`: Full desktop light and dark mode renders verifying clean, flush capsule perimeters.
+  - Mathematical simulation script (`/tmp/verify_both_ribbons.py`): 1000 sampled points along all 4 contours yielded 0 geometric violations.
+- **Code Quality Checks:**
+  - `npm run type-check`: 0 errors.
+  - `npm run lint`: 0 warnings / 0 errors.
 
 ---
 

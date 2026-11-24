@@ -123,7 +123,7 @@ function EmeraldRibbonConnector() {
       >
         <defs>
           {/* Light Mode: Pure Emerald Satin Gradient */}
-          <linearGradient id="emeraldSatinPureLight" x1="0" y1="40" x2="56" y2="10" gradientUnits="userSpaceOnUse">
+          <linearGradient id="emeraldSatinPureLight" x1="-8" y1="44" x2="64" y2="6" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#007A38" />
             <stop offset="25%" stopColor="#00843D" />
             <stop offset="50%" stopColor="#0FA958" />
@@ -132,7 +132,7 @@ function EmeraldRibbonConnector() {
           </linearGradient>
 
           {/* Dark Mode: Luminous Pure Emerald Satin Gradient */}
-          <linearGradient id="emeraldSatinPureDark" x1="0" y1="40" x2="56" y2="10" gradientUnits="userSpaceOnUse">
+          <linearGradient id="emeraldSatinPureDark" x1="-8" y1="44" x2="64" y2="6" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#00843D" />
             <stop offset="25%" stopColor="#16A05A" />
             <stop offset="50%" stopColor="#22C55E" />
@@ -141,7 +141,7 @@ function EmeraldRibbonConnector() {
           </linearGradient>
 
           {/* Clean Ambient Drop Shadow */}
-          <filter id="emeraldRibbonDropShadowLight" x="-25%" y="-25%" width="150%" height="150%">
+          <filter id="emeraldRibbonDropShadowLight" x="-30%" y="-30%" width="160%" height="160%">
             <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" floodColor="#00401C" floodOpacity="0.28" />
           </filter>
           <filter id="emeraldRibbonDropShadowDark" x="-30%" y="-30%" width="160%" height="160%">
@@ -149,15 +149,15 @@ function EmeraldRibbonConnector() {
           </filter>
         </defs>
 
-        {/* 1. Continuous Emerald Satin Ribbon Body (Thickness 9.5px, smooth S-curve) */}
+        {/* 1. Continuous Emerald Satin Ribbon Body (Extended -8px to 64px, exact mathematical tangent fit) */}
         <path
-          d="M 0 35.5 C 15 35.5, 24 22.5, 33 13.5 C 41 7, 48 7, 54 7 L 54 16.5 C 48 16.5, 41 16.5, 33 23 C 24 32, 15 45, 0 45 Z"
+          d="M -8 39 C 4 39, 14 26, 36 12 C 46 5.5, 54 2, 64 2 L 64 11.5 C 54 11.5, 46 14.5, 36 21 C 14 35, 4 48, -8 48 Z"
           className="fill-[url(#emeraldSatinPureLight)] dark:fill-[url(#emeraldSatinPureDark)] filter-[url(#emeraldRibbonDropShadowLight)] dark:filter-[url(#emeraldRibbonDropShadowDark)]"
         />
 
         {/* 2. Top Satin Specular Sheen (Reflective highlight along upper crest) */}
         <path
-          d="M 0 35.5 C 15 35.5, 24 22.5, 33 13.5 C 41 7, 48 7, 54 7"
+          d="M -8 39 C 4 39, 14 26, 36 12 C 46 5.5, 54 2, 64 2"
           className="stroke-white/95 dark:stroke-white/85"
           strokeWidth="1.4"
           strokeLinecap="round"
@@ -165,7 +165,7 @@ function EmeraldRibbonConnector() {
 
         {/* 3. Longitudinal Lustrous Core Light Beam */}
         <path
-          d="M 2 39 C 16 38, 25 25, 34 16.5 C 42 11, 48 11, 53 11"
+          d="M -6 41.5 C 5 41.5, 15 28.5, 37 14.5 C 47 8, 54 5, 62 5"
           className="stroke-white/35 dark:stroke-white/30"
           strokeWidth="1.6"
           strokeLinecap="round"
@@ -195,7 +195,7 @@ function CrimsonRibbonConnector() {
       >
         <defs>
           {/* Light Mode: Pure Crimson Satin Gradient */}
-          <linearGradient id="crimsonSatinPureLight" x1="0" y1="8" x2="56" y2="38" gradientUnits="userSpaceOnUse">
+          <linearGradient id="crimsonSatinPureLight" x1="-8" y1="6" x2="64" y2="44" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#B81D24" />
             <stop offset="25%" stopColor="#E4002B" />
             <stop offset="50%" stopColor="#FA203B" />
@@ -204,7 +204,7 @@ function CrimsonRibbonConnector() {
           </linearGradient>
 
           {/* Dark Mode: Luminous Pure Crimson Satin Gradient */}
-          <linearGradient id="crimsonSatinPureDark" x1="0" y1="8" x2="56" y2="38" gradientUnits="userSpaceOnUse">
+          <linearGradient id="crimsonSatinPureDark" x1="-8" y1="6" x2="64" y2="44" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#C2242B" />
             <stop offset="25%" stopColor="#E4002B" />
             <stop offset="50%" stopColor="#FF3352" />
@@ -213,7 +213,7 @@ function CrimsonRibbonConnector() {
           </linearGradient>
 
           {/* Clean Ambient Drop Shadow */}
-          <filter id="crimsonRibbonDropShadowLight" x="-25%" y="-25%" width="150%" height="150%">
+          <filter id="crimsonRibbonDropShadowLight" x="-30%" y="-30%" width="160%" height="160%">
             <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" floodColor="#590408" floodOpacity="0.28" />
           </filter>
           <filter id="crimsonRibbonDropShadowDark" x="-30%" y="-30%" width="160%" height="160%">
@@ -221,15 +221,15 @@ function CrimsonRibbonConnector() {
           </filter>
         </defs>
 
-        {/* 1. Continuous Crimson Satin Ribbon Body (Thickness 9.5px, mirrored curve down into util capsule) */}
+        {/* 1. Continuous Crimson Satin Ribbon Body (Extended -8px to 64px, exact mathematical tangent fit) */}
         <path
-          d="M 0 3 C 15 3, 24 16, 33 25 C 41 31.5, 48 31.5, 54 31.5 L 54 41 C 48 41, 41 41, 33 34.5 C 24 25.5, 15 12.5, 0 12.5 Z"
+          d="M -8 2 C 2 2, 10 5.5, 20 12 C 42 26, 52 39, 64 39 L 64 48 C 52 48, 42 35, 20 21 C 10 14.5, 2 11.5, -8 11.5 Z"
           className="fill-[url(#crimsonSatinPureLight)] dark:fill-[url(#crimsonSatinPureDark)] filter-[url(#crimsonRibbonDropShadowLight)] dark:filter-[url(#crimsonRibbonDropShadowDark)]"
         />
 
         {/* 2. Top Satin Specular Sheen (Reflective highlight along upper crest) */}
         <path
-          d="M 0 3 C 15 3, 24 16, 33 25 C 41 31.5, 48 31.5, 54 31.5"
+          d="M -8 2 C 2 2, 10 5.5, 20 12 C 42 26, 52 39, 64 39"
           className="stroke-white/95 dark:stroke-white/85"
           strokeWidth="1.4"
           strokeLinecap="round"
@@ -237,7 +237,7 @@ function CrimsonRibbonConnector() {
 
         {/* 3. Longitudinal Lustrous Core Light Beam */}
         <path
-          d="M 3 6 C 17 6, 25 18, 34 26.5 C 42 32.5, 48 32.5, 53 32.5"
+          d="M -6 5 C 2 5, 9 8, 19 14.5 C 41 28.5, 51 41.5, 62 41.5"
           className="stroke-white/35 dark:stroke-white/30"
           strokeWidth="1.6"
           strokeLinecap="round"

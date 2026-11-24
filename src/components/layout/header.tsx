@@ -293,7 +293,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
         <div className="relative flex items-center justify-between lg:justify-center w-full">
           
           {/* ================= 1. LEFT SECTION — LOGO CAPSULE (UAE GREEN BRAND BORDER) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/90 px-3.5 sm:px-4 lg:w-[216px] lg:px-4.5 backdrop-blur-2xl border-2 border-[#00843D] dark:border-[#16A05A] shadow-[0_4px_16px_-2px_rgba(0,132,61,0.22),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/90 dark:shadow-[0_0_18px_rgba(22,160,90,0.35),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-all duration-300">
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/90 px-3.5 sm:px-4 lg:w-[216px] lg:px-4.5 backdrop-blur-2xl border-[1.5px] border-[#00843D]/80 dark:border-[#16A05A]/80 shadow-[0_2px_12px_-2px_rgba(0,132,61,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/90 dark:shadow-[0_0_16px_rgba(22,160,90,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-all duration-300">
             <Link
               href={`/${country}`}
               aria-label="Takhlees Business Home"
@@ -321,9 +321,9 @@ export function Header({ country = 'ae' }: HeaderProps) {
           {/* ================= 1ST FLOWING RIBBON: EMERALD GREEN SATIN CONNECTOR ================= */}
           <EmeraldRibbonConnector />
 
-          {/* ================= 2. CENTER SECTION — MAIN NAVIGATION CAPSULE (LIQUID GLASS) ================= */}
+          {/* ================= 2. CENTER SECTION — MAIN NAVIGATION CAPSULE (UAE FLAG COLOR FLOW BORDER) ================= */}
           <nav
-            className="relative z-20 hidden flex-1 max-w-[650px] xl:max-w-[680px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/90 px-3 lg:flex xl:px-4 backdrop-blur-2xl border border-black/[0.08] dark:border-white/12 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,0,0,0.04),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300"
+            className="nav-center-flag-border relative z-20 hidden flex-1 max-w-[650px] xl:max-w-[680px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/90 px-3 lg:flex xl:px-4 backdrop-blur-2xl shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,0,0,0.04),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300"
             aria-label="Main Navigation"
           >
             {links.map((link) => {
@@ -461,7 +461,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
           <CrimsonRibbonConnector />
 
           {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE (UAE CRIMSON RED BRAND BORDER) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center justify-between gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/90 px-3 sm:px-3.5 lg:w-[204px] lg:px-4 backdrop-blur-2xl border-2 border-[#E4002B] dark:border-[#E4002B] shadow-[0_4px_16px_-2px_rgba(228,0,43,0.22),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/90 dark:shadow-[0_0_18px_rgba(228,0,43,0.35),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-all duration-300">
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center justify-between gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/90 px-3 sm:px-3.5 lg:w-[204px] lg:px-4 backdrop-blur-2xl border-[1.5px] border-[#E4002B]/80 dark:border-[#E4002B]/80 shadow-[0_2px_12px_-2px_rgba(228,0,43,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/90 dark:shadow-[0_0_16px_rgba(228,0,43,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-all duration-300">
             {/* Country Selector */}
             <div className="relative" ref={dropdownRef}>
               <button

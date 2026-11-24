@@ -104,153 +104,202 @@ function IndiaFlag() {
 }
 
 /**
- * Desktop Wrapping Border & Ribbon Clasp for Logo Capsule (Green)
- * Wraps completely around the Logo Capsule border and smoothly flows
- * into an S-curve ribbon that clasps onto the top-left of the Main Nav Capsule.
+ * EmeraldRibbonConnector — Left 3D Satin Ribbon Connector
+ * Connects the Logo Capsule directly to the Central Navigation Capsule.
+ * Single continuous emerald-green ribbon with one smooth, controlled S-shaped twist,
+ * physical layered depth, underside fold shadow, and specular crest sheen.
  */
-function LogoCapsuleBorderSvg() {
+function EmeraldRibbonConnector() {
   return (
-    <svg
-      viewBox="0 0 270 56"
-      className="absolute -top-1 -left-1 w-[270px] h-[56px] overflow-visible pointer-events-none z-20 hidden lg:block"
-      fill="none"
+    <div
+      className="relative z-10 hidden h-[48px] w-[50px] xl:w-[56px] shrink-0 items-center justify-center -mx-2 xl:-mx-2.5 lg:flex pointer-events-none select-none"
       aria-hidden="true"
     >
-      <defs>
-        {/* Light Mode Green Gradient */}
-        <linearGradient id="gPillGradLight" x1="0" y1="28" x2="270" y2="28" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#00843D" />
-          <stop offset="50%" stopColor="#087A43" />
-          <stop offset="82%" stopColor="#00843D" />
-          <stop offset="100%" stopColor="#16A05A" />
-        </linearGradient>
+      <svg
+        viewBox="0 0 56 48"
+        className="h-full w-full overflow-visible"
+        preserveAspectRatio="none"
+        fill="none"
+      >
+        <defs>
+          {/* Light Mode: Emerald Front Satin Gradient */}
+          <linearGradient id="emeraldSatinFrontLight" x1="0" y1="36" x2="56" y2="10" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#007A38" />
+            <stop offset="20%" stopColor="#00843D" />
+            <stop offset="52%" stopColor="#109A52" />
+            <stop offset="80%" stopColor="#00843D" />
+            <stop offset="100%" stopColor="#006830" />
+          </linearGradient>
 
-        {/* Dark Mode Luminous Emerald Gradient */}
-        <linearGradient id="gPillGradDark" x1="0" y1="28" x2="270" y2="28" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#087A43" />
-          <stop offset="50%" stopColor="#16A05A" />
-          <stop offset="100%" stopColor="#2EB04B" />
-        </linearGradient>
+          {/* Light Mode: Underside Twist Fold Shading (creates physical 3D twist depth) */}
+          <linearGradient id="emeraldSatinUnderLight" x1="16" y1="24" x2="36" y2="32" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#004720" />
+            <stop offset="60%" stopColor="#003517" />
+            <stop offset="100%" stopColor="#00240E" />
+          </linearGradient>
 
-        {/* Ambient Drop Shadows */}
-        <filter id="gPillShadowLight" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2.5" stdDeviation="3" floodColor="#00843D" floodOpacity="0.32" />
-        </filter>
-        <filter id="gPillShadowDark" x="-30%" y="-30%" width="160%" height="160%">
-          <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#16A05A" floodOpacity="0.55" />
-        </filter>
-      </defs>
+          {/* Dark Mode: Luminous Emerald Front Satin Gradient */}
+          <linearGradient id="emeraldSatinFrontDark" x1="0" y1="36" x2="56" y2="10" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#00843D" />
+            <stop offset="22%" stopColor="#109A52" />
+            <stop offset="52%" stopColor="#22C55E" />
+            <stop offset="78%" stopColor="#16A05A" />
+            <stop offset="100%" stopColor="#087A43" />
+          </linearGradient>
 
-      {/* 1. Sculpted 3D Green Border wrapping around Logo Capsule (216x48 pill at x=4, y=4) */}
-      <rect
-        x="4"
-        y="4"
-        width="216"
-        height="48"
-        rx="24"
-        strokeWidth="3.2"
-        className="stroke-[url(#gPillGradLight)] dark:stroke-[url(#gPillGradDark)] filter-[url(#gPillShadowLight)] dark:filter-[url(#gPillShadowDark)]"
-      />
+          {/* Dark Mode: Underside Twist Fold Shading */}
+          <linearGradient id="emeraldSatinUnderDark" x1="16" y1="24" x2="36" y2="32" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#005426" />
+            <stop offset="60%" stopColor="#00401C" />
+            <stop offset="100%" stopColor="#003015" />
+          </linearGradient>
 
-      {/* 2. Meniscus Light Reflection along top curvature of the Logo Capsule border */}
-      <path
-        d="M 28 4 L 192 4"
-        stroke="rgba(255,255,255,0.95)"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        className="dark:stroke-white/60"
-      />
+          {/* Ambient Drop Shadow for Physical Depth */}
+          <filter id="emeraldRibbonShadowLight" x="-25%" y="-25%" width="150%" height="150%">
+            <feDropShadow dx="0" dy="2" stdDeviation="2.2" floodColor="#002B13" floodOpacity="0.32" />
+          </filter>
+          <filter id="emeraldRibbonShadowDark" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#16A05A" floodOpacity="0.45" />
+          </filter>
+        </defs>
 
-      {/* 3. Flowing S-Ribbon Clasp: emerges from bottom of logo border (x=184, y=52) and loops up to top-left of nav capsule (x=266, y=4) */}
-      <path
-        d="M 184 52 C 210 52, 224 44, 234 28 C 242 14, 252 4, 266 4 L 266 14.5 C 254 14.5, 246 24, 238 36 C 228 48, 212 52, 184 52 Z"
-        className="fill-[url(#gPillGradLight)] dark:fill-[url(#gPillGradDark)] filter-[url(#gPillShadowLight)] dark:filter-[url(#gPillShadowDark)]"
-      />
+        {/* 1. Underside / Receding Fold of the S-Twist (Layer 1 - behind) */}
+        <path
+          d="M 2 37 C 14 37, 20 29, 28 22 L 34 26 C 26 32, 19 44, 2 45.5 Z"
+          className="fill-[url(#emeraldSatinUnderLight)] dark:fill-[url(#emeraldSatinUnderDark)]"
+        />
 
-      {/* 4. Meniscus light highlight along outer crest of the S-Ribbon */}
-      <path
-        d="M 184 52 C 210 52, 224 44, 234 28 C 242 14, 252 4, 266 4"
-        stroke="rgba(255,255,255,0.95)"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        className="dark:stroke-white/70"
-      />
-    </svg>
+        {/* 2. Leading Satin Surface (Layer 2 - front: sweeps across, twists through center, merges into nav capsule) */}
+        <path
+          d="M 0 36 C 16 36, 25 23, 34 14 C 42 7, 49 7, 56 7 L 56 15.5 C 49 15.5, 43 17, 36 24 C 27 34, 16 44.5, 0 44.5 Z"
+          className="fill-[url(#emeraldSatinFrontLight)] dark:fill-[url(#emeraldSatinFrontDark)] filter-[url(#emeraldRibbonShadowLight)] dark:filter-[url(#emeraldRibbonShadowDark)]"
+        />
+
+        {/* 3. Fold Edge Shadow / Crease (Defines the 3D twist crossover) */}
+        <path
+          d="M 27 21 C 29 24, 32 26, 34 25"
+          className="stroke-[rgba(0,30,12,0.55)] dark:stroke-[rgba(0,20,10,0.7)]"
+          strokeWidth="0.9"
+          strokeLinecap="round"
+        />
+
+        {/* 4. Top Satin Spine Specular Sheen (Reflective highlight along the upper crest) */}
+        <path
+          d="M 0 36 C 16 36, 25 23, 34 14 C 42 7, 49 7, 56 7"
+          className="stroke-white/90 dark:stroke-white/80"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
+
+        {/* 5. Longitudinal Lustrous Satin Beam (Soft core reflection) */}
+        <path
+          d="M 4 38.5 C 18 37, 26 25, 35 16.5 C 43 11, 49 11, 55 11"
+          className="stroke-white/25 dark:stroke-white/30"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
   );
 }
 
 /**
- * Desktop Wrapping Border & Ribbon Clasp for Utility Capsule (Red)
- * Wraps completely around the Utility Capsule border and extends backwards
- * into an S-curve ribbon that clasps onto the bottom-right of the Main Nav Capsule.
+ * CrimsonRibbonConnector — Right 3D Satin Ribbon Connector
+ * Connects the Central Navigation Capsule directly to the Utility Capsule.
+ * Single continuous crimson-red ribbon with one elegant minimal twist,
+ * mirrored naturally, physical layered depth, underside fold shadow, and specular crest sheen.
  */
-function UtilityCapsuleBorderSvg() {
+function CrimsonRibbonConnector() {
   return (
-    <svg
-      viewBox="0 0 262 56"
-      className="absolute -top-1 -left-[54px] w-[262px] h-[56px] overflow-visible pointer-events-none z-20 hidden lg:block"
-      fill="none"
+    <div
+      className="relative z-10 hidden h-[48px] w-[50px] xl:w-[56px] shrink-0 items-center justify-center -mx-2 xl:-mx-2.5 lg:flex pointer-events-none select-none"
       aria-hidden="true"
     >
-      <defs>
-        {/* Light Mode Crimson-Red Gradient */}
-        <linearGradient id="rPillGradLight" x1="0" y1="28" x2="262" y2="28" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#E4002B" />
-          <stop offset="45%" stopColor="#C2242B" />
-          <stop offset="100%" stopColor="#A31C1B" />
-        </linearGradient>
+      <svg
+        viewBox="0 0 56 48"
+        className="h-full w-full overflow-visible"
+        preserveAspectRatio="none"
+        fill="none"
+      >
+        <defs>
+          {/* Light Mode: Crimson Front Satin Gradient */}
+          <linearGradient id="crimsonSatinFrontLight" x1="0" y1="6" x2="56" y2="38" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#B81D24" />
+            <stop offset="20%" stopColor="#E4002B" />
+            <stop offset="52%" stopColor="#F82643" />
+            <stop offset="80%" stopColor="#E4002B" />
+            <stop offset="100%" stopColor="#A31218" />
+          </linearGradient>
 
-        {/* Dark Mode Luminous Crimson Gradient */}
-        <linearGradient id="rPillGradDark" x1="0" y1="28" x2="262" y2="28" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#E4002B" />
-          <stop offset="45%" stopColor="#C2242B" />
-          <stop offset="100%" stopColor="#8A1417" />
-        </linearGradient>
+          {/* Light Mode: Underside Twist Fold Shading */}
+          <linearGradient id="crimsonSatinUnderLight" x1="16" y1="24" x2="36" y2="16" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#690B0F" />
+            <stop offset="60%" stopColor="#4D070A" />
+            <stop offset="100%" stopColor="#330406" />
+          </linearGradient>
 
-        {/* Ambient Drop Shadows */}
-        <filter id="rPillShadowLight" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2.5" stdDeviation="3" floodColor="#C2242B" floodOpacity="0.32" />
-        </filter>
-        <filter id="rPillShadowDark" x="-30%" y="-30%" width="160%" height="160%">
-          <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#C2242B" floodOpacity="0.55" />
-        </filter>
-      </defs>
+          {/* Dark Mode: Luminous Crimson Front Satin Gradient */}
+          <linearGradient id="crimsonSatinFrontDark" x1="0" y1="6" x2="56" y2="38" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#C2242B" />
+            <stop offset="22%" stopColor="#E4002B" />
+            <stop offset="52%" stopColor="#FF2D4B" />
+            <stop offset="78%" stopColor="#E4002B" />
+            <stop offset="100%" stopColor="#B81D24" />
+          </linearGradient>
 
-      {/* 1. Flowing S-Ribbon Clasp: emerges from bottom-right of nav capsule (x=0, y=52) and loops up to top-left of utility capsule (x=76, y=4) */}
-      <path
-        d="M 0 52 C 22 52, 38 44, 48 28 C 56 14, 64 4, 78 4 L 78 14.5 C 66 14.5, 58 24, 50 36 C 40 48, 24 52, 0 52 Z"
-        className="fill-[url(#rPillGradLight)] dark:fill-[url(#rPillGradDark)] filter-[url(#rPillShadowLight)] dark:filter-[url(#rPillShadowDark)]"
-      />
+          {/* Dark Mode: Underside Twist Fold Shading */}
+          <linearGradient id="crimsonSatinUnderDark" x1="16" y1="24" x2="36" y2="16" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#7A0E13" />
+            <stop offset="60%" stopColor="#610A0E" />
+            <stop offset="100%" stopColor="#4A070A" />
+          </linearGradient>
 
-      {/* 2. Meniscus light highlight along outer crest of the Red S-Ribbon */}
-      <path
-        d="M 0 52 C 22 52, 38 44, 48 28 C 56 14, 64 4, 78 4"
-        stroke="rgba(255,255,255,0.95)"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        className="dark:stroke-white/70"
-      />
+          {/* Ambient Drop Shadow */}
+          <filter id="crimsonRibbonShadowLight" x="-25%" y="-25%" width="150%" height="150%">
+            <feDropShadow dx="0" dy="2" stdDeviation="2.2" floodColor="#4D070A" floodOpacity="0.32" />
+          </filter>
+          <filter id="crimsonRibbonShadowDark" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#E4002B" floodOpacity="0.45" />
+          </filter>
+        </defs>
 
-      {/* 3. Sculpted 3D Red Border wrapping around Utility Capsule (204x48 pill at x=54, y=4) */}
-      <rect
-        x="54"
-        y="4"
-        width="204"
-        height="48"
-        rx="24"
-        strokeWidth="3.2"
-        className="stroke-[url(#rPillGradLight)] dark:stroke-[url(#rPillGradDark)] filter-[url(#rPillShadowLight)] dark:filter-[url(#rPillShadowDark)]"
-      />
+        {/* 1. Underside / Receding Fold of the Red Twist (Layer 1 - behind) */}
+        <path
+          d="M 2 11 C 14 11, 20 19, 28 26 L 34 22 C 26 16, 19 4, 2 2.5 Z"
+          className="fill-[url(#crimsonSatinUnderLight)] dark:fill-[url(#crimsonSatinUnderDark)]"
+        />
 
-      {/* 4. Meniscus Light Reflection along top curvature of the Utility Capsule border */}
-      <path
-        d="M 78 4 L 234 4"
-        stroke="rgba(255,255,255,0.95)"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        className="dark:stroke-white/60"
-      />
-    </svg>
+        {/* 2. Leading Crimson Satin Surface (Layer 2 - front: sweeps across, twists through center, merges into util capsule) */}
+        <path
+          d="M 0 3 C 16 3, 25 16, 34 25 C 42 31.5, 49 31.5, 56 31.5 L 56 41 C 49 41, 42 41, 34 34.5 C 25 25.5, 16 12.5, 0 12.5 Z"
+          className="fill-[url(#crimsonSatinFrontLight)] dark:fill-[url(#crimsonSatinFrontDark)] filter-[url(#crimsonRibbonShadowLight)] dark:filter-[url(#crimsonRibbonShadowDark)]"
+        />
+
+        {/* 3. Fold Edge Shadow / Crease */}
+        <path
+          d="M 27 27 C 29 24, 32 22, 34 23"
+          className="stroke-[rgba(50,4,6,0.55)] dark:stroke-[rgba(30,2,4,0.7)]"
+          strokeWidth="0.9"
+          strokeLinecap="round"
+        />
+
+        {/* 4. Satin Spine Specular Sheen */}
+        <path
+          d="M 0 3 C 16 3, 25 16, 34 25 C 42 31.5, 49 31.5, 56 31.5"
+          className="stroke-white/90 dark:stroke-white/80"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
+
+        {/* 5. Longitudinal Lustrous Satin Beam */}
+        <path
+          d="M 4 5.5 C 18 5.5, 26 17, 35 25.5 C 43 31.5, 49 31.5, 55 31.5"
+          className="stroke-white/25 dark:stroke-white/30"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
   );
 }
 
@@ -296,18 +345,15 @@ export function Header({ country = 'ae' }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full px-3 pb-1 pt-2 sm:pt-2.5 lg:pt-2 xl:pt-2.5 sm:px-5">
       <div className="mx-auto max-w-[1160px]">
-        {/* ============ THREE-PART CONNECTED NAVBAR ARCHITECTURE (WRAPPING BORDER CLASP & LIQUID GLASS) ============ */}
+        {/* ============ THREE-PART CONNECTED NAVBAR ARCHITECTURE (DUAL SATIN RIBBONS & LIQUID GLASS) ============ */}
         <div className="relative flex items-center justify-between lg:justify-center w-full">
           
-          {/* ================= 1. LEFT SECTION — LOGO CAPSULE (LIQUID GLASS + WRAPPING GREEN BORDER) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/90 px-3.5 sm:px-4 lg:w-[216px] lg:px-4.5 backdrop-blur-2xl border-2 border-[#00843D] lg:border-0 dark:border-[#16A05A] shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/92 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
-            {/* Desktop Sculpted Wrapping Border & S-Ribbon Clasp */}
-            <LogoCapsuleBorderSvg />
-
+          {/* ================= 1. LEFT SECTION — LOGO CAPSULE (LIQUID GLASS) ================= */}
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/85 px-3.5 sm:px-4 lg:px-4.5 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
             <Link
               href={`/${country}`}
               aria-label="Takhlees Business Home"
-              className="relative z-10 group flex items-center gap-2 sm:gap-2.5 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+              className="group flex items-center gap-2 sm:gap-2.5 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
             >
               <Image
                 src="/icons/takhlees-emblem.png"
@@ -328,54 +374,14 @@ export function Header({ country = 'ae' }: HeaderProps) {
             </Link>
           </div>
 
+          {/* ================= 1ST FLOWING RIBBON: EMERALD GREEN SATIN CONNECTOR ================= */}
+          <EmeraldRibbonConnector />
+
           {/* ================= 2. CENTER SECTION — MAIN NAVIGATION CAPSULE (LIQUID GLASS) ================= */}
           <nav
-            className="relative z-10 hidden flex-1 max-w-[640px] xl:max-w-[670px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/85 px-3 lg:flex xl:px-4 backdrop-blur-2xl border border-black/[0.08] dark:border-white/12 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300 mx-2.5 xl:mx-3"
+            className="relative z-20 hidden flex-1 max-w-[650px] xl:max-w-[680px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/85 px-3 lg:flex xl:px-4 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300"
             aria-label="Main Navigation"
           >
-            {/* Clasp Overlay: Top-Left Green Clasp */}
-            <svg
-              viewBox="0 0 80 48"
-              className="absolute top-0 left-0 w-[80px] h-[48px] pointer-events-none overflow-visible z-0"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M 0 24 C 0 10, 10 0, 24 0 L 76 0"
-                strokeWidth="3.2"
-                className="stroke-[#00843D] dark:stroke-[#16A05A]"
-                strokeLinecap="round"
-              />
-              <path
-                d="M 14 0 L 76 0"
-                stroke="rgba(255,255,255,0.95)"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-                className="dark:stroke-white/60"
-              />
-            </svg>
-
-            {/* Clasp Overlay: Bottom-Right Red Clasp */}
-            <svg
-              viewBox="0 0 80 48"
-              className="absolute bottom-0 right-0 w-[80px] h-[48px] pointer-events-none overflow-visible z-0"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M 4 48 L 56 48 C 70 48, 80 38, 80 24"
-                strokeWidth="3.2"
-                className="stroke-[#E4002B] dark:stroke-[#E4002B]"
-                strokeLinecap="round"
-              />
-              <path
-                d="M 4 48 L 56 48"
-                stroke="rgba(255,255,255,0.7)"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                className="dark:stroke-white/40"
-              />
-            </svg>
             {links.map((link) => {
               const active = isActive(link.href);
 
@@ -507,10 +513,11 @@ export function Header({ country = 'ae' }: HeaderProps) {
             })}
           </nav>
 
-          {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE (LIQUID GLASS + WRAPPING RED BORDER) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center justify-between gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/90 px-3 sm:px-3.5 lg:w-[204px] lg:px-4 backdrop-blur-2xl border-2 border-[#E4002B] lg:border-0 dark:border-[#C2242B] shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/92 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
-            {/* Desktop Sculpted Wrapping Border & S-Ribbon Clasp */}
-            <UtilityCapsuleBorderSvg />
+          {/* ================= 2ND FLOWING RIBBON: CRIMSON RED SATIN CONNECTOR ================= */}
+          <CrimsonRibbonConnector />
+
+          {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE (LIQUID GLASS) ================= */}
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/85 px-2.5 sm:px-3 lg:px-3.5 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
             {/* Country Selector */}
             <div className="relative" ref={dropdownRef}>
               <button

@@ -670,6 +670,44 @@ This document is the **single source of truth** for all architectural, database,
   - `npm run lint`: 0 warnings / 0 errors.
   - `python manage.py check`: 0 issues (0 silenced).
 
+---
+
+### Entry #027 — Three-Part Connected Navbar: Liquid Glass Material & Active Water Drop Meniscus Restoration
+* **Date & Time:** 2026-11-24 22:07 (IST)
+* **Scope:** Liquid Glass Material Restoration, Active Navigation Water Drop Meniscus & Fluid Specular Reflections
+* **Files Modified:**
+  - `frontend-takhlees/src/components/layout/header.tsx`
+  - `CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Loss of Liquid Glass Tactility:** Following the restructuring to the three-part connected capsule architecture, the signature **Liquid Glass Effect** was missing: the capsules rendered with flat opaque surfaces, and the active navigation link lost its 3D water drop meniscus, specular refraction, and fluid spring transition.
+
+#### 2. Changes Applied:
+- **Restored Liquid Glass Material to All Three Capsules:**
+  - Light mode: Translucent frosted ivory glass (`bg-[#FAF8F5]/85 backdrop-blur-2xl border-white/90`) with dual inset specular rims (`inset 0 1.5px 2px 0 rgba(255,255,255,0.95), inset 0 -1.5px 2px 0 rgba(0,132,61,0.06)`) and multi-layer fluid shadows.
+  - Dark mode: Translucent obsidian liquid glass (`bg-[#111313]/90 backdrop-blur-2xl border-white/12`) with dual inset specular rims (`inset 0 1.5px 2px 0 rgba(255,255,255,0.16), inset 0 -1px 2px 0 rgba(0,0,0,0.6)`) and deep liquid glass depth shadows (`0 12px 36px -4px rgba(0,0,0,0.75)`).
+- **Reinstated Signature Liquid Water Drop on Active Navigation Link:**
+  - Implemented multi-gradient radial water droplet with surface tension highlights (`from-white/95 via-white/40 to-emerald-500/15` in light; `from-white/20 via-white/5 to-[#16A05A]/25` in dark).
+  - Restored top curvature water meniscus reflection (`h-[40%] rounded-full bg-gradient-to-b from-white/80 to-transparent`).
+  - Powered by Framer Motion `layoutId="liquid-glass-water-drop"` with spring physics (`stiffness: 420, damping: 30`) for fluid liquid movement between tabs.
+- **Synced Liquid Glass Styling to Services Dropdown & Connectors:**
+  - Matched the interactive services dropdown to the new liquid glass backdrop.
+  - Ensured flowing green and red curved ribbon connectors maintain glossy liquid meniscus specular rims.
+
+#### 3. Technical Rationale:
+- Reinstating the liquid glass material and water drop meniscus honors the original design language while harmonizing perfectly with the three-part connected capsule geometry and the Nimbus liquid toggle.
+
+#### 4. Verification & Proof:
+- **Playwright Live Verification:**
+  - `crop_3part_liquid_live_light.png`: Light mode rendering with liquid glass capsules and active water drop.
+  - `crop_3part_liquid_live_dark.png`: Dark mode rendering with obsidian liquid glass and luminous emerald water drop.
+  - `3part_liquid_live_laptop.png`: Verified on 13" laptop viewport (1280x800).
+- **Quality Checks:**
+  - `npm run type-check`: 0 errors.
+  - `npm run lint`: 0 warnings / 0 errors.
+  - `python manage.py check`: 0 issues (0 silenced).
+
+
 
 - **Visual Validation:** Verified Burj Khalifa spire, stepped setbacks, and surrounding towers appear crisp, sharp, and unmistakably visible as glowing emerald architectural line-art in dark mode.
 
@@ -888,6 +926,44 @@ This document is the **single source of truth** for all architectural, database,
   - `npm run type-check`: 0 errors.
   - `npm run lint`: 0 warnings / 0 errors.
   - `python manage.py check`: 0 issues (0 silenced).
+
+---
+
+### Entry #027 — Three-Part Connected Navbar: Liquid Glass Material & Active Water Drop Meniscus Restoration
+* **Date & Time:** 2026-11-24 22:07 (IST)
+* **Scope:** Liquid Glass Material Restoration, Active Navigation Water Drop Meniscus & Fluid Specular Reflections
+* **Files Modified:**
+  - `frontend-takhlees/src/components/layout/header.tsx`
+  - `CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Loss of Liquid Glass Tactility:** Following the restructuring to the three-part connected capsule architecture, the signature **Liquid Glass Effect** was missing: the capsules rendered with flat opaque surfaces, and the active navigation link lost its 3D water drop meniscus, specular refraction, and fluid spring transition.
+
+#### 2. Changes Applied:
+- **Restored Liquid Glass Material to All Three Capsules:**
+  - Light mode: Translucent frosted ivory glass (`bg-[#FAF8F5]/85 backdrop-blur-2xl border-white/90`) with dual inset specular rims (`inset 0 1.5px 2px 0 rgba(255,255,255,0.95), inset 0 -1.5px 2px 0 rgba(0,132,61,0.06)`) and multi-layer fluid shadows.
+  - Dark mode: Translucent obsidian liquid glass (`bg-[#111313]/90 backdrop-blur-2xl border-white/12`) with dual inset specular rims (`inset 0 1.5px 2px 0 rgba(255,255,255,0.16), inset 0 -1px 2px 0 rgba(0,0,0,0.6)`) and deep liquid glass depth shadows (`0 12px 36px -4px rgba(0,0,0,0.75)`).
+- **Reinstated Signature Liquid Water Drop on Active Navigation Link:**
+  - Implemented multi-gradient radial water droplet with surface tension highlights (`from-white/95 via-white/40 to-emerald-500/15` in light; `from-white/20 via-white/5 to-[#16A05A]/25` in dark).
+  - Restored top curvature water meniscus reflection (`h-[40%] rounded-full bg-gradient-to-b from-white/80 to-transparent`).
+  - Powered by Framer Motion `layoutId="liquid-glass-water-drop"` with spring physics (`stiffness: 420, damping: 30`) for fluid liquid movement between tabs.
+- **Synced Liquid Glass Styling to Services Dropdown & Connectors:**
+  - Matched the interactive services dropdown to the new liquid glass backdrop.
+  - Ensured flowing green and red curved ribbon connectors maintain glossy liquid meniscus specular rims.
+
+#### 3. Technical Rationale:
+- Reinstating the liquid glass material and water drop meniscus honors the original design language while harmonizing perfectly with the three-part connected capsule geometry and the Nimbus liquid toggle.
+
+#### 4. Verification & Proof:
+- **Playwright Live Verification:**
+  - `crop_3part_liquid_live_light.png`: Light mode rendering with liquid glass capsules and active water drop.
+  - `crop_3part_liquid_live_dark.png`: Dark mode rendering with obsidian liquid glass and luminous emerald water drop.
+  - `3part_liquid_live_laptop.png`: Verified on 13" laptop viewport (1280x800).
+- **Quality Checks:**
+  - `npm run type-check`: 0 errors.
+  - `npm run lint`: 0 warnings / 0 errors.
+  - `python manage.py check`: 0 issues (0 silenced).
+
 
 
 

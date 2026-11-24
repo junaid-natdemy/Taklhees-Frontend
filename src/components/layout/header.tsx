@@ -263,11 +263,11 @@ export function Header({ country = 'ae' }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full px-3 pb-1 pt-2 sm:pt-2.5 lg:pt-2 xl:pt-2.5 sm:px-5">
       <div className="mx-auto max-w-[1160px]">
-        {/* ============ THREE-PART CONNECTED NAVBAR ARCHITECTURE ============ */}
+        {/* ============ THREE-PART CONNECTED NAVBAR ARCHITECTURE (LIQUID GLASS SYSTEM) ============ */}
         <div className="relative flex items-center justify-between lg:justify-center w-full">
           
-          {/* ================= 1. LEFT SECTION — LOGO CAPSULE ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-white/95 px-3.5 sm:px-4 lg:px-4.5 backdrop-blur-xl border border-black/[0.08] shadow-[0_4px_16px_-2px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,1)] dark:bg-[#111313]/95 dark:border-[#303432] dark:shadow-[0_8px_24px_-2px_rgba(0,0,0,0.65),inset_0_1px_1px_rgba(255,255,255,0.08)] transition-all duration-300">
+          {/* ================= 1. LEFT SECTION — LOGO CAPSULE (LIQUID GLASS) ================= */}
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/85 px-3.5 sm:px-4 lg:px-4.5 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
             <Link
               href={`/${country}`}
               aria-label="Takhlees Business Home"
@@ -295,9 +295,9 @@ export function Header({ country = 'ae' }: HeaderProps) {
           {/* ================= CONNECTION A: GREEN CURVED RIBBON ================= */}
           <GreenRibbonConnector />
 
-          {/* ================= 2. CENTER SECTION — MAIN NAVIGATION CAPSULE ================= */}
+          {/* ================= 2. CENTER SECTION — MAIN NAVIGATION CAPSULE (LIQUID GLASS) ================= */}
           <nav
-            className="relative z-20 hidden flex-1 max-w-[660px] xl:max-w-[700px] h-[48px] items-center justify-evenly rounded-full bg-white/95 px-3 lg:flex xl:px-4 backdrop-blur-xl border border-black/[0.08] shadow-[0_4px_16px_-2px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,1)] dark:bg-[#111313]/95 dark:border-[#303432] dark:shadow-[0_8px_24px_-2px_rgba(0,0,0,0.65),inset_0_1px_1px_rgba(255,255,255,0.08)] transition-all duration-300"
+            className="relative z-20 hidden flex-1 max-w-[660px] xl:max-w-[700px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/85 px-3 lg:flex xl:px-4 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300"
             aria-label="Main Navigation"
           >
             {links.map((link) => {
@@ -323,11 +323,21 @@ export function Header({ country = 'ae' }: HeaderProps) {
                           : 'font-medium text-neutral-700 hover:text-neutral-900 dark:text-[#A5AAA7] dark:hover:text-[#F5F5F2]'
                       }`}
                     >
+                      {/* Signature Liquid Glass Active Water Drop */}
                       {active && (
                         <motion.span
-                          layoutId={`nav-active-pill-${country}`}
+                          layoutId={`liquid-glass-water-drop-${country}`}
                           transition={{ type: 'spring', stiffness: 420, damping: 30 }}
-                          className="absolute inset-0 z-0 rounded-full bg-emerald-500/10 border border-emerald-600/25 dark:bg-[#16A05A]/15 dark:border-[#16A05A]/35"
+                          className="absolute inset-0 z-0 rounded-full bg-gradient-to-b from-white/95 via-white/40 to-emerald-500/15 border border-emerald-600/25 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-2px_4px_rgba(0,132,61,0.22),0_4px_14px_-2px_rgba(0,132,61,0.25)] backdrop-blur-md dark:from-white/20 dark:via-white/5 dark:to-[#16A05A]/25 dark:border-[#16A05A]/40 dark:shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(22,160,90,0.3),0_4px_16px_-2px_rgba(0,0,0,0.7),0_0_14px_-2px_rgba(22,160,90,0.35)]"
+                          aria-hidden="true"
+                        >
+                          {/* Liquid surface tension water meniscus */}
+                          <span className="pointer-events-none absolute inset-x-2 top-0.5 h-[40%] rounded-full bg-gradient-to-b from-white/80 to-transparent dark:from-white/35" />
+                        </motion.span>
+                      )}
+                      {!active && (
+                        <span
+                          className="absolute inset-0 z-0 rounded-full bg-black/[0.04] opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-white/[0.06]"
                           aria-hidden="true"
                         />
                       )}
@@ -347,7 +357,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 6, scale: 0.98 }}
                           transition={{ duration: 0.16 }}
-                          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-80 rounded-2xl border border-black/[0.08] bg-white/95 p-2 shadow-2xl backdrop-blur-2xl dark:border-[#303432] dark:bg-[#111313]/95 z-50"
+                          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-80 rounded-2xl border border-white/90 bg-[#FAF8F5]/95 p-2 shadow-2xl backdrop-blur-2xl dark:border-white/12 dark:bg-[#111313]/95 z-50"
                         >
                           <div className="px-3 py-1.5 border-b border-black/5 dark:border-white/5 mb-1">
                             <span className="text-[10.5px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
@@ -397,17 +407,21 @@ export function Header({ country = 'ae' }: HeaderProps) {
                       : 'font-medium text-neutral-700 hover:text-neutral-900 dark:text-[#A5AAA7] dark:hover:text-[#F5F5F2]'
                   }`}
                 >
+                  {/* Signature Liquid Glass Active Water Drop */}
                   {active && (
                     <motion.span
-                      layoutId={`nav-active-pill-${country}`}
+                      layoutId={`liquid-glass-water-drop-${country}`}
                       transition={{ type: 'spring', stiffness: 420, damping: 30 }}
-                      className="absolute inset-0 z-0 rounded-full bg-emerald-500/10 border border-emerald-600/25 dark:bg-[#16A05A]/15 dark:border-[#16A05A]/35"
+                      className="absolute inset-0 z-0 rounded-full bg-gradient-to-b from-white/95 via-white/40 to-emerald-500/15 border border-emerald-600/25 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-2px_4px_rgba(0,132,61,0.22),0_4px_14px_-2px_rgba(0,132,61,0.25)] backdrop-blur-md dark:from-white/20 dark:via-white/5 dark:to-[#16A05A]/25 dark:border-[#16A05A]/40 dark:shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(22,160,90,0.3),0_4px_16px_-2px_rgba(0,0,0,0.7),0_0_14px_-2px_rgba(22,160,90,0.35)]"
                       aria-hidden="true"
-                    />
+                    >
+                      {/* Liquid surface tension water meniscus */}
+                      <span className="pointer-events-none absolute inset-x-2 top-0.5 h-[40%] rounded-full bg-gradient-to-b from-white/80 to-transparent dark:from-white/35" />
+                    </motion.span>
                   )}
                   {!active && (
                     <span
-                      className="absolute inset-0 z-0 rounded-full bg-black/[0.04] opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-white/[0.05]"
+                      className="absolute inset-0 z-0 rounded-full bg-black/[0.04] opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-white/[0.06]"
                       aria-hidden="true"
                     />
                   )}
@@ -420,8 +434,8 @@ export function Header({ country = 'ae' }: HeaderProps) {
           {/* ================= CONNECTION B: RED CURVED RIBBON ================= */}
           <RedRibbonConnector />
 
-          {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center gap-2 sm:gap-2.5 rounded-full bg-white/95 px-2.5 sm:px-3 lg:px-3.5 backdrop-blur-xl border border-black/[0.08] shadow-[0_4px_16px_-2px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,1)] dark:bg-[#111313]/95 dark:border-[#303432] dark:shadow-[0_8px_24px_-2px_rgba(0,0,0,0.65),inset_0_1px_1px_rgba(255,255,255,0.08)] transition-all duration-300">
+          {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE (LIQUID GLASS) ================= */}
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/85 px-2.5 sm:px-3 lg:px-3.5 backdrop-blur-2xl border border-white/90 shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,132,61,0.06),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:border-white/12 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300">
             {/* Country Selector */}
             <div className="relative" ref={dropdownRef}>
               <button
@@ -447,7 +461,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 4, scale: 0.96 }}
                     transition={{ duration: 0.14 }}
-                    className="absolute right-0 z-50 mt-2 w-36 rounded-2xl border border-black/[0.08] bg-white/98 p-1 shadow-xl backdrop-blur-xl dark:border-[#303432] dark:bg-[#111313]/98"
+                    className="absolute right-0 z-50 mt-2 w-36 rounded-2xl border border-white/90 bg-[#FAF8F5]/98 p-1 shadow-xl backdrop-blur-2xl dark:border-white/12 dark:bg-[#111313]/98"
                   >
                     {(['ae', 'in'] as const).map((c) => {
                       const selected = country === c;
@@ -500,7 +514,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.18 }}
-              className="mt-2.5 rounded-3xl border border-black/[0.08] bg-white/98 p-3 shadow-2xl backdrop-blur-2xl dark:border-[#303432] dark:bg-[#111313]/98 lg:hidden z-50"
+              className="mt-2.5 rounded-3xl border border-white/90 bg-[#FAF8F5]/98 p-3 shadow-2xl backdrop-blur-2xl dark:border-white/12 dark:bg-[#111313]/98 lg:hidden z-50"
             >
               <nav className="flex flex-col gap-1">
                 {links.map((link) => {

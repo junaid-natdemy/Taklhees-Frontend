@@ -586,3 +586,44 @@ This document is the **single source of truth** for all architectural, database,
   - Line Pixel Count: **20,424 visible green edge pixels** confirmed in lower-left hero crop.
 - **Type Checking & Linting:** `npm run type-check` (0 errors), `npm run lint` (0 errors), Django `manage.py check` (0 issues).
 - **Visual Validation:** Verified Burj Khalifa spire, stepped setbacks, and surrounding towers appear crisp, sharp, and unmistakably visible as glowing emerald architectural line-art in dark mode.
+
+---
+
+### Entry #022 — Architecture & DevOps: Dedicated GitHub Repositories Initialization & Push
+* **Date & Time:** 2026-11-24 21:16 (IST)
+* **Scope:** Git Repository Separation, Independent `.gitignore` Security Rules, Tailored Documentation & GitHub Deployment
+* **Files Modified:**
+  - `frontend-takhlees/.gitignore`
+  - `frontend-takhlees/README.md`
+  - `frontend-takhlees/CHANGELOG.md`
+  - `backend-takhlees/.gitignore`
+  - `backend-takhlees/README.md`
+  - `backend-takhlees/CHANGELOG.md`
+  - `CHANGELOG.md`
+
+#### 1. Problem Description:
+- **Need for Autonomous Codebases:** The client and engineering workflow required independent version control repositories for the frontend and backend, enabling decoupled CI/CD deployment pipelines, isolated dependency trees, and distinct branch protections.
+- **Security & Hygiene Safeguards:** Crucial to prevent accidental commits of local dependencies (`node_modules/`, `.next/`), virtual environments (`.venv/`), runtime artifacts (`*.tsbuildinfo`, `db.sqlite3`), or local environment secrets (`.env.local`, `.env`).
+
+#### 2. Changes Applied:
+- **Tailored `.gitignore` Configurations:**
+  - `frontend-takhlees/.gitignore`: Ignored `node_modules/`, `.next/`, `build/`, `dist/`, `.turbo/`, `*.tsbuildinfo`, and local `.env.local` files.
+  - `backend-takhlees/.gitignore`: Ignored `.venv/`, `__pycache__/`, `db.sqlite3`, `media/`, `staticfiles/`, and local `.env` files.
+- **Dedicated Repository Documentation:**
+  - Authored comprehensive `README.md` for `Taklhees-Frontend` with Next.js 15 App Router setup, regional route hierarchies (`/ae`, `/in`), and Tailwind brand tokens.
+  - Authored comprehensive `README.md` for `Taklhees-Backend` detailing Django 5.1+, 13 modular applications, PostgreSQL, and OpenAPI 3.0 documentation.
+- **Independent Git Inits & GitHub Remotes:**
+  - Initialized Git in `frontend-takhlees/`, set `main` branch, connected origin to `https://github.com/junaid-natdemy/Taklhees-Frontend.git`.
+  - Initialized Git in `backend-takhlees/`, set `main` branch, connected origin to `https://github.com/junaid-natdemy/Taklhees-Backend.git`.
+- **First Commit & Remote Push:**
+  - Staged and committed complete clean codebases (160 files in frontend, 43 files in backend).
+  - Pushed both repositories to their respective GitHub remotes via `git push -u origin main`.
+
+#### 3. Technical Rationale:
+- Separating repositories allows independent Vercel frontend deployments and AWS/Docker backend deployments without cross-repository deployment triggers or bloated monorepo clone sizes.
+
+#### 4. Verification & Proof:
+- **Frontend Git Push:** `https://github.com/junaid-natdemy/Taklhees-Frontend.git` branch `main` updated cleanly (186 objects, 24.69 MiB).
+- **Backend Git Push:** `https://github.com/junaid-natdemy/Taklhees-Backend.git` branch `main` updated cleanly (62 objects, 24.22 KiB).
+- **Clean Git Status:** Both repositories verified with `git status` reporting `nothing to commit, working tree clean`.
+

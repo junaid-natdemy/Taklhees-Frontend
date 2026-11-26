@@ -51,7 +51,7 @@ export default function UAELayout({
       <Header country="ae" />
 
       {/* Main Content */}
-      <main className="relative z-10 flex-1 pt-[60px] sm:pt-[62px] lg:pt-[60px] xl:pt-[62px]">{children}</main>
+      <main className="relative z-10 flex-1">{children}</main>
 
       {/* Footer */}
       <Footer country="ae" />

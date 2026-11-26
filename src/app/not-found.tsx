@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header country="ae" />
-      <main className="flex flex-1 flex-col items-center justify-center px-6 pb-6 pt-[84px] sm:pt-[86px] lg:pt-[84px] xl:pt-[86px] text-center">
+      <main className="flex flex-1 flex-col items-center justify-center p-6 text-center">
         <div className="space-y-4">
           <span className="text-6xl font-extrabold text-brand-green-600">404</span>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">

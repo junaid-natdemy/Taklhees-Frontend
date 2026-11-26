@@ -224,7 +224,7 @@ function DubaiSkylineSkeleton() {
 
 export function UAEHero() {
   return (
-    <section className="relative flex min-h-[calc(100vh-76px)] sm:min-h-[calc(100vh-78px)] lg:min-h-[calc(100vh-76px)] xl:min-h-[calc(100vh-76px)] 2xl:min-h-[calc(100vh-84px)] items-center overflow-hidden bg-transparent transition-colors duration-300">
+    <section className="relative flex min-h-0 pt-2 pb-8 sm:pt-0 sm:pb-0 sm:min-h-[calc(100vh-78px)] lg:min-h-[calc(100vh-76px)] xl:min-h-[calc(100vh-76px)] 2xl:min-h-[calc(100vh-84px)] items-center overflow-hidden bg-transparent transition-colors duration-300">
       {/* ================= BACKGROUND ================= */}
       <div className="pointer-events-none absolute inset-0 select-none overflow-hidden">
         {/* Dark mode subtle charcoal tonal depth (zero-blur radial gradient) */}
@@ -244,9 +244,39 @@ export function UAEHero() {
           </svg>
         </div>
 
-        {/* UAE flag ribbons, bottom-right (softly blended into background) */}
+        {/* Mobile-Only Bottom Emerald & Gold Horizon Wave */}
         <div
-          className="absolute -bottom-10 -right-10 h-[240px] w-[440px] opacity-90 dark:opacity-30"
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-[108px] opacity-95 dark:opacity-55 sm:hidden"
+        >
+          <svg viewBox="0 0 430 120" preserveAspectRatio="none" fill="none" className="h-full w-full">
+            <defs>
+              <linearGradient id="heroMobileEmeraldBack" x1="0" y1="0" x2="430" y2="120" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#086636" stopOpacity="0.92" />
+                <stop offset="55%" stopColor="#146736" stopOpacity="0.96" />
+                <stop offset="100%" stopColor="#053B1F" />
+              </linearGradient>
+              <linearGradient id="heroMobileGoldLine" x1="0" y1="0" x2="430" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#C99726" stopOpacity="0.2" />
+                <stop offset="52%" stopColor="#F5DDA0" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#C99726" stopOpacity="0.45" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0 94 C 115 74, 240 62, 430 28 L430 120 L0 120 Z"
+              fill="url(#heroMobileEmeraldBack)"
+            />
+            <path
+              d="M0 94 C 115 74, 240 62, 430 28"
+              stroke="url(#heroMobileGoldLine)"
+              strokeWidth="1.75"
+            />
+          </svg>
+        </div>
+
+        {/* UAE flag ribbons, bottom-right (tablet & desktop) */}
+        <div
+          className="hidden sm:block absolute -bottom-10 -right-10 h-[240px] w-[440px] opacity-90 dark:opacity-30"
           style={{
             WebkitMaskImage:
               'linear-gradient(to bottom, #000 48%, rgba(0,0,0,0.4) 78%, transparent 100%), linear-gradient(to left, #000 62%, rgba(0,0,0,0.4) 86%, transparent 100%)',
@@ -277,20 +307,20 @@ export function UAEHero() {
       </div>
 
       {/* ================= CONTENT (REFINED STANDARD SIZE) ================= */}
-      <div className="relative z-10 mx-auto w-full max-w-[1140px] px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
+      <div className="relative z-10 mx-auto w-full max-w-[1140px] px-4 pt-3 pb-4 sm:px-6 sm:py-8 lg:py-8">
+        <div className="grid grid-cols-1 items-center gap-5 sm:gap-8 lg:grid-cols-12 lg:gap-10">
           {/* ---------- LEFT ---------- */}
-          <div className="flex flex-col space-y-4 sm:space-y-5 lg:col-span-5 xl:col-span-5">
+          <div className="flex flex-col space-y-3.5 sm:space-y-5 lg:col-span-5 xl:col-span-5">
             {/* Eyebrow */}
-            <div className="flex items-center gap-3">
-              <span className="h-[2px] w-7 shrink-0 rounded-full bg-[#A31C1B]" />
-              <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-neutral-700 dark:text-[#F5F5F2] sm:text-[11px]">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="h-[2px] w-5 sm:w-7 shrink-0 rounded-full bg-[#A31C1B]" />
+              <span className="text-[9.5px] min-[375px]:text-[10px] font-semibold uppercase tracking-[0.16em] min-[375px]:tracking-[0.2em] text-neutral-700 dark:text-[#F5F5F2] sm:text-[11px] sm:tracking-[0.24em]">
                 BUSINESS SETUP &amp; PRO SERVICES IN UAE
               </span>
             </div>
 
             {/* Headline */}
-            <h1 className="font-sans text-[32px] font-extrabold leading-[1.08] tracking-[-0.02em] text-neutral-900 dark:text-[#F5F5F2] sm:text-[38px] lg:text-[40px] xl:text-[44px]">
+            <h1 className="font-serif text-[32px] min-[375px]:text-[36px] font-bold leading-[1.06] tracking-[-0.02em] text-neutral-900 dark:text-[#F5F5F2] sm:font-sans sm:font-extrabold sm:text-[38px] lg:text-[40px] xl:text-[44px]">
               <span className="block">Your Trusted</span>
               <span className="block">Business Partner</span>
               <span className="block">
@@ -303,7 +333,7 @@ export function UAEHero() {
                   <svg
                     aria-hidden="true"
                     viewBox="0 0 240 20"
-                    className="pointer-events-none absolute -bottom-2.5 left-0 h-3 w-[106%]"
+                    className="pointer-events-none absolute -bottom-1.5 sm:-bottom-2.5 left-0 h-2.5 sm:h-3 w-[106%]"
                     fill="none"
                   >
                     <path d="M2 15 C50 5 150 2 238 6 C150 9 60 18 2 15 Z" fill="#A31C1B" />
@@ -313,12 +343,26 @@ export function UAEHero() {
             </h1>
 
             {/* Supporting Description */}
-            <p className="max-w-[400px] text-sm sm:text-[15px] leading-relaxed text-neutral-600 dark:text-[#A5AAA7] pt-0.5">
+            <p className="max-w-[330px] sm:max-w-[400px] text-[13.5px] sm:text-[15px] leading-[1.55] sm:leading-relaxed text-neutral-600 dark:text-[#A5AAA7] pt-0.5">
               Simplifying business setup, PRO services, visa &amp; document clearing in UAE.
             </p>
 
-            {/* Trust & Service Highlights */}
-            <div className="flex flex-wrap items-center gap-y-3 divide-neutral-300 dark:divide-[#303432] sm:divide-x">
+            {/* Mobile-Only 3-Column Trust & Service Highlights */}
+            <div className="grid grid-cols-3 divide-x divide-[#087A42]/12 dark:divide-white/10 pt-0.5 sm:hidden">
+              {TRUST_HIGHLIGHTS.map(({ icon: Icon, title }) => (
+                <div key={`mobile-${title}`} className="flex flex-col items-center px-1.5 text-center">
+                  <span className="mb-1.5 flex h-9 w-9 items-center justify-center rounded-xl border border-[#087A42]/15 bg-white/85 text-[#0B6B35] shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_10px_rgba(8,122,66,0.08)] dark:border-[#16A05A]/25 dark:bg-[#101C16]/85 dark:text-[#16A05A] dark:shadow-none">
+                    <Icon className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden="true" />
+                  </span>
+                  <span className="text-[11px] min-[375px]:text-[11.5px] font-bold leading-tight text-neutral-900 dark:text-[#F5F5F2]">
+                    {title}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Tablet & Desktop Trust & Service Highlights (Unchanged) */}
+            <div className="hidden sm:flex flex-wrap items-center gap-y-3 divide-neutral-300 dark:divide-[#303432] sm:divide-x">
               {TRUST_HIGHLIGHTS.map(({ icon: Icon, title }) => (
                 <div key={title} className="flex items-center gap-2 pr-4 sm:px-4 sm:first:pl-0 sm:last:pr-0">
                   <Icon className="h-4 w-4 shrink-0 text-[#0B6B35] dark:text-[#16A05A]" strokeWidth={2} />
@@ -327,15 +371,15 @@ export function UAEHero() {
               ))}
             </div>
 
-            {/* CTAs with Liquid Glass Button */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-1">
-              <LiquidButton variant="emerald" size="md" asChild>
+            {/* CTAs: Full-width stacked on mobile, inline on sm+ */}
+            <div className="flex w-full flex-col gap-2.5 pt-1 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5">
+              <LiquidButton variant="emerald" size="md" asChild className="w-full sm:w-auto h-11 sm:h-10">
                 <Link href="/ae/contact" className="group">
                   <span>Get a Consultation</span>
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
               </LiquidButton>
-              <LiquidButton variant="glass" size="md" asChild>
+              <LiquidButton variant="glass" size="md" asChild className="w-full sm:w-auto h-11 sm:h-10">
                 <Link href="/ae/services">
                   <span>Explore Our Services</span>
                 </Link>
@@ -343,10 +387,10 @@ export function UAEHero() {
             </div>
           </div>
 
-          {/* ================= RIGHT COLUMN: AMBIENT DRIFT WALL (SEAMLESSLY MERGED INTO BACKGROUND) ================= */}
+          {/* ================= RIGHT COLUMN: AMBIENT DRIFT WALL (COMPACT HEIGHT ON MOBILE, UNCHANGED ON SM+) ================= */}
           <div className="relative flex justify-center lg:col-span-7 xl:col-span-7 lg:justify-end animate-in fade-in duration-500">
             {/* Visual Stage (Natural Canvas, Zero Box Boundaries) */}
-            <div className="relative w-full max-w-[560px] lg:max-w-[580px] h-[450px] sm:h-[480px]">
+            <div className="relative w-full max-w-[560px] lg:max-w-[580px] h-[270px] min-[375px]:h-[300px] sm:h-[480px]">
               {/* DriftWall (Smooth Dissolve on Left, Top & Bottom — Fully Unclipped Right Edge) */}
               <div
                 className="relative w-full h-full z-10 [perspective:1400px]"
@@ -384,7 +428,7 @@ export function UAEHero() {
               </div>
 
               {/* Floating Vintage Seal Stamp */}
-              <div className="absolute -bottom-4 right-2 sm:right-4 z-30 pointer-events-auto">
+              <div className="absolute -bottom-2 right-1 sm:-bottom-4 sm:right-4 z-30 pointer-events-auto scale-[0.78] sm:scale-100 origin-bottom-right">
                 <VintageSealStamp />
               </div>
             </div>

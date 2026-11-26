@@ -273,17 +273,17 @@ export function Header({ country = 'ae' }: HeaderProps) {
   };
 
   return (
-    <header className="relative z-50 w-full px-3 pb-1 pt-2 sm:pt-2.5 lg:pt-2 xl:pt-2.5 sm:px-5">
+    <header className="relative z-50 w-full px-2.5 pb-1 pt-2 sm:pt-2.5 lg:pt-2 xl:pt-2.5 sm:px-5">
       <div className="mx-auto max-w-[1160px]">
         {/* ============ THREE-PART CONNECTED NAVBAR ARCHITECTURE (DUAL SATIN RIBBONS & LIQUID GLASS) ============ */}
-        <div className="relative flex items-center justify-between lg:justify-center w-full">
+        <div className="relative flex items-center justify-between gap-1.5 sm:gap-0 lg:justify-center w-full">
           
           {/* ================= 1. LEFT SECTION — LOGO CAPSULE (UAE GREEN BRAND BORDER) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/95 px-3 sm:px-3.5 lg:w-auto lg:px-4 backdrop-blur-sm border-[1.5px] border-[#00843D]/80 dark:border-[#16A05A]/80 shadow-[0_2px_12px_-2px_rgba(0,132,61,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/95 dark:shadow-[0_0_16px_rgba(22,160,90,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow] duration-150">
+          <div className="relative z-20 flex h-[42px] sm:h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/95 px-2.5 sm:px-3.5 lg:w-auto lg:px-4 backdrop-blur-sm border-[1.5px] border-[#00843D]/80 dark:border-[#16A05A]/80 shadow-[0_2px_12px_-2px_rgba(0,132,61,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/95 dark:shadow-[0_0_16px_rgba(22,160,90,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow] duration-150">
             <Link
               href={`/${country}`}
               aria-label="Takhlees Business Home"
-              className="group flex items-center gap-2 sm:gap-2.5 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+              className="group flex items-center gap-1.5 sm:gap-2.5 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
             >
               <Image
                 src="/icons/takhlees-emblem.png"
@@ -291,13 +291,13 @@ export function Header({ country = 'ae' }: HeaderProps) {
                 width={32}
                 height={32}
                 priority
-                className="h-7 w-7 xl:h-7.5 xl:w-7.5 object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-6 w-6 sm:h-7 sm:w-7 xl:h-7.5 xl:w-7.5 object-contain transition-transform duration-300 group-hover:scale-105"
               />
               <div className="flex flex-col justify-center leading-none">
-                <span className="text-right text-[11.5px] lg:text-[12px] font-bold text-neutral-800 dark:text-[#A5AAA7]">
+                <span className="text-right text-[10px] sm:text-[11.5px] lg:text-[12px] font-bold text-neutral-800 dark:text-[#A5AAA7]">
                   تـخـلـيـص
                 </span>
-                <span className="mt-0.5 text-[13.5px] lg:text-[14px] xl:text-[14.5px] font-extrabold uppercase tracking-wide text-neutral-900 dark:text-[#F5F5F2]">
+                <span className="mt-0.5 text-[12px] sm:text-[13.5px] lg:text-[14px] xl:text-[14.5px] font-extrabold uppercase tracking-wide text-neutral-900 dark:text-[#F5F5F2]">
                   TAKHLEES
                 </span>
               </div>
@@ -447,7 +447,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
           <CrimsonRibbonConnector />
 
           {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE (UAE CRIMSON RED BRAND BORDER) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center justify-between gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/95 px-3 sm:px-3.5 lg:w-[204px] lg:px-4 backdrop-blur-sm border-[1.5px] border-[#E4002B]/80 dark:border-[#E4002B]/80 shadow-[0_2px_12px_-2px_rgba(228,0,43,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/95 dark:shadow-[0_0_16px_rgba(228,0,43,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow] duration-150">
+          <div className="relative z-20 flex h-[42px] sm:h-[48px] shrink-0 items-center justify-between gap-1 sm:gap-2.5 rounded-full bg-[#FAF8F5]/95 px-2 sm:px-3.5 lg:w-[204px] lg:px-4 backdrop-blur-sm border-[1.5px] border-[#E4002B]/80 dark:border-[#E4002B]/80 shadow-[0_2px_12px_-2px_rgba(228,0,43,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/95 dark:shadow-[0_0_16px_rgba(228,0,43,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow] duration-150">
             {/* Country Selector */}
             <div className="relative" ref={dropdownRef}>
               <button
@@ -456,10 +456,10 @@ export function Header({ country = 'ae' }: HeaderProps) {
                 aria-expanded={countryOpen}
                 aria-haspopup="listbox"
                 aria-label="Select country"
-                className="flex items-center gap-1.5 rounded-full px-2 py-1 text-xs font-semibold text-neutral-800 transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:text-[#F5F5F2] dark:hover:bg-white/10"
+                className="flex items-center gap-1 sm:gap-1.5 rounded-full px-1.5 sm:px-2 py-1 text-xs font-semibold text-neutral-800 transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:text-[#F5F5F2] dark:hover:bg-white/10"
               >
                 {isUAE ? <UAEFlag /> : <IndiaFlag />}
-                <span className="font-semibold text-xs">{isUAE ? 'UAE' : 'India'}</span>
+                <span className="font-semibold text-[11px] sm:text-xs">{isUAE ? 'UAE' : 'India'}</span>
                 <ChevronDown
                   className={`h-3 w-3 opacity-70 transition-transform duration-200 ${countryOpen ? 'rotate-180' : ''}`}
                 />
@@ -512,7 +512,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle mobile menu"
               aria-expanded={mobileOpen}
-              className="touch-manipulation rounded-full p-1.5 text-neutral-800 transition-colors hover:bg-black/5 dark:text-[#F5F5F2] dark:hover:bg-white/10 lg:hidden"
+              className="touch-manipulation rounded-full p-1 sm:p-1.5 text-neutral-800 transition-colors hover:bg-black/5 dark:text-[#F5F5F2] dark:hover:bg-white/10 lg:hidden"
             >
               {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>

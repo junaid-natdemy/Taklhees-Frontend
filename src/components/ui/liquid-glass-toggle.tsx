@@ -49,34 +49,6 @@ export const NimbusToggleIcons = {
   close: I(<path d="M6.5 6.5l11 11M17.5 6.5l-11 11" />),
 }
 
-/* ---------- styles (Takhlees theme) ---------- */
-const NT_CSS = `
-.nimbus-toggle{--t-tint:rgba(0,132,61,.10);--t-rim:rgba(255,255,255,.85);--t-ico-off:#E89A12;--t-ico-on:#0B2A1A;
-  position:relative;display:inline-block;flex:none;padding:0;margin:0;border:0;background:none;border-radius:999px;cursor:pointer;isolation:isolate;
-  vertical-align:middle;touch-action:pan-y;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;outline:none}
-.nimbus-toggle[data-tone="dark"]{--t-tint:rgba(23,23,23,.85);--t-rim:rgba(255,255,255,.12);--t-ico-off:#A5AAA7;--t-ico-on:#F5F5F2}
-.nimbus-toggle:focus-visible{outline:2px solid #16A05A;outline-offset:3px}
-.nimbus-toggle:disabled{opacity:.45;cursor:not-allowed}
-.nt-glass{position:absolute;inset:0;border-radius:inherit;z-index:-2;overflow:hidden;background:var(--t-tint);
-  -webkit-backdrop-filter:blur(10px) saturate(1.2) brightness(1.06);backdrop-filter:blur(10px) saturate(1.2) brightness(1.06);
-  box-shadow:inset 0 2px 5px rgba(0,50,25,.18),inset 0 -1px 1px var(--t-rim),inset 0 0 0 1px rgba(0,132,61,.22),0 1px 0 rgba(255,255,255,.6),0 10px 24px -14px rgba(0,50,25,.5)}
-.nimbus-toggle[data-tone="dark"] .nt-glass{box-shadow:inset 0 2px 6px rgba(0,0,0,.6),inset 0 -1px 1px var(--t-rim),inset 0 0 0 1px rgba(48,52,50,.5),0 8px 20px -10px rgba(0,0,0,.8)}
-.nt-water{position:absolute;z-index:-1;pointer-events:none}
-.nimbus-toggle[data-gl="off"] .nt-water{display:none}
-.nt-fill,.nt-knob{display:none;position:absolute;pointer-events:none;border-radius:999px;will-change:transform,width}
-.nimbus-toggle[data-gl="off"] .nt-fill,.nimbus-toggle[data-gl="off"] .nt-knob{display:block}
-.nt-fill{z-index:-1;left:2px;top:2px;bottom:2px;background:linear-gradient(180deg,#8BE8AC,#00843D);opacity:.85}
-.nt-knob{z-index:0;left:0;background:radial-gradient(120% 140% at 30% 0%,rgba(255,255,255,.95),rgba(255,255,255,0) 60%),rgba(240,255,245,.85);
-  box-shadow:inset 0 1px 1px #fff,inset 0 -2px 6px rgba(0,132,61,.25),inset 0 0 0 1px rgba(255,255,255,.6),0 4px 10px -3px rgba(0,60,30,.45)}
-.nimbus-toggle[data-tone="dark"] .nt-knob{background:radial-gradient(120% 140% at 30% 0%,rgba(255,255,255,.45),rgba(255,255,255,0) 60%),rgba(32,34,34,.95);
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.4),inset 0 0 0 1px rgba(48,52,50,.6),0 4px 10px -3px rgba(0,0,0,.8)}
-.nimbus-toggle[data-tone="dark"] .nt-fill{background:linear-gradient(180deg,#16A05A,#087A43)}
-.nt-icon{position:absolute;left:0;top:0;z-index:1;pointer-events:none;will-change:transform}
-.nt-icon>span{position:absolute;inset:0;display:block}
-.nt-icon>span:first-child{color:var(--t-ico-off)}
-.nt-icon>span:last-child{color:var(--t-ico-on)}
-`
-
 /* ---------- the water shader (Waterline engine + track fill) ---------- */
 const VERT = `attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}`
 const FRAG = `precision highp float;
@@ -458,8 +430,9 @@ export function LiquidToggle({
   React.useEffect(() => {
     const s = st.current
     s.reduce = !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    const isTouchOrCoarse = !!window.matchMedia?.("(pointer: coarse)").matches
     const cv = canvasRef.current
-    s.glc = cv ? initGL(cv) : null
+    s.glc = !isTouchOrCoarse && cv ? initGL(cv) : null
     if (!s.glc) setGl("off")
     const lost = (e: Event) => { e.preventDefault(); s.glc = null; setGl("off") }
     cv?.addEventListener("webglcontextlost", lost)
@@ -506,7 +479,7 @@ export function LiquidToggle({
   /* follow the controlled / uncontrolled value */
   React.useEffect(() => {
     if (st.current.drag.id === -1) goTo(current)
-  })
+  }, [current, goTo])
   React.useEffect(() => { loop() }, [tone, hasIcons, loop])
 
   /* ---- interaction ---- */
@@ -540,7 +513,8 @@ export function LiquidToggle({
     }
     if (s.drag.id === e.pointerId) {
       const x = localX(e.clientX)
-      if (!s.drag.moved && Math.abs(x - s.drag.startX) > 4) {
+      const dragThreshold = e.pointerType === "touch" ? 10 : 5
+      if (!s.drag.moved && Math.abs(x - s.drag.startX) > dragThreshold) {
         s.drag.moved = true
         s.suppressClick = true
         s.lead = Math.abs(x - s.a.x) <= Math.abs(x - s.b.x) ? 0 : 1
@@ -606,7 +580,6 @@ export function LiquidToggle({
       onPointerCancel={endDrag}
       onPointerLeave={() => { st.current.mouse.on = false; loop() }}
     >
-      <style dangerouslySetInnerHTML={{ __html: NT_CSS }} />
       <span className="nt-glass" aria-hidden="true" />
       <canvas className="nt-water" ref={canvasRef} aria-hidden="true" />
       <span className="nt-fill" ref={fillRef} aria-hidden="true" />

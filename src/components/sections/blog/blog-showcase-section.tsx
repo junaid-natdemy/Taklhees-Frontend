@@ -7,8 +7,6 @@ import { ThemeImage } from '@/components/ui/theme-image';
 import { useSectionInView } from '@/hooks/use-section-in-view';
 import {
   AnimatePresence,
-  LazyMotion,
-  domAnimation,
   m,
   useReducedMotion,
 } from 'motion/react';
@@ -133,13 +131,12 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
         : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
 
   return (
-    <LazyMotion features={domAnimation}>
-      <section
-        ref={sectionRef}
-        id="blog"
-        aria-labelledby="blog-showcase-heading"
-        className="relative overflow-hidden bg-[linear-gradient(180deg,#FAF8F3_0%,#F4EFE3_56%,#ECE4D3_100%)] pt-7 pb-14 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#050807_0%,#07100C_56%,#050907_100%)] sm:pt-8 sm:pb-16 lg:pt-9 lg:pb-16"
-      >
+    <section
+      ref={sectionRef}
+      id="blog"
+      aria-labelledby="blog-showcase-heading"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#FAF8F3_0%,#F4EFE3_56%,#ECE4D3_100%)] pt-7 pb-14 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#050807_0%,#07100C_56%,#050907_100%)] sm:pt-8 sm:pb-16 lg:pt-9 lg:pb-16"
+    >
         {/* ═══════════════ BACKGROUND: FULL-BLEED BESPOKE DUBAI SKYLINE & EMERALD-GOLD WAVES ═══════════════ */}
         <div
           aria-hidden="true"
@@ -353,7 +350,7 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
           {/* ═══════════════ JOURNAL CONTENT AREA ═══════════════ */}
           {pagination.totalItems === 0 ? (
             /* Clean Intentional Empty State (0 articles) */
-            <div className="mx-auto mt-10 max-w-xl rounded-[28px] border border-[#C99726]/30 bg-white/70 px-8 py-12 text-center backdrop-blur-xl dark:border-white/15 dark:bg-[#0D1A13]/75">
+            <div className="mx-auto mt-10 max-w-xl rounded-[28px] border border-[#C99726]/30 bg-white/75 px-8 py-12 text-center backdrop-blur-md dark:border-white/15 dark:bg-[#0D1A13]/80">
               <p className="font-serif text-xl font-semibold text-[#171717] dark:text-white">
                 No journal articles published yet
               </p>
@@ -404,7 +401,7 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                   {/* ── 1. FEATURED EDITORIAL ARTICLE ── */}
                   {pagination.featured && (
                     <article
-                      className={`group relative isolate overflow-hidden ${FEATURED_ORGANIC_RADIUS} bg-[linear-gradient(148deg,rgba(255,254,250,0.82)_0%,rgba(249,245,233,0.68)_54%,rgba(230,242,235,0.62)_100%)] p-2.5 shadow-[0_18px_40px_-14px_rgba(12,38,24,0.14)] backdrop-blur-2xl backdrop-saturate-150 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_46px_-14px_rgba(12,38,24,0.18)] dark:bg-[linear-gradient(148deg,rgba(16,32,24,0.82)_0%,rgba(11,22,17,0.72)_60%,rgba(7,26,18,0.82)_100%)] dark:shadow-[0_20px_44px_-14px_rgba(0,0,0,0.58)] sm:p-3`}
+                      className={`group relative isolate overflow-hidden ${FEATURED_ORGANIC_RADIUS} bg-[linear-gradient(148deg,rgba(255,254,250,0.86)_0%,rgba(249,245,233,0.74)_54%,rgba(230,242,235,0.68)_100%)] p-2.5 shadow-[0_18px_40px_-14px_rgba(12,38,24,0.14)] backdrop-blur-md backdrop-saturate-150 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_46px_-14px_rgba(12,38,24,0.18)] dark:bg-[linear-gradient(148deg,rgba(16,32,24,0.86)_0%,rgba(11,22,17,0.78)_60%,rgba(7,26,18,0.86)_100%)] dark:shadow-[0_20px_44px_-14px_rgba(0,0,0,0.58)] sm:p-3`}
                     >
                       {/* Shared LiquidButton Bevel + Contact-style Multi-Layer Glass Reflections + Emerald-Gold Rim */}
                       <div
@@ -413,7 +410,7 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                       />
                       <div
                         aria-hidden="true"
-                        className="pointer-events-none absolute -left-16 -top-10 z-[1] h-40 w-[60%] -rotate-12 rounded-full bg-gradient-to-b from-white/50 via-white/12 to-transparent blur-md dark:from-white/[0.08] dark:via-white/[0.02]"
+                        className="pointer-events-none absolute -left-16 -top-10 z-[1] h-40 w-[60%] -rotate-12 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.52)_0%,transparent_72%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_72%)]"
                       />
                       <div
                         aria-hidden="true"
@@ -553,7 +550,7 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                               delay: prefersReducedMotion ? 0 : 0.05 * (index + 1),
                               ease: [0.22, 1, 0.36, 1],
                             }}
-                            className={`group relative isolate flex h-full flex-col justify-between overflow-hidden ${shape.card} bg-[linear-gradient(148deg,rgba(255,254,250,0.82)_0%,rgba(249,245,233,0.66)_56%,rgba(232,243,236,0.60)_100%)] p-2.5 shadow-[0_14px_32px_-12px_rgba(12,38,24,0.12)] backdrop-blur-2xl backdrop-saturate-150 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_-14px_rgba(12,38,24,0.16)] dark:bg-[linear-gradient(148deg,rgba(16,32,24,0.80)_0%,rgba(11,22,17,0.70)_60%,rgba(7,26,18,0.80)_100%)] dark:shadow-[0_16px_34px_-12px_rgba(0,0,0,0.52)]`}
+                            className={`group relative isolate flex h-full flex-col justify-between overflow-hidden ${shape.card} bg-[linear-gradient(148deg,rgba(255,254,250,0.86)_0%,rgba(249,245,233,0.74)_56%,rgba(232,243,236,0.68)_100%)] p-2.5 shadow-[0_14px_32px_-12px_rgba(12,38,24,0.12)] backdrop-blur-md backdrop-saturate-150 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_20px_38px_-14px_rgba(12,38,24,0.16)] dark:bg-[linear-gradient(148deg,rgba(16,32,24,0.84)_0%,rgba(11,22,17,0.76)_60%,rgba(7,26,18,0.84)_100%)] dark:shadow-[0_16px_34px_-12px_rgba(0,0,0,0.52)]`}
                           >
                             {/* Bevel, Contact-style Specular + Caustic Reflections, Subtle Golden Sheen & Emerald-Gold Edge */}
                             <div
@@ -731,7 +728,6 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
           )}
         </div>
       </section>
-    </LazyMotion>
   );
 }
 

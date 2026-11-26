@@ -38,6 +38,7 @@ export function ThemeImage({
     <Image
       src={isDark ? darkSrc : lightSrc}
       alt={alt}
+      decoding="async"
       className={[className, isDark ? darkClassName : lightClassName]
         .filter(Boolean)
         .join(' ')}

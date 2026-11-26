@@ -100,7 +100,7 @@ export function HeroVisual() {
           <div className="rounded-[16px] bg-white p-[5px] shadow-[0_28px_50px_-30px_rgba(6,17,12,0.75)] ring-1 ring-ink/10 dark:bg-[#0E2117] dark:ring-white/10">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[11px] bg-forest">
               <Image
-                src="/images/skyline-sunset.jpg"
+                src="/images/driftwall/skyline-sunset.webp"
                 alt="Dubai business district skyline at sunset"
                 fill
                 sizes="20vw"

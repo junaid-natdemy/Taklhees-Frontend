@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ThemeImage } from '@/components/ui/theme-image';
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from 'motion/react';
 import {
   ArrowRight,
   Briefcase,
@@ -62,42 +62,6 @@ function EditorialWaterGlassDefs() {
         <clipPath id="editorial-visual-clip" clipPathUnits="objectBoundingBox">
           <path d={VISUAL_ORGANIC_CLIP} />
         </clipPath>
-        {/* Exact water-refraction pipeline from liquid-glass-button.tsx */}
-        <filter
-          id="editorial-water-glass"
-          x="0%"
-          y="0%"
-          width="100%"
-          height="100%"
-          colorInterpolationFilters="sRGB"
-        >
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.05 0.05"
-            numOctaves="1"
-            seed="1"
-            result="turbulence"
-          />
-          <feGaussianBlur
-            in="turbulence"
-            stdDeviation="2"
-            result="blurredNoise"
-          />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="blurredNoise"
-            scale="70"
-            xChannelSelector="R"
-            yChannelSelector="B"
-            result="displaced"
-          />
-          <feGaussianBlur
-            in="displaced"
-            stdDeviation="4"
-            result="finalBlur"
-          />
-          <feComposite in="finalBlur" in2="finalBlur" operator="over" />
-        </filter>
       </defs>
     </svg>
   );
@@ -122,13 +86,12 @@ export function EditorialShowcaseSection() {
   const shouldAnimate = !prefersReducedMotion && inView;
 
   return (
-    <LazyMotion features={domAnimation}>
-      <section
-        ref={sectionRef}
-        id="corporate-overview"
-        aria-labelledby="editorial-showcase-heading"
-        className="relative overflow-hidden bg-[#F7F6F1] pt-14 pb-20 transition-colors duration-300 dark:bg-[#050807] sm:pt-16 sm:pb-24 lg:pt-20 lg:pb-24"
-      >
+    <section
+      ref={sectionRef}
+      id="corporate-overview"
+      aria-labelledby="editorial-showcase-heading"
+      className="relative overflow-hidden bg-[#F7F6F1] pt-14 pb-20 transition-colors duration-300 dark:bg-[#050807] sm:pt-16 sm:pb-24 lg:pt-20 lg:pb-24"
+    >
         <EditorialWaterGlassDefs />
 
         {/* ================= LUXURY LAYERED BACKGROUND ================= */}
@@ -221,14 +184,6 @@ export function EditorialShowcaseSection() {
                 <stop offset="65%" stopColor="#F5D77F" stopOpacity="0.92" />
                 <stop offset="100%" stopColor="#C99726" stopOpacity="0.28" />
               </linearGradient>
-
-              <filter id="editorialShowcaseGoldGlow" x="-10%" y="-10%" width="120%" height="120%">
-                <feGaussianBlur stdDeviation="3.5" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
             </defs>
 
             {/* Layer 1: Broad Soft Ivory Organic Curve */}
@@ -282,48 +237,8 @@ export function EditorialShowcaseSection() {
             <path
               d="M280 760 C 480 685, 760 660, 1020 655 C 1220 652, 1350 565, 1440 485"
               stroke="#E5C158"
-              strokeOpacity="0.35"
-              strokeWidth="1.25"
-            />
-
-            {/* Animated Gold Light Stream 1 */}
-            <m.path
-              d="M1440 35 C 1320 95, 1345 340, 1295 495 C 1235 675, 920 620, 650 650 C 430 675, 250 715, 140 760"
-              stroke="#F5D77F"
-              strokeOpacity="0.78"
-              strokeWidth="2.8"
-              strokeLinecap="round"
-              strokeDasharray="240 1560"
-              filter="url(#editorialShowcaseGoldGlow)"
-              initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
-              animate={
-                shouldAnimate ? { strokeDashoffset: -1800 } : undefined
-              }
-              transition={{
-                duration: 14,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-            />
-
-            {/* Animated Gold Light Stream 2 (Slower Counter-Wave) */}
-            <m.path
-              d="M280 760 C 480 685, 760 660, 1020 655 C 1220 652, 1350 565, 1440 485"
-              stroke="#F3D37A"
-              strokeOpacity="0.58"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeDasharray="190 1410"
-              filter="url(#editorialShowcaseGoldGlow)"
-              initial={prefersReducedMotion ? false : { strokeDashoffset: -200 }}
-              animate={
-                shouldAnimate ? { strokeDashoffset: 1400 } : undefined
-              }
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
+              strokeOpacity="0.45"
+              strokeWidth="1.4"
             />
           </svg>
 
@@ -569,7 +484,6 @@ export function EditorialShowcaseSection() {
           </m.div>
         </div>
       </section>
-    </LazyMotion>
   );
 }
 

@@ -37,7 +37,7 @@ export default function UAELayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-[#F7F5F0] dark:bg-[#080909] transition-colors duration-300 overflow-x-hidden">
+    <div className="relative flex min-h-screen flex-col bg-[#F7F5F0] dark:bg-[#080909] overflow-x-clip">
       {/* Dark mode subtle charcoal tonal variation (zero-blur radial gradient) */}
       <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 z-0 hidden h-[600px] w-[1100px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(16,17,17,0.65)_0%,transparent_70%)] dark:block" />
 
@@ -51,7 +51,7 @@ export default function UAELayout({
       <Header country="ae" />
 
       {/* Main Content */}
-      <main className="relative z-10 flex-1">{children}</main>
+      <main className="relative z-10 flex-1 pt-[60px] sm:pt-[62px] lg:pt-[60px] xl:pt-[62px]">{children}</main>
 
       {/* Footer */}
       <Footer country="ae" />

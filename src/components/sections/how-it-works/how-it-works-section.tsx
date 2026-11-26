@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Building2, FileCheck2, Layers, Rocket } from 'lucide-react';
-import { m, LazyMotion, domAnimation, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from 'motion/react';
 import { useSectionInView } from '@/hooks/use-section-in-view';
 import HowItWorks, {
   type HowItWorksStep,
@@ -46,14 +46,13 @@ export function HowItWorksSection() {
   }));
 
   return (
-    <LazyMotion features={domAnimation}>
-      <section
-        ref={sectionRef}
-        id="how-it-works"
-        data-section-paused={!inView ? 'true' : undefined}
-        aria-labelledby="how-it-works-heading"
-        className="relative overflow-hidden bg-[#F8F7F2] py-8 transition-colors duration-300 dark:bg-[#050807] sm:py-9 lg:py-10"
-      >
+    <section
+      ref={sectionRef}
+      id="how-it-works"
+      data-section-paused={!inView ? 'true' : undefined}
+      aria-labelledby="how-it-works-heading"
+      className="relative overflow-hidden bg-[#F8F7F2] py-8 transition-colors duration-300 dark:bg-[#050807] sm:py-9 lg:py-10"
+    >
         {/* Futuristic Impact-Style Orbital Rings & Glowing UAE Star Nodes */}
         <svg
           aria-hidden="true"
@@ -78,13 +77,6 @@ export function HowItWorksSection() {
               <stop offset="50%" stopColor="#E0B13A" stopOpacity="0.24" />
               <stop offset="100%" stopColor="#C99726" stopOpacity="0.04" />
             </linearGradient>
-            <filter id="hiwNodeGlow" x="-80%" y="-80%" width="260%" height="260%">
-              <feGaussianBlur stdDeviation="3" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
           </defs>
 
           {/* Outer Emerald Elliptical Orbit */}
@@ -131,7 +123,6 @@ export function HowItWorksSection() {
           ].map((node, i) => (
             <m.g
               key={`hiw-node-${i}`}
-              filter="url(#hiwNodeGlow)"
               animate={
                 shouldAnimate
                   ? { opacity: [0.55, 1, 0.55], scale: [0.92, 1.15, 0.92] }
@@ -344,6 +335,5 @@ export function HowItWorksSection() {
           </m.div>
         </div>
       </section>
-    </LazyMotion>
   );
 }

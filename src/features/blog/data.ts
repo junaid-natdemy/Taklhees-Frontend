@@ -266,10 +266,20 @@ export function paginateBlogArticles(
 }
 
 /**
- * Fetches blog articles from the Django API if available, falling back
- * gracefully to verified editorial articles so SSR never fails offline.
+ * Fetches blog articles from the Django API when a non-local backend URL is
+ * configured, returning curated verified articles immediately offline/static.
  */
 export async function getBlogArticles(): Promise<BlogArticle[]> {
+  const configuredApiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const isLocalApi =
+    !configuredApiUrl ||
+    configuredApiUrl.includes('localhost') ||
+    configuredApiUrl.includes('127.0.0.1');
+
+  if (process.env.NODE_ENV === 'production' && isLocalApi) {
+    return UAE_BLOG_ARTICLES;
+  }
+
   try {
     const response = await apiClient<{ results?: BlogArticle[] } | BlogArticle[]>(
       '/blog/articles/',
@@ -277,7 +287,7 @@ export async function getBlogArticles(): Promise<BlogArticle[]> {
         next: { revalidate: 300 },
         signal:
           typeof AbortSignal !== 'undefined' && 'timeout' in AbortSignal
-            ? AbortSignal.timeout(1500)
+            ? AbortSignal.timeout(1200)
             : undefined,
       } as RequestInit
     );

@@ -104,7 +104,7 @@ export const ImpactStatCard = React.memo(function ImpactStatCard({
           'relative flex h-full w-full flex-col items-center justify-between overflow-hidden rounded-[inherit] px-4 pt-5 pb-3 transition-[background-color,border-color,box-shadow,transform] duration-300 group-hover:-translate-y-1 motion-reduce:group-hover:translate-y-0',
           isActive
             ? 'bg-[#073D20] text-white border border-[#2EB04B]/50 shadow-[0_26px_54px_-12px_rgba(11,90,49,0.48),0_0_24px_-4px_rgba(201,151,38,0.24),inset_0_1px_0_rgba(255,255,255,0.38)] dark:bg-gradient-to-b dark:from-[#075B35] dark:via-[#063E24] dark:to-[#041D11] dark:text-[#F5F5F2] dark:border-[#00A85A]/75 dark:shadow-[0_28px_60px_-14px_rgba(0,0,0,0.95),0_0_38px_-6px_rgba(0,168,90,0.45),inset_0_1px_0_rgba(0,168,90,0.28)]'
-            : 'bg-white/95 backdrop-blur-md text-[#171717] border border-black/[0.08] shadow-[0_18px_38px_-16px_rgba(15,23,18,0.16),inset_0_1px_0_rgba(255,255,255,0.95)] group-hover:border-[#146736]/38 group-hover:shadow-[0_22px_44px_-14px_rgba(20,103,54,0.24)] dark:bg-[#09100C]/82 dark:backdrop-blur-xl dark:text-[#F5F5F2] dark:border-[#00A85A]/28 dark:shadow-[0_22px_48px_-14px_rgba(0,0,0,0.95),0_0_24px_-8px_rgba(0,168,90,0.20),inset_0_1px_0_rgba(0,168,90,0.14)] dark:group-hover:border-[#00A85A]/65 dark:group-hover:shadow-[0_24px_52px_-12px_rgba(0,0,0,0.96),0_0_32px_-4px_rgba(0,168,90,0.38)]'
+            : 'bg-white/95 backdrop-blur-sm text-[#171717] border border-black/[0.08] shadow-[0_18px_38px_-16px_rgba(15,23,18,0.16),inset_0_1px_0_rgba(255,255,255,0.95)] group-hover:border-[#146736]/38 group-hover:shadow-[0_22px_44px_-14px_rgba(20,103,54,0.24)] dark:bg-[#09100C]/90 dark:backdrop-blur-md dark:text-[#F5F5F2] dark:border-[#00A85A]/28 dark:shadow-[0_22px_48px_-14px_rgba(0,0,0,0.95),0_0_24px_-8px_rgba(0,168,90,0.20),inset_0_1px_0_rgba(0,168,90,0.14)] dark:group-hover:border-[#00A85A]/65 dark:group-hover:shadow-[0_24px_52px_-12px_rgba(0,0,0,0.96),0_0_32px_-4px_rgba(0,168,90,0.38)]'
         )}
       >
         {/* 1. Full-Depth Photographic Layer */}
@@ -119,7 +119,7 @@ export const ImpactStatCard = React.memo(function ImpactStatCard({
             src={metric.image}
             alt={metric.imageAlt}
             fill
-            loading={variant === 'mobile' ? 'eager' : 'lazy'}
+            loading="eager"
             decoding="async"
             sizes="(max-width: 767px) 92vw, 250px"
             style={{ objectPosition: metric.objectPosition }}

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { ThemeImage } from '@/components/ui/theme-image';
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from 'motion/react';
 import { Users } from 'lucide-react';
 import { MotionTiltCard } from '@/components/ui/motion-tilt-card';
 import { cn } from '@/lib/utils';
@@ -50,45 +50,6 @@ function LeadershipGlassFilter() {
         <clipPath id="torn-paper-right" clipPathUnits="objectBoundingBox">
           <path d={TORN_CLIP_RIGHT} />
         </clipPath>
-        <filter
-          id="leadership-glass"
-          x="0%"
-          y="0%"
-          width="100%"
-          height="100%"
-          colorInterpolationFilters="sRGB"
-        >
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.04 0.04"
-            numOctaves="1"
-            seed="3"
-            result="turbulence"
-          />
-          <feGaussianBlur
-            in="turbulence"
-            stdDeviation="2"
-            result="blurredNoise"
-          />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="blurredNoise"
-            scale="48"
-            xChannelSelector="R"
-            yChannelSelector="B"
-            result="displaced"
-          />
-          <feGaussianBlur
-            in="displaced"
-            stdDeviation="3.5"
-            result="finalBlur"
-          />
-          <feComposite
-            in="finalBlur"
-            in2="finalBlur"
-            operator="over"
-          />
-        </filter>
       </defs>
     </svg>
   );
@@ -131,10 +92,10 @@ function FloatingQuotePanel({
         className
       )}
     >
-      {/* Warm Champagne & Emerald Ambient Glow Beneath Floating Torn-Paper Glass */}
+      {/* Warm Champagne & Emerald Ambient Glow Beneath Floating Torn-Paper Glass (zero-blur gradient) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-4 inset-x-8 h-8 rounded-full bg-gradient-to-r from-[#087A42]/22 via-[#E0B13A]/28 to-[#087A42]/22 blur-xl dark:from-[#00A85A]/25 dark:via-[#E0B13A]/22 dark:to-[#00A85A]/25"
+        className="pointer-events-none absolute -bottom-6 inset-x-4 h-12 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(224,177,58,0.22)_0%,rgba(8,122,66,0.14)_48%,transparent_76%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(224,177,58,0.18)_0%,rgba(0,168,90,0.18)_48%,transparent_76%)]"
       />
 
       <MotionTiltCard
@@ -193,9 +154,6 @@ function FloatingQuotePanel({
               className="pointer-events-none absolute inset-0 z-20 h-full w-full"
             >
               <defs>
-                <filter id={`torn-bevel-blur-${profile.id}`} x="-10%" y="-10%" width="120%" height="120%">
-                  <feGaussianBlur stdDeviation="1.4" />
-                </filter>
                 <linearGradient
                   id={`torn-rim-${profile.id}`}
                   x1="0%"
@@ -221,14 +179,14 @@ function FloatingQuotePanel({
                 </linearGradient>
               </defs>
 
-              {/* Thick blurred inner glass meniscus (mimics liquid-button inset 0 0 6px 6px) */}
+              {/* Inner glass meniscus (lightweight crisp stroke) */}
               <path
                 d={tornRimPath}
                 fill="none"
                 stroke={`url(#torn-inner-glow-${profile.id})`}
-                strokeWidth="12"
+                strokeOpacity="0.65"
+                strokeWidth="8"
                 vectorEffect="non-scaling-stroke"
-                filter={`url(#torn-bevel-blur-${profile.id})`}
               />
 
               {/* Top-left bright specular bevel highlight */}
@@ -330,14 +288,13 @@ export function LeadershipInsightsSection() {
   const ceoProfile = LEADERSHIP_PROFILES[1];
 
   return (
-    <LazyMotion features={domAnimation}>
-      <section
-        ref={sectionRef}
-        id="leadership"
-        data-section-paused={!inView ? 'true' : undefined}
-        aria-labelledby="leadership-heading"
-        className="relative overflow-hidden bg-[#F7F6F1] pt-16 pb-10 transition-colors duration-300 dark:bg-[#050807] sm:pt-20 sm:pb-12 lg:pt-22 lg:pb-10"
-      >
+    <section
+      ref={sectionRef}
+      id="leadership"
+      data-section-paused={!inView ? 'true' : undefined}
+      aria-labelledby="leadership-heading"
+      className="relative overflow-hidden bg-[#F7F6F1] pt-16 pb-10 transition-colors duration-300 dark:bg-[#050807] sm:pt-20 sm:pb-12 lg:pt-22 lg:pb-10"
+    >
         {/* Hidden SVG Glass Distortion Filter */}
         <LeadershipGlassFilter />
 
@@ -517,22 +474,6 @@ export function LeadershipInsightsSection() {
               <stop offset="70%" stopColor="#917100" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
             </linearGradient>
-
-            <filter id="editorialGoldGlow" x="-10%" y="-25%" width="120%" height="150%">
-              <feGaussianBlur stdDeviation="4.5" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-
-            <filter id="editorialGoldGlowSoft" x="-10%" y="-30%" width="120%" height="160%">
-              <feGaussianBlur stdDeviation="6" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
           </defs>
 
           {/* Sweeping Emerald Wave Crest */}
@@ -549,60 +490,13 @@ export function LeadershipInsightsSection() {
             strokeWidth="2.2"
           />
 
-          {/* Gold Stream 1: Primary flowing light — behind cards */}
-          <m.path
-            d="M0 135 C 210 65, 390 250, 690 195 C 960 145, 1180 40, 1440 95"
-            stroke="url(#editorial-gold-stream)"
-            strokeWidth="5"
-            strokeLinecap="round"
-            strokeDasharray="420 1180"
-            filter="url(#editorialGoldGlow)"
-            initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
-            animate={
-              shouldAnimate ? { strokeDashoffset: -1600 } : undefined
-            }
-            transition={{
-              duration: 14,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-          />
-
-          {/* Gold Stream 2: Secondary wave — offset path, slower */}
-          <m.path
-            d="M-40 170 C 180 100, 420 220, 720 170 C 1000 125, 1210 70, 1480 120"
-            stroke="url(#editorial-gold-stream-2)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeDasharray="340 1260"
-            filter="url(#editorialGoldGlowSoft)"
-            initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
-            animate={
-              shouldAnimate ? { strokeDashoffset: -1600 } : undefined
-            }
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-          />
-
-          {/* Gold Stream 3: Tertiary ethereal ribbon — fastest, thinnest */}
-          <m.path
+          {/* Secondary subtle gold ribbon crest */}
+          <path
             d="M0 110 C 240 40, 480 200, 740 155 C 980 115, 1140 60, 1440 80"
             stroke="url(#editorial-gold-stream-3)"
-            strokeWidth="2"
+            strokeOpacity="0.65"
+            strokeWidth="1.6"
             strokeLinecap="round"
-            strokeDasharray="260 1340"
-            initial={prefersReducedMotion ? false : { strokeDashoffset: -300 }}
-            animate={
-              shouldAnimate ? { strokeDashoffset: -1900 } : undefined
-            }
-            transition={{
-              duration: 11,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
           />
 
           {/* Static champagne-gold crest accent (thicker, luminous) */}
@@ -834,6 +728,5 @@ export function LeadershipInsightsSection() {
           />
         </svg>
       </section>
-    </LazyMotion>
   );
 }

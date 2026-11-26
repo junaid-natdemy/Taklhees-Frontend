@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useState, type RefObject } from 'react';
+import { startTransition, useEffect, useState, type RefObject } from 'react';
 
 /**
- * Tracks whether a section container is within or near the viewport so infinite
- * decorative JS animations pause automatically when scrolled offscreen.
+ * Tracks whether a section container is within or near the viewport using
+ * low-priority state transitions so scrolling never blocks the main thread.
  */
 export function useSectionInView(
   ref: RefObject<HTMLElement | null>,
@@ -20,7 +20,10 @@ export function useSectionInView(
     }
 
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
+      ([entry]) => {
+        const next = entry.isIntersecting;
+        startTransition(() => setInView(next));
+      },
       { rootMargin }
     );
     observer.observe(el);

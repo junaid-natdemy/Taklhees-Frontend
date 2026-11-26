@@ -38,7 +38,7 @@ const LiquidGlassArrowButton = React.memo(function LiquidGlassArrowButton({
       aria-label={ariaLabel}
       className={cn(
         'group relative isolate flex h-11 w-11 xl:h-12 xl:w-12 cursor-pointer items-center justify-center rounded-full touch-manipulation select-none overflow-hidden',
-        'bg-gradient-to-b from-white/95 via-white/75 to-[#EBF5EE]/90 backdrop-blur-2xl backdrop-saturate-150',
+        'bg-gradient-to-b from-white/95 via-white/75 to-[#EBF5EE]/90 backdrop-blur-md backdrop-saturate-150',
         'border border-[#146736]/22 shadow-[0_12px_28px_-6px_rgba(0,0,0,0.16),0_3px_10px_-2px_rgba(20,103,54,0.16),inset_0_2px_3px_rgba(255,255,255,1),inset_0_-4px_8px_rgba(20,103,54,0.16)]',
         'text-neutral-800 hover:scale-105 hover:border-[#146736]/45 hover:text-[#146736] active:scale-95',
         'dark:bg-gradient-to-b dark:from-[#0E1E16]/90 dark:via-[#08110C]/85 dark:to-[#075B35]/35 dark:border-[#00A85A]/45',
@@ -298,10 +298,10 @@ export function ImpactSection() {
             <AnimatePresence mode="wait" initial={false}>
               <m.div
                 key={activeMetric.id}
-                initial={prefersReduced ? { opacity: 1 } : { opacity: 0, y: 8, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.98 }}
-                transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                initial={prefersReduced ? { opacity: 1 } : { opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -4 }}
+                transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
               >
                 <ImpactStatCard
                   metric={activeMetric}

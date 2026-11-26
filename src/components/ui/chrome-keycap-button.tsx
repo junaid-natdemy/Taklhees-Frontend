@@ -3,7 +3,6 @@
 import React, {
   useCallback,
   useEffect,
-  useId,
   useMemo,
   useRef,
   useState,
@@ -435,8 +434,6 @@ export const ChromeKeycapButton = React.forwardRef<
   ref
 ) {
   const prefersReducedMotion = useReducedMotion();
-  const rawId = useId();
-  const safeId = rawId.replace(/:/g, "");
   const audioCtxRef = useRef<AudioContext | null>(null);
   const [isPressed, setIsPressed] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -626,7 +623,7 @@ export const ChromeKeycapButton = React.forwardRef<
         }}
         transition={springTransition}
         style={{ borderRadius: metrics.outerRadius + 4 }}
-        className="pointer-events-none absolute -inset-1.5 overflow-hidden blur-xl"
+        className="pointer-events-none absolute -inset-1.5 overflow-hidden opacity-75"
       >
         <m.span
           aria-hidden="true"
@@ -695,7 +692,7 @@ export const ChromeKeycapButton = React.forwardRef<
             padding: metrics.bezelPadding,
             backgroundColor: palette.bezelGlassTint,
           }}
-          className="relative flex h-full w-full items-center justify-center overflow-hidden backdrop-blur-xl shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.52),inset_0_-1px_2px_rgba(0,0,0,0.38)]"
+          className="relative flex h-full w-full items-center justify-center overflow-hidden backdrop-blur-md shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.52),inset_0_-1px_2px_rgba(0,0,0,0.38)]"
         >
           {/* Orbiting dark-chrome + luminous glass reflection band inside bezel */}
           <m.span
@@ -749,28 +746,8 @@ export const ChromeKeycapButton = React.forwardRef<
                   ? "inset 0 2px 7px rgba(0,0,0,0.46), inset 0 -1px 1.5px rgba(255,255,255,0.24)"
                   : palette.capHighlight,
               }}
-              className="relative flex h-full w-full items-center justify-center overflow-hidden backdrop-blur-xl"
+              className="relative flex h-full w-full items-center justify-center overflow-hidden backdrop-blur-md"
             >
-              {/* Fine bead-blasted frosted glass micro-grain texture */}
-              <svg
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.08] mix-blend-overlay"
-              >
-                <filter id={`grain-${safeId}`}>
-                  <feTurbulence
-                    type="fractalNoise"
-                    baseFrequency="0.88"
-                    numOctaves="2"
-                    stitchTiles="stitch"
-                  />
-                  <feColorMatrix type="saturate" values="0" />
-                </filter>
-                <rect
-                  width="100%"
-                  height="100%"
-                  filter={`url(#grain-${safeId})`}
-                />
-              </svg>
 
               {/* Interactive pointer-tracking glass refraction sheen */}
               <m.span

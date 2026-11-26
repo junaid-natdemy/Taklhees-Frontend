@@ -1,56 +1,18 @@
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import { UAEHero } from '@/components/sections/uae-hero';
 import { ImpactSection } from '@/components/sections/impact/impact-section';
+import { EditorialShowcaseSection } from '@/components/sections/editorial-showcase/editorial-showcase-section';
+import { ServicesSection } from '@/components/sections/services/services-section';
+import { HowItWorksSection } from '@/components/sections/how-it-works/how-it-works-section';
+import { ConsultationPartnersSection } from '@/components/sections/consultation/consultation-partners-section';
+import { TestimonialsSection } from '@/components/sections/testimonials/testimonials-section';
+import { LeadershipInsightsSection } from '@/components/sections/leadership/leadership-insights-section';
+import { BlogShowcaseSection } from '@/components/sections/blog/blog-showcase-section';
+import { ContactSection } from '@/components/sections/contact/contact-section';
+import { BusinessBriefingSection } from '@/components/sections/newsletter/business-briefing-section';
 import { getLandingBlogArticles } from '@/features/blog/data';
 
-const EditorialShowcaseSection = dynamic(() =>
-  import('@/components/sections/editorial-showcase/editorial-showcase-section').then(
-    (m) => m.EditorialShowcaseSection
-  )
-);
-const ServicesSection = dynamic(() =>
-  import('@/components/sections/services/services-section').then(
-    (m) => m.ServicesSection
-  )
-);
-const HowItWorksSection = dynamic(() =>
-  import('@/components/sections/how-it-works/how-it-works-section').then(
-    (m) => m.HowItWorksSection
-  )
-);
-const ConsultationPartnersSection = dynamic(() =>
-  import('@/components/sections/consultation/consultation-partners-section').then(
-    (m) => m.ConsultationPartnersSection
-  )
-);
-const TestimonialsSection = dynamic(() =>
-  import('@/components/sections/testimonials/testimonials-section').then(
-    (m) => m.TestimonialsSection
-  )
-);
-const LeadershipInsightsSection = dynamic(() =>
-  import('@/components/sections/leadership/leadership-insights-section').then(
-    (m) => m.LeadershipInsightsSection
-  )
-);
-const BlogShowcaseSection = dynamic(() =>
-  import('@/components/sections/blog/blog-showcase-section').then(
-    (m) => m.BlogShowcaseSection
-  )
-);
-const ContactSection = dynamic(() =>
-  import('@/components/sections/contact/contact-section').then(
-    (m) => m.ContactSection
-  )
-);
-const BusinessBriefingSection = dynamic(() =>
-  import('@/components/sections/newsletter/business-briefing-section').then(
-    (m) => m.BusinessBriefingSection
-  )
-);
-
-export const revalidate = 300;
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: {

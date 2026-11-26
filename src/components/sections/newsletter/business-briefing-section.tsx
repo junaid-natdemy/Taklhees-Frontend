@@ -7,8 +7,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {
   AnimatePresence,
-  LazyMotion,
-  domAnimation,
   m,
   useReducedMotion,
 } from 'motion/react';
@@ -25,7 +23,6 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { MotionTiltCard } from '@/components/ui/motion-tilt-card';
-import { useSectionInView } from '@/hooks/use-section-in-view';
 
 const briefingSchema = z.object({
   email: z
@@ -60,9 +57,20 @@ export function BusinessBriefingSection() {
     number | null
   >(null);
   const sectionRef = React.useRef<HTMLElement>(null);
-  const inView = useSectionInView(sectionRef);
-  const shouldAnimate = !prefersReducedMotion && inView;
   const panelRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        el.dataset.sectionPaused = entry.isIntersecting ? '' : 'true';
+      },
+      { rootMargin: '140px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   React.useEffect(() => {
     if (resetCountdown === null) return;
@@ -141,13 +149,12 @@ export function BusinessBriefingSection() {
   const isSuccess = Boolean(subscribedMessage && resetCountdown !== null);
 
   return (
-    <LazyMotion features={domAnimation}>
-      <section
-        ref={sectionRef}
-        id="business-briefing"
-        aria-labelledby="briefing-heading"
-        className="relative flex min-h-[calc(100vh-76px)] items-center overflow-hidden bg-[#F8F7F2] py-20 transition-colors duration-300 dark:bg-[#050807] sm:py-24 lg:min-h-screen lg:py-28"
-      >
+    <section
+      ref={sectionRef}
+      id="business-briefing"
+      aria-labelledby="briefing-heading"
+      className="relative flex min-h-[calc(100vh-76px)] items-center overflow-hidden bg-[#F8F7F2] py-20 transition-colors duration-300 dark:bg-[#050807] sm:py-24 lg:min-h-screen lg:py-28"
+    >
         {/* ================= LAYERED ATMOSPHERIC BACKGROUND ================= */}
         <div
           aria-hidden="true"
@@ -238,13 +245,6 @@ export function BusinessBriefingSection() {
                 <stop offset="70%" stopColor="#E5C158" stopOpacity="0.88" />
                 <stop offset="100%" stopColor="#C99726" stopOpacity="0.3" />
               </linearGradient>
-              <filter id="briefingGoldGlow" x="-10%" y="-25%" width="120%" height="150%">
-                <feGaussianBlur stdDeviation="3.5" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
             </defs>
 
             {/* Translucent Ivory Wave */}
@@ -271,27 +271,7 @@ export function BusinessBriefingSection() {
             <path
               d="M0 295 C 240 245, 520 275, 840 215 C 1100 165, 1280 95, 1440 120"
               stroke="url(#briefing-gold-contour)"
-              strokeWidth="1.9"
-            />
-
-            {/* Travelling Champagne-Gold Light Reflection */}
-            <m.path
-              d="M0 295 C 240 245, 520 275, 840 215 C 1100 165, 1280 95, 1440 120"
-              stroke="#F7DF92"
-              strokeOpacity="0.82"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeDasharray="240 1360"
-              filter="url(#briefingGoldGlow)"
-              initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
-              animate={
-                shouldAnimate ? { strokeDashoffset: -1600 } : undefined
-              }
-              transition={{
-                duration: 15,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
+              strokeWidth="2"
             />
           </svg>
 
@@ -419,7 +399,7 @@ export function BusinessBriefingSection() {
                   {/* Organic Sculpted Liquid-Glass Panel (locks exact height during success) */}
                   <div
                     ref={panelRef}
-                    className={`group relative isolate flex flex-col justify-center overflow-hidden px-6 py-7 backdrop-blur-xl transition-all duration-500 sm:px-9 sm:py-9 ${
+                    className={`group relative isolate flex flex-col justify-center overflow-hidden px-6 py-7 backdrop-blur-md transition-colors duration-300 sm:px-9 sm:py-9 ${
                       isSuccess
                         ? 'bg-[linear-gradient(148deg,rgba(255,254,250,0.88)_0%,rgba(248,245,234,0.80)_52%,rgba(227,242,233,0.78)_100%)] dark:bg-[linear-gradient(148deg,rgba(14,30,22,0.88)_0%,rgba(10,22,16,0.82)_60%,rgba(7,26,18,0.88)_100%)]'
                         : 'bg-white/42 dark:bg-[#0D1913]/58'
@@ -769,7 +749,6 @@ export function BusinessBriefingSection() {
           </div>
         </div>
       </section>
-    </LazyMotion>
   );
 }
 

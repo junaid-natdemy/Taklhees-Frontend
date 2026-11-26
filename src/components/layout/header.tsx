@@ -140,20 +140,12 @@ function EmeraldRibbonConnector() {
             <stop offset="75%" stopColor="#16A05A" />
             <stop offset="100%" stopColor="#0FA958" />
           </linearGradient>
-
-          {/* Clean Ambient Drop Shadow */}
-          <filter id="emeraldRibbonDropShadowLight" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#00401C" floodOpacity="0.25" />
-          </filter>
-          <filter id="emeraldRibbonDropShadowDark" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="0" stdDeviation="3.5" floodColor="#16A05A" floodOpacity="0.45" />
-          </filter>
         </defs>
 
-        {/* 1. Continuous Emerald Satin Ribbon Body (Zero Protrusion: Tucked cleanly inside capsule contours) */}
+        {/* 1. Continuous Emerald Satin Ribbon Body (Zero Protrusion & Zero SVG Filter Cost) */}
         <path
           d="M 0 26 C 18 27.5, 36 13, 54 13 L 54 21.5 C 36 21.5, 18 36, 0 34.5 Z"
-          className="fill-[url(#emeraldSatinPureLight)] dark:fill-[url(#emeraldSatinPureDark)] filter-[url(#emeraldRibbonDropShadowLight)] dark:filter-[url(#emeraldRibbonDropShadowDark)]"
+          className="fill-[url(#emeraldSatinPureLight)] dark:fill-[url(#emeraldSatinPureDark)]"
         />
 
         {/* 2. Top Satin Specular Sheen (Reflective highlight along upper crest) */}
@@ -213,20 +205,12 @@ function CrimsonRibbonConnector() {
             <stop offset="75%" stopColor="#E4002B" />
             <stop offset="100%" stopColor="#D1182A" />
           </linearGradient>
-
-          {/* Clean Ambient Drop Shadow */}
-          <filter id="crimsonRibbonDropShadowLight" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#590408" floodOpacity="0.25" />
-          </filter>
-          <filter id="crimsonRibbonDropShadowDark" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="0" stdDeviation="3.5" floodColor="#E4002B" floodOpacity="0.45" />
-          </filter>
         </defs>
 
-        {/* 1. Continuous Crimson Satin Ribbon Body (Zero Protrusion: Tucked cleanly inside capsule contours) */}
+        {/* 1. Continuous Crimson Satin Ribbon Body (Zero Protrusion & Zero SVG Filter Cost) */}
         <path
           d="M 2 13 C 20 13, 38 27.5, 56 26 L 56 34.5 C 38 36, 20 21.5, 2 21.5 Z"
-          className="fill-[url(#crimsonSatinPureLight)] dark:fill-[url(#crimsonSatinPureDark)] filter-[url(#crimsonRibbonDropShadowLight)] dark:filter-[url(#crimsonRibbonDropShadowDark)]"
+          className="fill-[url(#crimsonSatinPureLight)] dark:fill-[url(#crimsonSatinPureDark)]"
         />
 
         {/* 2. Top Satin Specular Sheen (Reflective highlight along upper crest) */}
@@ -289,13 +273,13 @@ export function Header({ country = 'ae' }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full px-3 pb-1 pt-2 sm:pt-2.5 lg:pt-2 xl:pt-2.5 sm:px-5 transform-gpu will-change-transform">
+    <header className="fixed inset-x-0 top-0 z-50 w-full px-3 pb-1 pt-2 sm:pt-2.5 lg:pt-2 xl:pt-2.5 sm:px-5">
       <div className="mx-auto max-w-[1160px]">
         {/* ============ THREE-PART CONNECTED NAVBAR ARCHITECTURE (DUAL SATIN RIBBONS & LIQUID GLASS) ============ */}
         <div className="relative flex items-center justify-between lg:justify-center w-full">
           
           {/* ================= 1. LEFT SECTION — LOGO CAPSULE (UAE GREEN BRAND BORDER) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/90 px-3 sm:px-3.5 lg:w-auto lg:px-4 backdrop-blur-2xl border-[1.5px] border-[#00843D]/80 dark:border-[#16A05A]/80 shadow-[0_2px_12px_-2px_rgba(0,132,61,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/90 dark:shadow-[0_0_16px_rgba(22,160,90,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-all duration-300">
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/95 px-3 sm:px-3.5 lg:w-auto lg:px-4 backdrop-blur-sm border-[1.5px] border-[#00843D]/80 dark:border-[#16A05A]/80 shadow-[0_2px_12px_-2px_rgba(0,132,61,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/95 dark:shadow-[0_0_16px_rgba(22,160,90,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow] duration-150">
             <Link
               href={`/${country}`}
               aria-label="Takhlees Business Home"
@@ -325,7 +309,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
 
           {/* ================= 2. CENTER SECTION — MAIN NAVIGATION CAPSULE (UAE FLAG COLOR FLOW BORDER) ================= */}
           <nav
-            className="nav-center-flag-border relative z-20 hidden flex-1 max-w-[650px] xl:max-w-[680px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/90 px-3 lg:flex xl:px-4 backdrop-blur-2xl shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,0,0,0.04),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-all duration-300"
+            className="nav-center-flag-border relative z-20 hidden flex-1 max-w-[650px] xl:max-w-[680px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/94 px-3 lg:flex xl:px-4 backdrop-blur-sm shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,0,0,0.04),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-[border-color,box-shadow] duration-150"
             aria-label="Main Navigation"
           >
             {links.map((link) => {
@@ -385,7 +369,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 6, scale: 0.98 }}
                           transition={{ duration: 0.16 }}
-                          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-80 rounded-2xl border border-white/90 bg-[#FAF8F5]/95 p-2 shadow-2xl backdrop-blur-2xl dark:border-white/12 dark:bg-[#111313]/95 z-50"
+                          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-80 rounded-2xl border border-white/90 bg-[#FAF8F5]/96 p-2 shadow-2xl backdrop-blur-md dark:border-white/12 dark:bg-[#111313]/96 z-50"
                         >
                           <div className="px-3 py-1.5 border-b border-black/5 dark:border-white/5 mb-1">
                             <span className="text-[10.5px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
@@ -463,7 +447,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
           <CrimsonRibbonConnector />
 
           {/* ================= 3. RIGHT SECTION — UTILITY CAPSULE (UAE CRIMSON RED BRAND BORDER) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center justify-between gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/90 px-3 sm:px-3.5 lg:w-[204px] lg:px-4 backdrop-blur-2xl border-[1.5px] border-[#E4002B]/80 dark:border-[#E4002B]/80 shadow-[0_2px_12px_-2px_rgba(228,0,43,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/90 dark:shadow-[0_0_16px_rgba(228,0,43,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-all duration-300">
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center justify-between gap-2 sm:gap-2.5 rounded-full bg-[#FAF8F5]/95 px-3 sm:px-3.5 lg:w-[204px] lg:px-4 backdrop-blur-sm border-[1.5px] border-[#E4002B]/80 dark:border-[#E4002B]/80 shadow-[0_2px_12px_-2px_rgba(228,0,43,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/95 dark:shadow-[0_0_16px_rgba(228,0,43,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-[border-color,box-shadow] duration-150">
             {/* Country Selector */}
             <div className="relative" ref={dropdownRef}>
               <button
@@ -489,7 +473,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 4, scale: 0.96 }}
                     transition={{ duration: 0.14 }}
-                    className="absolute right-0 z-50 mt-2 w-36 rounded-2xl border border-white/90 bg-[#FAF8F5]/98 p-1 shadow-xl backdrop-blur-2xl dark:border-white/12 dark:bg-[#111313]/98"
+                    className="absolute right-0 z-50 mt-2 w-36 rounded-2xl border border-white/90 bg-[#FAF8F5]/98 p-1 shadow-xl backdrop-blur-md dark:border-white/12 dark:bg-[#111313]/98"
                   >
                     {(['ae', 'in'] as const).map((c) => {
                       const selected = country === c;
@@ -527,7 +511,8 @@ export function Header({ country = 'ae' }: HeaderProps) {
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle mobile menu"
-              className="rounded-full p-1.5 text-neutral-800 transition-colors hover:bg-black/5 dark:text-[#F5F5F2] dark:hover:bg-white/10 lg:hidden"
+              aria-expanded={mobileOpen}
+              className="touch-manipulation rounded-full p-1.5 text-neutral-800 transition-colors hover:bg-black/5 dark:text-[#F5F5F2] dark:hover:bg-white/10 lg:hidden"
             >
               {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
@@ -538,11 +523,11 @@ export function Header({ country = 'ae' }: HeaderProps) {
         <AnimatePresence>
           {mobileOpen && (
             <m.div
-              initial={{ opacity: 0, y: -10, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -8, scale: 0.98 }}
-              transition={{ duration: 0.18 }}
-              className="mt-2.5 rounded-3xl border border-white/90 bg-[#FAF8F5]/98 p-3 shadow-2xl backdrop-blur-2xl dark:border-white/12 dark:bg-[#111313]/98 lg:hidden z-50"
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-2.5 rounded-3xl border border-black/10 bg-[#FAF8F5]/97 p-3 shadow-xl backdrop-blur-sm dark:border-white/12 dark:bg-[#111313]/97 lg:hidden z-50"
             >
               <nav className="flex flex-col gap-1">
                 {links.map((link) => {

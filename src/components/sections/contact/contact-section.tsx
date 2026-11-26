@@ -7,8 +7,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {
   AnimatePresence,
-  LazyMotion,
-  domAnimation,
   m,
   useReducedMotion,
 } from 'motion/react';
@@ -204,19 +202,6 @@ function OrganicGlassRim({
             }
           />
         </linearGradient>
-        <filter
-          id={`${id}-rim-bloom`}
-          x="-10%"
-          y="-10%"
-          width="120%"
-          height="120%"
-        >
-          <feGaussianBlur stdDeviation="0.004" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
       </defs>
 
       {/* 3D Liquid-Glass Lens Thickness Band (adapted from LiquidToggle fresnel rim) */}
@@ -258,7 +243,6 @@ function OrganicGlassRim({
           pathLength={100}
           strokeDasharray="15 85"
           vectorEffect="non-scaling-stroke"
-          filter={`url(#${id}-rim-bloom)`}
           style={{ strokeWidth: '3px' }}
           initial={{ strokeDashoffset: 0 }}
           animate={{ strokeDashoffset: -100 }}
@@ -409,14 +393,13 @@ export function ContactSection({
   const isSuccess = Boolean(submittedMessage);
 
   return (
-    <LazyMotion features={domAnimation}>
-      <section
-        ref={sectionRef}
-        id="contact"
-        data-section-paused={!inView ? 'true' : undefined}
-        aria-labelledby="contact-heading"
-        className="relative overflow-hidden bg-[linear-gradient(180deg,#FAF8F3_0%,#F3EDE0_55%,#EAE1CE_100%)] py-14 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#050807_0%,#07100C_55%,#050907_100%)] sm:py-16 lg:py-20"
-      >
+    <section
+      ref={sectionRef}
+      id="contact"
+      data-section-paused={!inView ? 'true' : undefined}
+      aria-labelledby="contact-heading"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#FAF8F3_0%,#F3EDE0_55%,#EAE1CE_100%)] py-14 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#050807_0%,#07100C_55%,#050907_100%)] sm:py-16 lg:py-20"
+    >
         {/* Organic clipPaths (shared #container-glass mounted once in Providers) */}
         <OrganicClipDefs />
 
@@ -549,19 +532,6 @@ export function ContactSection({
                 <stop offset="72%" stopColor="#C89B3C" stopOpacity="0.8" />
                 <stop offset="100%" stopColor="#E5C158" stopOpacity="0.35" />
               </linearGradient>
-              <filter
-                id="contactGoldGlowBg"
-                x="-10%"
-                y="-30%"
-                width="120%"
-                height="160%"
-              >
-                <feGaussianBlur stdDeviation="3" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
             </defs>
 
             <m.g
@@ -613,26 +583,7 @@ export function ContactSection({
               <path
                 d="M500 300 C 780 240, 1035 208, 1235 142 C 1330 110, 1395 86, 1440 96"
                 stroke="url(#contact-wave-gold-bg)"
-                strokeWidth="1.6"
-                filter="url(#contactGoldGlowBg)"
-              />
-              <m.path
-                d="M500 300 C 780 240, 1035 208, 1235 142 C 1330 110, 1395 86, 1440 96"
-                stroke="#FFF3CC"
-                strokeOpacity="0.82"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-                strokeDasharray="180 1420"
-                filter="url(#contactGoldGlowBg)"
-                initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
-                animate={
-                  shouldAnimate ? { strokeDashoffset: -1600 } : undefined
-                }
-                transition={{
-                  duration: 18,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
+                strokeWidth="1.8"
               />
             </m.g>
           </svg>
@@ -710,7 +661,7 @@ export function ContactSection({
               >
                 <div className="h-full w-full drop-shadow-[0_18px_34px_rgba(4,42,23,0.3)]">
                   <div
-                    className="group relative isolate flex h-full flex-col justify-between overflow-hidden bg-[linear-gradient(152deg,rgba(16,142,76,0.74)_0%,rgba(7,92,48,0.82)_48%,rgba(4,52,27,0.88)_100%)] px-8 py-9 text-white backdrop-blur-xl saturate-[1.45] sm:px-9 sm:py-10"
+                    className="group relative isolate flex h-full flex-col justify-between overflow-hidden bg-[linear-gradient(152deg,rgba(16,142,76,0.78)_0%,rgba(7,92,48,0.86)_48%,rgba(4,52,27,0.90)_100%)] px-8 py-9 text-white backdrop-blur-md saturate-[1.35] sm:px-9 sm:py-10"
                     style={{ clipPath: 'url(#contact-emerald-shape)' }}
                   >
 
@@ -725,7 +676,7 @@ export function ContactSection({
                     {/* Multi-layered Liquid Glass Reflections (LiquidToggle dual speculars + skylight gloss + meniscus + caustic bounce) */}
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute -left-16 -top-12 z-[1] h-56 w-[75%] -rotate-12 rounded-full bg-gradient-to-b from-white/[0.22] via-white/[0.06] to-transparent blur-md"
+                      className="pointer-events-none absolute -left-16 -top-12 z-[1] h-56 w-[75%] -rotate-12 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.22)_0%,transparent_72%)]"
                     />
                     <div
                       aria-hidden="true"
@@ -892,10 +843,10 @@ export function ContactSection({
                 {/* Clipped Organic Frosted-Ivory Liquid Glass Surface (separated so form controls are never clipped) */}
                 <div
                   aria-hidden="true"
-                  className={`pointer-events-none absolute inset-0 z-0 overflow-hidden backdrop-blur-xl saturate-[1.45] transition-all duration-500 ${
+                  className={`pointer-events-none absolute inset-0 z-0 overflow-hidden backdrop-blur-md saturate-[1.35] transition-colors duration-300 ${
                     isSuccess
                       ? 'bg-[linear-gradient(148deg,rgba(255,254,250,0.88)_0%,rgba(248,245,234,0.80)_52%,rgba(227,242,233,0.78)_100%)] dark:bg-[linear-gradient(148deg,rgba(14,30,22,0.88)_0%,rgba(10,22,16,0.82)_60%,rgba(7,26,18,0.88)_100%)]'
-                      : 'bg-[linear-gradient(148deg,rgba(255,254,250,0.68)_0%,rgba(249,245,233,0.52)_52%,rgba(229,242,234,0.48)_100%)] dark:bg-[linear-gradient(148deg,rgba(16,32,24,0.72)_0%,rgba(11,22,17,0.62)_60%,rgba(7,26,18,0.72)_100%)]'
+                      : 'bg-[linear-gradient(148deg,rgba(255,254,250,0.72)_0%,rgba(249,245,233,0.58)_52%,rgba(229,242,234,0.54)_100%)] dark:bg-[linear-gradient(148deg,rgba(16,32,24,0.78)_0%,rgba(11,22,17,0.68)_60%,rgba(7,26,18,0.78)_100%)]'
                   }`}
                   style={{ clipPath: 'url(#contact-ivory-shape)' }}
                 >
@@ -909,7 +860,7 @@ export function ContactSection({
                   />
 
                   {/* Multi-layered Frosted Ivory Glass Depth & Emerald/Champagne Reflections */}
-                  <div className="pointer-events-none absolute -left-16 -top-12 z-[1] h-56 w-[72%] -rotate-12 rounded-full bg-gradient-to-b from-white/55 via-white/15 to-transparent blur-md dark:from-white/[0.08] dark:via-white/[0.02]" />
+                  <div className="pointer-events-none absolute -left-16 -top-12 z-[1] h-56 w-[72%] -rotate-12 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.55)_0%,transparent_72%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_72%)]" />
                   <div className="pointer-events-none absolute inset-x-4 top-1.5 z-[1] h-32 rounded-t-[40px] bg-gradient-to-b from-white/85 via-white/28 to-transparent dark:from-white/[0.14] dark:via-white/[0.04]" />
                   <div
                     className={`pointer-events-none absolute inset-0 z-[1] transition-opacity duration-500 ${
@@ -1434,7 +1385,6 @@ export function ContactSection({
           </div>
         </div>
       </section>
-    </LazyMotion>
   );
 }
 

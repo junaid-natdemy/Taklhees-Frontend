@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   Award,
   Briefcase,
@@ -43,7 +43,7 @@ function TestimonialCard({ item }: { item: TestimonialItem }) {
   return (
     <figure
       className={cn(
-        'testimonial-liquid-glass group overflow-hidden rounded-[22px] p-6 transition-all duration-300',
+        'testimonial-liquid-glass group overflow-hidden rounded-[22px] p-6 transition-[transform,box-shadow] duration-200',
         'hover:-translate-y-0.5',
         'hover:shadow-[0_20px_42px_-12px_rgba(8,122,66,0.18)] dark:hover:shadow-[0_20px_44px_-12px_rgba(0,168,90,0.24)]'
       )}
@@ -55,7 +55,7 @@ function TestimonialCard({ item }: { item: TestimonialItem }) {
       />
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/40 blur-2xl transition-opacity duration-300 group-hover:opacity-90 dark:bg-emerald-400/10"
+        className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.45)_0%,transparent_70%)] transition-opacity duration-300 group-hover:opacity-90 dark:bg-[radial-gradient(circle,rgba(52,211,153,0.14)_0%,transparent_70%)]"
       />
 
       {/* Decorative Green Opening Quotation Mark */}
@@ -109,13 +109,18 @@ function TestimonialCard({ item }: { item: TestimonialItem }) {
 export function TestimonialsSection() {
   const [col1, col2, col3] = TESTIMONIAL_COLUMNS;
   const sectionRef = useRef<HTMLElement>(null);
-  const [inView, setInView] = useState(true);
 
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.removeAttribute('data-marquee-paused');
+        } else {
+          el.setAttribute('data-marquee-paused', 'true');
+        }
+      },
       { rootMargin: '150px' }
     );
     io.observe(el);
@@ -126,7 +131,6 @@ export function TestimonialsSection() {
     <section
       ref={sectionRef}
       id="testimonials"
-      data-marquee-paused={!inView ? 'true' : undefined}
       aria-labelledby="testimonials-heading"
       className="relative overflow-hidden bg-[#F8F7F2] py-16 transition-colors duration-300 dark:bg-[#050807] sm:py-20 lg:py-24"
     >

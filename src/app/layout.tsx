@@ -7,14 +7,12 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
 });
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-serif',
   display: 'swap',
-  weight: ['500', '600', '700'],
   style: ['normal', 'italic'],
 });
 

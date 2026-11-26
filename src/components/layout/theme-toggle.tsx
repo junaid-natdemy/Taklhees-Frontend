@@ -7,9 +7,11 @@ import { LiquidToggle, NimbusToggleIcons } from '@/components/ui/liquid-glass-to
 export const ThemeToggle = React.memo(function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const [enableSound, setEnableSound] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
+    setEnableSound(window.matchMedia('(pointer: fine)').matches);
   }, []);
 
   React.useEffect(() => {
@@ -29,7 +31,9 @@ export const ThemeToggle = React.memo(function ThemeToggle() {
       }
 
       const currentIsDark = (resolvedTheme || theme) === 'dark';
-      setTheme(currentIsDark ? 'light' : 'dark');
+      React.startTransition(() => {
+        setTheme(currentIsDark ? 'light' : 'dark');
+      });
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -53,10 +57,14 @@ export const ThemeToggle = React.memo(function ThemeToggle() {
         size={26}
         tone={isDark ? 'dark' : 'light'}
         checked={isDark}
-        onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+        onCheckedChange={(checked) => {
+          React.startTransition(() => {
+            setTheme(checked ? 'dark' : 'light');
+          });
+        }}
         icons={{ off: NimbusToggleIcons.sun, on: NimbusToggleIcons.moon }}
         label="Toggle light and dark theme"
-        sound={true}
+        sound={enableSound}
       />
     </div>
   );

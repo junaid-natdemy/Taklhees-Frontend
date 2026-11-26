@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { useSectionInView } from '@/hooks/use-section-in-view';
 
@@ -202,8 +202,7 @@ export default function HowItWorks({
   const positions = stepPositions || DEFAULT_CARD_POSITIONS;
 
   return (
-    <LazyMotion features={domAnimation}>
-      <div ref={wrapperRef} className={cn('relative mx-auto w-full max-w-[980px]', className)}>
+    <div ref={wrapperRef} className={cn('relative mx-auto w-full max-w-[980px]', className)}>
         {/* Desktop & Tablet Staggered 3-Card Stage */}
         <div className="relative flex flex-col gap-5 pl-7 md:block md:h-[346px] md:gap-0 md:pl-0">
           {/* Mobile Vertical Timeline Line & Nodes */}
@@ -311,6 +310,5 @@ export default function HowItWorks({
           ))}
         </div>
       </div>
-    </LazyMotion>
   );
 }

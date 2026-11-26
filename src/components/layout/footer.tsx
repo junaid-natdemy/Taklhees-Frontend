@@ -97,7 +97,6 @@ export function Footer({ country = 'ae' }: FooterProps) {
   const footerRef = useRef<HTMLElement>(null);
   const inView = useSectionInView(footerRef, '120px');
   const prefersReducedMotion = useReducedMotion();
-  const shouldAnimate = !prefersReducedMotion && inView;
 
   const primaryLinks = isUAE
     ? [
@@ -186,10 +185,7 @@ export function Footer({ country = 'ae' }: FooterProps) {
             </linearGradient>
           </defs>
 
-          <m.g
-            animate={shouldAnimate ? { x: [0, -18, 0] } : undefined}
-            transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
-          >
+          <g className="takhlees-loader-wave-slow">
             <path
               d="M-60 95 C 240 48, 520 148, 860 110 C 1140 78, 1320 48, 1500 72 L1500 200 L-60 200 Z"
               fill="url(#footer-wave-back)"
@@ -200,12 +196,9 @@ export function Footer({ country = 'ae' }: FooterProps) {
               strokeOpacity="0.45"
               strokeWidth="1.1"
             />
-          </m.g>
+          </g>
 
-          <m.g
-            animate={shouldAnimate ? { x: [0, 16, 0] } : undefined}
-            transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-          >
+          <g className="takhlees-loader-wave-front">
             <path
               d="M-60 128 C 260 88, 560 165, 920 128 C 1180 100, 1340 62, 1500 84 L1500 200 L-60 200 Z"
               fill="url(#footer-wave-front)"
@@ -215,7 +208,7 @@ export function Footer({ country = 'ae' }: FooterProps) {
               stroke="url(#footer-gold-line)"
               strokeWidth="1.5"
             />
-          </m.g>
+          </g>
         </svg>
       </div>
 

@@ -44,7 +44,6 @@ function renderOrbitalNodes(nodes: OrbitalNode[], shouldAnimate: boolean) {
   return nodes.map((node) => (
     <m.g
       key={node.id}
-      filter="url(#nodeGlow)"
       animate={
         shouldAnimate
           ? {
@@ -240,14 +239,6 @@ export const ImpactGlobeBackdrop = React.memo(function ImpactGlobeBackdrop() {
             <stop offset="76%" stopColor="#00A85A" stopOpacity="0.48" />
             <stop offset="100%" stopColor="#00A85A" stopOpacity="0" />
           </linearGradient>
-
-          <filter id="nodeGlow" x="-120%" y="-120%" width="340%" height="340%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
         </defs>
 
         {/* Outer Atmospheric Dome Orbit Ring Arching Over Cards & Subtitle (with Locked Nodes) */}

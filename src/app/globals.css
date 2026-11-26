@@ -380,12 +380,12 @@
   position: relative;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.68) 0%,
-    rgba(255, 255, 255, 0.36) 52%,
-    rgba(248, 247, 242, 0.52) 100%
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(255, 255, 255, 0.54) 52%,
+    rgba(248, 247, 242, 0.68) 100%
   );
-  backdrop-filter: blur(10px) saturate(1.45);
-  -webkit-backdrop-filter: blur(10px) saturate(1.45);
+  backdrop-filter: blur(6px) saturate(1.3);
+  -webkit-backdrop-filter: blur(6px) saturate(1.3);
   box-shadow:
     inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95),
     inset 0 -1.5px 3px 0 rgba(8, 122, 66, 0.08),
@@ -429,12 +429,12 @@
 .dark .testimonial-liquid-glass {
   background: linear-gradient(
     135deg,
-    rgba(22, 32, 27, 0.62) 0%,
-    rgba(10, 15, 13, 0.48) 55%,
-    rgba(14, 24, 19, 0.58) 100%
+    rgba(22, 32, 27, 0.72) 0%,
+    rgba(10, 15, 13, 0.62) 55%,
+    rgba(14, 24, 19, 0.7) 100%
   );
-  backdrop-filter: blur(12px) saturate(1.45);
-  -webkit-backdrop-filter: blur(12px) saturate(1.45);
+  backdrop-filter: blur(6px) saturate(1.3);
+  -webkit-backdrop-filter: blur(6px) saturate(1.3);
   box-shadow:
     inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.18),
     inset 0 -1.5px 3px 0 rgba(0, 168, 90, 0.14),
@@ -696,41 +696,171 @@
 }
 
 [data-section-paused='true'] .leadership-glass-sheen,
-[data-section-paused='true'] .partners-water-shimmer {
+[data-section-paused='true'] .partners-water-shimmer,
+[data-section-paused='true'] .takhlees-loader-wave-slow,
+[data-section-paused='true'] .takhlees-loader-wave-front {
   animation-play-state: paused !important;
+}
+
+/* ================= NIMBUS LIQUID TOGGLE ================= */
+.nimbus-toggle {
+  --t-tint: rgba(0, 132, 61, 0.1);
+  --t-rim: rgba(255, 255, 255, 0.85);
+  --t-ico-off: #e89a12;
+  --t-ico-on: #0b2a1a;
+  position: relative;
+  display: inline-block;
+  flex: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  border-radius: 999px;
+  cursor: pointer;
+  isolation: isolate;
+  vertical-align: middle;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+}
+
+.nimbus-toggle[data-tone='dark'] {
+  --t-tint: rgba(23, 23, 23, 0.85);
+  --t-rim: rgba(255, 255, 255, 0.12);
+  --t-ico-off: #a5aaa7;
+  --t-ico-on: #f5f5f2;
+}
+
+.nimbus-toggle:focus-visible {
+  outline: 2px solid #16a05a;
+  outline-offset: 3px;
+}
+
+.nimbus-toggle:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.nt-glass {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -2;
+  overflow: hidden;
+  background: var(--t-tint);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 50, 25, 0.18),
+    inset 0 -1px 1px var(--t-rim),
+    inset 0 0 0 1px rgba(0, 132, 61, 0.22),
+    0 1px 0 rgba(255, 255, 255, 0.6),
+    0 8px 18px -12px rgba(0, 50, 25, 0.45);
+}
+
+.nimbus-toggle[data-tone='dark'] .nt-glass {
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.6),
+    inset 0 -1px 1px var(--t-rim),
+    inset 0 0 0 1px rgba(48, 52, 50, 0.5),
+    0 8px 18px -10px rgba(0, 0, 0, 0.8);
+}
+
+.nt-water {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.nimbus-toggle[data-gl='off'] .nt-water {
+  display: none;
+}
+
+.nt-fill,
+.nt-knob {
+  display: none;
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+  will-change: transform, width;
+}
+
+.nimbus-toggle[data-gl='off'] .nt-fill,
+.nimbus-toggle[data-gl='off'] .nt-knob {
+  display: block;
+}
+
+.nt-fill {
+  z-index: -1;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  background: linear-gradient(180deg, #8be8ac, #00843d);
+  opacity: 0.85;
+}
+
+.nt-knob {
+  z-index: 0;
+  left: 0;
+  background: radial-gradient(120% 140% at 30% 0%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 60%),
+    rgba(240, 255, 245, 0.9);
+  box-shadow:
+    inset 0 1px 1px #fff,
+    inset 0 -2px 6px rgba(0, 132, 61, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+    0 3px 8px -2px rgba(0, 60, 30, 0.4);
+}
+
+.nimbus-toggle[data-tone='dark'] .nt-knob {
+  background: radial-gradient(120% 140% at 30% 0%, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0) 60%),
+    rgba(32, 34, 34, 0.95);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.4),
+    inset 0 0 0 1px rgba(48, 52, 50, 0.6),
+    0 3px 8px -2px rgba(0, 0, 0, 0.75);
+}
+
+.nimbus-toggle[data-tone='dark'] .nt-fill {
+  background: linear-gradient(180deg, #16a05a, #087a43);
+}
+
+.nt-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.nt-icon > span {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.nt-icon > span:first-child {
+  color: var(--t-ico-off);
+}
+
+.nt-icon > span:last-child {
+  color: var(--t-ico-on);
 }
 
 /* ================= HARDWARE-ADAPTIVE LIQUID GLASS REFRACTION ================= */
 .liquid-glass-refract-button {
-  backdrop-filter: blur(10px) saturate(1.6) contrast(1.04);
-  -webkit-backdrop-filter: blur(10px) saturate(1.6) contrast(1.04);
+  backdrop-filter: blur(10px) saturate(1.5) contrast(1.03);
+  -webkit-backdrop-filter: blur(10px) saturate(1.5) contrast(1.03);
 }
 
 .liquid-glass-refract-editorial {
-  backdrop-filter: blur(12px) saturate(1.55) contrast(1.03);
-  -webkit-backdrop-filter: blur(12px) saturate(1.55) contrast(1.03);
+  backdrop-filter: blur(10px) saturate(1.5) contrast(1.03);
+  -webkit-backdrop-filter: blur(10px) saturate(1.5) contrast(1.03);
 }
 
 .liquid-glass-refract-leadership {
-  backdrop-filter: blur(14px) saturate(1.6) brightness(1.04);
-  -webkit-backdrop-filter: blur(14px) saturate(1.6) brightness(1.04);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .liquid-glass-refract-button {
-    backdrop-filter: url('#container-glass');
-    -webkit-backdrop-filter: url('#container-glass');
-  }
-
-  .liquid-glass-refract-editorial {
-    backdrop-filter: url('#editorial-water-glass');
-    -webkit-backdrop-filter: url('#editorial-water-glass');
-  }
-
-  .liquid-glass-refract-leadership {
-    backdrop-filter: url('#leadership-glass');
-    -webkit-backdrop-filter: url('#leadership-glass');
-  }
+  backdrop-filter: blur(12px) saturate(1.5) brightness(1.04);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5) brightness(1.04);
 }
 
 /* Scale heavy backdrop blur radii cleanly on mobile / touch GPUs while preserving liquid-glass shine & saturation */
@@ -739,25 +869,33 @@
   .dark .nav-uae-pill,
   .nav-in-pill,
   .dark .nav-in-pill,
-  .hero-liquid-glass-bar {
-    backdrop-filter: blur(12px) saturate(1.5);
-    -webkit-backdrop-filter: blur(12px) saturate(1.5);
-  }
-
+  .hero-liquid-glass-bar,
   .partners-liquid-glass,
   .dark .partners-liquid-glass,
   .service-liquid-glass,
   .dark .service-liquid-glass,
   .leadership-liquid-glass,
-  .dark .leadership-liquid-glass {
-    backdrop-filter: blur(11px) saturate(1.6) contrast(1.03);
-    -webkit-backdrop-filter: blur(11px) saturate(1.6) contrast(1.03);
+  .dark .leadership-liquid-glass,
+  .testimonial-liquid-glass,
+  .dark .testimonial-liquid-glass,
+  .liquid-glass-refract-button,
+  .liquid-glass-refract-editorial,
+  .liquid-glass-refract-leadership {
+    backdrop-filter: blur(6px) saturate(1.35);
+    -webkit-backdrop-filter: blur(6px) saturate(1.35);
   }
 
-  .testimonial-liquid-glass,
-  .dark .testimonial-liquid-glass {
-    backdrop-filter: blur(8px) saturate(1.4);
-    -webkit-backdrop-filter: blur(8px) saturate(1.4);
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl {
+    --tw-backdrop-blur: blur(6px) !important;
+  }
+
+  .blur-xl,
+  .blur-2xl,
+  .blur-3xl {
+    --tw-blur: blur(10px) !important;
   }
 }
 

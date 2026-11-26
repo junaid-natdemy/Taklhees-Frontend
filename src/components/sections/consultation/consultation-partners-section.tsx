@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { m, useReducedMotion } from 'motion/react';
-import { useSectionInView } from '@/hooks/use-section-in-view';
 import { GOVERNMENT_PARTNERS } from './partners-data';
 
 const MARQUEE_PARTNERS = [
@@ -15,8 +14,6 @@ const MARQUEE_PARTNERS = [
 export function ConsultationPartnersSection() {
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
-  const inView = useSectionInView(sectionRef);
-  const shouldAnimate = !prefersReducedMotion && inView;
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -237,13 +234,6 @@ export function ConsultationPartnersSection() {
             <stop offset="68%" stopColor="#C99726" stopOpacity="0.78" />
             <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.2" />
           </linearGradient>
-          <filter id="consultGoldGlow" x="-10%" y="-25%" width="120%" height="150%">
-            <feGaussianBlur stdDeviation="3.5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
         </defs>
 
         {/* Soft Ivory Overlap Wave */}
@@ -264,27 +254,7 @@ export function ConsultationPartnersSection() {
         <path
           d="M0 155 C 250 105, 540 205, 880 150 C 1140 108, 1310 68, 1440 92"
           stroke="url(#consult-wave-gold)"
-          strokeWidth="1.6"
-        />
-
-        {/* Subtle Animated Gold Light Stream */}
-        <m.path
-          d="M0 155 C 250 105, 540 205, 880 150 C 1140 108, 1310 68, 1440 92"
-          stroke="#F7DF92"
-          strokeOpacity="0.75"
-          strokeWidth="2.6"
-          strokeLinecap="round"
-          strokeDasharray="220 1380"
-          filter="url(#consultGoldGlow)"
-          initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
-          animate={
-            shouldAnimate ? { strokeDashoffset: -1600 } : undefined
-          }
-          transition={{
-            duration: 16,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
+          strokeWidth="1.8"
         />
       </svg>
 

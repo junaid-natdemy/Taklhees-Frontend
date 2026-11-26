@@ -64,11 +64,11 @@ const DEFAULT_ITEMS: DriftWallItem[] = [
     title: 'Executive Advisory & Strategy',
   },
   {
-    image: '/images/document-signing.jpg',
+    image: '/images/driftwall/document-signing.webp',
     title: 'Corporate PRO & Typing Clearing',
   },
   {
-    image: '/images/meeting-partners.jpg',
+    image: '/images/driftwall/meeting-partners.webp',
     title: 'Government Relations & Licensing',
   },
   // Column 2 (Center Hero): Modern Towers, TAKHLEES Training Center, Highway & Infrastructure
@@ -213,14 +213,14 @@ export function DriftWall({
     return cols.map((col) => (col.length ? col : items.slice(0, 1)));
   }, [items, columns]);
 
-  // Even-numbered column copies (2 or 4) so CSS -50% marquee loops seamlessly on mobile GPUs
+  // Even-numbered column copies (>=4) so both RAF wrap and CSS -50% marquee always cover rotated corners
   const columnMeta = useMemo<ColumnMeta[]>(() => {
     return columnItems.map((col, c) => {
       const colHeight = columnHeights?.[c] ?? tileHeight;
       const unit = colHeight + gap;
       const copyHeight = Math.max(unit, col.length * unit);
-      const halfNeeded = Math.ceil((containerHeight * 1.45) / copyHeight);
-      const copies = Math.max(2, Math.min(4, halfNeeded * 2));
+      const halfNeeded = Math.ceil((containerHeight * 1.65) / copyHeight);
+      const copies = Math.max(4, Math.min(8, halfNeeded * 2));
       return { copyHeight, copies };
     });
   }, [columnItems, tileHeight, gap, containerHeight, columnHeights]);
@@ -384,9 +384,10 @@ export function DriftWall({
         data-col={colIndex}
         style={{ height: `${colH + gap}px` }}
         className={cx(
-          'group/tile relative block flex-none outline-none w-full [transform-style:preserve-3d]',
+          'group/tile relative block flex-none outline-none w-full',
+          !useCssDrift && '[transform-style:preserve-3d]',
           activeId === id && 'is-active',
-          isFeatured ? 'z-20 [transform:translateZ(18px)]' : 'z-10'
+          !useCssDrift && (isFeatured ? 'z-20 [transform:translateZ(18px)]' : 'z-10')
         )}
       >
         <span
@@ -397,25 +398,26 @@ export function DriftWall({
           className={cx(
             'pointer-events-none absolute inset-0 block overflow-hidden',
             isFeatured
-              ? 'border-2 border-white/60 dark:border-white/20 shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)]'
-              : 'border border-white/50 dark:border-white/10 shadow-[0_10px_28px_rgba(0,0,0,0.08)] dark:shadow-[0_14px_36px_rgba(0,0,0,0.45)]',
-            'opacity-[var(--dw-dim)] [transform:translateZ(0)]',
-            'transition-[transform,opacity,box-shadow] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)]',
-            'group-[.is-active]/tile:opacity-100 group-[.is-active]/tile:[transform:translateZ(var(--dw-lift))]',
-            'group-[.is-active]/tile:shadow-[0_24px_60px_-10px_rgba(0,0,0,0.3)] dark:group-[.is-active]/tile:shadow-[0_24px_60px_-10px_rgba(0,0,0,0.8)]',
-            'group-focus-visible/tile:opacity-100 group-focus-visible/tile:[transform:translateZ(var(--dw-lift))]',
-            'group-focus-visible/tile:shadow-[0_20px_50px_-15px_rgba(22,160,90,0.5),0_0_0_2px_rgba(22,160,90,0.8)]'
+              ? 'border-2 border-white/60 dark:border-white/20 shadow-[0_14px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_18px_40px_rgba(0,0,0,0.6)]'
+              : 'border border-white/50 dark:border-white/10 shadow-[0_8px_22px_rgba(0,0,0,0.08)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.45)]',
+            'opacity-[var(--dw-dim)] [backface-visibility:hidden]',
+            !useCssDrift &&
+              'transition-[transform,opacity,box-shadow] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-[.is-active]/tile:opacity-100 group-[.is-active]/tile:[transform:translateZ(var(--dw-lift))] group-[.is-active]/tile:shadow-[0_24px_60px_-10px_rgba(0,0,0,0.3)] dark:group-[.is-active]/tile:shadow-[0_24px_60px_-10px_rgba(0,0,0,0.8)]'
           )}
         >
           <Image
             src={item.image}
             alt={item.title ?? 'TAKHLEES UAE'}
             fill
-            sizes="(max-width: 639px) 160px, 210px"
-            loading={isPrimaryCopy ? 'eager' : 'lazy'}
+            unoptimized
+            loading="eager"
             decoding="async"
             draggable={false}
-            className="block h-full w-full select-none object-cover [filter:grayscale(var(--dw-gray))_saturate(1.05)] transition-[filter] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-[.is-active]/tile:[filter:grayscale(0)_saturate(1.15)]"
+            className={cx(
+              'block h-full w-full select-none object-cover',
+              grayscale &&
+                '[filter:grayscale(var(--dw-gray))_saturate(1.05)] transition-[filter] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-[.is-active]/tile:[filter:grayscale(0)_saturate(1.15)]'
+            )}
           />
 
           {/* Glossy Bevel Reflection Highlight */}
@@ -426,7 +428,7 @@ export function DriftWall({
 
           {/* Refined Label Tag on Hover */}
           {item.title && (
-            <span className="absolute bottom-2 left-2 right-2 text-[10px] font-bold text-white truncate bg-neutral-900/80 px-2.5 py-1 rounded-md backdrop-blur-xs opacity-0 group-[.is-active]/tile:opacity-100 transition-opacity">
+            <span className="absolute bottom-2 left-2 right-2 text-[10px] font-bold text-white truncate bg-neutral-900/90 px-2.5 py-1 rounded-md opacity-0 group-[.is-active]/tile:opacity-100 transition-opacity">
               {item.title}
             </span>
           )}
@@ -450,7 +452,7 @@ export function DriftWall({
     >
       <div
         ref={planeRef}
-        className="absolute left-1/2 top-1/2 flex cursor-pointer flex-row [transform-style:preserve-3d] [transform-origin:50%_50%] will-change-transform"
+        className="absolute left-1/2 top-1/2 flex h-0 cursor-pointer flex-row items-start [transform-style:preserve-3d] [transform-origin:50%_50%] will-change-transform"
         style={{
           transform: `translate(-50%, -50%) rotateX(${tilt}deg) rotateY(${turn}deg) rotateZ(${roll}deg) translateZ(${-depth}px)`,
         }}
@@ -462,6 +464,7 @@ export function DriftWall({
           const copies = Array.from({ length: meta.copies });
           const colVel = baseVelocities[c] ?? speed;
           const halfDistance = (meta.copies / 2) * meta.copyHeight;
+          const topAnchorOffset = Math.round(containerHeight * 0.85);
           const cssDurationSec = Math.max(4, Math.round((halfDistance / Math.max(8, Math.abs(colVel))) * 10) / 10);
           const cssClass = useCssDrift && !reduced
             ? colVel < 0
@@ -471,12 +474,16 @@ export function DriftWall({
 
           return (
             <div
-              style={{ width: `${colW + gap}px` }}
+              style={{ width: `${colW + gap}px`, marginTop: `-${topAnchorOffset}px` }}
               className="relative [transform-style:preserve-3d]"
               key={`col-${c}`}
             >
               <div
-                className={cx('flex flex-col [transform-style:preserve-3d] will-change-transform', cssClass)}
+                className={cx(
+                  'flex flex-col will-change-transform',
+                  !useCssDrift && '[transform-style:preserve-3d]',
+                  cssClass
+                )}
                 style={
                   useCssDrift && !reduced
                     ? {

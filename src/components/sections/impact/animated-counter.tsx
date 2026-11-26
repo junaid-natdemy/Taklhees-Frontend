@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { animate, useInView, useMotionValue, useReducedMotion } from 'motion/react';
+import { useInView, useReducedMotion } from 'motion/react';
 
 interface AnimatedCounterProps {
   target: number;
@@ -16,8 +16,8 @@ const numberFormatter = new Intl.NumberFormat('en-AE', {
 });
 
 /**
- * AnimatedCounter — Smooth hardware-friendly count-up with tabular-nums,
- * viewport reveal trigger, and full `prefers-reduced-motion` bypass.
+ * AnimatedCounter — Zero-re-render DOM-direct count-up using single requestAnimationFrame
+ * easing loop, early viewport trigger, and full `prefers-reduced-motion` bypass.
  */
 export const AnimatedCounter = React.memo(function AnimatedCounter({
   target,
@@ -25,51 +25,58 @@ export const AnimatedCounter = React.memo(function AnimatedCounter({
   delayMs = 0,
   className,
 }: AnimatedCounterProps) {
-  const ref = React.useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.25 });
+  const containerRef = React.useRef<HTMLSpanElement>(null);
+  const valueRef = React.useRef<HTMLSpanElement>(null);
+  const inView = useInView(containerRef, { once: true, margin: '120px' });
   const prefersReduced = !!useReducedMotion();
-  const motionVal = useMotionValue(prefersReduced ? target : 0);
-  const [displayValue, setDisplayValue] = React.useState<string>(() =>
-    numberFormatter.format(prefersReduced ? target : 0)
-  );
   const hasAnimatedRef = React.useRef(false);
-
-  React.useEffect(() => {
-    if (prefersReduced) {
-      setDisplayValue(numberFormatter.format(target));
-      return;
-    }
-
-    if (!inView || hasAnimatedRef.current) {
-      return;
-    }
-
-    hasAnimatedRef.current = true;
-    const unsubscribe = motionVal.on('change', (latest) => {
-      setDisplayValue(numberFormatter.format(Math.round(latest)));
-    });
-
-    let animationControls: { stop: () => void } | undefined;
-    const timer = window.setTimeout(() => {
-      animationControls = animate(motionVal, target, {
-        duration: 1.15,
-        ease: [0.22, 1, 0.36, 1],
-      });
-    }, delayMs);
-
-    return () => {
-      window.clearTimeout(timer);
-      animationControls?.stop();
-      unsubscribe();
-    };
-  }, [inView, prefersReduced, target, delayMs, motionVal]);
 
   const staticLabel = `${numberFormatter.format(target)}${suffix}`;
 
+  React.useEffect(() => {
+    const el = valueRef.current;
+    if (!el) return;
+
+    if (prefersReduced) {
+      el.textContent = numberFormatter.format(target);
+      return;
+    }
+
+    if (!inView || hasAnimatedRef.current) return;
+    hasAnimatedRef.current = true;
+
+    let rafId = 0;
+    const clampedDelay = Math.min(delayMs, 120);
+    const durationMs = 460;
+
+    const timer = window.setTimeout(() => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const elapsed = now - start;
+        const progress = Math.min(1, elapsed / durationMs);
+        // Cubic ease-out
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        el.textContent = numberFormatter.format(current);
+        if (progress < 1) {
+          rafId = window.requestAnimationFrame(tick);
+        }
+      };
+      rafId = window.requestAnimationFrame(tick);
+    }, clampedDelay);
+
+    return () => {
+      window.clearTimeout(timer);
+      if (rafId) window.cancelAnimationFrame(rafId);
+    };
+  }, [inView, prefersReduced, target, delayMs]);
+
   return (
-    <span ref={ref} className={className} aria-label={staticLabel}>
+    <span ref={containerRef} className={className} aria-label={staticLabel}>
       <span aria-hidden="true" className="tabular-nums">
-        {displayValue}
+        <span ref={valueRef}>
+          {prefersReduced ? numberFormatter.format(target) : '0'}
+        </span>
         {suffix}
       </span>
     </span>

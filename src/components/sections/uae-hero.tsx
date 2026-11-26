@@ -28,8 +28,8 @@ function VintageSealStamp({ className }: { className?: string }) {
         className
       )}
     >
-      {/* Outer ambient drop shadow */}
-      <div className="pointer-events-none absolute inset-3 rounded-full bg-[#00843D]/20 blur-xl dark:bg-transparent" />
+      {/* Outer ambient drop shadow (zero-blur gradient) */}
+      <div className="pointer-events-none absolute -inset-2 rounded-full bg-[radial-gradient(circle,rgba(0,132,61,0.16)_0%,transparent_70%)] dark:bg-transparent" />
 
       {/* SVG Vintage Seal Stamp */}
       <svg

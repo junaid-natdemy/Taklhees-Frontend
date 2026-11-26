@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ThemeImage } from '@/components/ui/theme-image';
 import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import {
+  ArrowLeft,
   ArrowRight,
   ChevronRight,
   Layers,
@@ -292,6 +293,17 @@ function ServiceCard({
 
 export function ServicesSection() {
   const prefersReducedMotion = useReducedMotion();
+  const [mobileIndex, setMobileIndex] = useState(0);
+  const totalServices = UAE_SERVICES.length;
+  const activeMobileService = UAE_SERVICES[mobileIndex] ?? UAE_SERVICES[0];
+
+  const handleMobilePrev = () => {
+    setMobileIndex((prev) => (prev - 1 + totalServices) % totalServices);
+  };
+
+  const handleMobileNext = () => {
+    setMobileIndex((prev) => (prev + 1) % totalServices);
+  };
 
   return (
     <section
@@ -409,8 +421,51 @@ export function ServicesSection() {
           </p>
         </m.div>
 
-        {/* 2x2 Responsive Services Grid */}
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-7 md:grid-cols-2 lg:gap-5">
+        {/* Mobile-Only Single Service Card + Prev/Next Controls */}
+        <div className="mt-6 md:hidden">
+          {activeMobileService && (
+            <ServiceCard
+              key={`mobile-${activeMobileService.id}`}
+              service={activeMobileService}
+              index={0}
+              reducedMotion={prefersReducedMotion}
+            />
+          )}
+
+          {totalServices > 1 && (
+            <div className="mt-4 flex items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={handleMobilePrev}
+                aria-label="Previous service"
+                className="inline-flex h-10 items-center gap-1.5 rounded-full border border-[#087A42]/25 bg-white/85 px-4 text-[13px] font-semibold text-[#171717] shadow-xs transition-all active:scale-95 dark:border-[#16A05A]/30 dark:bg-[#0D1310]/85 dark:text-white"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+                <span>Previous</span>
+              </button>
+
+              <span
+                aria-live="polite"
+                className="inline-flex h-9 min-w-[70px] items-center justify-center rounded-full border border-[#087A42]/20 bg-white/75 px-3 text-[12.5px] font-semibold tabular-nums text-[#171717] dark:border-[#16A05A]/25 dark:bg-[#0D1310]/75 dark:text-white/90"
+              >
+                {mobileIndex + 1} of {totalServices}
+              </span>
+
+              <button
+                type="button"
+                onClick={handleMobileNext}
+                aria-label="Next service"
+                className="inline-flex h-10 items-center gap-1.5 rounded-full border border-[#087A42]/40 bg-[#087A42]/10 px-4 text-[13px] font-semibold text-[#087A42] shadow-xs transition-all active:scale-95 dark:border-[#16A05A]/45 dark:bg-[#16A05A]/15 dark:text-[#6EE7A8]"
+              >
+                <span>Next</span>
+                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Tablet & Desktop 2x2 Services Grid */}
+        <div className="mt-6 hidden gap-4 sm:mt-7 md:grid md:grid-cols-2 lg:gap-5">
           {UAE_SERVICES.map((service, index) => (
             <ServiceCard
               key={service.id}

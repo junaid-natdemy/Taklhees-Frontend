@@ -75,14 +75,157 @@ export interface BlogShowcaseSectionProps {
   articles: readonly BlogArticle[];
 }
 
+function SupportingArticleCard({
+  article,
+  index,
+  prefersReducedMotion,
+}: {
+  article: BlogArticle;
+  index: number;
+  prefersReducedMotion: boolean | null;
+}) {
+  const shape =
+    SUPPORTING_ORGANIC_RADII[index % SUPPORTING_ORGANIC_RADII.length];
+  return (
+    <m.article
+      initial={
+        prefersReducedMotion
+          ? false
+          : { opacity: 0, y: 14, rotateX: 3 }
+      }
+      animate={{ opacity: 1, y: 0, rotateX: 0 }}
+      transition={{
+        duration: 0.35,
+        delay: prefersReducedMotion ? 0 : 0.05 * (index + 1),
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className={`group relative isolate flex h-full flex-col justify-between overflow-hidden ${shape.card} bg-[linear-gradient(148deg,rgba(255,254,250,0.86)_0%,rgba(249,245,233,0.74)_56%,rgba(232,243,236,0.68)_100%)] p-2.5 shadow-[0_14px_32px_-12px_rgba(12,38,24,0.12)] backdrop-blur-md backdrop-saturate-150 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_20px_38px_-14px_rgba(12,38,24,0.16)] dark:bg-[linear-gradient(148deg,rgba(16,32,24,0.84)_0%,rgba(11,22,17,0.76)_60%,rgba(7,26,18,0.84)_100%)] dark:shadow-[0_16px_34px_-12px_rgba(0,0,0,0.52)]`}
+    >
+      {/* Bevel, Contact-style Specular + Caustic Reflections, Subtle Golden Sheen & Emerald-Gold Edge */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 z-0 ${shape.card} ${LIQUID_GLASS_BEVEL}`}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(80%_50%_at_18%_16%,rgba(255,255,255,0.45)_0%,transparent_64%),radial-gradient(70%_45%_at_84%_88%,rgba(8,122,66,0.10)_0%,transparent_62%)] dark:bg-[radial-gradient(80%_50%_at_18%_16%,rgba(255,255,255,0.07)_0%,transparent_64%),radial-gradient(70%_45%_at_84%_88%,rgba(22,160,90,0.13)_0%,transparent_62%)]"
+      />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-5 top-0 z-20 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent dark:via-white/20"
+      />
+      <span
+        aria-hidden="true"
+        className="leadership-glass-sheen pointer-events-none absolute inset-y-0 left-0 z-[2] w-[38%] bg-gradient-to-r from-transparent via-[#F5DDA0]/[0.13] to-transparent dark:via-[#F5DDA0]/[0.06]"
+        style={{
+          animationDuration: '11s',
+          animationDelay: `${index * 1.4}s`,
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 z-20 ${shape.card} [background:linear-gradient(132deg,rgba(255,255,255,0.9)_0%,rgba(229,193,88,0.65)_36%,rgba(8,122,66,0.28)_68%,rgba(245,215,127,0.72)_100%)] dark:[background:linear-gradient(132deg,rgba(255,255,255,0.20)_0%,rgba(229,193,88,0.5)_36%,rgba(22,160,90,0.36)_68%,rgba(245,215,127,0.45)_100%)]`}
+        style={{
+          padding: '1.25px',
+          WebkitMask:
+            'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          WebkitMaskComposite: 'xor',
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'exclude',
+        }}
+      />
+
+      <div className="relative z-10 flex h-full flex-col justify-between">
+        <div>
+          <Link
+            href={`/ae/blog/${article.slug}`}
+            tabIndex={-1}
+            aria-hidden="true"
+            className={`relative block h-[116px] w-full overflow-hidden ${shape.image} ring-1 ring-inset ring-[#C99726]/25 dark:ring-[#E5C158]/20 sm:h-[120px]`}
+          >
+            <Image
+              src={article.image}
+              alt={article.imageAlt}
+              fill
+              sizes="(max-width: 768px) 100vw, 340px"
+              loading="lazy"
+              className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.035]"
+            />
+            <span className="absolute left-2.5 top-2.5 inline-flex items-center gap-1 rounded-full border border-white/25 bg-[#085A30]/90 px-2.5 py-0.5 text-[10.5px] font-semibold text-white shadow-sm backdrop-blur-md">
+              <CategoryIcon icon={article.categoryIcon} />
+              <span>{article.category}</span>
+            </span>
+          </Link>
+
+          <h3 className="mt-2.5 line-clamp-2 min-h-[2.55rem] px-1 font-serif text-[15px] font-bold leading-[1.3] tracking-tight text-[#141715] transition-colors group-hover:text-[#087A42] dark:text-[#F6F5F0] dark:group-hover:text-[#6EE7A8]">
+            <Link
+              href={`/ae/blog/${article.slug}`}
+              className="focus-visible:outline-none focus-visible:underline"
+            >
+              {article.title}
+            </Link>
+          </h3>
+        </div>
+
+        <div className="mt-2.5 flex items-center justify-between gap-2 border-t border-black/8 px-1 pb-0.5 pt-2 dark:border-white/10">
+          <div className="flex flex-wrap items-center gap-2.5 text-[11px] font-medium text-[#525954] dark:text-white/70">
+            <span className="inline-flex items-center gap-1">
+              <Calendar
+                className="h-3 w-3 text-[#087A42] dark:text-[#2EB04B]"
+                aria-hidden="true"
+              />
+              <time dateTime={article.publishedAt}>
+                {article.formattedDate}
+              </time>
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <Clock
+                className="h-3 w-3 text-[#087A42] dark:text-[#2EB04B]"
+                aria-hidden="true"
+              />
+              <span>{article.readingTimeMinutes} min read</span>
+            </span>
+          </div>
+
+          <Link
+            href={`/ae/blog/${article.slug}`}
+            aria-label={`Read ${article.title}`}
+            className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white/80 text-[#085A30] transition-all duration-200 group-hover:border-[#087A42]/45 group-hover:bg-[#087A42] group-hover:text-white dark:border-white/15 dark:bg-[#101C16] dark:text-[#6EE7A8] dark:group-hover:bg-[#16A05A] dark:group-hover:text-white"
+          >
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </m.article>
+  );
+}
+
 export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = React.useRef<HTMLElement>(null);
   const inView = useSectionInView(sectionRef);
   const shouldAnimate = !prefersReducedMotion && inView;
   const [requestedPage, setRequestedPage] = React.useState(1);
+  const [mobileIndex, setMobileIndex] = React.useState(0);
   const [direction, setDirection] = React.useState<1 | -1>(1);
   const [isTransitioning, setIsTransitioning] = React.useState(false);
+
+  const totalMobileArticles = articles.length;
+  const safeMobileIndex =
+    totalMobileArticles > 0 ? mobileIndex % totalMobileArticles : 0;
+  const activeMobileArticle = articles[safeMobileIndex];
+
+  const handleMobilePrev = () => {
+    if (totalMobileArticles <= 1) return;
+    setMobileIndex(
+      (prev) => (prev - 1 + totalMobileArticles) % totalMobileArticles
+    );
+  };
+
+  const handleMobileNext = () => {
+    if (totalMobileArticles <= 1) return;
+    setMobileIndex((prev) => (prev + 1) % totalMobileArticles);
+  };
 
   const pagination = React.useMemo(
     () => paginateBlogArticles(articles, requestedPage, JOURNAL_PAGE_SIZE),
@@ -368,7 +511,7 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
               </div>
             </div>
           ) : (
-            <div className="mt-5" style={{ perspective: 1200 }}>
+            <div className="mt-5 hidden md:block" style={{ perspective: 1200 }}>
               <AnimatePresence mode="wait" initial={false}>
                 <m.div
                   key={`journal-page-${pagination.currentPage}`}
@@ -531,133 +674,14 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                   {/* ── 2. ADAPTIVE SUPPORTING ARTICLES GRID (0..3 CARDS, ZERO PLACEHOLDERS) ── */}
                   {supportingCount > 0 && (
                     <div className={`grid gap-4 ${supportingGridClass}`}>
-                      {pagination.supporting.map((article, index) => {
-                        const shape =
-                          SUPPORTING_ORGANIC_RADII[
-                            index % SUPPORTING_ORGANIC_RADII.length
-                          ];
-                        return (
-                          <m.article
-                            key={article.id}
-                            initial={
-                              prefersReducedMotion
-                                ? false
-                                : { opacity: 0, y: 14, rotateX: 3 }
-                            }
-                            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                            transition={{
-                              duration: 0.35,
-                              delay: prefersReducedMotion ? 0 : 0.05 * (index + 1),
-                              ease: [0.22, 1, 0.36, 1],
-                            }}
-                            className={`group relative isolate flex h-full flex-col justify-between overflow-hidden ${shape.card} bg-[linear-gradient(148deg,rgba(255,254,250,0.86)_0%,rgba(249,245,233,0.74)_56%,rgba(232,243,236,0.68)_100%)] p-2.5 shadow-[0_14px_32px_-12px_rgba(12,38,24,0.12)] backdrop-blur-md backdrop-saturate-150 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_20px_38px_-14px_rgba(12,38,24,0.16)] dark:bg-[linear-gradient(148deg,rgba(16,32,24,0.84)_0%,rgba(11,22,17,0.76)_60%,rgba(7,26,18,0.84)_100%)] dark:shadow-[0_16px_34px_-12px_rgba(0,0,0,0.52)]`}
-                          >
-                            {/* Bevel, Contact-style Specular + Caustic Reflections, Subtle Golden Sheen & Emerald-Gold Edge */}
-                            <div
-                              aria-hidden="true"
-                              className={`pointer-events-none absolute inset-0 z-0 ${shape.card} ${LIQUID_GLASS_BEVEL}`}
-                            />
-                            <div
-                              aria-hidden="true"
-                              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(80%_50%_at_18%_16%,rgba(255,255,255,0.45)_0%,transparent_64%),radial-gradient(70%_45%_at_84%_88%,rgba(8,122,66,0.10)_0%,transparent_62%)] dark:bg-[radial-gradient(80%_50%_at_18%_16%,rgba(255,255,255,0.07)_0%,transparent_64%),radial-gradient(70%_45%_at_84%_88%,rgba(22,160,90,0.13)_0%,transparent_62%)]"
-                            />
-                            <span
-                              aria-hidden="true"
-                              className="pointer-events-none absolute inset-x-5 top-0 z-20 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent dark:via-white/20"
-                            />
-                            <span
-                              aria-hidden="true"
-                              className="leadership-glass-sheen pointer-events-none absolute inset-y-0 left-0 z-[2] w-[38%] bg-gradient-to-r from-transparent via-[#F5DDA0]/[0.13] to-transparent dark:via-[#F5DDA0]/[0.06]"
-                              style={{
-                                animationDuration: '11s',
-                                animationDelay: `${index * 1.4}s`,
-                              }}
-                            />
-                            <div
-                              aria-hidden="true"
-                              className={`pointer-events-none absolute inset-0 z-20 ${shape.card} [background:linear-gradient(132deg,rgba(255,255,255,0.9)_0%,rgba(229,193,88,0.65)_36%,rgba(8,122,66,0.28)_68%,rgba(245,215,127,0.72)_100%)] dark:[background:linear-gradient(132deg,rgba(255,255,255,0.20)_0%,rgba(229,193,88,0.5)_36%,rgba(22,160,90,0.36)_68%,rgba(245,215,127,0.45)_100%)]`}
-                              style={{
-                                padding: '1.25px',
-                                WebkitMask:
-                                  'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                                WebkitMaskComposite: 'xor',
-                                mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                                maskComposite: 'exclude',
-                              }}
-                            />
-
-                            <div className="relative z-10 flex h-full flex-col justify-between">
-                              <div>
-                                {/* Card Image following parent organic silhouette */}
-                                <Link
-                                  href={`/ae/blog/${article.slug}`}
-                                  tabIndex={-1}
-                                  aria-hidden="true"
-                                  className={`relative block h-[116px] w-full overflow-hidden ${shape.image} ring-1 ring-inset ring-[#C99726]/25 dark:ring-[#E5C158]/20 sm:h-[120px]`}
-                                >
-                                  <Image
-                                    src={article.image}
-                                    alt={article.imageAlt}
-                                    fill
-                                    sizes="(max-width: 768px) 100vw, 340px"
-                                    loading="lazy"
-                                    className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.035]"
-                                  />
-                                  <span className="absolute left-2.5 top-2.5 inline-flex items-center gap-1 rounded-full border border-white/25 bg-[#085A30]/90 px-2.5 py-0.5 text-[10.5px] font-semibold text-white shadow-sm backdrop-blur-md">
-                                    <CategoryIcon icon={article.categoryIcon} />
-                                    <span>{article.category}</span>
-                                  </span>
-                                </Link>
-
-                              {/* Card Title (fixed 2-line min-height so cards align uniformly) */}
-                              <h3 className="mt-2.5 line-clamp-2 min-h-[2.55rem] px-1 font-serif text-[15px] font-bold leading-[1.3] tracking-tight text-[#141715] transition-colors group-hover:text-[#087A42] dark:text-[#F6F5F0] dark:group-hover:text-[#6EE7A8]">
-                                <Link
-                                  href={`/ae/blog/${article.slug}`}
-                                  className="focus-visible:outline-none focus-visible:underline"
-                                >
-                                  {article.title}
-                                </Link>
-                              </h3>
-                            </div>
-
-                            {/* Card Meta & Minimal Navigation Indicator */}
-                            <div className="mt-2.5 flex items-center justify-between gap-2 border-t border-black/8 px-1 pb-0.5 pt-2 dark:border-white/10">
-                              <div className="flex flex-wrap items-center gap-2.5 text-[11px] font-medium text-[#525954] dark:text-white/70">
-                                <span className="inline-flex items-center gap-1">
-                                  <Calendar
-                                    className="h-3 w-3 text-[#087A42] dark:text-[#2EB04B]"
-                                    aria-hidden="true"
-                                  />
-                                  <time dateTime={article.publishedAt}>
-                                    {article.formattedDate}
-                                  </time>
-                                </span>
-                                <span className="inline-flex items-center gap-1">
-                                  <Clock
-                                    className="h-3 w-3 text-[#087A42] dark:text-[#2EB04B]"
-                                    aria-hidden="true"
-                                  />
-                                  <span>
-                                    {article.readingTimeMinutes} min read
-                                  </span>
-                                </span>
-                              </div>
-
-                              <Link
-                                href={`/ae/blog/${article.slug}`}
-                                aria-label={`Read ${article.title}`}
-                                className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white/80 text-[#085A30] transition-all duration-200 group-hover:border-[#087A42]/45 group-hover:bg-[#087A42] group-hover:text-white dark:border-white/15 dark:bg-[#101C16] dark:text-[#6EE7A8] dark:group-hover:bg-[#16A05A] dark:group-hover:text-white"
-                              >
-                                <ArrowRight
-                                  className="h-3.5 w-3.5"
-                                  aria-hidden="true"
-                                />
-                              </Link>
-                            </div>
-                            </div>
-                          </m.article>
-                        );
-                      })}
+                      {pagination.supporting.map((article, index) => (
+                        <SupportingArticleCard
+                          key={article.id}
+                          article={article}
+                          index={index}
+                          prefersReducedMotion={prefersReducedMotion}
+                        />
+                      ))}
                     </div>
                   )}
                 </m.div>
@@ -665,11 +689,66 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
             </div>
           )}
 
-          {/* ═══════════════ PAGINATION BAR & SHOW ALL ARTICLES CTA ═══════════════ */}
+          {/* Mobile-Only Single Article Card + Prev/Next Controls */}
+          {pagination.totalItems > 0 && activeMobileArticle && (
+            <div className="mt-5 md:hidden">
+              <SupportingArticleCard
+                key={`mobile-article-${activeMobileArticle.id}`}
+                article={activeMobileArticle}
+                index={safeMobileIndex}
+                prefersReducedMotion={prefersReducedMotion}
+              />
+
+              <nav
+                aria-label="Mobile journal pagination and archive"
+                className="mt-4 flex flex-col items-center justify-center gap-3"
+              >
+                {totalMobileArticles > 1 && (
+                  <div className="flex items-center gap-2.5">
+                    <button
+                      type="button"
+                      onClick={handleMobilePrev}
+                      aria-label="Previous article"
+                      className={`group/prev inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-[22px_14px_22px_16px/18px_14px_18px_16px] border border-[#C99726]/35 bg-white/80 px-4 text-[13px] font-semibold text-[#1C2A21] backdrop-blur-xl transition-all duration-200 active:scale-95 dark:border-white/15 dark:bg-[#101C16]/85 dark:text-white ${LIQUID_GLASS_BEVEL}`}
+                    >
+                      <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+                      <span>Previous</span>
+                    </button>
+
+                    <span
+                      aria-live="polite"
+                      className="inline-flex h-9 min-w-[74px] items-center justify-center rounded-[16px_22px_16px_22px/18px_16px_18px_16px] border border-[#087A42]/20 bg-[linear-gradient(145deg,rgba(255,254,250,0.68)_0%,rgba(247,243,232,0.48)_100%)] px-3 text-center text-[12.5px] font-semibold tabular-nums text-[#1C1C1C] ring-1 ring-inset ring-white/70 backdrop-blur-xl dark:border-[#2EB04B]/25 dark:bg-[linear-gradient(145deg,rgba(16,32,24,0.64)_0%,rgba(10,22,16,0.48)_100%)] dark:text-white/90 dark:ring-white/10"
+                    >
+                      {safeMobileIndex + 1} of {totalMobileArticles}
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={handleMobileNext}
+                      aria-label="Next article"
+                      className={`group/next inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-[14px_22px_16px_22px/16px_18px_16px_18px] border border-[#087A42]/45 bg-[linear-gradient(135deg,rgba(255,255,255,0.92)_0%,rgba(232,245,237,0.86)_100%)] px-4 text-[13px] font-semibold text-[#085A30] backdrop-blur-xl transition-all duration-200 active:scale-95 dark:border-[#2EB04B]/45 dark:bg-[linear-gradient(135deg,rgba(16,32,24,0.92)_0%,rgba(11,26,18,0.88)_100%)] dark:text-[#6EE7A8] ${LIQUID_GLASS_BEVEL}`}
+                    >
+                      <span>Next</span>
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </button>
+                  </div>
+                )}
+
+                <LiquidButton asChild variant="emerald" size="md">
+                  <Link href="/ae/blog">
+                    <span>Show All Articles</span>
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </LiquidButton>
+              </nav>
+            </div>
+          )}
+
+          {/* ═══════════════ DESKTOP/TABLET PAGINATION BAR & SHOW ALL ARTICLES CTA ═══════════════ */}
           {pagination.totalItems > 0 && (
             <nav
               aria-label="Journal pagination and archive"
-              className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5"
+              className="mt-5 hidden flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5 md:flex"
             >
               {pagination.totalPages > 1 && (
                 <>

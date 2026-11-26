@@ -295,7 +295,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
         <div className="relative flex items-center justify-between lg:justify-center w-full">
           
           {/* ================= 1. LEFT SECTION — LOGO CAPSULE (UAE GREEN BRAND BORDER) ================= */}
-          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/90 px-3.5 sm:px-4 lg:w-[216px] lg:px-4.5 backdrop-blur-2xl border-[1.5px] border-[#00843D]/80 dark:border-[#16A05A]/80 shadow-[0_2px_12px_-2px_rgba(0,132,61,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/90 dark:shadow-[0_0_16px_rgba(22,160,90,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-all duration-300">
+          <div className="relative z-20 flex h-[48px] shrink-0 items-center rounded-full bg-[#FAF8F5]/90 px-3 sm:px-3.5 lg:w-auto lg:px-4 backdrop-blur-2xl border-[1.5px] border-[#00843D]/80 dark:border-[#16A05A]/80 shadow-[0_2px_12px_-2px_rgba(0,132,61,0.2),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] dark:bg-[#111313]/90 dark:shadow-[0_0_16px_rgba(22,160,90,0.3),inset_0_1.5px_2px_0_rgba(255,255,255,0.18)] transition-all duration-300">
             <Link
               href={`/${country}`}
               aria-label="Takhlees Business Home"

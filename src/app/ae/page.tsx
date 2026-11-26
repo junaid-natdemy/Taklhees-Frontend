@@ -1,5 +1,16 @@
 import type { Metadata } from 'next';
 import { UAEHero } from '@/components/sections/uae-hero';
+import { EditorialShowcaseSection } from '@/components/sections/editorial-showcase/editorial-showcase-section';
+import { ImpactSection } from '@/components/sections/impact/impact-section';
+import { ServicesSection } from '@/components/sections/services/services-section';
+import { HowItWorksSection } from '@/components/sections/how-it-works/how-it-works-section';
+import { LeadershipInsightsSection } from '@/components/sections/leadership/leadership-insights-section';
+import { TestimonialsSection } from '@/components/sections/testimonials/testimonials-section';
+import { ConsultationPartnersSection } from '@/components/sections/consultation/consultation-partners-section';
+import { BlogShowcaseSection } from '@/components/sections/blog/blog-showcase-section';
+import { ContactSection } from '@/components/sections/contact/contact-section';
+import { BusinessBriefingSection } from '@/components/sections/newsletter/business-briefing-section';
+import { getLandingBlogArticles } from '@/features/blog/data';
 
 export const metadata: Metadata = {
   title: {
@@ -112,7 +123,9 @@ const jsonLd = {
   },
 };
 
-export default function UAEPage() {
+export default async function UAEPage() {
+  const articles = await getLandingBlogArticles();
+
   return (
     <>
       <script
@@ -120,6 +133,16 @@ export default function UAEPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <UAEHero />
+      <EditorialShowcaseSection />
+      <ImpactSection />
+      <ServicesSection />
+      <HowItWorksSection />
+      <LeadershipInsightsSection />
+      <TestimonialsSection />
+      <ConsultationPartnersSection />
+      <BlogShowcaseSection articles={articles} />
+      <ContactSection />
+      <BusinessBriefingSection />
     </>
   );
 }

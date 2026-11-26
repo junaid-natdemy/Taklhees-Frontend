@@ -193,30 +193,34 @@ function VintageSealStamp({ className }: { className?: string }) {
 function DubaiSkylineSkeleton() {
   return (
     <div
-      className="pointer-events-none absolute bottom-0 left-0 z-0 h-[210px] sm:h-[250px] lg:h-[290px] xl:h-[320px] w-auto max-w-[85vw] select-none"
+      className="pointer-events-none absolute bottom-0 left-0 z-0 h-[230px] sm:h-[275px] lg:h-[320px] xl:h-[360px] w-[min(92vw,760px)] select-none"
       style={{
-        WebkitMaskImage: 'linear-gradient(to right, #000 70%, transparent 98%)',
-        maskImage: 'linear-gradient(to right, #000 70%, transparent 98%)',
+        WebkitMaskImage:
+          'linear-gradient(to right, #000 58%, rgba(0,0,0,0.45) 82%, transparent 98%), linear-gradient(to top, #000 68%, rgba(0,0,0,0.5) 88%, transparent 100%)',
+        WebkitMaskComposite: 'source-in',
+        maskImage:
+          'linear-gradient(to right, #000 58%, rgba(0,0,0,0.45) 82%, transparent 98%), linear-gradient(to top, #000 68%, rgba(0,0,0,0.5) 88%, transparent 100%)',
+        maskComposite: 'intersect',
       }}
       aria-hidden="true"
     >
-      {/* Light Mode: Distinct UAE Green Architectural Skyline Linework */}
+      {/* Light Mode: Crisp Recognizable Dubai Skyline Illustration */}
       <Image
-        src="/images/dubai-skyline-skeleton-light.png"
-        alt="Dubai Skyline Architectural Skeleton"
-        width={1679}
-        height={861}
+        src="/images/dubai-skyline-hero-light.jpg"
+        alt="Dubai Skyline featuring Burj Khalifa, Emirates Towers, and Museum of the Future"
+        width={1376}
+        height={768}
         priority
-        className="block h-full w-auto object-contain object-left-bottom opacity-[0.28] transition-opacity duration-300 dark:hidden"
+        className="block h-full w-full object-cover object-left-bottom opacity-[0.65] mix-blend-multiply transition-opacity duration-300 dark:hidden"
       />
-      {/* Dark Mode: Vivid Emerald Architectural Skyline Linework */}
+      {/* Dark Mode: Obsidian & Emerald-Gold Dubai Skyline Illustration */}
       <Image
-        src="/images/dubai-skyline-skeleton-dark.png"
-        alt="Dubai Skyline Architectural Skeleton"
-        width={1679}
-        height={861}
+        src="/images/dubai-skyline-hero-dark.jpg"
+        alt="Dubai Skyline featuring Burj Khalifa, Emirates Towers, and Museum of the Future"
+        width={1376}
+        height={768}
         priority
-        className="hidden h-full w-auto object-contain object-left-bottom opacity-[0.65] transition-opacity duration-300 dark:block"
+        className="hidden h-full w-full object-cover object-left-bottom opacity-[0.82] mix-blend-screen transition-opacity duration-300 dark:block"
       />
     </div>
   );
@@ -227,8 +231,8 @@ export function UAEHero() {
     <section className="relative flex min-h-[calc(100vh-76px)] sm:min-h-[calc(100vh-78px)] lg:min-h-[calc(100vh-76px)] xl:min-h-[calc(100vh-76px)] 2xl:min-h-[calc(100vh-84px)] items-center overflow-hidden bg-transparent transition-colors duration-300">
       {/* ================= BACKGROUND ================= */}
       <div className="pointer-events-none absolute inset-0 select-none overflow-hidden">
-        {/* Dark mode subtle charcoal tonal depth (Zero green background wash) */}
-        <div className="absolute right-0 top-1/4 hidden h-[450px] w-[450px] rounded-full bg-[#101111]/40 blur-[140px] dark:block" />
+        {/* Dark mode subtle charcoal tonal depth (zero-blur radial gradient) */}
+        <div className="absolute right-0 top-1/4 hidden h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(16,17,17,0.45)_0%,transparent_70%)] dark:block" />
 
         {/* Light mode whisper wave, top-left (Soft Ivory Accent, Zero Green Tint) */}
         <div className="absolute -left-20 -top-20 block h-[380px] w-[380px] opacity-[0.08] dark:hidden">
@@ -244,8 +248,18 @@ export function UAEHero() {
           </svg>
         </div>
 
-        {/* UAE flag ribbons, bottom-right */}
-        <div className="absolute -bottom-10 -right-10 h-[240px] w-[440px] opacity-90 dark:opacity-30">
+        {/* UAE flag ribbons, bottom-right (softly blended into background) */}
+        <div
+          className="absolute -bottom-10 -right-10 h-[240px] w-[440px] opacity-90 dark:opacity-30"
+          style={{
+            WebkitMaskImage:
+              'linear-gradient(to bottom, #000 48%, rgba(0,0,0,0.4) 78%, transparent 100%), linear-gradient(to left, #000 62%, rgba(0,0,0,0.4) 86%, transparent 100%)',
+            WebkitMaskComposite: 'source-in',
+            maskImage:
+              'linear-gradient(to bottom, #000 48%, rgba(0,0,0,0.4) 78%, transparent 100%), linear-gradient(to left, #000 62%, rgba(0,0,0,0.4) 86%, transparent 100%)',
+            maskComposite: 'intersect',
+          }}
+        >
           <svg viewBox="0 0 640 370" fill="none" className="h-full w-full">
             <path d="M 60 370 C 190 320, 330 250, 490 230 C 560 220, 610 230, 640 240 L 640 370 Z" fill="url(#heroRedWave)" />
             <path d="M 0 370 C 170 300, 350 310, 500 280 C 570 265, 610 280, 640 290 L 640 370 Z" fill="url(#heroGreenWave)" />

@@ -36,8 +36,8 @@ export default function UAELayout({
 }) {
   return (
     <div className="relative flex min-h-screen flex-col bg-[#F7F5F0] dark:bg-[#080909] transition-colors duration-300 overflow-x-hidden">
-      {/* Dark mode subtle charcoal tonal variation (Zero green background wash) */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 z-0 hidden h-[500px] w-[1000px] rounded-full bg-[#101111]/60 blur-[140px] dark:block" />
+      {/* Dark mode subtle charcoal tonal variation (zero-blur radial gradient) */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 z-0 hidden h-[600px] w-[1100px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(16,17,17,0.65)_0%,transparent_70%)] dark:block" />
 
       {/* Floating Header Navbar (persists across all /ae navigation) */}
       <Header country="ae" />

@@ -254,6 +254,10 @@ export function DriftWall({
     [tilt, turn, roll, depth]
   );
 
+  useLayoutEffect(() => {
+    applyPlaneTransform(pointerDampedRef.current.x, pointerDampedRef.current.y);
+  }, [applyPlaneTransform]);
+
   useEffect(() => {
     if (!inView) {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -418,7 +422,7 @@ export function DriftWall({
           <img
             src={item.image}
             alt={item.title ?? 'TAKHLEES UAE'}
-            loading="lazy"
+            loading="eager"
             decoding="async"
             draggable={false}
             className="block h-full w-full select-none object-cover [filter:grayscale(var(--dw-gray))_saturate(1.05)] transition-[filter] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-[.is-active]/tile:[filter:grayscale(0)_saturate(1.15)]"
@@ -444,7 +448,7 @@ export function DriftWall({
   return (
     <div
       ref={containerRef}
-      className={cx('relative h-full w-full overflow-y-hidden overflow-x-visible select-none', className)}
+      className={cx('relative h-full w-full overflow-hidden select-none', className)}
       style={cssVars}
       onPointerMove={handlePointerMove}
       onPointerEnter={() => {
@@ -457,10 +461,14 @@ export function DriftWall({
       <div
         ref={planeRef}
         className="absolute left-1/2 top-1/2 flex cursor-pointer flex-row [transform-style:preserve-3d] [transform-origin:50%_50%] will-change-transform"
+        style={{
+          transform: `translate(-50%, -50%) rotateX(${tilt}deg) rotateY(${turn}deg) rotateZ(${roll}deg) translateZ(${-depth}px)`,
+        }}
       >
         {columnItems.map((col, c) => {
           const colW = columnWidths?.[c] ?? tileWidth;
           const meta = columnMeta[c];
+          const initialOffset = meta.copyHeight * ((c * 0.37) % 1);
           const copies = Array.from({ length: meta.copies });
           return (
             <div
@@ -470,6 +478,9 @@ export function DriftWall({
             >
               <div
                 className="flex flex-col [transform-style:preserve-3d] will-change-transform"
+                style={{
+                  transform: `translate3d(0, ${-initialOffset}px, 0)`,
+                }}
                 ref={(el) => {
                   trackRefs.current[c] = el;
                 }}

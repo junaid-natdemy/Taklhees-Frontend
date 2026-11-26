@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   images: {
-    formats: ['image/avif', 'image/webp'],
+    unoptimized: process.env.NODE_ENV === 'development',
+    formats: ['image/webp'],
     remotePatterns: [
       {
         protocol: 'https',

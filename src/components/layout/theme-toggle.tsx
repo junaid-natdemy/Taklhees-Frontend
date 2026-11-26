@@ -12,6 +12,30 @@ export const ThemeToggle = React.memo(function ThemeToggle() {
     setMounted(true);
   }, []);
 
+  React.useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.metaKey || event.ctrlKey || event.altKey || event.repeat) return;
+      if (event.key !== 't' && event.key !== 'T') return;
+
+      const target = event.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.tagName === 'SELECT' ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+
+      const currentIsDark = (resolvedTheme || theme) === 'dark';
+      setTheme(currentIsDark ? 'light' : 'dark');
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [resolvedTheme, theme, setTheme]);
+
   if (!mounted) {
     return (
       <span

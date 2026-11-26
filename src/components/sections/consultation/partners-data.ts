@@ -16,7 +16,7 @@ export const GOVERNMENT_PARTNERS: GovernmentPartner[] = [
   },
   {
     id: 'haad-abu-dhabi',
-    name: 'Health Authority — Abu Dhabi',
+    name: 'Department of Health — Abu Dhabi (DOH)',
     src: '/images/partners/haad-abu-dhabi.webp',
     width: 218,
     height: 148,

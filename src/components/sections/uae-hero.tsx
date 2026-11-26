@@ -21,17 +21,19 @@ const ROSETTE_POINTS =
 function VintageSealStamp({ className }: { className?: string }) {
   return (
     <div
+      role="img"
+      aria-label="Takhlees Certified 10+ Years of Excellence"
       className={cn(
-        'group relative flex items-center justify-center select-none cursor-pointer transition-transform duration-300 hover:scale-105 hover:rotate-0 -rotate-6',
+        'group relative flex items-center justify-center select-none transition-transform duration-300 hover:scale-105 hover:rotate-0 -rotate-6',
         className
       )}
-      title="Takhlees Certified 10+ Years of Excellence"
     >
       {/* Outer ambient drop shadow */}
       <div className="pointer-events-none absolute inset-3 rounded-full bg-[#00843D]/20 blur-xl dark:bg-transparent" />
 
       {/* SVG Vintage Seal Stamp */}
       <svg
+        aria-hidden="true"
         viewBox="0 0 200 200"
         className="h-32 w-32 sm:h-36 sm:w-36 drop-shadow-[0_14px_28px_rgba(0,0,0,0.18)] dark:drop-shadow-[0_16px_32px_rgba(0,0,0,0.7)]"
       >
@@ -210,6 +212,7 @@ function DubaiSkylineSkeleton() {
         alt="Dubai Skyline featuring Burj Khalifa, Emirates Towers, and Museum of the Future"
         width={1376}
         height={768}
+        sizes="(max-width: 1024px) 92vw, 760px"
         priority
         className="block h-full w-full object-cover object-left-bottom opacity-[0.65] mix-blend-multiply transition-opacity duration-300 dark:hidden"
       />
@@ -219,6 +222,7 @@ function DubaiSkylineSkeleton() {
         alt="Dubai Skyline featuring Burj Khalifa, Emirates Towers, and Museum of the Future"
         width={1376}
         height={768}
+        sizes="(max-width: 1024px) 92vw, 760px"
         priority
         className="hidden h-full w-full object-cover object-left-bottom opacity-[0.82] mix-blend-screen transition-opacity duration-300 dark:block"
       />
@@ -318,7 +322,7 @@ export function UAEHero() {
 
             {/* Supporting Description */}
             <p className="max-w-[400px] text-sm sm:text-[15px] leading-relaxed text-neutral-600 dark:text-[#A5AAA7] pt-0.5">
-              Simplifying business setup, PRO services and documentation across the UAE.
+              Simplifying business setup, PRO services, visa &amp; document clearing in UAE.
             </p>
 
             {/* Trust & Service Highlights */}

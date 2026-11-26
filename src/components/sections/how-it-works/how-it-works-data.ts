@@ -14,7 +14,7 @@ export const HOW_IT_WORKS_STEPS: HowItWorksStepData[] = [
     number: '01',
     title: 'Choose Your Business Activity',
     description:
-      'Find the right activity, reserve your trade name and secure the right license.',
+      'Select your UAE business activity, reserve a trade name and secure licensing.',
     iconName: 'building',
   },
   {
@@ -22,7 +22,7 @@ export const HOW_IT_WORKS_STEPS: HowItWorksStepData[] = [
     number: '02',
     title: 'Complete Your Documentation',
     description:
-      'We coordinate approvals, paperwork and government submissions.',
+      'We manage attestations, typing, ministry approvals and government submissions.',
     iconName: 'file-check',
   },
   {
@@ -30,7 +30,7 @@ export const HOW_IT_WORKS_STEPS: HowItWorksStepData[] = [
     number: '03',
     title: 'Launch with Confidence',
     description:
-      'Get ongoing support to establish and grow your business in the UAE.',
+      'Establish your company with ongoing PRO, visa renewal and compliance support.',
     iconName: 'rocket',
   },
 ];

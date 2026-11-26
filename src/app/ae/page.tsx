@@ -14,26 +14,33 @@ import { getLandingBlogArticles } from '@/features/blog/data';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Takhlees Business | PRO Services & Business Setup in UAE',
+    absolute: 'Business Setup & PRO Services in UAE | Takhlees Business',
   },
   description:
-    'Looking for PRO services or business setup support in the UAE? Explore Takhlees services for business documentation, visa support and more.',
+    'Simplify UAE business setup, PRO services, trade licence renewal, family visas, DOH licensing, and VAT filing in Abu Dhabi & Dubai with Takhlees Business.',
   keywords: [
+    'Business Setup in UAE',
     'PRO Services UAE',
-    'Business Setup UAE',
-    'UAE Documentation Services',
-    'Visa Services UAE',
-    'Company Formation UAE',
-    'Government Typing Services UAE',
+    'PRO Services Abu Dhabi',
+    'Business Setup Abu Dhabi',
+    'Trade Licence Renewal UAE',
+    'DOH Professional Licensing',
+    'Family Visa UAE',
+    'VAT Registration UAE',
     'Takhlees Business',
   ],
   alternates: {
     canonical: 'https://takhleesbusiness.com/ae',
+    languages: {
+      'en-AE': 'https://takhleesbusiness.com/ae',
+      'en-IN': 'https://takhleesbusiness.com/in',
+      'x-default': 'https://takhleesbusiness.com/ae',
+    },
   },
   openGraph: {
-    title: 'Takhlees Business | PRO Services & Business Setup in UAE',
+    title: 'Business Setup & PRO Services in UAE | Takhlees Business',
     description:
-      'Looking for PRO services or business setup support in the UAE? Explore Takhlees services for business documentation, visa support and more.',
+      'Simplify UAE business setup, PRO services, trade licence renewal, family visas, DOH licensing, and VAT filing in Abu Dhabi & Dubai with Takhlees Business.',
     url: 'https://takhleesbusiness.com/ae',
     siteName: 'Takhlees Business',
     images: [
@@ -41,7 +48,7 @@ export const metadata: Metadata = {
         url: '/images/takhlees-hero-visual-dark.png',
         width: 1200,
         height: 630,
-        alt: 'Takhlees Business PRO Services & Business Setup in UAE',
+        alt: 'Takhlees Business — UAE Business Setup, Corporate PRO Services & Documentation',
       },
     ],
     locale: 'en_AE',
@@ -49,9 +56,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Takhlees Business | PRO Services & Business Setup in UAE',
+    title: 'Business Setup & PRO Services in UAE | Takhlees Business',
     description:
-      'Looking for PRO services or business setup support in the UAE? Explore Takhlees services for business documentation, visa support and more.',
+      'Simplify UAE business setup, PRO services, trade licence renewal, family visas, DOH licensing, and VAT filing in Abu Dhabi & Dubai with Takhlees Business.',
     images: ['/images/takhlees-hero-visual-dark.png'],
   },
   robots: {
@@ -69,58 +76,127 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: 'Takhlees Business',
-  alternateName: 'Takhlees Corporate Services',
-  description:
-    'Professional corporate PRO services, typing, business setup support and government documentation clearing across the United Arab Emirates.',
-  url: 'https://takhleesbusiness.com/ae',
-  logo: 'https://takhleesbusiness.com/icons/takhlees-emblem.png',
-  image: 'https://takhleesbusiness.com/images/takhlees-hero-visual-dark.png',
-  telephone: '+97120000000',
-  email: 'info@takhleesbusiness.com',
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'AE',
-    addressLocality: 'Abu Dhabi',
-  },
-  areaServed: {
-    '@type': 'Country',
-    name: 'United Arab Emirates',
-  },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Corporate PRO & Business Setup Services',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Business Setup in UAE',
-          description:
-            'Comprehensive company formation, mainland and free zone trade license registration assistance.',
-        },
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://takhleesbusiness.com/#organization',
+      name: 'Takhlees Business',
+      legalName: 'Takhlees Transactions LLC',
+      url: 'https://takhleesbusiness.com/ae',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://takhleesbusiness.com/icons/takhlees-emblem.png',
       },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Corporate PRO Services',
-          description:
-            'Government liaison, ministry documentation clearing, and corporate labor/immigration processing.',
-        },
+      email: 'info@takhleesbusiness.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Mussafah Ind. Area M-10',
+        addressLocality: 'Abu Dhabi',
+        addressCountry: 'AE',
       },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Documentation Support & Visa Services',
-          description:
-            'Official document typing, visa processing assistance, and certified regulatory documentation clearing.',
-        },
+    },
+    {
+      '@type': ['LocalBusiness', 'ProfessionalService'],
+      '@id': 'https://takhleesbusiness.com/ae#localbusiness',
+      name: 'Takhlees Business',
+      alternateName: 'Takhlees Transactions LLC',
+      parentOrganization: {
+        '@id': 'https://takhleesbusiness.com/#organization',
       },
-    ],
-  },
+      description:
+        'Corporate business setup, government PRO services, trade licence renewal, family residence visas, DOH healthcare licensing in Abu Dhabi & Al Ain, and UAE VAT filing.',
+      url: 'https://takhleesbusiness.com/ae',
+      image: 'https://takhleesbusiness.com/images/takhlees-hero-visual-dark.png',
+      email: 'info@takhleesbusiness.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Mussafah Ind. Area M-10',
+        addressLocality: 'Abu Dhabi',
+        addressCountry: 'AE',
+      },
+      areaServed: [
+        { '@type': 'City', name: 'Abu Dhabi' },
+        { '@type': 'City', name: 'Dubai' },
+        { '@type': 'Country', name: 'United Arab Emirates' },
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'UAE Corporate & Documentation Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Business Setup & Trade Licensing in UAE',
+              description:
+                'Mainland and Free Zone company formation, trade name reservation, and trade licence issuance.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Corporate PRO Services',
+              description:
+                'Visa processing, trade licence renewal, Emirates ID coordination, and government document clearing.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'DOH Professional Licensing',
+              description:
+                'Healthcare professional licensing support for doctors, specialists, and consultants in Abu Dhabi and Al Ain.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'UAE Family Residence Visa Services',
+              description:
+                'Spouse and dependent visa sponsorship, document attestation, medical scheduling, and ICP coordination.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'VAT Registration & Filing',
+              description:
+                'UAE VAT registration, return filing, corporate tax setup, and Federal Tax Authority (FTA) compliance.',
+            },
+          },
+        ],
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://takhleesbusiness.com/#website',
+      name: 'Takhlees Business',
+      url: 'https://takhleesbusiness.com/ae',
+      publisher: {
+        '@id': 'https://takhleesbusiness.com/#organization',
+      },
+      inLanguage: 'en-AE',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': 'https://takhleesbusiness.com/ae#webpage',
+      url: 'https://takhleesbusiness.com/ae',
+      name: 'Business Setup & PRO Services in UAE | Takhlees Business',
+      description:
+        'Simplify UAE business setup, PRO services, trade licence renewal, family visas, DOH licensing, and VAT filing in Abu Dhabi & Dubai with Takhlees Business.',
+      isPartOf: {
+        '@id': 'https://takhleesbusiness.com/#website',
+      },
+      about: {
+        '@id': 'https://takhleesbusiness.com/ae#localbusiness',
+      },
+      inLanguage: 'en-AE',
+    },
+  ],
 };
 
 export default async function UAEPage() {
@@ -133,13 +209,13 @@ export default async function UAEPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <UAEHero />
-      <EditorialShowcaseSection />
       <ImpactSection />
+      <EditorialShowcaseSection />
       <ServicesSection />
       <HowItWorksSection />
-      <LeadershipInsightsSection />
-      <TestimonialsSection />
       <ConsultationPartnersSection />
+      <TestimonialsSection />
+      <LeadershipInsightsSection />
       <BlogShowcaseSection articles={articles} />
       <ContactSection />
       <BusinessBriefingSection />

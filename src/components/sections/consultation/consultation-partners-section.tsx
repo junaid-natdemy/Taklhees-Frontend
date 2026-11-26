@@ -414,9 +414,10 @@ export function ConsultationPartnersSection() {
               >
                 <Image
                   src="/images/consultation/uae-consultation.webp"
-                  alt="Emirati businessman, professional woman, and UAE business setup consultant during an executive meeting in a modern Dubai office"
+                  alt="UAE corporate business setup consultant meeting with clients in Abu Dhabi office"
                   width={1376}
                   height={768}
+                  sizes="(max-width: 1024px) 100vw, 580px"
                   loading="lazy"
                   className="h-full w-full object-cover object-center dark:brightness-[0.88] dark:contrast-[1.05]"
                 />
@@ -455,7 +456,7 @@ export function ConsultationPartnersSection() {
               className="h-[1px] w-10 rounded-full bg-[#087A42]/60 dark:bg-[#16A05A]/60 sm:w-16"
             />
             <h3 className="text-center text-[11px] font-bold uppercase tracking-[0.22em] text-[#087A42] dark:text-[#16A05A] sm:text-xs">
-              OUR TRUSTED GOVERNMENT PARTNERS
+              UAE AUTHORITIES &amp; GOVERNMENT PORTALS
             </h3>
             <span
               aria-hidden="true"
@@ -553,9 +554,12 @@ export function ConsultationPartnersSection() {
                   data-testid="partners-marquee-track"
                   className="flex w-max items-center will-change-transform"
                 >
-                  {MARQUEE_PARTNERS.map((partner, idx) => (
+                  {MARQUEE_PARTNERS.map((partner, idx) => {
+                    const isClone = idx >= GOVERNMENT_PARTNERS.length;
+                    return (
                     <div
                       key={`${partner.id}-${idx}`}
+                      aria-hidden={isClone || undefined}
                       className="flex shrink-0 items-center"
                     >
                       <div
@@ -567,11 +571,11 @@ export function ConsultationPartnersSection() {
                       >
                         <Image
                           src={partner.src}
-                          alt={partner.name}
+                          alt={isClone ? '' : partner.name}
                           width={partner.width}
                           height={partner.height}
-                          loading="eager"
-                          unoptimized
+                          sizes="(max-width: 639px) 140px, 165px"
+                          loading="lazy"
                           className="h-11 w-auto max-w-[145px] select-none object-contain sm:h-12 lg:h-[54px] lg:max-w-[165px] dark:[filter:drop-shadow(0_0_1px_rgba(255,255,255,0.72))]"
                         />
                       </div>
@@ -581,7 +585,8 @@ export function ConsultationPartnersSection() {
                         className="h-9 w-px shrink-0 bg-black/[0.08] dark:bg-white/[0.12]"
                       />
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>

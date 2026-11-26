@@ -314,12 +314,6 @@ export function DriftWall({
     };
   }, [baseVelocities, columnMeta, pauseOnHover, parallax, reduced, inView, applyPlaneTransform]);
 
-  const activate = useCallback((id: string, index: number): void => {
-    activeIdRef.current = id;
-    hoveredColRef.current = index;
-    setActiveId(id);
-  }, []);
-
   const release = useCallback((): void => {
     activeIdRef.current = null;
     hoveredColRef.current = -1;
@@ -379,23 +373,19 @@ export function DriftWall({
     [tileWidth, tileHeight, gap, radius, lift, dim, grayscale, overlayColor, perspective, maskStyle, style]
   );
 
-  const renderTile = (item: DriftWallItem, id: string, colIndex: number) => {
+  const renderTile = (item: DriftWallItem, id: string, colIndex: number, isPrimaryCopy: boolean) => {
     const colH = columnHeights?.[colIndex] ?? tileHeight;
     const isFeatured = item.featured;
 
     return (
       <div
         key={id}
-        tabIndex={0}
-        role="button"
-        aria-label={item.title ?? 'tile'}
+        aria-hidden={!isPrimaryCopy || undefined}
         data-tile-id={id}
         data-col={colIndex}
-        onFocus={() => activate(id, colIndex)}
-        onBlur={release}
         style={{ height: `${colH + gap}px` }}
         className={cx(
-          'group/tile relative block flex-none cursor-pointer outline-none w-full [transform-style:preserve-3d]',
+          'group/tile relative block flex-none outline-none w-full [transform-style:preserve-3d]',
           activeId === id && 'is-active',
           isFeatured ? 'z-20 [transform:translateZ(18px)]' : 'z-10'
         )}
@@ -486,7 +476,9 @@ export function DriftWall({
                 }}
               >
                 {copies.map((_, copyIndex) =>
-                  col.map((item, itemIndex) => renderTile(item, `${c}-${copyIndex}-${itemIndex}`, c))
+                  col.map((item, itemIndex) =>
+                    renderTile(item, `${c}-${copyIndex}-${itemIndex}`, c, copyIndex === 0)
+                  )
                 )}
               </div>
             </div>

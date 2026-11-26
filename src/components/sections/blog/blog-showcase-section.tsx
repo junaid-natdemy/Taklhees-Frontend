@@ -446,6 +446,8 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                         {/* Left Large Article Image with Organic Frame & Delicate Inset Gold Reflection */}
                         <Link
                           href={`/ae/blog/${pagination.featured.slug}`}
+                          tabIndex={-1}
+                          aria-hidden="true"
                           className={`relative block h-[165px] w-full overflow-hidden ${FEATURED_IMAGE_RADIUS} ring-1 ring-inset ring-[#C99726]/20 dark:ring-[#E5C158]/18 after:pointer-events-none after:absolute after:inset-1.5 after:z-10 ${FEATURED_IMAGE_INSET_RADIUS} after:border after:border-[#F5D77F]/24 dark:after:border-[#E5C158]/16 sm:h-[180px] lg:col-span-5 lg:h-[175px]`}
                         >
                           <Image
@@ -453,6 +455,7 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                             alt={pagination.featured.imageAlt}
                             fill
                             sizes="(max-width: 1024px) 100vw, 440px"
+                            loading="lazy"
                             className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.035]"
                           />
                           <div
@@ -592,6 +595,8 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                                 {/* Card Image following parent organic silhouette */}
                                 <Link
                                   href={`/ae/blog/${article.slug}`}
+                                  tabIndex={-1}
+                                  aria-hidden="true"
                                   className={`relative block h-[116px] w-full overflow-hidden ${shape.image} ring-1 ring-inset ring-[#C99726]/25 dark:ring-[#E5C158]/20 sm:h-[120px]`}
                                 >
                                   <Image
@@ -599,6 +604,7 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                                     alt={article.imageAlt}
                                     fill
                                     sizes="(max-width: 768px) 100vw, 340px"
+                                    loading="lazy"
                                     className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.035]"
                                   />
                                   <span className="absolute left-2.5 top-2.5 inline-flex items-center gap-1 rounded-full border border-white/25 bg-[#085A30]/90 px-2.5 py-0.5 text-[10.5px] font-semibold text-white shadow-sm backdrop-blur-md">

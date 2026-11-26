@@ -83,19 +83,22 @@ export const ImpactStatCard = React.memo(function ImpactStatCard({
   const isPositionedCard = variant === 'desktop' || variant === 'tablet';
 
   return (
-    <button
-      type="button"
-      onClick={onSelect}
-      aria-pressed={isActive}
-      aria-label={`${metric.value}${metric.suffix} ${metric.label} — ${metric.description}`}
+    <article
       className={cn(
-        'group cursor-pointer text-center select-none touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-[#146736] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F6F1] dark:focus-visible:ring-[#00A85A] dark:focus-visible:ring-offset-[#050807]',
+        'group text-center select-none',
         isPositionedCard
           ? 'absolute left-1/2 top-0 -ml-[102px] w-[204px] h-[306px] xl:-ml-[116px] xl:w-[232px] xl:h-[332px] rounded-[26px] transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none'
           : 'relative w-full min-h-[296px] rounded-[24px] transition-[transform,box-shadow,border-color] duration-300',
         slotClasses
       )}
     >
+      <button
+        type="button"
+        onClick={onSelect}
+        aria-pressed={isActive}
+        aria-label={`${metric.value}${metric.suffix} ${metric.label} — ${metric.description}`}
+        className="absolute inset-0 z-30 cursor-pointer rounded-[inherit] touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-[#146736] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F6F1] dark:focus-visible:ring-[#00A85A] dark:focus-visible:ring-offset-[#050807]"
+      />
       <div
         className={cn(
           'relative flex h-full w-full flex-col items-center justify-between overflow-hidden rounded-[inherit] px-4 pt-5 pb-3 transition-[background-color,border-color,box-shadow,transform] duration-300 group-hover:-translate-y-1 motion-reduce:group-hover:translate-y-0',
@@ -264,7 +267,7 @@ export const ImpactStatCard = React.memo(function ImpactStatCard({
           )}
         />
       </div>
-    </button>
+    </article>
   );
 });
 

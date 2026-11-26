@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         status: 'subscribed',
         email: parsed.data.email,
         message:
-          'You are subscribed to The Takhlees Business Briefing. Watch your inbox for our next monthly UAE update.',
+          'You are subscribed to The Takhlees Business Briefing. Watch your inbox for curated UAE regulatory and business updates.',
       },
       { status: 201 }
     );

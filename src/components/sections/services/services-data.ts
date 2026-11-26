@@ -18,24 +18,24 @@ export const UAE_SERVICES: ServiceItem[] = [
     id: 'doh-licensing',
     title: 'DOH Professional Licensing',
     description:
-      'Official government authorization that permits healthcare professionals to legally practice in Abu Dhabi and Al Ain.',
-    tags: ['DHA', 'General Practitioners', 'Specialists', 'Consultants'],
+      'Department of Health (DOH) licensing support for doctors and healthcare specialists in Abu Dhabi & Al Ain.',
+    tags: ['DOH Licensing', 'General Practitioners', 'Specialists', 'Consultants'],
     href: '/ae/services#certifications',
     icon: 'stethoscope',
     image: '/images/services/doh-licensing.webp',
     imageAlt:
-      'Modern Abu Dhabi healthcare authority medical center exterior with glass facade and palm trees',
+      'Abu Dhabi healthcare licensing center exterior representing DOH medical professional registration',
     imageWidth: 800,
     imageHeight: 597,
   },
   {
     id: 'pro-service',
-    title: 'PRO Service',
+    title: 'PRO Services',
     description:
-      'Reliable and efficient PRO services in Abu Dhabi for visa processing, trade license renewal and document clearing.',
+      'End-to-end PRO services in Abu Dhabi & Dubai for visa processing, trade licence renewal and document clearing.',
     tags: [
-      'Visa Applications',
-      'Trade License',
+      'Visa Processing',
+      'Trade Licence',
       'Emirates ID',
       'Document Clearing',
     ],
@@ -43,7 +43,7 @@ export const UAE_SERVICES: ServiceItem[] = [
     icon: 'layers',
     image: '/images/services/pro-service.webp',
     imageAlt:
-      'Modern Abu Dhabi government services and corporate business center building exterior',
+      'Abu Dhabi corporate government services center for UAE PRO and trade licence clearing',
     imageWidth: 800,
     imageHeight: 597,
   },
@@ -51,7 +51,7 @@ export const UAE_SERVICES: ServiceItem[] = [
     id: 'family-visa',
     title: 'Family Visa',
     description:
-      'Apply for a UAE Family Residence Visa to sponsor your wife, husband or children in Abu Dhabi.',
+      'Sponsor your spouse or children in the UAE with document attestation, medical scheduling and ICP approvals.',
     tags: [
       'Document Verification',
       'Attestation Guidance',
@@ -63,7 +63,7 @@ export const UAE_SERVICES: ServiceItem[] = [
     icon: 'users',
     image: '/images/services/family-visa.webp',
     imageAlt:
-      'Emirati family walking together on a sunlit waterfront promenade with Dubai skyline in the background',
+      'Family walking along a UAE waterfront promenade supported by Family Residence Visa services',
     imageWidth: 800,
     imageHeight: 536,
   },
@@ -71,13 +71,13 @@ export const UAE_SERVICES: ServiceItem[] = [
     id: 'vat-filing',
     title: 'VAT Registration & Filing',
     description:
-      'Seamless Value Added Tax management and compliance support for your business.',
-    tags: ['Corporate Tax', 'VAT UAE', 'FTA Compliance', 'Business Growth'],
+      'Complete UAE VAT registration, return filing, corporate tax setup and FTA compliance for your business.',
+    tags: ['Corporate Tax', 'VAT UAE', 'FTA Compliance', 'Tax Returns'],
     href: '/ae/services#business-setup',
     icon: 'percent',
     image: '/images/services/vat-filing.webp',
     imageAlt:
-      'Financial tax compliance documents, calculator, fountain pen, and laptop on an executive desk',
+      'UAE VAT registration, corporate tax ledger and Federal Tax Authority compliance documents',
     imageWidth: 800,
     imageHeight: 597,
   },

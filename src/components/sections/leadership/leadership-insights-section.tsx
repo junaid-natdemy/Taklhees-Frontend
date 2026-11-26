@@ -694,8 +694,8 @@ export function LeadershipInsightsSection() {
                   alt={mdProfile.portraitAlt}
                   width={mdProfile.portraitWidth}
                   height={mdProfile.portraitHeight}
+                  sizes="(max-width: 1024px) 220px, 345px"
                   loading="lazy"
-                  unoptimized
                   className="h-full w-full object-contain object-bottom drop-shadow-[0_18px_36px_rgba(4,42,23,0.22)]"
                 />
               </div>
@@ -728,8 +728,8 @@ export function LeadershipInsightsSection() {
                   alt={ceoProfile.portraitAlt}
                   width={ceoProfile.portraitWidth}
                   height={ceoProfile.portraitHeight}
+                  sizes="(max-width: 1024px) 220px, 345px"
                   loading="lazy"
-                  unoptimized
                   className="h-full w-full object-cover object-[35%_18%] drop-shadow-[0_18px_36px_rgba(4,42,23,0.22)]"
                 />
               </div>
@@ -778,8 +778,8 @@ export function LeadershipInsightsSection() {
                     alt={profile.portraitAlt}
                     width={profile.portraitWidth}
                     height={profile.portraitHeight}
+                    sizes="(max-width: 640px) 220px, 245px"
                     loading="lazy"
-                    unoptimized
                     className={cn(
                       'h-full w-full drop-shadow-[0_14px_28px_rgba(4,42,23,0.2)]',
                       profile.id === 'sadique-manalaya'

@@ -5,12 +5,17 @@ import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
+import {
+  AnimatePresence,
+  LazyMotion,
+  domAnimation,
+  m,
+  useReducedMotion,
+} from 'motion/react';
 import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  CheckCircle2,
   ChevronDown,
   Globe,
   Loader2,
@@ -18,6 +23,7 @@ import {
   MapPin,
   MessageSquare,
   Phone,
+  RotateCcw,
   User,
 } from 'lucide-react';
 import { GlassFilter } from '@/components/ui/liquid-glass-button';
@@ -277,6 +283,10 @@ export function ContactSection({
   const [submittedMessage, setSubmittedMessage] = React.useState<string | null>(
     null
   );
+  const [lockedPanelHeight, setLockedPanelHeight] = React.useState<
+    number | null
+  >(null);
+  const panelContentRef = React.useRef<HTMLDivElement>(null);
   const [countryMenuOpen, setCountryMenuOpen] = React.useState(false);
   const countryMenuRef = React.useRef<HTMLDivElement>(null);
 
@@ -330,6 +340,7 @@ export function ContactSection({
   }, [countryMenuOpen]);
 
   const onSubmit = async (values: ContactFormValues) => {
+    if (submittedMessage) return;
     setServerError(null);
     const resolvedCountry =
       values.country === 'OTHER'
@@ -363,9 +374,11 @@ export function ContactSection({
         return;
       }
 
+      const measuredHeight = panelContentRef.current?.offsetHeight ?? null;
+      if (measuredHeight) setLockedPanelHeight(measuredHeight);
       setSubmittedMessage(
         data.message ??
-          'Thank you for reaching out. Our UAE corporate consultant will contact you shortly.'
+          'Thank you for reaching out to Takhlees. Your enquiry has been received successfully. Our UAE corporate consultancy team will review your message and get back to you shortly.'
       );
       reset();
     } catch {
@@ -374,6 +387,23 @@ export function ContactSection({
       );
     }
   };
+
+  const handleResetSuccess = () => {
+    setSubmittedMessage(null);
+    setLockedPanelHeight(null);
+    setServerError(null);
+    setCountryMenuOpen(false);
+    reset({
+      name: '',
+      email: '',
+      phone: '',
+      country: 'AE',
+      otherCountry: '',
+      message: '',
+    });
+  };
+
+  const isSuccess = Boolean(submittedMessage);
 
   return (
     <LazyMotion features={domAnimation}>
@@ -749,9 +779,9 @@ export function ContactSection({
                           />
                         </div>
                         <div className="space-y-0.5">
-                          <h2 className="text-[14.5px] font-bold tracking-tight text-white">
+                          <h3 className="text-[14.5px] font-bold tracking-tight text-white">
                             Address
-                          </h2>
+                          </h3>
                           <p className="text-[12.5px] leading-relaxed text-white/86">
                             Mussafah Ind. Area M-10
                             <br />
@@ -789,9 +819,9 @@ export function ContactSection({
                           />
                         </div>
                         <div className="space-y-0.5">
-                          <h2 className="text-[14.5px] font-bold tracking-tight text-white">
+                          <h3 className="text-[14.5px] font-bold tracking-tight text-white">
                             Email
-                          </h2>
+                          </h3>
                           <p className="text-[12.5px] text-white/86">
                             {contact.email}
                           </p>
@@ -825,9 +855,9 @@ export function ContactSection({
                           />
                         </div>
                         <div className="space-y-0.5">
-                          <h2 className="text-[14.5px] font-bold tracking-tight text-white">
+                          <h3 className="text-[14.5px] font-bold tracking-tight text-white">
                             Phone
-                          </h2>
+                          </h3>
                           <p className="text-[12.5px] text-white/86">
                             {contact.phone}
                           </p>
@@ -858,7 +888,11 @@ export function ContactSection({
                 {/* Clipped Organic Frosted-Ivory Liquid Glass Surface (separated so form controls are never clipped) */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-[linear-gradient(148deg,rgba(255,254,250,0.68)_0%,rgba(249,245,233,0.52)_52%,rgba(229,242,234,0.48)_100%)] backdrop-blur-xl saturate-[1.45] transition-all duration-300 dark:bg-[linear-gradient(148deg,rgba(16,32,24,0.72)_0%,rgba(11,22,17,0.62)_60%,rgba(7,26,18,0.72)_100%)]"
+                  className={`pointer-events-none absolute inset-0 z-0 overflow-hidden backdrop-blur-xl saturate-[1.45] transition-all duration-500 ${
+                    isSuccess
+                      ? 'bg-[linear-gradient(148deg,rgba(255,254,250,0.88)_0%,rgba(248,245,234,0.80)_52%,rgba(227,242,233,0.78)_100%)] dark:bg-[linear-gradient(148deg,rgba(14,30,22,0.88)_0%,rgba(10,22,16,0.82)_60%,rgba(7,26,18,0.88)_100%)]'
+                      : 'bg-[linear-gradient(148deg,rgba(255,254,250,0.68)_0%,rgba(249,245,233,0.52)_52%,rgba(229,242,234,0.48)_100%)] dark:bg-[linear-gradient(148deg,rgba(16,32,24,0.72)_0%,rgba(11,22,17,0.62)_60%,rgba(7,26,18,0.72)_100%)]'
+                  }`}
                   style={{ clipPath: 'url(#contact-ivory-shape)' }}
                 >
 
@@ -873,7 +907,13 @@ export function ContactSection({
                   {/* Multi-layered Frosted Ivory Glass Depth & Emerald/Champagne Reflections */}
                   <div className="pointer-events-none absolute -left-16 -top-12 z-[1] h-56 w-[72%] -rotate-12 rounded-full bg-gradient-to-b from-white/55 via-white/15 to-transparent blur-md dark:from-white/[0.08] dark:via-white/[0.02]" />
                   <div className="pointer-events-none absolute inset-x-4 top-1.5 z-[1] h-32 rounded-t-[40px] bg-gradient-to-b from-white/85 via-white/28 to-transparent dark:from-white/[0.14] dark:via-white/[0.04]" />
-                  <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(85%_55%_at_18%_18%,rgba(255,255,255,0.55)_0%,transparent_64%),radial-gradient(75%_45%_at_82%_85%,rgba(8,122,66,0.14)_0%,transparent_62%)] dark:bg-[radial-gradient(85%_55%_at_18%_18%,rgba(255,255,255,0.1)_0%,transparent_64%),radial-gradient(75%_45%_at_82%_85%,rgba(22,160,90,0.16)_0%,transparent_62%)]" />
+                  <div
+                    className={`pointer-events-none absolute inset-0 z-[1] transition-opacity duration-500 ${
+                      isSuccess
+                        ? 'bg-[radial-gradient(85%_60%_at_50%_18%,rgba(8,122,66,0.12)_0%,transparent_64%),radial-gradient(80%_50%_at_50%_85%,rgba(229,193,88,0.12)_0%,transparent_65%)] dark:bg-[radial-gradient(85%_60%_at_50%_18%,rgba(22,160,90,0.20)_0%,transparent_64%),radial-gradient(80%_50%_at_50%_85%,rgba(229,193,88,0.12)_0%,transparent_65%)]'
+                        : 'bg-[radial-gradient(85%_55%_at_18%_18%,rgba(255,255,255,0.55)_0%,transparent_64%),radial-gradient(75%_45%_at_82%_85%,rgba(8,122,66,0.14)_0%,transparent_62%)] dark:bg-[radial-gradient(85%_55%_at_18%_18%,rgba(255,255,255,0.1)_0%,transparent_64%),radial-gradient(75%_45%_at_82%_85%,rgba(22,160,90,0.16)_0%,transparent_62%)]'
+                    }`}
+                  />
                   <div className="pointer-events-none absolute inset-x-6 bottom-1.5 z-[1] h-24 rounded-b-[40px] bg-gradient-to-t from-[#087A42]/16 via-[#E5C158]/[0.08] to-transparent dark:from-[#16A05A]/16" />
                   {/* Staggered Champagne-Gold Reflection Streak */}
                   <span
@@ -885,53 +925,176 @@ export function ContactSection({
                   />
                 </div>
 
-                {/* Form Content with Safe Horizontal & Bottom Padding (keeps Send Message button completely inside organic silhouette) */}
-                <div className="relative z-10 px-8 pt-8 pb-12 sm:px-16 sm:pt-10 sm:pb-16">
-                    {/* Heading Row */}
-                    <div className="mb-4 flex items-center gap-3.5">
-                      <div className="relative isolate flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white/75 dark:bg-[#112219]/80">
-                        <div
-                          aria-hidden="true"
-                          className={`pointer-events-none absolute inset-0 z-0 rounded-xl ${LIQUID_GLASS_BEVEL}`}
-                        />
-                        <MessageSquare
-                          className="relative z-10 h-[18px] w-[18px] text-[#087A42] dark:text-[#2EB04B]"
-                          strokeWidth={1.8}
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <h2 className="text-[20px] font-bold tracking-tight text-[#0B3B22] dark:text-white sm:text-[22px]">
-                        We&apos;d love to hear from you
-                      </h2>
-                    </div>
-
+                {/* Form / Success Content with Safe Horizontal & Bottom Padding (keeps exact form height on success) */}
+                <div
+                  ref={panelContentRef}
+                  style={
+                    isSuccess && lockedPanelHeight
+                      ? { height: `${lockedPanelHeight}px` }
+                      : undefined
+                  }
+                  className="relative z-10 flex h-full flex-col justify-center px-8 pt-8 pb-12 sm:px-16 sm:pt-10 sm:pb-16"
+                >
+                  <AnimatePresence mode="wait" initial={false}>
                     {submittedMessage ? (
-                      <div
+                      <m.div
+                        key="contact-success-panel"
                         role="status"
-                        className="flex items-start gap-3 rounded-2xl border border-[#087A42]/30 bg-[#087A42]/10 px-5 py-5 text-[#0D3B22] backdrop-blur-md dark:border-[#2EB04B]/35 dark:bg-[#16A05A]/15 dark:text-white"
+                        aria-live="polite"
+                        initial={
+                          prefersReducedMotion ? false : { opacity: 0, y: 6 }
+                        }
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={
+                          prefersReducedMotion ? undefined : { opacity: 0, y: -4 }
+                        }
+                        transition={{
+                          duration: 0.28,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        className="mx-auto flex w-full max-w-[420px] flex-col items-center justify-center text-center"
                       >
-                        <CheckCircle2
-                          className="mt-0.5 h-5 w-5 shrink-0 text-[#087A42] dark:text-[#2EB04B]"
-                          aria-hidden="true"
-                        />
-                        <div className="space-y-1 text-[14px]">
-                          <p className="font-semibold">Message Sent</p>
-                          <p className="opacity-90">{submittedMessage}</p>
+                        {/* Emerald Circular Liquid-Glass Indicator with Delicate Gold Rim */}
+                        <m.div
+                          initial={
+                            prefersReducedMotion
+                              ? false
+                              : { opacity: 0, scale: 0.85 }
+                          }
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{
+                            duration: 0.34,
+                            delay: prefersReducedMotion ? 0 : 0.04,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                          className="relative mb-3.5 flex h-[54px] w-[54px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#F5D77F_0%,#C99726_48%,#E5C158_100%)] p-[1.5px] shadow-[0_12px_24px_-6px_rgba(8,122,66,0.42),0_0_18px_rgba(229,193,88,0.3)]"
+                        >
+                          <div className="relative isolate flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-[radial-gradient(110%_110%_at_30%_18%,#2EB04B_0%,#087A42_56%,#044323_100%)]">
+                            <span
+                              aria-hidden="true"
+                              className={`pointer-events-none absolute inset-0 rounded-full ${LIQUID_GLASS_BEVEL}`}
+                            />
+                            <span
+                              aria-hidden="true"
+                              className="pointer-events-none absolute inset-x-2 top-1 h-[44%] rounded-full bg-gradient-to-b from-white/55 via-white/15 to-transparent"
+                            />
+                            <span
+                              aria-hidden="true"
+                              className="pointer-events-none absolute inset-x-3 bottom-1 h-[22%] rounded-full bg-gradient-to-t from-[#8BE8AC]/45 to-transparent"
+                            />
+                            <Check
+                              className="relative z-10 h-6 w-6 text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]"
+                              strokeWidth={2.75}
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </m.div>
+
+                        {/* Success Eyebrow & Editorial Heading */}
+                        <m.div
+                          initial={
+                            prefersReducedMotion
+                              ? false
+                              : { opacity: 0, y: 8 }
+                          }
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.32,
+                            delay: prefersReducedMotion ? 0 : 0.12,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                          className="flex flex-col items-center"
+                        >
+                          <span className="inline-flex items-center rounded-full border border-[#087A42]/18 bg-white/78 px-3.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#085A30] shadow-[inset_0_1px_1px_rgba(255,255,255,0.9)] backdrop-blur-md dark:border-[#2EB04B]/30 dark:bg-[#0D1E15]/85 dark:text-[#6EE7A8]">
+                            MESSAGE DELIVERED
+                          </span>
+
+                          <h3 className="mt-3 font-serif text-[23px] font-bold leading-[1.18] tracking-[-0.015em] text-[#171717] dark:text-white sm:text-[27px]">
+                            Message{' '}
+                            <span className="italic text-[#087A42] dark:text-[#2EB04B]">
+                              Successfully
+                            </span>{' '}
+                            Sent
+                          </h3>
+
+                          <p className="mt-2 max-w-[390px] text-[13px] leading-[1.6] text-[#454D47] dark:text-white/78 sm:text-[13.5px]">
+                            Thank you for reaching out to Takhlees. Your enquiry
+                            has been received successfully. Our UAE corporate
+                            consultancy team will review your message and get back
+                            to you shortly.
+                          </p>
+                        </m.div>
+
+                        {/* Secondary Minimal Link Action */}
+                        <m.div
+                          initial={
+                            prefersReducedMotion
+                              ? false
+                              : { opacity: 0, y: 6 }
+                          }
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.28,
+                            delay: prefersReducedMotion ? 0 : 0.2,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                          className="mt-4"
+                        >
                           <button
                             type="button"
-                            onClick={() => setSubmittedMessage(null)}
-                            className="mt-2 inline-block text-[13px] font-semibold text-[#087A42] underline underline-offset-4 dark:text-[#6EE7A8]"
+                            onClick={handleResetSuccess}
+                            className="group/reset inline-flex cursor-pointer items-center gap-1.5 border-b-[1.5px] border-[#C99726] pb-0.5 text-[13px] font-bold text-[#085A30] transition-colors hover:text-[#087A42] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087A42] focus-visible:ring-offset-4 dark:border-[#E5C158] dark:text-[#6EE7A8] dark:hover:text-white"
                           >
-                            Send another message
+                            <span>Send another message</span>
+                            <RotateCcw
+                              className="h-3.5 w-3.5 text-[#1C2A21] transition-transform duration-300 group-hover/reset:-rotate-45 dark:text-[#E5C158]"
+                              aria-hidden="true"
+                            />
                           </button>
-                        </div>
-                      </div>
+                        </m.div>
+                      </m.div>
                     ) : (
-                      <form
-                        onSubmit={handleSubmit(onSubmit)}
-                        noValidate
-                        className="space-y-3.5"
+                      <m.div
+                        key="contact-form-panel"
+                        initial={
+                          prefersReducedMotion
+                            ? false
+                            : { opacity: 0, scale: 0.985 }
+                        }
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={
+                          prefersReducedMotion
+                            ? undefined
+                            : { opacity: 0, scale: 0.98 }
+                        }
+                        transition={{
+                          duration: 0.24,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
                       >
+                        {/* Heading Row */}
+                        <div className="mb-4 flex items-center gap-3.5">
+                          <div className="relative isolate flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white/75 dark:bg-[#112219]/80">
+                            <div
+                              aria-hidden="true"
+                              className={`pointer-events-none absolute inset-0 z-0 rounded-xl ${LIQUID_GLASS_BEVEL}`}
+                            />
+                            <MessageSquare
+                              className="relative z-10 h-[18px] w-[18px] text-[#087A42] dark:text-[#2EB04B]"
+                              strokeWidth={1.8}
+                              aria-hidden="true"
+                            />
+                          </div>
+                          <h3 className="text-[20px] font-bold tracking-tight text-[#0B3B22] dark:text-white sm:text-[22px]">
+                            We&apos;d love to hear from you
+                          </h3>
+                        </div>
+
+                        <form
+                          onSubmit={handleSubmit(onSubmit)}
+                          noValidate
+                          className="space-y-3.5"
+                        >
                         {/* Row 1: Name & Email */}
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                           <div>
@@ -952,12 +1115,14 @@ export function ContactSection({
                                 autoComplete="name"
                                 placeholder="Enter your name"
                                 aria-invalid={Boolean(errors.name)}
+                                aria-describedby={errors.name ? 'contact-name-error' : undefined}
                                 {...register('name')}
                                 className={`${LIQUID_INPUT_CLASS} h-10 pl-10 pr-4`}
                               />
                             </div>
                             {errors.name && (
                               <p
+                                id="contact-name-error"
                                 role="alert"
                                 className="mt-1 text-[12px] font-medium text-[#C2242B] dark:text-[#F87171]"
                               >
@@ -982,14 +1147,17 @@ export function ContactSection({
                                 id="contact-email"
                                 type="email"
                                 autoComplete="email"
+                                spellCheck={false}
                                 placeholder="Enter your email"
                                 aria-invalid={Boolean(errors.email)}
+                                aria-describedby={errors.email ? 'contact-email-error' : undefined}
                                 {...register('email')}
                                 className={`${LIQUID_INPUT_CLASS} h-10 pl-10 pr-4`}
                               />
                             </div>
                             {errors.email && (
                               <p
+                                id="contact-email-error"
                                 role="alert"
                                 className="mt-1 text-[12px] font-medium text-[#C2242B] dark:text-[#F87171]"
                               >
@@ -1019,12 +1187,14 @@ export function ContactSection({
                                 autoComplete="tel"
                                 placeholder="Enter phone number"
                                 aria-invalid={Boolean(errors.phone)}
+                                aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
                                 {...register('phone')}
                                 className={`${LIQUID_INPUT_CLASS} h-10 pl-10 pr-3 text-[13.5px]`}
                               />
                             </div>
                             {errors.phone && (
                               <p
+                                id="contact-phone-error"
                                 role="alert"
                                 className="mt-1 text-[12px] font-medium text-[#C2242B] dark:text-[#F87171]"
                               >
@@ -1033,7 +1203,13 @@ export function ContactSection({
                             )}
                           </div>
 
-                          <div ref={countryMenuRef} className="relative">
+                          <div
+                            ref={countryMenuRef}
+                            className="relative"
+                            onKeyDown={(e) => {
+                              if (e.key === 'Escape') setCountryMenuOpen(false);
+                            }}
+                          >
                             <label
                               htmlFor="contact-country-trigger"
                               className="mb-1.5 block text-[11px] font-bold uppercase tracking-[0.12em] text-[#2A332D] dark:text-white/80"
@@ -1074,9 +1250,11 @@ export function ContactSection({
                                   const isSelected =
                                     opt.value === selectedCountry;
                                   return (
-                                    <li key={opt.value} role="option" aria-selected={isSelected}>
+                                    <li key={opt.value} role="none">
                                       <button
                                         type="button"
+                                        role="option"
+                                        aria-selected={isSelected}
                                         onClick={() => {
                                           setValue('country', opt.value, {
                                             shouldValidate: true,
@@ -1113,6 +1291,7 @@ export function ContactSection({
 
                             {errors.country && (
                               <p
+                                id="contact-country-error"
                                 role="alert"
                                 className="mt-1 text-[12px] font-medium text-[#C2242B] dark:text-[#F87171]"
                               >
@@ -1142,12 +1321,14 @@ export function ContactSection({
                                 autoComplete="country-name"
                                 placeholder="Enter your country"
                                 aria-invalid={Boolean(errors.otherCountry)}
+                                aria-describedby={errors.otherCountry ? 'contact-other-country-error' : undefined}
                                 {...register('otherCountry')}
                                 className={`${LIQUID_INPUT_CLASS} h-10 pl-10 pr-4`}
                               />
                             </div>
                             {errors.otherCountry && (
                               <p
+                                id="contact-other-country-error"
                                 role="alert"
                                 className="mt-1 text-[12px] font-medium text-[#C2242B] dark:text-[#F87171]"
                               >
@@ -1175,12 +1356,14 @@ export function ContactSection({
                               rows={3}
                               placeholder="Enter your message"
                               aria-invalid={Boolean(errors.message)}
+                              aria-describedby={errors.message ? 'contact-message-error' : undefined}
                               {...register('message')}
                               className={`${LIQUID_INPUT_CLASS} resize-y py-2.5 pl-10 pr-4`}
                             />
                           </div>
                           {errors.message && (
                             <p
+                              id="contact-message-error"
                               role="alert"
                               className="mt-1 text-[12px] font-medium text-[#C2242B] dark:text-[#F87171]"
                             >
@@ -1237,10 +1420,12 @@ export function ContactSection({
                             )}
                           </span>
                         </button>
-                      </form>
+                        </form>
+                      </m.div>
                     )}
-                  </div>
+                  </AnimatePresence>
                 </div>
+              </div>
             </m.div>
           </div>
         </div>

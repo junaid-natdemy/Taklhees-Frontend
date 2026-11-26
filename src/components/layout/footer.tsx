@@ -28,7 +28,7 @@ export function Footer({ country = 'ae' }: FooterProps) {
                 />
               </div>
               <span className="text-lg font-bold text-white tracking-tight">
-                TAKHLLES
+                TAKHLEES
               </span>
             </div>
             <p className="text-sm text-brand-charcoal-400">
@@ -40,9 +40,9 @@ export function Footer({ country = 'ae' }: FooterProps) {
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
               {isUAE ? 'Services' : 'Academy'}
-            </h4>
+            </h3>
             <ul className="space-y-2 text-sm text-brand-charcoal-400">
               {isUAE ? (
                 <>
@@ -64,9 +64,9 @@ export function Footer({ country = 'ae' }: FooterProps) {
 
           {/* Legal & Governance */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
               Legal & Policy
-            </h4>
+            </h3>
             <ul className="space-y-2 text-sm text-brand-charcoal-400">
               <li><Link href={`/${country}/privacy`} className="hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link href={`/${country}/terms`} className="hover:text-white transition-colors">Terms of Service</Link></li>
@@ -76,9 +76,9 @@ export function Footer({ country = 'ae' }: FooterProps) {
 
           {/* Contact Details */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
               Contact
-            </h4>
+            </h3>
             <div className="space-y-1.5 text-sm text-brand-charcoal-400">
               <p>{contact.location}</p>
               <p>Email: <a href={`mailto:${contact.email}`} className="text-brand-green-400 hover:underline">{contact.email}</a></p>

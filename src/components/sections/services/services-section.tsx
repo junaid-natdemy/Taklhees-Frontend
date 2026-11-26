@@ -221,6 +221,7 @@ function ServiceCard({
             alt={service.imageAlt}
             width={service.imageWidth}
             height={service.imageHeight}
+            sizes="(max-width: 639px) 100vw, 320px"
             loading="lazy"
             className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04] dark:brightness-[0.88] dark:contrast-[1.05]"
           />
@@ -273,7 +274,8 @@ function ServiceCard({
         <div className="mt-3 pt-1">
           <Link
             href={service.href}
-            className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[#087A42] transition-colors hover:text-[#065F33] dark:text-[#16A05A] dark:hover:text-[#2EB04B]"
+            aria-label={`Learn more about ${service.title}`}
+            className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[#087A42] transition-colors hover:text-[#065F33] focus-visible:outline-none focus-visible:underline dark:text-[#16A05A] dark:hover:text-[#2EB04B]"
           >
             <span>Learn More</span>
             <ArrowRight

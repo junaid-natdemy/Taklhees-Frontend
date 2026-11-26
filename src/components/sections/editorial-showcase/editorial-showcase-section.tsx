@@ -377,9 +377,9 @@ export function EditorialShowcaseSection() {
 
               {/* Description */}
               <p className="mt-5 max-w-[470px] text-[14.5px] leading-[1.7] text-[#454846] dark:text-white/75 sm:text-[15.5px]">
-                Takhlees Transactions LLC provides comprehensive business setup,
-                trade licensing, document clearance, visa processing and
-                government liaison services across the UAE.
+                Takhlees Transactions LLC delivers Mainland and Free Zone company
+                formation, trade licensing, document clearing, visa processing
+                and government liaison services across the UAE.
               </p>
 
               {/* Single Primary CTA — LiquidButton */}
@@ -439,9 +439,10 @@ export function EditorialShowcaseSection() {
                     >
                       <Image
                         src="/images/consultation/uae-consultation.webp"
-                        alt="UAE business professionals in a corporate setup and PRO consultation in Dubai"
+                        alt="UAE business setup and corporate PRO advisors reviewing company licensing documents with a client"
                         width={1280}
                         height={800}
+                        sizes="(max-width: 1024px) 100vw, 620px"
                         loading="lazy"
                         className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
                       />
@@ -497,6 +498,7 @@ export function EditorialShowcaseSection() {
             className="relative z-20 mx-auto mt-8 max-w-[790px] lg:-mt-11 lg:ml-auto lg:mr-14"
           >
             <div
+              role="region"
               aria-label="Core UAE corporate service categories"
               className="group relative isolate overflow-hidden bg-white/18 px-4 py-4 dark:bg-black/22 sm:px-6 sm:py-5"
               style={{

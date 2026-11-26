@@ -5,16 +5,23 @@ import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
+import {
+  AnimatePresence,
+  LazyMotion,
+  domAnimation,
+  m,
+  useReducedMotion,
+} from 'motion/react';
 import {
   ArrowRight,
   BarChart3,
   BookOpen,
   CalendarCheck2,
-  CheckCircle2,
+  Check,
   FileText,
   Loader2,
   Mail,
+  RotateCcw,
   ShieldCheck,
 } from 'lucide-react';
 import { GlassFilter } from '@/components/ui/liquid-glass-button';
@@ -49,12 +56,17 @@ export function BusinessBriefingSection() {
   const [subscribedMessage, setSubscribedMessage] = React.useState<string | null>(
     null
   );
+  const [lockedPanelHeight, setLockedPanelHeight] = React.useState<
+    number | null
+  >(null);
+  const panelRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     if (resetCountdown === null) return;
     if (resetCountdown <= 0) {
       setSubscribedMessage(null);
       setResetCountdown(null);
+      setLockedPanelHeight(null);
       return;
     }
     const timer = window.setTimeout(() => {
@@ -74,6 +86,7 @@ export function BusinessBriefingSection() {
   });
 
   const onSubmit = async (values: BriefingFormValues) => {
+    if (subscribedMessage) return;
     setServerError(null);
     try {
       const response = await fetch('/api/newsletter', {
@@ -99,9 +112,11 @@ export function BusinessBriefingSection() {
         return;
       }
 
+      const measuredHeight = panelRef.current?.offsetHeight ?? null;
+      if (measuredHeight) setLockedPanelHeight(measuredHeight);
       setSubscribedMessage(
         data.message ??
-          'You are subscribed to The Takhlees Business Briefing.'
+          'You are subscribed to The Takhlees Business Briefing. Watch your inbox for curated UAE regulatory and business updates.'
       );
       setResetCountdown(10);
       reset();
@@ -111,6 +126,16 @@ export function BusinessBriefingSection() {
       );
     }
   };
+
+  const handleResetSuccess = () => {
+    setSubscribedMessage(null);
+    setResetCountdown(null);
+    setLockedPanelHeight(null);
+    setServerError(null);
+    reset({ email: '' });
+  };
+
+  const isSuccess = Boolean(subscribedMessage && resetCountdown !== null);
 
   return (
     <LazyMotion features={domAnimation}>
@@ -406,11 +431,19 @@ export function BusinessBriefingSection() {
                     className="pointer-events-none absolute -inset-4 bg-[radial-gradient(ellipse_at_55%_50%,rgba(8,122,66,0.16),rgba(229,193,88,0.18)_48%,transparent_75%)] blur-2xl dark:bg-[radial-gradient(ellipse_at_55%_50%,rgba(22,160,90,0.22),rgba(212,175,55,0.14)_48%,transparent_75%)]"
                   />
 
-                  {/* Organic Sculpted Liquid-Glass Panel (Reusing LiquidButton Material System) */}
+                  {/* Organic Sculpted Liquid-Glass Panel (locks exact height during success) */}
                   <div
-                    className="group relative isolate overflow-hidden bg-white/42 px-6 py-7 backdrop-blur-xl transition-all duration-300 dark:bg-[#0D1913]/58 sm:px-9 sm:py-9"
+                    ref={panelRef}
+                    className={`group relative isolate flex flex-col justify-center overflow-hidden px-6 py-7 backdrop-blur-xl transition-all duration-500 sm:px-9 sm:py-9 ${
+                      isSuccess
+                        ? 'bg-[linear-gradient(148deg,rgba(255,254,250,0.88)_0%,rgba(248,245,234,0.80)_52%,rgba(227,242,233,0.78)_100%)] dark:bg-[linear-gradient(148deg,rgba(14,30,22,0.88)_0%,rgba(10,22,16,0.82)_60%,rgba(7,26,18,0.88)_100%)]'
+                        : 'bg-white/42 dark:bg-[#0D1913]/58'
+                    }`}
                     style={{
                       borderRadius: '34px 52px 34px 36px / 34px 34px 48px 34px',
+                      ...(isSuccess && lockedPanelHeight
+                        ? { height: `${lockedPanelHeight}px` }
+                        : {}),
                     }}
                   >
                     {/* Layer 1: LiquidButton 9-Layer Beveled Glass Inset Shadows */}
@@ -435,195 +468,317 @@ export function BusinessBriefingSection() {
                       }}
                     />
 
-                    {/* Layer 4: Top Specular Highlight & Moving Glass Sheen */}
+                    {/* Layer 4: Top Specular Highlight, Emerald Success Reflection & Moving Glass Sheen */}
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(110%_75%_at_18%_8%,rgba(255,255,255,0.52)_0%,rgba(255,255,255,0.1)_40%,transparent_68%)] dark:bg-[radial-gradient(110%_75%_at_18%_8%,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_40%,transparent_68%)]"
+                      className={`pointer-events-none absolute inset-0 z-[1] transition-opacity duration-500 ${
+                        isSuccess
+                          ? 'bg-[radial-gradient(85%_60%_at_50%_18%,rgba(8,122,66,0.12)_0%,transparent_64%),radial-gradient(80%_50%_at_50%_85%,rgba(229,193,88,0.12)_0%,transparent_65%)] dark:bg-[radial-gradient(85%_60%_at_50%_18%,rgba(22,160,90,0.20)_0%,transparent_64%),radial-gradient(80%_50%_at_50%_85%,rgba(229,193,88,0.12)_0%,transparent_65%)]'
+                          : 'bg-[radial-gradient(110%_75%_at_18%_8%,rgba(255,255,255,0.52)_0%,rgba(255,255,255,0.1)_40%,transparent_68%)] dark:bg-[radial-gradient(110%_75%_at_18%_8%,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_40%,transparent_68%)]'
+                      }`}
                       style={{ borderRadius: 'inherit' }}
                     />
                     <span
                       aria-hidden="true"
-                      className="leadership-glass-sheen pointer-events-none absolute inset-y-0 left-0 z-20 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent dark:via-white/[0.06]"
+                      className="leadership-glass-sheen pointer-events-none absolute inset-y-0 left-0 z-20 w-1/3 bg-gradient-to-r from-transparent via-[#F5DDA0]/[0.18] to-transparent dark:via-white/[0.06]"
                     />
 
-                    {/* Panel Inner Content */}
-                    <div className="relative z-10">
-                      {/* Header Row: Small Glass Mail Tile + Heading & Description */}
-                      <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
-                        <div className="relative isolate flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white/60 dark:bg-[#112219]/75">
-                          <div
-                            aria-hidden="true"
-                            className={`pointer-events-none absolute inset-0 z-0 rounded-2xl ${LIQUID_GLASS_BEVEL_SHADOW}`}
-                          />
-                          <div
-                            aria-hidden="true"
-                            className="pointer-events-none absolute inset-0 -z-10 rounded-2xl"
-                            style={{ backdropFilter: 'url("#container-glass")' }}
-                          />
-                          <Mail
-                            className="relative z-10 h-6 w-6 text-[#087A42] dark:text-[#2EB04B]"
-                            strokeWidth={1.75}
-                            aria-hidden="true"
-                          />
-                        </div>
+                    {/* Panel Inner Content — Entire Card Transforms on Success */}
+                    <div className="relative z-10 w-full">
+                      <AnimatePresence mode="wait" initial={false}>
+                        {isSuccess ? (
+                          <m.div
+                            key="briefing-success-panel"
+                            role="status"
+                            aria-live="polite"
+                            initial={
+                              prefersReducedMotion ? false : { opacity: 0, y: 8 }
+                            }
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={
+                              prefersReducedMotion
+                                ? undefined
+                                : { opacity: 0, y: -6 }
+                            }
+                            transition={{
+                              duration: 0.3,
+                              ease: [0.22, 1, 0.36, 1],
+                            }}
+                            className="mx-auto flex w-full max-w-[400px] flex-col items-center justify-center text-center"
+                          >
+                            {/* Compact Emerald Circular Liquid-Glass Indicator */}
+                            <m.div
+                              initial={
+                                prefersReducedMotion
+                                  ? false
+                                  : { opacity: 0, scale: 0.85 }
+                              }
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{
+                                duration: 0.34,
+                                delay: prefersReducedMotion ? 0 : 0.04,
+                                ease: [0.22, 1, 0.36, 1],
+                              }}
+                              className="relative mb-2.5 flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#F5D77F_0%,#C99726_48%,#E5C158_100%)] p-[1.5px] shadow-[0_10px_22px_-6px_rgba(8,122,66,0.42),0_0_16px_rgba(229,193,88,0.3)]"
+                            >
+                              <div className="relative isolate flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-[radial-gradient(110%_110%_at_30%_18%,#2EB04B_0%,#087A42_56%,#044323_100%)]">
+                                <span
+                                  aria-hidden="true"
+                                  className={`pointer-events-none absolute inset-0 rounded-full ${LIQUID_GLASS_BEVEL_SHADOW}`}
+                                />
+                                <span
+                                  aria-hidden="true"
+                                  className="pointer-events-none absolute inset-x-1.5 top-0.5 h-[44%] rounded-full bg-gradient-to-b from-white/55 via-white/15 to-transparent"
+                                />
+                                <Check
+                                  className="relative z-10 h-5 w-5 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
+                                  strokeWidth={2.75}
+                                  aria-hidden="true"
+                                />
+                              </div>
+                            </m.div>
 
-                        <div>
-                          <h3 className="text-[20px] font-bold tracking-tight text-[#171B18] dark:text-white sm:text-[22px]">
-                            Subscribe to Our Business Briefing
-                          </h3>
-                          <p className="mt-1 text-[13.5px] leading-relaxed text-[#4E534F] dark:text-white/70 sm:text-[14px]">
-                            Your monthly update on UAE business, compliance and
-                            opportunities.
-                          </p>
-                        </div>
-                      </div>
+                            {/* Eyebrow, Compact Serif Heading & Confirmation Message */}
+                            <m.div
+                              initial={
+                                prefersReducedMotion
+                                  ? false
+                                  : { opacity: 0, y: 8 }
+                              }
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{
+                                duration: 0.32,
+                                delay: prefersReducedMotion ? 0 : 0.1,
+                                ease: [0.22, 1, 0.36, 1],
+                              }}
+                              className="flex flex-col items-center"
+                            >
+                              <span className="inline-flex items-center rounded-full border border-[#087A42]/18 bg-white/78 px-3 py-0.5 text-[9.5px] font-bold uppercase tracking-[0.18em] text-[#085A30] shadow-[inset_0_1px_1px_rgba(255,255,255,0.9)] backdrop-blur-md dark:border-[#2EB04B]/30 dark:bg-[#0D1E15]/85 dark:text-[#6EE7A8]">
+                                SUBSCRIPTION CONFIRMED
+                              </span>
 
-                      {/* Subscription Form or 10s Emerald Success Countdown */}
-                      {subscribedMessage && resetCountdown !== null ? (
-                        <div
-                          role="status"
-                          className="mt-6 space-y-3 rounded-2xl border border-[#087A42]/30 bg-[#087A42]/10 px-5 py-4 text-[#0D3B22] backdrop-blur-md dark:border-[#2EB04B]/35 dark:bg-[#16A05A]/15 dark:text-white"
-                        >
-                          <div className="flex items-start gap-3">
-                            <CheckCircle2
-                              className="mt-0.5 h-5 w-5 shrink-0 text-[#087A42] dark:text-[#2EB04B]"
-                              aria-hidden="true"
-                            />
-                            <div className="flex-1 text-[13.5px] leading-relaxed">
-                              <p className="font-semibold">Subscription Confirmed</p>
-                              <p className="mt-0.5 opacity-90">
+                              <h3 className="mt-2 font-serif text-[21px] font-bold leading-[1.16] tracking-[-0.015em] text-[#171717] dark:text-white sm:text-[23px]">
+                                Subscription{' '}
+                                <span className="italic text-[#087A42] dark:text-[#2EB04B]">
+                                  Confirmed
+                                </span>
+                              </h3>
+
+                              <p className="mt-1.5 max-w-[380px] text-[12.5px] leading-[1.5] text-[#454D47] dark:text-white/78 sm:text-[13px]">
                                 {subscribedMessage}
                               </p>
-                            </div>
-                          </div>
+                            </m.div>
 
-                          {/* 10-Second Countdown Progress & Timer */}
-                          <div className="space-y-1.5 pt-1">
-                            <div className="flex items-center justify-between text-[11.5px] font-medium text-[#087A42] dark:text-[#6EE7A8]">
-                              <span>Ready for another email in</span>
-                              <span
-                                data-testid="briefing-countdown"
-                                className="tabular-nums font-semibold"
-                              >
-                                {resetCountdown}s
-                              </span>
-                            </div>
-                            <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#087A42]/15 dark:bg-white/10">
-                              <div
-                                className="h-full rounded-full bg-gradient-to-r from-[#16A34A] to-[#00843D] transition-all duration-1000 ease-linear dark:from-[#2EB04B] dark:to-[#16A05A]"
-                                style={{ width: `${(resetCountdown / 10) * 100}%` }}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <form
-                          onSubmit={handleSubmit(onSubmit)}
-                          noValidate
-                          className="mt-6 space-y-3.5"
-                        >
-                          <div>
-                            <label
-                              htmlFor="briefing-email"
-                              className="sr-only"
+                            {/* Delicate Progress Hairline + Inline Countdown & Reset */}
+                            <m.div
+                              initial={
+                                prefersReducedMotion
+                                  ? false
+                                  : { opacity: 0, y: 6 }
+                              }
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{
+                                duration: 0.28,
+                                delay: prefersReducedMotion ? 0 : 0.18,
+                                ease: [0.22, 1, 0.36, 1],
+                              }}
+                              className="mt-3.5 flex w-full max-w-[310px] flex-col items-center gap-2"
                             >
-                              Business email address
-                            </label>
-                            <div className="relative flex items-center">
-                              <Mail
-                                className="pointer-events-none absolute left-4 h-4.5 w-4.5 text-[#5D635F] dark:text-white/55"
-                                strokeWidth={1.75}
+                              <div className="h-1 w-full overflow-hidden rounded-full bg-[#087A42]/12 dark:bg-white/10">
+                                <div
+                                  className="h-full rounded-full bg-gradient-to-r from-[#087A42] via-[#16A34A] to-[#C99726] transition-all duration-1000 ease-linear dark:from-[#2EB04B] dark:to-[#E5C158]"
+                                  style={{
+                                    width: `${((resetCountdown ?? 0) / 10) * 100}%`,
+                                  }}
+                                />
+                              </div>
+
+                              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11.5px]">
+                                <span className="font-medium text-[#4E534F] dark:text-white/65">
+                                  Ready in{' '}
+                                  <span
+                                    data-testid="briefing-countdown"
+                                    className="font-semibold tabular-nums text-[#087A42] dark:text-[#6EE7A8]"
+                                  >
+                                    {resetCountdown}s
+                                  </span>
+                                </span>
+                                <span
+                                  aria-hidden="true"
+                                  className="h-3 w-px bg-black/15 dark:bg-white/20"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={handleResetSuccess}
+                                  className="group/reset inline-flex cursor-pointer items-center gap-1.5 border-b border-[#C99726] pb-0.5 text-[12px] font-bold text-[#085A30] transition-colors hover:text-[#087A42] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087A42] focus-visible:ring-offset-4 dark:border-[#E5C158] dark:text-[#6EE7A8] dark:hover:text-white"
+                                >
+                                  <span>Subscribe another email</span>
+                                  <RotateCcw
+                                    className="h-3 w-3 text-[#1C2A21] transition-transform duration-300 group-hover/reset:-rotate-45 dark:text-[#E5C158]"
+                                    aria-hidden="true"
+                                  />
+                                </button>
+                              </div>
+                            </m.div>
+                          </m.div>
+                        ) : (
+                          <m.div
+                            key="briefing-form-panel"
+                            initial={
+                              prefersReducedMotion
+                                ? false
+                                : { opacity: 0, scale: 0.985 }
+                            }
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={
+                              prefersReducedMotion
+                                ? undefined
+                                : { opacity: 0, scale: 0.98 }
+                            }
+                            transition={{
+                              duration: 0.24,
+                              ease: [0.22, 1, 0.36, 1],
+                            }}
+                          >
+                            {/* Header Row: Small Glass Mail Tile + Heading & Description */}
+                            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
+                              <div className="relative isolate flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white/60 dark:bg-[#112219]/75">
+                                <div
+                                  aria-hidden="true"
+                                  className={`pointer-events-none absolute inset-0 z-0 rounded-2xl ${LIQUID_GLASS_BEVEL_SHADOW}`}
+                                />
+                                <div
+                                  aria-hidden="true"
+                                  className="pointer-events-none absolute inset-0 -z-10 rounded-2xl"
+                                  style={{
+                                    backdropFilter: 'url("#container-glass")',
+                                  }}
+                                />
+                                <Mail
+                                  className="relative z-10 h-6 w-6 text-[#087A42] dark:text-[#2EB04B]"
+                                  strokeWidth={1.75}
+                                  aria-hidden="true"
+                                />
+                              </div>
+
+                              <div>
+                                <h3 className="text-[20px] font-bold tracking-tight text-[#171B18] dark:text-white sm:text-[22px]">
+                                  Subscribe to Our Business Briefing
+                                </h3>
+                                <p className="mt-1 text-[13.5px] leading-relaxed text-[#4E534F] dark:text-white/70 sm:text-[14px]">
+                                  Your curated update on UAE business, compliance
+                                  and opportunities.
+                                </p>
+                              </div>
+                            </div>
+
+                            <form
+                              onSubmit={handleSubmit(onSubmit)}
+                              noValidate
+                              className="mt-6 space-y-3.5"
+                            >
+                              <div>
+                                <label
+                                  htmlFor="briefing-email"
+                                  className="sr-only"
+                                >
+                                  Business email address
+                                </label>
+                                <div className="relative flex items-center">
+                                  <Mail
+                                    className="pointer-events-none absolute left-4 h-4.5 w-4.5 text-[#5D635F] dark:text-white/55"
+                                    strokeWidth={1.75}
+                                    aria-hidden="true"
+                                  />
+                                  <input
+                                    id="briefing-email"
+                                    type="email"
+                                    autoComplete="email"
+                                    spellCheck={false}
+                                    placeholder="Enter your business email address"
+                                    aria-invalid={Boolean(
+                                      errors.email || serverError
+                                    )}
+                                    aria-describedby={
+                                      errors.email || serverError
+                                        ? 'briefing-email-error'
+                                        : undefined
+                                    }
+                                    {...register('email', {
+                                      onChange: () => {
+                                        if (serverError) setServerError(null);
+                                      },
+                                    })}
+                                    className="h-12 w-full rounded-full border border-black/10 bg-white/82 pl-11 pr-5 text-[14px] text-[#171717] placeholder:text-[#6B706C] shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 focus:border-[#087A42]/55 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#087A42]/20 dark:border-white/14 dark:bg-[#101C16]/85 dark:text-white dark:placeholder:text-white/45 dark:focus:border-[#2EB04B]/60 dark:focus:ring-[#2EB04B]/20"
+                                  />
+                                </div>
+
+                                {(errors.email || serverError) && (
+                                  <p
+                                    id="briefing-email-error"
+                                    role="alert"
+                                    className="mt-2 pl-4 text-[12.5px] font-medium text-[#C2242B] dark:text-[#F87171]"
+                                  >
+                                    {errors.email?.message ?? serverError}
+                                  </p>
+                                )}
+                              </div>
+
+                              {/* Full-Width Green Water-Container Glass Bottle Button */}
+                              <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="group relative isolate inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full border border-[#D4AF37]/55 bg-[linear-gradient(180deg,#16A34A_0%,#00843D_50%,#064E27_100%)] px-8 text-[14.5px] font-semibold tracking-wide text-white shadow-[0_12px_28px_-6px_rgba(0,132,61,0.48)] transition-all duration-300 hover:scale-[1.015] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#16A05A] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60 dark:bg-[linear-gradient(180deg,#2EB04B_0%,#0E8A48_52%,#064523_100%)]"
+                              >
+                                <span
+                                  aria-hidden="true"
+                                  className="pointer-events-none absolute inset-0 z-0 rounded-full shadow-[inset_0_2px_3px_rgba(255,255,255,0.55),inset_0_-3px_6px_rgba(0,25,12,0.5),inset_3px_3px_0.5px_-3px_rgba(0,0,0,0.65),inset_-3px_-3px_0.5px_-3px_rgba(0,0,0,0.65),inset_0_0_8px_4px_rgba(255,255,255,0.14)]"
+                                />
+                                <span
+                                  aria-hidden="true"
+                                  className="pointer-events-none absolute inset-x-3 top-1 z-[1] h-[44%] rounded-full bg-gradient-to-b from-white/50 via-white/15 to-transparent"
+                                />
+                                <span
+                                  aria-hidden="true"
+                                  className="pointer-events-none absolute inset-x-8 bottom-1 z-[1] h-[24%] rounded-full bg-gradient-to-t from-[#8BE8AC]/45 to-transparent"
+                                />
+
+                                <span className="relative z-10 inline-flex items-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)]">
+                                  {isSubmitting ? (
+                                    <>
+                                      <Loader2
+                                        className="h-4 w-4 animate-spin"
+                                        aria-hidden="true"
+                                      />
+                                      <span>Subscribing...</span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <span>Subscribe to the Briefing</span>
+                                      <ArrowRight
+                                        className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                                        aria-hidden="true"
+                                      />
+                                    </>
+                                  )}
+                                </span>
+                              </button>
+                            </form>
+
+                            {/* Trust Message */}
+                            <div className="mt-4 flex items-center justify-center gap-2 text-[12.5px] text-[#4E534F] dark:text-white/65">
+                              <ShieldCheck
+                                className="h-4 w-4 shrink-0 text-[#087A42] dark:text-[#2EB04B]"
+                                strokeWidth={1.8}
                                 aria-hidden="true"
                               />
-                              <input
-                                id="briefing-email"
-                                type="email"
-                                autoComplete="email"
-                                placeholder="Enter your business email address"
-                                aria-invalid={Boolean(
-                                  errors.email || serverError
-                                )}
-                                aria-describedby={
-                                  errors.email || serverError
-                                    ? 'briefing-email-error'
-                                    : undefined
-                                }
-                                {...register('email', {
-                                  onChange: () => {
-                                    if (serverError) setServerError(null);
-                                  },
-                                })}
-                                className="h-12 w-full rounded-full border border-black/10 bg-white/82 pl-11 pr-5 text-[14px] text-[#171717] placeholder:text-[#6B706C] shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 focus:border-[#087A42]/55 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#087A42]/20 dark:border-white/14 dark:bg-[#101C16]/85 dark:text-white dark:placeholder:text-white/45 dark:focus:border-[#2EB04B]/60 dark:focus:ring-[#2EB04B]/20"
-                              />
+                              <span>
+                                No spam. Just relevant UAE business updates.
+                              </span>
                             </div>
-
-                            {(errors.email || serverError) && (
-                              <p
-                                id="briefing-email-error"
-                                role="alert"
-                                className="mt-2 pl-4 text-[12.5px] font-medium text-[#C2242B] dark:text-[#F87171]"
-                              >
-                                {errors.email?.message ?? serverError}
-                              </p>
-                            )}
-                          </div>
-
-                          {/* Full-Width Green Water-Container Glass Bottle Button */}
-                          <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="group relative isolate inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full border border-[#D4AF37]/55 bg-[linear-gradient(180deg,#16A34A_0%,#00843D_50%,#064E27_100%)] px-8 text-[14.5px] font-semibold tracking-wide text-white shadow-[0_12px_28px_-6px_rgba(0,132,61,0.48)] transition-all duration-300 hover:scale-[1.015] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#16A05A] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60 dark:bg-[linear-gradient(180deg,#2EB04B_0%,#0E8A48_52%,#064523_100%)]"
-                          >
-                            {/* Exact LiquidButton 9-Layer Beveled Glass Bottle Rim */}
-                            <span
-                              aria-hidden="true"
-                              className="pointer-events-none absolute inset-0 z-0 rounded-full shadow-[inset_0_2px_3px_rgba(255,255,255,0.55),inset_0_-3px_6px_rgba(0,25,12,0.5),inset_3px_3px_0.5px_-3px_rgba(0,0,0,0.65),inset_-3px_-3px_0.5px_-3px_rgba(0,0,0,0.65),inset_0_0_8px_4px_rgba(255,255,255,0.14)]"
-                            />
-
-                            {/* Glossy Top Glass-Bottle Meniscus Highlight */}
-                            <span
-                              aria-hidden="true"
-                              className="pointer-events-none absolute inset-x-3 top-1 z-[1] h-[44%] rounded-full bg-gradient-to-b from-white/50 via-white/15 to-transparent"
-                            />
-
-                            {/* Bottom Internal Water Caustic Reflection */}
-                            <span
-                              aria-hidden="true"
-                              className="pointer-events-none absolute inset-x-8 bottom-1 z-[1] h-[24%] rounded-full bg-gradient-to-t from-[#8BE8AC]/45 to-transparent"
-                            />
-
-                            <span className="relative z-10 inline-flex items-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)]">
-                              {isSubmitting ? (
-                                <>
-                                  <Loader2
-                                    className="h-4 w-4 animate-spin"
-                                    aria-hidden="true"
-                                  />
-                                  <span>Subscribing...</span>
-                                </>
-                              ) : (
-                                <>
-                                  <span>Subscribe to the Briefing</span>
-                                  <ArrowRight
-                                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-                                    aria-hidden="true"
-                                  />
-                                </>
-                              )}
-                            </span>
-                          </button>
-                        </form>
-                      )}
-
-                      {/* Trust Message */}
-                      <div className="mt-4 flex items-center justify-center gap-2 text-[12.5px] text-[#4E534F] dark:text-white/65">
-                        <ShieldCheck
-                          className="h-4 w-4 shrink-0 text-[#087A42] dark:text-[#2EB04B]"
-                          strokeWidth={1.8}
-                          aria-hidden="true"
-                        />
-                        <span>No spam. Just relevant UAE business updates.</span>
-                      </div>
+                          </m.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
                 </div>

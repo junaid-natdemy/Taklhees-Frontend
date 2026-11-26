@@ -1070,3 +1070,32 @@ html[data-splash-seen='1'] .takhlees-splash-overlay {
   mask-composite: exclude;
   pointer-events: none;
 }
+
+/* ================= VIEW TRANSITION LIQUID INK REVEAL ================= */
+::view-transition-group(root) {
+  animation-duration: 1200ms;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root) {
+    animation-duration: 0ms;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}

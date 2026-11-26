@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import Image from 'next/image';
 import {
   CSSProperties,
   useCallback,
@@ -55,11 +56,11 @@ interface ColumnMeta {
 const DEFAULT_ITEMS: DriftWallItem[] = [
   // Column 1 (Left): Dubai Skyline, Strategic Advisory, Corporate Typing & Partner Relations
   {
-    image: '/images/skyline-sunset.jpg',
+    image: '/images/driftwall/skyline-sunset.webp',
     title: 'Dubai Business Hub',
   },
   {
-    image: '/images/team-consultation.jpg',
+    image: '/images/driftwall/team-consultation.webp',
     title: 'Executive Advisory & Strategy',
   },
   {
@@ -72,37 +73,37 @@ const DEFAULT_ITEMS: DriftWallItem[] = [
   },
   // Column 2 (Center Hero): Modern Towers, TAKHLEES Training Center, Highway & Infrastructure
   {
-    image: '/images/corporate-towers.jpg',
+    image: '/images/driftwall/corporate-towers.webp',
     title: 'Corporate Headquarters UAE',
   },
   {
-    image: '/images/classroom-training.png',
+    image: '/images/driftwall/classroom-training.webp',
     title: 'TAKHLEES Executive Training Center',
     featured: true,
   },
   {
-    image: '/images/dubai-highway-night.jpg',
+    image: '/images/driftwall/dubai-highway-night.webp',
     title: 'Dubai Financial District',
   },
   {
-    image: '/images/construction-crane.jpg',
+    image: '/images/driftwall/construction-crane.webp',
     title: 'UAE Infrastructure & Development',
   },
   // Column 3 (Right): Partnership Handshake, Industrial Freezone, Sheikh Zayed Rd & Certifications
   {
-    image: '/images/business-handshake.jpg',
+    image: '/images/driftwall/business-handshake.webp',
     title: 'Business Setup Partnership',
   },
   {
-    image: '/images/construction-crane.jpg',
+    image: '/images/driftwall/construction-crane.webp',
     title: 'Industrial & Freezone Licensing',
   },
   {
-    image: '/images/skyline-sunset.jpg',
+    image: '/images/driftwall/skyline-sunset.webp',
     title: 'Sheikh Zayed Road Business Center',
   },
   {
-    image: '/images/team-consultation.jpg',
+    image: '/images/driftwall/team-consultation.webp',
     title: 'ICV & ISO Certification Experts',
   },
 ];
@@ -112,12 +113,8 @@ const cx = (...parts: (string | false | undefined)[]) => parts.filter(Boolean).j
 const prefersReducedMotion = (): boolean =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const isLowEndDevice = (): boolean => {
-  if (typeof window === 'undefined') return false;
-  const lowCores = typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 4;
-  const isTouch = window.matchMedia('(pointer: coarse)').matches;
-  return lowCores || isTouch;
-};
+const isCoarsePointer = (): boolean =>
+  typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
 
 const columnFactor = (index: number, variance: number): number => {
   const pseudo = ((index * 0.6180339887 + 0.35) % 1) * 2 - 1;
@@ -168,19 +165,28 @@ export function DriftWall({
   const [activeId, setActiveId] = useState<string | null>(null);
   const activeIdRef = useRef<string | null>(null);
   const [reduced, setReduced] = useState(false);
+  const [useCssDrift, setUseCssDrift] = useState(false);
   const [inView, setInView] = useState(true);
 
-  // Check reduced motion & low device mode
+  // Sync reduced motion and pointer mode (touch devices use 0ms-JS compositor CSS drift instead of freezing)
   useEffect(() => {
-    const isLowPower = prefersReducedMotion() || isLowEndDevice();
-    setReduced(isLowPower);
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches || isLowEndDevice());
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
+    setReduced(prefersReducedMotion());
+    setUseCssDrift(isCoarsePointer());
+
+    const rmQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const cpQuery = window.matchMedia('(pointer: coarse)');
+    const onRmChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    const onCpChange = (e: MediaQueryListEvent) => setUseCssDrift(e.matches);
+
+    rmQuery.addEventListener('change', onRmChange);
+    cpQuery.addEventListener('change', onCpChange);
+    return () => {
+      rmQuery.removeEventListener('change', onRmChange);
+      cpQuery.removeEventListener('change', onCpChange);
+    };
   }, []);
 
-  // Performance optimization: Pause RAF when offscreen
+  // Performance optimization: Pause animations when offscreen
   useEffect(() => {
     if (!containerRef.current) return;
     const observer = new IntersectionObserver(
@@ -207,15 +213,14 @@ export function DriftWall({
     return cols.map((col) => (col.length ? col : items.slice(0, 1)));
   }, [items, columns]);
 
-  // Compute column copy counts for seamless infinite loop (guaranteeing zero empty gaps)
+  // Even-numbered column copies (2 or 4) so CSS -50% marquee loops seamlessly on mobile GPUs
   const columnMeta = useMemo<ColumnMeta[]>(() => {
     return columnItems.map((col, c) => {
       const colHeight = columnHeights?.[c] ?? tileHeight;
       const unit = colHeight + gap;
       const copyHeight = Math.max(unit, col.length * unit);
-      // Ensure total height is at least containerHeight * 3.5, never capping too low
-      const needed = Math.ceil((containerHeight * 3.5) / copyHeight) + 1;
-      const copies = Math.max(4, Math.min(6, needed));
+      const halfNeeded = Math.ceil((containerHeight * 1.45) / copyHeight);
+      const copies = Math.max(2, Math.min(4, halfNeeded * 2));
       return { copyHeight, copies };
     });
   }, [columnItems, tileHeight, gap, containerHeight, columnHeights]);
@@ -259,9 +264,10 @@ export function DriftWall({
   }, [applyPlaneTransform]);
 
   useEffect(() => {
-    if (!inView) {
+    if (!inView || reduced || useCssDrift) {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
+      lastTsRef.current = null;
       return;
     }
 
@@ -278,29 +284,21 @@ export function DriftWall({
       pointerDampedRef.current.y += (targetY - pointerDampedRef.current.y) * damp;
       applyPlaneTransform(pointerDampedRef.current.x, pointerDampedRef.current.y);
 
-      if (!reduced) {
-        for (let c = 0; c < trackRefs.current.length; c++) {
-          const meta = columnMeta[c];
-          if (!meta) continue;
-          const paused = wallHoveredRef.current && pauseOnHover;
-          const factor = paused || hoveredColRef.current === c ? 0 : 1;
-          const target = baseVelocities[c] * factor;
+      for (let c = 0; c < trackRefs.current.length; c++) {
+        const meta = columnMeta[c];
+        if (!meta) continue;
+        const paused = wallHoveredRef.current && pauseOnHover;
+        const factor = paused || hoveredColRef.current === c ? 0 : 1;
+        const target = baseVelocities[c] * factor;
 
-          const ease = 1 - Math.exp(-dt / (target === 0 ? 0.16 : 0.28));
-          velocitiesRef.current[c] += (target - velocitiesRef.current[c]) * ease;
-          let next = (offsetsRef.current[c] ?? 0) + velocitiesRef.current[c] * dt;
-          next = ((next % meta.copyHeight) + meta.copyHeight) % meta.copyHeight;
-          offsetsRef.current[c] = next;
+        const ease = 1 - Math.exp(-dt / (target === 0 ? 0.16 : 0.28));
+        velocitiesRef.current[c] += (target - velocitiesRef.current[c]) * ease;
+        let next = (offsetsRef.current[c] ?? 0) + velocitiesRef.current[c] * dt;
+        next = ((next % meta.copyHeight) + meta.copyHeight) % meta.copyHeight;
+        offsetsRef.current[c] = next;
 
-          const el = trackRefs.current[c];
-          if (el) el.style.transform = `translate3d(0, ${-next}px, 0)`;
-        }
-      } else {
-        for (let c = 0; c < trackRefs.current.length; c++) {
-          const el = trackRefs.current[c];
-          const meta = columnMeta[c];
-          if (el && meta) el.style.transform = `translate3d(0, ${-(offsetsRef.current[c] ?? 0)}px, 0)`;
-        }
+        const el = trackRefs.current[c];
+        if (el) el.style.transform = `translate3d(0, ${-next}px, 0)`;
       }
 
       rafRef.current = requestAnimationFrame(animate);
@@ -312,7 +310,7 @@ export function DriftWall({
       rafRef.current = null;
       lastTsRef.current = null;
     };
-  }, [baseVelocities, columnMeta, pauseOnHover, parallax, reduced, inView, applyPlaneTransform]);
+  }, [baseVelocities, columnMeta, pauseOnHover, parallax, reduced, useCssDrift, inView, applyPlaneTransform]);
 
   const release = useCallback((): void => {
     activeIdRef.current = null;
@@ -322,6 +320,7 @@ export function DriftWall({
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
+      if (useCssDrift) return;
       const rect = containerRef.current?.getBoundingClientRect();
       if (!rect) return;
       if (parallax > 0 && !reduced) {
@@ -330,8 +329,8 @@ export function DriftWall({
           y: (e.clientY - rect.top) / rect.height - 0.5,
         };
       }
-      const hit = document.elementFromPoint(e.clientX, e.clientY);
-      const tile = hit && hit.closest ? (hit.closest('[data-tile-id]') as HTMLElement | null) : null;
+      const targetEl = e.target as HTMLElement | null;
+      const tile = targetEl?.closest?.('[data-tile-id]') as HTMLElement | null;
       if (!tile) return;
       const id = tile.dataset.tileId ?? null;
       if (id === activeIdRef.current) return;
@@ -339,7 +338,7 @@ export function DriftWall({
       hoveredColRef.current = Number(tile.dataset.col);
       setActiveId(id);
     },
-    [parallax, reduced]
+    [parallax, reduced, useCssDrift]
   );
 
   const handlePointerLeaveWall = useCallback((): void => {
@@ -408,11 +407,12 @@ export function DriftWall({
             'group-focus-visible/tile:shadow-[0_20px_50px_-15px_rgba(22,160,90,0.5),0_0_0_2px_rgba(22,160,90,0.8)]'
           )}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={item.image}
             alt={item.title ?? 'TAKHLEES UAE'}
-            loading="eager"
+            fill
+            sizes="(max-width: 639px) 160px, 210px"
+            loading={isPrimaryCopy ? 'eager' : 'lazy'}
             decoding="async"
             draggable={false}
             className="block h-full w-full select-none object-cover [filter:grayscale(var(--dw-gray))_saturate(1.05)] transition-[filter] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-[.is-active]/tile:[filter:grayscale(0)_saturate(1.15)]"
@@ -460,6 +460,15 @@ export function DriftWall({
           const meta = columnMeta[c];
           const initialOffset = meta.copyHeight * ((c * 0.37) % 1);
           const copies = Array.from({ length: meta.copies });
+          const colVel = baseVelocities[c] ?? speed;
+          const halfDistance = (meta.copies / 2) * meta.copyHeight;
+          const cssDurationSec = Math.max(4, Math.round((halfDistance / Math.max(8, Math.abs(colVel))) * 10) / 10);
+          const cssClass = useCssDrift && !reduced
+            ? colVel < 0
+              ? 'animate-infinite-scroll-y-reverse'
+              : 'animate-infinite-scroll-y'
+            : '';
+
           return (
             <div
               style={{ width: `${colW + gap}px` }}
@@ -467,10 +476,17 @@ export function DriftWall({
               key={`col-${c}`}
             >
               <div
-                className="flex flex-col [transform-style:preserve-3d] will-change-transform"
-                style={{
-                  transform: `translate3d(0, ${-initialOffset}px, 0)`,
-                }}
+                className={cx('flex flex-col [transform-style:preserve-3d] will-change-transform', cssClass)}
+                style={
+                  useCssDrift && !reduced
+                    ? {
+                        animationDuration: `${cssDurationSec}s`,
+                        animationPlayState: inView ? 'running' : 'paused',
+                      }
+                    : {
+                        transform: `translate3d(0, ${-initialOffset}px, 0)`,
+                      }
+                }
                 ref={(el) => {
                   trackRefs.current[c] = el;
                 }}

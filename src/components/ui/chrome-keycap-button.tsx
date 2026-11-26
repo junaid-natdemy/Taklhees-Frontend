@@ -9,12 +9,12 @@ import React, {
   useState,
 } from "react";
 import {
-  motion,
+  m,
   useMotionTemplate,
   useMotionValue,
   useReducedMotion,
   useSpring,
-} from "framer-motion";
+} from "motion/react";
 
 function cn(...classes: Array<string | false | null | undefined>): string {
   return classes.filter(Boolean).join(" ");
@@ -618,7 +618,7 @@ export const ChromeKeycapButton = React.forwardRef<
       {...rest}
     >
       {/* Synchronized orbiting ambient luminous glow around the rounded perimeter */}
-      <motion.span
+      <m.span
         aria-hidden="true"
         animate={{
           opacity: isPressed ? 0.32 : isHovered ? 0.68 : 0.44,
@@ -628,7 +628,7 @@ export const ChromeKeycapButton = React.forwardRef<
         style={{ borderRadius: metrics.outerRadius + 4 }}
         className="pointer-events-none absolute -inset-1.5 overflow-hidden blur-xl"
       >
-        <motion.span
+        <m.span
           aria-hidden="true"
           animate={orbitAnimation}
           transition={orbitTransition}
@@ -643,10 +643,10 @@ export const ChromeKeycapButton = React.forwardRef<
           }}
           className="absolute block will-change-transform"
         />
-      </motion.span>
+      </m.span>
 
       {/* Ground ambient shadow + tactile compression */}
-      <motion.span
+      <m.span
         aria-hidden="true"
         animate={{
           opacity: isPressed ? 0.72 : 1,
@@ -671,7 +671,7 @@ export const ChromeKeycapButton = React.forwardRef<
         }}
         className="relative flex h-full w-full items-center justify-center overflow-hidden"
       >
-        <motion.span
+        <m.span
           aria-hidden="true"
           animate={orbitAnimation}
           transition={orbitTransition}
@@ -698,7 +698,7 @@ export const ChromeKeycapButton = React.forwardRef<
           className="relative flex h-full w-full items-center justify-center overflow-hidden backdrop-blur-xl shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.52),inset_0_-1px_2px_rgba(0,0,0,0.38)]"
         >
           {/* Orbiting dark-chrome + luminous glass reflection band inside bezel */}
-          <motion.span
+          <m.span
             aria-hidden="true"
             animate={orbitAnimation}
             transition={orbitTransition}
@@ -736,7 +736,7 @@ export const ChromeKeycapButton = React.forwardRef<
             className="relative z-10 flex h-full w-full items-center justify-center shadow-[0_1px_2px_rgba(255,255,255,0.36)]"
           >
             {/* Floating frosted-glass anodized keycap face */}
-            <motion.span
+            <m.span
               animate={{
                 y: isPressed ? metrics.pressDepth : 0,
                 scale: isPressed ? 0.986 : 1,
@@ -773,7 +773,7 @@ export const ChromeKeycapButton = React.forwardRef<
               </svg>
 
               {/* Interactive pointer-tracking glass refraction sheen */}
-              <motion.span
+              <m.span
                 aria-hidden="true"
                 animate={{ opacity: isHovered ? 1 : 0.45 }}
                 transition={{ duration: 0.25 }}
@@ -807,7 +807,7 @@ export const ChromeKeycapButton = React.forwardRef<
                   isHighlighted={isHovered || isPressed}
                 />
               </span>
-            </motion.span>
+            </m.span>
           </span>
         </span>
       </span>

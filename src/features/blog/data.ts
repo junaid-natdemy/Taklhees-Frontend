@@ -273,7 +273,13 @@ export async function getBlogArticles(): Promise<BlogArticle[]> {
   try {
     const response = await apiClient<{ results?: BlogArticle[] } | BlogArticle[]>(
       '/blog/articles/',
-      { next: { revalidate: 300 } } as RequestInit
+      {
+        next: { revalidate: 300 },
+        signal:
+          typeof AbortSignal !== 'undefined' && 'timeout' in AbortSignal
+            ? AbortSignal.timeout(1500)
+            : undefined,
+      } as RequestInit
     );
 
     if (Array.isArray(response) && response.length > 0) {

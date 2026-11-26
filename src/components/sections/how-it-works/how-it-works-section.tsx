@@ -1,9 +1,11 @@
 'use client';
 
+import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Building2, FileCheck2, Layers, Rocket } from 'lucide-react';
 import { m, LazyMotion, domAnimation, useReducedMotion } from 'motion/react';
+import { useSectionInView } from '@/hooks/use-section-in-view';
 import HowItWorks, {
   type HowItWorksStep,
   type PinTone,
@@ -30,6 +32,9 @@ const STEP_PIN_TONES: Record<string, PinTone> = {
 
 export function HowItWorksSection() {
   const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useSectionInView(sectionRef);
+  const shouldAnimate = !prefersReducedMotion && inView;
 
   const steps: HowItWorksStep[] = HOW_IT_WORKS_STEPS.map((item) => ({
     id: item.id,
@@ -43,7 +48,9 @@ export function HowItWorksSection() {
   return (
     <LazyMotion features={domAnimation}>
       <section
+        ref={sectionRef}
         id="how-it-works"
+        data-section-paused={!inView ? 'true' : undefined}
         aria-labelledby="how-it-works-heading"
         className="relative overflow-hidden bg-[#F8F7F2] py-8 transition-colors duration-300 dark:bg-[#050807] sm:py-9 lg:py-10"
       >
@@ -126,9 +133,9 @@ export function HowItWorksSection() {
               key={`hiw-node-${i}`}
               filter="url(#hiwNodeGlow)"
               animate={
-                prefersReducedMotion
-                  ? undefined
-                  : { opacity: [0.55, 1, 0.55], scale: [0.92, 1.15, 0.92] }
+                shouldAnimate
+                  ? { opacity: [0.55, 1, 0.55], scale: [0.92, 1.15, 0.92] }
+                  : undefined
               }
               transition={{
                 duration: 3.8 + node.delay * 0.4,
@@ -219,7 +226,7 @@ export function HowItWorksSection() {
           }}
         >
           <Image
-            src="/images/contact/dubai-skyline-contact-bg.jpg"
+            src="/images/contact/dubai-skyline-contact-bg.webp"
             alt=""
             fill
             sizes="100vw"
@@ -232,7 +239,7 @@ export function HowItWorksSection() {
         <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {/* Centered Section Heading */}
           <m.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 'some' }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -290,7 +297,7 @@ export function HowItWorksSection() {
 
           {/* Full-Width Water-Flow Liquid Glass Consultation Banner */}
           <m.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 'some' }}
             transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}

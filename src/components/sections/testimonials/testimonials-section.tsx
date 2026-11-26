@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import {
   Award,
   Briefcase,
@@ -15,6 +14,7 @@ import {
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { InfiniteSlider } from '@/components/ui/infinite-slider';
+import { ThemeImage } from '@/components/ui/theme-image';
 import { cn } from '@/lib/utils';
 import {
   TESTIMONIAL_COLUMNS,
@@ -187,21 +187,16 @@ export function TestimonialsSection() {
             'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 35%, #000 72%, #000 100%)',
         }}
       >
-        <Image
-          src="/images/testimonials/dubai-skyline-testimonials-light.jpg"
+        <ThemeImage
+          lightSrc="/images/testimonials/dubai-skyline-testimonials-light.webp"
+          darkSrc="/images/testimonials/dubai-skyline-testimonials-dark.webp"
           alt=""
           fill
           sizes="100vw"
           loading="lazy"
-          className="block object-cover object-bottom opacity-75 mix-blend-multiply dark:hidden"
-        />
-        <Image
-          src="/images/testimonials/dubai-skyline-testimonials-dark.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          loading="lazy"
-          className="hidden object-cover object-bottom opacity-60 mix-blend-screen dark:block"
+          lightClassName="opacity-75 mix-blend-multiply"
+          darkClassName="opacity-60 mix-blend-screen"
+          className="block object-cover object-bottom"
         />
       </div>
 

@@ -1,8 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'motion/react';
+import { ThemeImage } from '@/components/ui/theme-image';
 
 interface OrbitalNode {
   id: string;
@@ -40,18 +40,18 @@ const NODE_HALO_CLASSES: Record<OrbitalNode['tone'], string> = {
   gold: 'fill-[#C99726]/18 dark:fill-[#E0B13A]/30',
 };
 
-function renderOrbitalNodes(nodes: OrbitalNode[], prefersReduced: boolean) {
+function renderOrbitalNodes(nodes: OrbitalNode[], shouldAnimate: boolean) {
   return nodes.map((node) => (
-    <motion.g
+    <m.g
       key={node.id}
       filter="url(#nodeGlow)"
       animate={
-        prefersReduced
-          ? undefined
-          : {
+        shouldAnimate
+          ? {
               opacity: [0.55, 1, 0.55],
               scale: [0.92, 1.15, 0.92],
             }
+          : undefined
       }
       transition={{
         duration: 3.8 + node.delay * 0.4,
@@ -64,7 +64,7 @@ function renderOrbitalNodes(nodes: OrbitalNode[], prefersReduced: boolean) {
       <circle cx={node.cx} cy={node.cy} r={node.r * 2.5} className={NODE_HALO_CLASSES[node.tone]} />
       <circle cx={node.cx} cy={node.cy} r={node.r} className={NODE_FILL_CLASSES[node.tone]} />
       <circle cx={node.cx} cy={node.cy} r={node.r * 0.52} className="fill-white" />
-    </motion.g>
+    </m.g>
   ));
 }
 
@@ -76,15 +76,31 @@ function renderOrbitalNodes(nodes: OrbitalNode[], prefersReduced: boolean) {
  */
 export const ImpactGlobeBackdrop = React.memo(function ImpactGlobeBackdrop() {
   const prefersReduced = !!useReducedMotion();
+  const rootRef = React.useRef<HTMLDivElement>(null);
+  const [inView, setInView] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: '150px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const shouldAnimate = !prefersReduced && inView;
 
   return (
     <div
+      ref={rootRef}
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
       aria-hidden="true"
     >
-      {/* LAYER 1: Calibrated Light & Blackout Dark Radial Depth */}
+      {/* LAYER 1: Calibrated Light & Blackout Dark Radial Depth (zero-blur gradients) */}
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[720px] w-[min(1260px,100vw)] -translate-x-1/2 rounded-full blur-3xl dark:hidden"
+        className="pointer-events-none absolute left-1/2 top-0 h-[720px] w-[min(1260px,100vw)] -translate-x-1/2 rounded-full dark:hidden"
         style={{
           background: [
             'radial-gradient(ellipse 62% 54% at 50% 48%, rgba(255,255,255,0.88) 0%, rgba(20,103,54,0.06) 52%, rgba(247,246,241,0) 80%)',
@@ -93,7 +109,7 @@ export const ImpactGlobeBackdrop = React.memo(function ImpactGlobeBackdrop() {
         }}
       />
       <div
-        className="pointer-events-none absolute left-1/2 top-0 hidden h-[720px] w-[min(1260px,100vw)] -translate-x-1/2 rounded-full blur-3xl dark:block"
+        className="pointer-events-none absolute left-1/2 top-0 hidden h-[720px] w-[min(1260px,100vw)] -translate-x-1/2 rounded-full dark:block"
         style={{
           background: [
             'radial-gradient(ellipse 52% 48% at 50% 54%, rgba(0,168,90,0.16) 0%, rgba(7,91,53,0.09) 44%, rgba(5,8,7,0) 78%)',
@@ -104,44 +120,44 @@ export const ImpactGlobeBackdrop = React.memo(function ImpactGlobeBackdrop() {
 
       {/* Subtle Ambient Emerald Peripheral Depth (Matches Blackout Reference Corner Glow) */}
       <div
-        className="pointer-events-none absolute -right-24 top-1/4 hidden h-[420px] w-[420px] rounded-full blur-3xl dark:block"
+        className="pointer-events-none absolute -right-24 top-1/4 hidden h-[420px] w-[420px] rounded-full dark:block"
         style={{
-          background: 'radial-gradient(circle, rgba(7,91,53,0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(7,91,53,0.12) 0%, transparent 74%)',
         }}
       />
       <div
-        className="pointer-events-none absolute -left-24 bottom-12 hidden h-[380px] w-[380px] rounded-full blur-3xl dark:block"
+        className="pointer-events-none absolute -left-24 bottom-12 hidden h-[380px] w-[380px] rounded-full dark:block"
         style={{
-          background: 'radial-gradient(circle, rgba(0,168,90,0.09) 0%, transparent 72%)',
+          background: 'radial-gradient(circle, rgba(0,168,90,0.09) 0%, transparent 74%)',
         }}
       />
 
       {/* LAYER 2: Prominent Horizontally Centered 3D Dotted World Globe (Crown just under heading down behind selector bar) */}
       <div className="pointer-events-none absolute left-1/2 top-[118px] sm:top-[116px] lg:top-[114px] h-[440px] w-[440px] -translate-x-1/2 sm:h-[540px] sm:w-[540px] lg:h-[620px] lg:w-[620px]">
-        <motion.div
+        <m.div
           className="relative h-full w-full"
-          animate={prefersReduced ? undefined : { scale: [1, 1.011, 1] }}
+          animate={shouldAnimate ? { scale: [1, 1.011, 1] } : undefined}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         >
           {/* Soft Spherical Outer Rim Atmospheric Corona */}
           <div
-            className="pointer-events-none absolute -inset-4 rounded-full blur-2xl dark:hidden"
+            className="pointer-events-none absolute -inset-4 rounded-full dark:hidden"
             style={{
               background:
-                'radial-gradient(circle, rgba(0,168,90,0.09) 42%, rgba(20,103,54,0.10) 64%, transparent 74%)',
+                'radial-gradient(circle, rgba(0,168,90,0.09) 42%, rgba(20,103,54,0.10) 64%, transparent 76%)',
             }}
           />
           <div
-            className="pointer-events-none absolute -inset-5 hidden rounded-full blur-2xl dark:block"
+            className="pointer-events-none absolute -inset-5 hidden rounded-full dark:block"
             style={{
               background:
-                'radial-gradient(circle, rgba(0,168,90,0.14) 48%, rgba(0,168,90,0.22) 67%, transparent 76%)',
+                'radial-gradient(circle, rgba(0,168,90,0.14) 48%, rgba(0,168,90,0.22) 67%, transparent 78%)',
             }}
           />
 
-          {/* Light Mode 3D Dotted Continent Globe with airy upper dissolve */}
+          {/* Active Theme 3D Dotted Continent Globe (single image downloaded per theme) */}
           <div
-            className="block h-full w-full dark:hidden"
+            className="h-full w-full dark:[mask-image:none]"
             style={{
               WebkitMaskImage:
                 'linear-gradient(to bottom, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.68) 16%, rgba(0,0,0,0.95) 36%, rgba(0,0,0,1) 74%, rgba(0,0,0,0.88) 92%, rgba(0,0,0,0.5) 100%)',
@@ -149,40 +165,32 @@ export const ImpactGlobeBackdrop = React.memo(function ImpactGlobeBackdrop() {
                 'linear-gradient(to bottom, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.68) 16%, rgba(0,0,0,0.95) 36%, rgba(0,0,0,1) 74%, rgba(0,0,0,0.88) 92%, rgba(0,0,0,0.5) 100%)',
             }}
           >
-            <Image
-              src="/images/impact/globe-orb-light.webp"
+            <ThemeImage
+              lightSrc="/images/impact/globe-orb-light.webp"
+              darkSrc="/images/impact/globe-orb-dark.webp"
               alt=""
-              width={900}
-              height={900}
-              loading="eager"
+              width={640}
+              height={640}
+              loading="lazy"
               sizes="(max-width: 639px) 440px, (max-width: 1023px) 540px, 620px"
-              className="h-full w-full object-contain opacity-[0.76]"
+              lightClassName="opacity-[0.76]"
+              darkClassName="opacity-[0.95]"
+              className="h-full w-full object-contain"
             />
           </div>
-
-          {/* Dark Mode 3D Dotted Continent Globe */}
-          <Image
-            src="/images/impact/globe-orb-dark.webp"
-            alt=""
-            width={900}
-            height={900}
-            loading="eager"
-            sizes="(max-width: 639px) 440px, (max-width: 1023px) 540px, 620px"
-            className="hidden h-full w-full object-contain opacity-[0.95] dark:block"
-          />
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Subtle Typography Legibility Guard Under Subtitle Over Top Crown */}
       <div
-        className="pointer-events-none absolute left-1/2 top-24 h-[140px] w-[min(680px,92vw)] -translate-x-1/2 rounded-full blur-xl dark:hidden"
+        className="pointer-events-none absolute left-1/2 top-24 h-[140px] w-[min(680px,92vw)] -translate-x-1/2 rounded-full dark:hidden"
         style={{
           background:
             'radial-gradient(ellipse 68% 58% at 50% 42%, rgba(247,246,241,0.74) 0%, rgba(247,246,241,0) 80%)',
         }}
       />
       <div
-        className="pointer-events-none absolute left-1/2 top-24 hidden h-[140px] w-[min(680px,92vw)] -translate-x-1/2 rounded-full blur-xl dark:block"
+        className="pointer-events-none absolute left-1/2 top-24 hidden h-[140px] w-[min(680px,92vw)] -translate-x-1/2 rounded-full dark:block"
         style={{
           background:
             'radial-gradient(ellipse 68% 58% at 50% 42%, rgba(5,8,7,0.68) 0%, rgba(5,8,7,0) 80%)',
@@ -243,9 +251,9 @@ export const ImpactGlobeBackdrop = React.memo(function ImpactGlobeBackdrop() {
         </defs>
 
         {/* Outer Atmospheric Dome Orbit Ring Arching Over Cards & Subtitle (with Locked Nodes) */}
-        <motion.g
+        <m.g
           style={{ transformOrigin: '600px 410px' }}
-          animate={prefersReduced ? undefined : { rotate: [-0.7, 0.7, -0.7] }}
+          animate={shouldAnimate ? { rotate: [-0.7, 0.7, -0.7] } : undefined}
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
         >
           <ellipse
@@ -267,13 +275,13 @@ export const ImpactGlobeBackdrop = React.memo(function ImpactGlobeBackdrop() {
             className="stroke-[#146736]/22 dark:stroke-[#00A85A]/30"
             strokeWidth="0.9"
           />
-          {renderOrbitalNodes(OUTER_RING_NODES, prefersReduced)}
-        </motion.g>
+          {renderOrbitalNodes(OUTER_RING_NODES, shouldAnimate)}
+        </m.g>
 
         {/* Mid Tilted Planetary Orbit Ring (with Locked Node) */}
-        <motion.g
+        <m.g
           style={{ transformOrigin: '600px 435px' }}
-          animate={prefersReduced ? undefined : { rotate: [0.8, -0.8, 0.8] }}
+          animate={shouldAnimate ? { rotate: [0.8, -0.8, 0.8] } : undefined}
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
         >
           <ellipse
@@ -295,8 +303,8 @@ export const ImpactGlobeBackdrop = React.memo(function ImpactGlobeBackdrop() {
             strokeWidth="0.85"
             strokeDasharray="4 7"
           />
-          {renderOrbitalNodes(MID_RING_NODES, prefersReduced)}
-        </motion.g>
+          {renderOrbitalNodes(MID_RING_NODES, shouldAnimate)}
+        </m.g>
 
         {/* Lower Orbital Sweep Cradling Beneath Cards & Wrapping Toward Pills: Emerald Leading Arc */}
         <path
@@ -345,7 +353,7 @@ export const ImpactGlobeBackdrop = React.memo(function ImpactGlobeBackdrop() {
         />
 
         {/* Locked Lower Orbit Star Nodes */}
-        {renderOrbitalNodes(LOWER_ARC_NODES, prefersReduced)}
+        {renderOrbitalNodes(LOWER_ARC_NODES, shouldAnimate)}
       </svg>
     </div>
   );

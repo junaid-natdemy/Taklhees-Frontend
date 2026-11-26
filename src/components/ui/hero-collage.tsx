@@ -2,19 +2,19 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'motion/react';
 import { Building2 } from 'lucide-react';
 
 /* ------------------------------------------------------------------ */
 /*  IMAGES - swap paths here only                                      */
 /* ------------------------------------------------------------------ */
 const IMG = {
-  skyline: '/images/skyline-sunset.jpg',
+  skyline: '/images/driftwall/skyline-sunset.webp',
   meeting: '/images/meeting-partners.jpg', // NEW - 3 people at a table
   signing: '/images/document-signing.jpg', // NEW - hand signing on clipboard
-  training: '/images/classroom-training.png',
-  towers: '/images/corporate-towers.jpg',
-  crane: '/images/construction-crane.jpg',
+  training: '/images/classroom-training.webp',
+  towers: '/images/driftwall/corporate-towers.webp',
+  crane: '/images/driftwall/construction-crane.webp',
 };
 
 /* Outer card skew. The photo inside gets the inverse skew so it stays upright. */
@@ -78,7 +78,7 @@ function Laurel({ flip = false }: { flip?: boolean }) {
 /* ------------------------------------------------------------------ */
 function PhotoCard({ card, reduced }: { card: CollageCard; reduced: boolean }) {
   return (
-    <motion.div
+    <m.div
       className="absolute"
       style={{
         left: `${card.left}%`,
@@ -114,7 +114,7 @@ function PhotoCard({ card, reduced }: { card: CollageCard; reduced: boolean }) {
         />
         <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/20" />
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

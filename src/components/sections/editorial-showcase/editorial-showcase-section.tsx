@@ -1,8 +1,9 @@
 'use client';
 
-import * as React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ThemeImage } from '@/components/ui/theme-image';
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
 import {
   ArrowRight,
@@ -104,10 +105,26 @@ function EditorialWaterGlassDefs() {
 
 export function EditorialShowcaseSection() {
   const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: '120px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const shouldAnimate = !prefersReducedMotion && inView;
 
   return (
     <LazyMotion features={domAnimation}>
       <section
+        ref={sectionRef}
         id="corporate-overview"
         aria-labelledby="editorial-showcase-heading"
         className="relative overflow-hidden bg-[#F7F6F1] pt-14 pb-20 transition-colors duration-300 dark:bg-[#050807] sm:pt-16 sm:pb-24 lg:pt-20 lg:pb-24"
@@ -119,16 +136,16 @@ export function EditorialShowcaseSection() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 select-none overflow-hidden"
         >
-          {/* Delicate Atmospheric Radial Lighting */}
-          <div className="absolute left-[12%] top-[16%] h-[480px] w-[620px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.88),rgba(247,246,241,0)_72%)] blur-2xl dark:bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.14),transparent_72%)]" />
+          {/* Delicate Atmospheric Radial Lighting (zero-blur smooth gradient) */}
+          <div className="absolute left-[12%] top-[16%] h-[480px] w-[620px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.88),rgba(247,246,241,0)_76%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.14),transparent_76%)]" />
           <m.div
             animate={
-              prefersReducedMotion
-                ? undefined
-                : { scale: [1, 1.045, 1], opacity: [0.85, 1, 0.85] }
+              shouldAnimate
+                ? { scale: [1, 1.045, 1], opacity: [0.85, 1, 0.85] }
+                : undefined
             }
             transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute right-[10%] top-[22%] h-[460px] w-[580px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.14),rgba(212,175,55,0.08)_52%,transparent_76%)] blur-3xl dark:bg-[radial-gradient(ellipse_at_center,rgba(0,168,90,0.22),rgba(212,175,55,0.08)_55%,transparent_76%)]"
+            className="absolute right-[10%] top-[22%] h-[460px] w-[580px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.14),rgba(212,175,55,0.08)_52%,transparent_78%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,168,90,0.22),rgba(212,175,55,0.08)_55%,transparent_78%)]"
           />
 
           {/* Faint Architectural Grid Texture */}
@@ -155,21 +172,14 @@ export function EditorialShowcaseSection() {
                 'radial-gradient(ellipse 85% 85% at 22% 78%, #000 24%, rgba(0,0,0,0.5) 58%, transparent 90%)',
             }}
           >
-            <Image
-              src="/images/testimonials/dubai-skyline-light.webp"
+            <ThemeImage
+              lightSrc="/images/testimonials/dubai-skyline-light.webp"
+              darkSrc="/images/testimonials/dubai-skyline-dark.webp"
               alt=""
               width={1920}
               height={320}
               loading="lazy"
-              className="block h-full w-full object-cover object-left-bottom dark:hidden"
-            />
-            <Image
-              src="/images/testimonials/dubai-skyline-dark.webp"
-              alt=""
-              width={1920}
-              height={320}
-              loading="lazy"
-              className="hidden h-full w-full object-cover object-left-bottom dark:block"
+              className="block h-full w-full object-cover object-left-bottom"
             />
           </div>
 
@@ -287,7 +297,7 @@ export function EditorialShowcaseSection() {
               filter="url(#editorialShowcaseGoldGlow)"
               initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
               animate={
-                prefersReducedMotion ? undefined : { strokeDashoffset: -1800 }
+                shouldAnimate ? { strokeDashoffset: -1800 } : undefined
               }
               transition={{
                 duration: 14,
@@ -307,7 +317,7 @@ export function EditorialShowcaseSection() {
               filter="url(#editorialShowcaseGoldGlow)"
               initial={prefersReducedMotion ? false : { strokeDashoffset: -200 }}
               animate={
-                prefersReducedMotion ? undefined : { strokeDashoffset: 1400 }
+                shouldAnimate ? { strokeDashoffset: 1400 } : undefined
               }
               transition={{
                 duration: 20,
@@ -326,7 +336,7 @@ export function EditorialShowcaseSection() {
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
             {/* ---------- LEFT SIDE: EDITORIAL CONTENT ---------- */}
             <m.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+              initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 'some' }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -398,7 +408,7 @@ export function EditorialShowcaseSection() {
 
             {/* ---------- RIGHT SIDE: SCULPTED ORGANIC WATER-GLASS VISUAL ---------- */}
             <m.div
-              initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.97 }}
+              initial={prefersReducedMotion ? false : { opacity: 0.99, scale: 0.985 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 'some' }}
               transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
@@ -414,17 +424,16 @@ export function EditorialShowcaseSection() {
                   {/* Soft Emerald & Champagne Ambient Glow */}
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute -inset-4 bg-[radial-gradient(ellipse_at_60%_50%,rgba(8,122,66,0.22),rgba(212,175,55,0.16)_50%,transparent_75%)] blur-2xl dark:bg-[radial-gradient(ellipse_at_60%_50%,rgba(22,160,90,0.24),rgba(212,175,55,0.12)_50%,transparent_75%)]"
+                    className="pointer-events-none absolute -inset-4 bg-[radial-gradient(ellipse_at_60%_50%,rgba(8,122,66,0.22),rgba(212,175,55,0.16)_50%,transparent_78%)] dark:bg-[radial-gradient(ellipse_at_60%_50%,rgba(22,160,90,0.24),rgba(212,175,55,0.12)_50%,transparent_78%)]"
                   />
 
                   {/* Outer Water-Glass Lens Shell (Refracts Background Around Photo) */}
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute -inset-3 z-0 overflow-hidden bg-white/10 dark:bg-black/15"
+                    className="liquid-glass-refract-editorial pointer-events-none absolute -inset-3 z-0 overflow-hidden bg-white/10 dark:bg-black/15"
                     style={{
                       clipPath: 'url(#editorial-visual-clip)',
                       WebkitClipPath: 'url(#editorial-visual-clip)',
-                      backdropFilter: 'url("#editorial-water-glass")',
                     }}
                   />
 
@@ -491,7 +500,7 @@ export function EditorialShowcaseSection() {
 
           {/* ================= FLOATING WATER-GLASS SERVICE NAVIGATION (EXACT LIQUIDBUTTON SYSTEM) ================= */}
           <m.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+            initial={prefersReducedMotion ? false : { opacity: 0.99, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 'some' }}
             transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
@@ -522,12 +531,11 @@ export function EditorialShowcaseSection() {
                 }}
               />
 
-              {/* Layer 2: Exact LiquidButton SVG Water-Refraction Backdrop */}
+              {/* Layer 2: Hardware-Adaptive LiquidButton Water-Refraction Backdrop */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+                className="liquid-glass-refract-editorial pointer-events-none absolute inset-0 -z-10 overflow-hidden"
                 style={{
-                  backdropFilter: 'url("#editorial-water-glass")',
                   borderRadius: 'inherit',
                 }}
               />

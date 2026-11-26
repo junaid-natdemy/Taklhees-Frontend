@@ -119,7 +119,8 @@ export const ImpactStatCard = React.memo(function ImpactStatCard({
             src={metric.image}
             alt={metric.imageAlt}
             fill
-            loading="eager"
+            loading={variant === 'mobile' ? 'eager' : 'lazy'}
+            decoding="async"
             sizes="(max-width: 767px) 92vw, 250px"
             style={{ objectPosition: metric.objectPosition }}
             className={cn(

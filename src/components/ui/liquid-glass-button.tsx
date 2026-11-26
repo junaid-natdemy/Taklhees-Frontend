@@ -140,13 +140,11 @@ const LiquidButton = React.forwardRef<HTMLButtonElement, LiquidButtonProps>(
                 />
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 -z-10 h-full w-full overflow-hidden rounded-full"
-                  style={{ backdropFilter: 'url("#container-glass")' }}
+                  className="liquid-glass-refract-button pointer-events-none absolute inset-0 -z-10 h-full w-full overflow-hidden rounded-full"
                 />
                 <span className="relative z-10 inline-flex items-center gap-2">
                   {childElement.props.children}
                 </span>
-                <GlassFilter />
               </>
             ),
           })}
@@ -173,14 +171,12 @@ const LiquidButton = React.forwardRef<HTMLButtonElement, LiquidButtonProps>(
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 h-full w-full overflow-hidden rounded-full"
-          style={{ backdropFilter: 'url("#container-glass")' }}
+          className="liquid-glass-refract-button pointer-events-none absolute inset-0 -z-10 h-full w-full overflow-hidden rounded-full"
         />
 
         <span className="relative z-10 inline-flex items-center gap-2">
           {children}
         </span>
-        <GlassFilter />
       </button>
     )
   }
@@ -189,7 +185,10 @@ LiquidButton.displayName = "LiquidButton"
 
 function GlassFilter() {
   return (
-    <svg className="hidden" aria-hidden="true">
+    <svg
+      className="pointer-events-none fixed h-0 w-0 overflow-hidden opacity-0"
+      aria-hidden="true"
+    >
       <defs>
         <filter
           id="container-glass"

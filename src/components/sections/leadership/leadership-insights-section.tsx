@@ -1,6 +1,8 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { ThemeImage } from '@/components/ui/theme-image';
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
 import { Users } from 'lucide-react';
 import { MotionTiltCard } from '@/components/ui/motion-tilt-card';
@@ -99,11 +101,13 @@ function FloatingQuotePanel({
   profile,
   index,
   reducedMotion,
+  animateFloat,
   className,
 }: {
   profile: LeadershipProfile;
   index: number;
   reducedMotion: boolean | null;
+  animateFloat: boolean;
   className?: string;
 }) {
   const floatDuration = index === 0 ? 7.4 : 8.6;
@@ -113,7 +117,7 @@ function FloatingQuotePanel({
 
   return (
     <m.div
-      initial={reducedMotion ? false : { opacity: 0, y: 22 }}
+      initial={reducedMotion ? false : { opacity: 0.99, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 'some' }}
       transition={{
@@ -142,11 +146,11 @@ function FloatingQuotePanel({
         {/* Outer Drop-Shadow Wrapper (follows exact torn-paper silhouette) */}
         <m.div
           animate={
-            reducedMotion
-              ? undefined
-              : {
+            animateFloat
+              ? {
                   y: [0, -4, 0],
                 }
+              : undefined
           }
           transition={{
             duration: floatDuration,
@@ -163,13 +167,10 @@ function FloatingQuotePanel({
               WebkitClipPath: clipUrl,
             }}
           >
-            {/* Layer 1: SVG-Driven Liquid Refraction Backdrop (from liquid-glass-button) */}
+            {/* Layer 1: Hardware-Adaptive Liquid Refraction Backdrop */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-              style={{
-                backdropFilter: 'url("#leadership-glass")',
-              }}
+              className="liquid-glass-refract-leadership pointer-events-none absolute inset-0 -z-10 overflow-hidden"
             />
 
             {/* Layer 2: Glossy Liquid-Glass Specular & Caustic Glow */}
@@ -310,13 +311,30 @@ function FloatingQuotePanel({
 
 export function LeadershipInsightsSection() {
   const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: '150px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const shouldAnimate = !prefersReducedMotion && inView;
   const mdProfile = LEADERSHIP_PROFILES[0];
   const ceoProfile = LEADERSHIP_PROFILES[1];
 
   return (
     <LazyMotion features={domAnimation}>
       <section
+        ref={sectionRef}
         id="leadership"
+        data-section-paused={!inView ? 'true' : undefined}
         aria-labelledby="leadership-heading"
         className="relative overflow-hidden bg-[#F7F6F1] pt-16 pb-10 transition-colors duration-300 dark:bg-[#050807] sm:pt-20 sm:pb-12 lg:pt-22 lg:pb-10"
       >
@@ -325,16 +343,16 @@ export function LeadershipInsightsSection() {
 
         {/* ================= ATMOSPHERIC EDITORIAL CANVAS ================= */}
 
-        {/* Large Diffused Emerald & Champagne Radial Glow Behind Center Stage */}
+        {/* Large Diffused Emerald & Champagne Radial Glow Behind Center Stage (zero-blur gradient) */}
         <m.div
           aria-hidden="true"
           animate={
-            prefersReducedMotion
-              ? undefined
-              : { scale: [1, 1.05, 1], opacity: [0.85, 1, 0.85] }
+            shouldAnimate
+              ? { scale: [1, 1.05, 1], opacity: [0.85, 1, 0.85] }
+              : undefined
           }
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-          className="pointer-events-none absolute left-1/2 top-[56%] z-0 h-[440px] w-[920px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.16),rgba(201,151,38,0.08)_52%,transparent_76%)] blur-2xl dark:bg-[radial-gradient(ellipse_at_center,rgba(0,168,90,0.22),rgba(224,177,58,0.1)_52%,transparent_76%)]"
+          className="pointer-events-none absolute left-1/2 top-[56%] z-0 h-[440px] w-[920px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.16),rgba(201,151,38,0.08)_52%,transparent_78%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,168,90,0.22),rgba(224,177,58,0.1)_52%,transparent_78%)]"
         />
 
         {/* Subtle Islamic Geometric Lattice in Upper-Left Corner */}
@@ -426,21 +444,14 @@ export function LeadershipInsightsSection() {
               'radial-gradient(ellipse 70% 70% at 32% 52%, #000 15%, rgba(0,0,0,0.35) 48%, transparent 80%)',
           }}
         >
-          <Image
-            src="/images/testimonials/dubai-skyline-light.webp"
+          <ThemeImage
+            lightSrc="/images/testimonials/dubai-skyline-light.webp"
+            darkSrc="/images/testimonials/dubai-skyline-dark.webp"
             alt=""
             width={1920}
             height={320}
             loading="lazy"
-            className="block h-full w-full object-cover object-left-bottom dark:hidden"
-          />
-          <Image
-            src="/images/testimonials/dubai-skyline-dark.webp"
-            alt=""
-            width={1920}
-            height={320}
-            loading="lazy"
-            className="hidden h-full w-full object-cover object-left-bottom dark:block"
+            className="block h-full w-full object-cover object-left-bottom"
           />
         </div>
 
@@ -455,21 +466,14 @@ export function LeadershipInsightsSection() {
               'radial-gradient(ellipse 68% 60% at 76% 44%, #000 12%, rgba(0,0,0,0.35) 45%, transparent 76%)',
           }}
         >
-          <Image
-            src="/images/testimonials/dubai-skyline-light.webp"
+          <ThemeImage
+            lightSrc="/images/testimonials/dubai-skyline-light.webp"
+            darkSrc="/images/testimonials/dubai-skyline-dark.webp"
             alt=""
             width={1920}
             height={320}
             loading="lazy"
-            className="block h-full w-full object-cover object-right-bottom dark:hidden"
-          />
-          <Image
-            src="/images/testimonials/dubai-skyline-dark.webp"
-            alt=""
-            width={1920}
-            height={320}
-            loading="lazy"
-            className="hidden h-full w-full object-cover object-right-bottom dark:block"
+            className="block h-full w-full object-cover object-right-bottom"
           />
         </div>
 
@@ -555,7 +559,7 @@ export function LeadershipInsightsSection() {
             filter="url(#editorialGoldGlow)"
             initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
             animate={
-              prefersReducedMotion ? undefined : { strokeDashoffset: -1600 }
+              shouldAnimate ? { strokeDashoffset: -1600 } : undefined
             }
             transition={{
               duration: 14,
@@ -574,7 +578,7 @@ export function LeadershipInsightsSection() {
             filter="url(#editorialGoldGlowSoft)"
             initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
             animate={
-              prefersReducedMotion ? undefined : { strokeDashoffset: -1600 }
+              shouldAnimate ? { strokeDashoffset: -1600 } : undefined
             }
             transition={{
               duration: 18,
@@ -592,7 +596,7 @@ export function LeadershipInsightsSection() {
             strokeDasharray="260 1340"
             initial={prefersReducedMotion ? false : { strokeDashoffset: -300 }}
             animate={
-              prefersReducedMotion ? undefined : { strokeDashoffset: -1900 }
+              shouldAnimate ? { strokeDashoffset: -1900 } : undefined
             }
             transition={{
               duration: 11,
@@ -614,7 +618,7 @@ export function LeadershipInsightsSection() {
         <div className="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           {/* Centered Section Heading */}
           <m.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 'some' }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -669,7 +673,7 @@ export function LeadershipInsightsSection() {
           <div className="relative mt-10 hidden min-h-[455px] lg:block">
             {/* Left Dominant Executive Portrait: Mr. Ramshad Ashraf */}
             <m.div
-              initial={prefersReducedMotion ? false : { opacity: 0, x: -24 }}
+              initial={prefersReducedMotion ? false : { opacity: 0.99, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 'some' }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -703,7 +707,7 @@ export function LeadershipInsightsSection() {
 
             {/* Right Dominant Executive Portrait: Mr. Sadique Manalaya */}
             <m.div
-              initial={prefersReducedMotion ? false : { opacity: 0, x: 24 }}
+              initial={prefersReducedMotion ? false : { opacity: 0.99, x: 16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 'some' }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -742,6 +746,7 @@ export function LeadershipInsightsSection() {
                 profile={mdProfile}
                 index={0}
                 reducedMotion={prefersReducedMotion}
+                animateFloat={shouldAnimate}
               />
 
               {/* Right-Center Panel (Lowered Offset, Beside CEO) */}
@@ -749,6 +754,7 @@ export function LeadershipInsightsSection() {
                 profile={ceoProfile}
                 index={1}
                 reducedMotion={prefersReducedMotion}
+                animateFloat={shouldAnimate}
                 className="mt-16"
               />
             </div>
@@ -760,7 +766,7 @@ export function LeadershipInsightsSection() {
               <div key={profile.id} className="flex flex-col items-center">
                 <m.div
                   initial={
-                    prefersReducedMotion ? false : { opacity: 0, scale: 0.96 }
+                    prefersReducedMotion ? false : { opacity: 0.99, scale: 0.97 }
                   }
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, amount: 'some' }}
@@ -793,6 +799,7 @@ export function LeadershipInsightsSection() {
                   profile={profile}
                   index={index}
                   reducedMotion={prefersReducedMotion}
+                  animateFloat={shouldAnimate}
                   className="z-20 w-full"
                 />
               </div>

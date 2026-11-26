@@ -9,12 +9,12 @@ import { DriftWall, type DriftWallItem } from '@/components/ui/drift-wall';
  * stays the dominant anchor of the composition instead of repeating.
  */
 const AMBIENT_TILES: DriftWallItem[] = [
-  { image: '/images/skyline-sunset.jpg', title: 'Dubai business district' },
-  { image: '/images/corporate-towers.jpg', title: 'Corporate headquarters' },
-  { image: '/images/team-consultation.jpg', title: 'Client consultation' },
-  { image: '/images/business-handshake.jpg', title: 'Partnership agreement' },
-  { image: '/images/construction-crane.jpg', title: 'Industrial development' },
-  { image: '/images/dubai-highway-night.jpg', title: 'Dubai financial district' },
+  { image: '/images/driftwall/skyline-sunset.webp', title: 'Dubai business district' },
+  { image: '/images/driftwall/corporate-towers.webp', title: 'Corporate headquarters' },
+  { image: '/images/driftwall/team-consultation.webp', title: 'Client consultation' },
+  { image: '/images/driftwall/business-handshake.webp', title: 'Partnership agreement' },
+  { image: '/images/driftwall/construction-crane.webp', title: 'Industrial development' },
+  { image: '/images/driftwall/dubai-highway-night.webp', title: 'Dubai financial district' },
 ];
 
 function Laurel({ flip = false }: { flip?: boolean }) {
@@ -115,7 +115,7 @@ export function HeroVisual() {
           <div className="group relative rounded-[22px] bg-white p-[6px] shadow-[0_46px_80px_-46px_rgba(6,17,12,0.75)] ring-1 ring-ink/10 transition-transform duration-500 ease-out hover:-translate-y-1 lg:-rotate-[1.4deg] lg:rounded-[26px] lg:p-2 dark:bg-[#0E2117] dark:ring-white/12">
             <div className="relative aspect-[7/5] overflow-hidden rounded-[16px] bg-forest lg:rounded-[19px]">
               <Image
-                src="/images/classroom-training.png"
+                src="/images/classroom-training.webp"
                 alt="Takhlees training room: safety-certified candidates in a corporate certification session"
                 fill
                 priority

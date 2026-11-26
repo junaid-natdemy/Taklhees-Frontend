@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'motion/react';
+import { useSectionInView } from '@/hooks/use-section-in-view';
 import { GOVERNMENT_PARTNERS } from './partners-data';
 
 const MARQUEE_PARTNERS = [
@@ -14,6 +15,8 @@ const MARQUEE_PARTNERS = [
 export function ConsultationPartnersSection() {
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
+  const inView = useSectionInView(sectionRef);
+  const shouldAnimate = !prefersReducedMotion && inView;
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -89,6 +92,7 @@ export function ConsultationPartnersSection() {
     const io = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
+        section.dataset.sectionPaused = isVisible ? '' : 'true';
         if (isVisible && rafId === 0) {
           lastTime = null;
           rafId = requestAnimationFrame(tick);
@@ -264,7 +268,7 @@ export function ConsultationPartnersSection() {
         />
 
         {/* Subtle Animated Gold Light Stream */}
-        <motion.path
+        <m.path
           d="M0 155 C 250 105, 540 205, 880 150 C 1140 108, 1310 68, 1440 92"
           stroke="#F7DF92"
           strokeOpacity="0.75"
@@ -274,7 +278,7 @@ export function ConsultationPartnersSection() {
           filter="url(#consultGoldGlow)"
           initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
           animate={
-            prefersReducedMotion ? undefined : { strokeDashoffset: -1600 }
+            shouldAnimate ? { strokeDashoffset: -1600 } : undefined
           }
           transition={{
             duration: 16,
@@ -315,8 +319,8 @@ export function ConsultationPartnersSection() {
         {/* ================= UPPER: CONSULTATION HERO AREA ================= */}
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-4">
           {/* Left Side: Editorial Copy */}
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+          <m.div
+            initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 'some' }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -364,11 +368,11 @@ export function ConsultationPartnersSection() {
               Get expert guidance for your business setup, documentation and PRO
               service needs in the UAE.
             </p>
-          </motion.div>
+          </m.div>
 
           {/* Right Side: Seamlessly Blended Background Consultation Photography */}
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.98 }}
+          <m.div
+            initial={prefersReducedMotion ? false : { opacity: 0.99, scale: 0.985 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 'some' }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
@@ -438,12 +442,12 @@ export function ConsultationPartnersSection() {
                 />
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* ================= LOWER: WATER-FLOW LIQUID GLASS GOVERNMENT PARTNERS ================= */}
-        <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+        <m.div
+          initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 'some' }}
           transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -591,7 +595,7 @@ export function ConsultationPartnersSection() {
               )}
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

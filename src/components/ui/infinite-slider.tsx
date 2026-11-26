@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 export interface InfiniteSliderProps {
@@ -32,6 +32,19 @@ export function InfiniteSlider({
 }: InfiniteSliderProps) {
   const prefersReduced = !!useReducedMotion();
   const [isHovered, setIsHovered] = React.useState(false);
+  const [inView, setInView] = React.useState(true);
+  const rootRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.01, rootMargin: '120px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const isVertical = direction === 'vertical';
   // Duration scales inversely with speed parameter to match 21st.dev InfiniteSlider ergonomics
@@ -41,10 +54,11 @@ export function InfiniteSlider({
       ? Math.max(16, Math.round((1200 / speedOnHover) * 10) / 10)
       : baseDurationSec;
 
-  const shouldPause = pauseOnHover && isHovered && !speedOnHover;
+  const shouldPause = !inView || (pauseOnHover && isHovered && !speedOnHover);
 
   return (
     <div
+      ref={rootRef}
       className={cn('overflow-hidden', className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

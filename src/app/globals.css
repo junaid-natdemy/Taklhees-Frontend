@@ -79,9 +79,13 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  main section {
+    contain: layout style;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -688,6 +692,153 @@
   .leadership-glass-sheen {
     animation: none !important;
     transform: none !important;
+  }
+}
+
+[data-section-paused='true'] .leadership-glass-sheen,
+[data-section-paused='true'] .partners-water-shimmer {
+  animation-play-state: paused !important;
+}
+
+/* ================= HARDWARE-ADAPTIVE LIQUID GLASS REFRACTION ================= */
+.liquid-glass-refract-button {
+  backdrop-filter: blur(10px) saturate(1.6) contrast(1.04);
+  -webkit-backdrop-filter: blur(10px) saturate(1.6) contrast(1.04);
+}
+
+.liquid-glass-refract-editorial {
+  backdrop-filter: blur(12px) saturate(1.55) contrast(1.03);
+  -webkit-backdrop-filter: blur(12px) saturate(1.55) contrast(1.03);
+}
+
+.liquid-glass-refract-leadership {
+  backdrop-filter: blur(14px) saturate(1.6) brightness(1.04);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6) brightness(1.04);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .liquid-glass-refract-button {
+    backdrop-filter: url('#container-glass');
+    -webkit-backdrop-filter: url('#container-glass');
+  }
+
+  .liquid-glass-refract-editorial {
+    backdrop-filter: url('#editorial-water-glass');
+    -webkit-backdrop-filter: url('#editorial-water-glass');
+  }
+
+  .liquid-glass-refract-leadership {
+    backdrop-filter: url('#leadership-glass');
+    -webkit-backdrop-filter: url('#leadership-glass');
+  }
+}
+
+/* Scale heavy backdrop blur radii cleanly on mobile / touch GPUs while preserving liquid-glass shine & saturation */
+@media (hover: none), (pointer: coarse), (max-width: 767px) {
+  .nav-uae-pill,
+  .dark .nav-uae-pill,
+  .nav-in-pill,
+  .dark .nav-in-pill,
+  .hero-liquid-glass-bar {
+    backdrop-filter: blur(12px) saturate(1.5);
+    -webkit-backdrop-filter: blur(12px) saturate(1.5);
+  }
+
+  .partners-liquid-glass,
+  .dark .partners-liquid-glass,
+  .service-liquid-glass,
+  .dark .service-liquid-glass,
+  .leadership-liquid-glass,
+  .dark .leadership-liquid-glass {
+    backdrop-filter: blur(11px) saturate(1.6) contrast(1.03);
+    -webkit-backdrop-filter: blur(11px) saturate(1.6) contrast(1.03);
+  }
+
+  .testimonial-liquid-glass,
+  .dark .testimonial-liquid-glass {
+    backdrop-filter: blur(8px) saturate(1.4);
+    -webkit-backdrop-filter: blur(8px) saturate(1.4);
+  }
+}
+
+/* ================= TAKHLEES LUXURY GLOBAL LOADER ================= */
+html[data-splash-seen='1'] .takhlees-splash-overlay {
+  display: none !important;
+}
+
+@keyframes takhlees-loader-arc-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes takhlees-loader-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.96;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+}
+
+@keyframes takhlees-loader-sheen {
+  0% {
+    transform: translate3d(-120%, 0, 0);
+  }
+  65%,
+  100% {
+    transform: translate3d(380%, 0, 0);
+  }
+}
+
+@keyframes takhlees-loader-wave-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-18px, 0, 0);
+  }
+}
+
+.takhlees-loader-arc-spin {
+  animation: takhlees-loader-arc-spin 6.5s linear infinite;
+  will-change: transform;
+}
+
+.takhlees-loader-breathe {
+  animation: takhlees-loader-breathe 3.8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.takhlees-loader-sheen {
+  animation: takhlees-loader-sheen 2.4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.takhlees-loader-wave-slow {
+  animation: takhlees-loader-wave-drift 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+.takhlees-loader-wave-front {
+  animation: takhlees-loader-wave-drift 12s ease-in-out infinite reverse;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .takhlees-loader-arc-spin,
+  .takhlees-loader-breathe,
+  .takhlees-loader-sheen,
+  .takhlees-loader-wave-slow,
+  .takhlees-loader-wave-front {
+    animation: none !important;
   }
 }
 

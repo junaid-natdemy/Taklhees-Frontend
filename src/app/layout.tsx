@@ -45,6 +45,11 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} ${playfairDisplay.variable}`}
     >
       <body className="min-h-screen bg-background font-sans antialiased">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem('takhlees_splash_seen')==='1'||window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.dataset.splashSeen='1';}}catch(e){}`,
+          }}
+        />
         <Providers>{children}</Providers>
       </body>
     </html>

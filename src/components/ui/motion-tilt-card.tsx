@@ -33,7 +33,7 @@ export function MotionTiltCard({
   const rotateY = useSpring(0, SPRING_CONFIG);
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (prefersReducedMotion || !ref.current) return;
+    if (prefersReducedMotion || event.pointerType === 'touch' || !ref.current) return;
     const box = ref.current.getBoundingClientRect();
     if (box.width === 0 || box.height === 0) return;
 
@@ -44,8 +44,8 @@ export function MotionTiltCard({
     rotateY.set(maxTilt * (x / box.width - 0.5));
   };
 
-  const handlePointerEnter = () => {
-    if (prefersReducedMotion) return;
+  const handlePointerEnter = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion || event.pointerType === 'touch') return;
     z.set(hoverZ);
   };
 

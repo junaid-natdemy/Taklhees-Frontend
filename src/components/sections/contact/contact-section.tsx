@@ -26,8 +26,8 @@ import {
   RotateCcw,
   User,
 } from 'lucide-react';
-import { GlassFilter } from '@/components/ui/liquid-glass-button';
 import { MotionTiltCard } from '@/components/ui/motion-tilt-card';
+import { useSectionInView } from '@/hooks/use-section-in-view';
 import { siteConfig } from '@/config/site';
 
 /* ━━━━━━━━━━━━━━━━━━ FORM SCHEMA ━━━━━━━━━━━━━━━━━━ */
@@ -279,6 +279,9 @@ export function ContactSection({
   asPageHeading?: boolean;
 }) {
   const prefersReducedMotion = useReducedMotion();
+  const sectionRef = React.useRef<HTMLElement>(null);
+  const inView = useSectionInView(sectionRef);
+  const shouldAnimate = !prefersReducedMotion && inView;
   const [serverError, setServerError] = React.useState<string | null>(null);
   const [submittedMessage, setSubmittedMessage] = React.useState<string | null>(
     null
@@ -408,12 +411,13 @@ export function ContactSection({
   return (
     <LazyMotion features={domAnimation}>
       <section
+        ref={sectionRef}
         id="contact"
+        data-section-paused={!inView ? 'true' : undefined}
         aria-labelledby="contact-heading"
         className="relative overflow-hidden bg-[linear-gradient(180deg,#FAF8F3_0%,#F3EDE0_55%,#EAE1CE_100%)] py-14 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#050807_0%,#07100C_55%,#050907_100%)] sm:py-16 lg:py-20"
       >
-        {/* Reused LiquidButton SVG #container-glass distortion filter & organic clipPaths */}
-        <GlassFilter />
+        {/* Organic clipPaths (shared #container-glass mounted once in Providers) */}
         <OrganicClipDefs />
 
         {/* ═══════════════ PANORAMIC DUBAI SKYLINE & EMERALD-GOLD WAVE SYSTEM ═══════════════ */}
@@ -422,8 +426,8 @@ export function ContactSection({
           className="pointer-events-none absolute inset-0 select-none overflow-hidden"
         >
           {/* Warm Golden-Hour Horizon Glow & Emerald Ambient Reflections */}
-          <div className="absolute left-[14%] top-[8%] h-[420px] w-[580px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,253,247,0.96),transparent_72%)] blur-3xl dark:bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.14),transparent_72%)]" />
-          <div className="absolute right-[2%] top-[10%] h-[500px] w-[680px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(229,189,98,0.28),rgba(8,122,66,0.08)_54%,transparent_76%)] blur-3xl dark:bg-[radial-gradient(ellipse_at_center,rgba(0,168,90,0.2),rgba(212,175,55,0.12)_55%,transparent_76%)]" />
+          <div className="absolute left-[14%] top-[8%] h-[420px] w-[580px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,253,247,0.96),transparent_76%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.14),transparent_76%)]" />
+          <div className="absolute right-[2%] top-[10%] h-[500px] w-[680px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(229,189,98,0.28),rgba(8,122,66,0.08)_54%,transparent_78%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,168,90,0.2),rgba(212,175,55,0.12)_55%,transparent_78%)]" />
 
           {/* Dedicated Panoramic Dubai Skyline with Burj Khalifa & Emerald-Gold Waves */}
           <div
@@ -436,7 +440,7 @@ export function ContactSection({
             }}
           >
             <Image
-              src="/images/contact/dubai-skyline-contact-bg.jpg"
+              src="/images/contact/dubai-skyline-contact-bg.webp"
               alt=""
               fill
               sizes="100vw"
@@ -563,9 +567,9 @@ export function ContactSection({
             <m.g
               style={{ transformOrigin: 'center bottom' }}
               animate={
-                prefersReducedMotion
-                  ? undefined
-                  : { x: [0, -24, 0], scaleX: [1.03, 1.05, 1.03] }
+                shouldAnimate
+                  ? { x: [0, -24, 0], scaleX: [1.03, 1.05, 1.03] }
+                  : undefined
               }
               transition={{
                 duration: 21,
@@ -592,9 +596,9 @@ export function ContactSection({
             <m.g
               style={{ transformOrigin: 'center bottom' }}
               animate={
-                prefersReducedMotion
-                  ? undefined
-                  : { x: [0, 22, 0], scaleX: [1.04, 1.06, 1.04] }
+                shouldAnimate
+                  ? { x: [0, 22, 0], scaleX: [1.04, 1.06, 1.04] }
+                  : undefined
               }
               transition={{
                 duration: 17,
@@ -622,7 +626,7 @@ export function ContactSection({
                 filter="url(#contactGoldGlowBg)"
                 initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
                 animate={
-                  prefersReducedMotion ? undefined : { strokeDashoffset: -1600 }
+                  shouldAnimate ? { strokeDashoffset: -1600 } : undefined
                 }
                 transition={{
                   duration: 18,
@@ -638,7 +642,7 @@ export function ContactSection({
         <div className="relative z-10 mx-auto max-w-[1060px] px-4 sm:px-6 lg:px-8">
           {/* ─── Centered Editorial Section Header ─── */}
           <m.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 'some' }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -692,7 +696,7 @@ export function ContactSection({
           <div className="mt-9 grid grid-cols-1 items-stretch gap-5 lg:grid-cols-12 lg:gap-6">
             {/* ══════ LEFT: PRESERVED SILHOUETTE + UPGRADED EMERALD LIQUID-GLASS MATERIAL ══════ */}
             <m.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+              initial={prefersReducedMotion ? false : { opacity: 0.99, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 'some' }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
@@ -715,7 +719,7 @@ export function ContactSection({
                       pathD={EMERALD_SCULPTED_PATH}
                       id="emerald-panel"
                       variant="emerald"
-                      prefersReducedMotion={prefersReducedMotion}
+                      prefersReducedMotion={!shouldAnimate}
                     />
 
                     {/* Multi-layered Liquid Glass Reflections (LiquidToggle dual speculars + skylight gloss + meniscus + caustic bounce) */}
@@ -878,7 +882,7 @@ export function ContactSection({
 
             {/* ══════ RIGHT: SCULPTED ORGANIC IVORY LIQUID-GLASS FORM ══════ */}
             <m.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+              initial={prefersReducedMotion ? false : { opacity: 0.99, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 'some' }}
               transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
@@ -901,7 +905,7 @@ export function ContactSection({
                     pathD={IVORY_SCULPTED_PATH}
                     id="ivory-panel"
                     variant="ivory"
-                    prefersReducedMotion={prefersReducedMotion}
+                    prefersReducedMotion={!shouldAnimate}
                   />
 
                   {/* Multi-layered Frosted Ivory Glass Depth & Emerald/Champagne Reflections */}

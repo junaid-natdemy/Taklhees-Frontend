@@ -3,6 +3,8 @@
 import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ThemeImage } from '@/components/ui/theme-image';
+import { useSectionInView } from '@/hooks/use-section-in-view';
 import {
   AnimatePresence,
   LazyMotion,
@@ -77,6 +79,9 @@ export interface BlogShowcaseSectionProps {
 
 export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
   const prefersReducedMotion = useReducedMotion();
+  const sectionRef = React.useRef<HTMLElement>(null);
+  const inView = useSectionInView(sectionRef);
+  const shouldAnimate = !prefersReducedMotion && inView;
   const [requestedPage, setRequestedPage] = React.useState(1);
   const [direction, setDirection] = React.useState<1 | -1>(1);
   const [isTransitioning, setIsTransitioning] = React.useState(false);
@@ -130,6 +135,7 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
   return (
     <LazyMotion features={domAnimation}>
       <section
+        ref={sectionRef}
         id="blog"
         aria-labelledby="blog-showcase-heading"
         className="relative overflow-hidden bg-[linear-gradient(180deg,#FAF8F3_0%,#F4EFE3_56%,#ECE4D3_100%)] pt-7 pb-14 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#050807_0%,#07100C_56%,#050907_100%)] sm:pt-8 sm:pb-16 lg:pt-9 lg:pb-16"
@@ -149,21 +155,14 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                 'linear-gradient(to bottom, rgba(0,0,0,0.88) 0%, #000 8%, #000 90%, rgba(0,0,0,0.75) 100%)',
             }}
           >
-            <Image
-              src="/images/blog/dubai-journal-bg-light.jpg"
+            <ThemeImage
+              lightSrc="/images/blog/dubai-journal-bg-light.webp"
+              darkSrc="/images/blog/dubai-journal-bg-dark.webp"
               alt=""
               fill
               sizes="100vw"
-              priority={false}
-              className="object-cover object-center dark:hidden"
-            />
-            <Image
-              src="/images/blog/dubai-journal-bg-dark.jpg"
-              alt=""
-              fill
-              sizes="100vw"
-              priority={false}
-              className="hidden object-cover object-center dark:block"
+              loading="lazy"
+              className="object-cover object-center"
             />
           </div>
 
@@ -250,9 +249,9 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
             <m.g
               style={{ transformOrigin: 'center bottom' }}
               animate={
-                prefersReducedMotion
-                  ? undefined
-                  : { x: [0, -22, 0], scaleX: [1.03, 1.05, 1.03] }
+                shouldAnimate
+                  ? { x: [0, -22, 0], scaleX: [1.03, 1.05, 1.03] }
+                  : undefined
               }
               transition={{
                 duration: 20,
@@ -274,9 +273,9 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
             <m.g
               style={{ transformOrigin: 'center bottom' }}
               animate={
-                prefersReducedMotion
-                  ? undefined
-                  : { x: [0, 20, 0], scaleX: [1.04, 1.06, 1.04] }
+                shouldAnimate
+                  ? { x: [0, 20, 0], scaleX: [1.04, 1.06, 1.04] }
+                  : undefined
               }
               transition={{
                 duration: 17,
@@ -301,7 +300,7 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
         <div className="relative z-10 mx-auto max-w-[1060px] px-4 sm:px-6 lg:px-8">
           {/* ─── Centered Editorial Section Header ─── */}
           <m.header
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 'some' }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}

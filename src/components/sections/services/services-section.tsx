@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { ThemeImage } from '@/components/ui/theme-image';
+import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import {
   ArrowRight,
   ChevronRight,
@@ -120,7 +121,7 @@ function ServiceSmartTags({
 
       <div ref={containerRef} className="min-w-0 flex-1 overflow-hidden">
         <AnimatePresence mode="wait" initial={false}>
-          <motion.ul
+          <m.ul
             key={`${startIndex}-${visibleCount}`}
             id={`${serviceId}-tags`}
             aria-label={`${serviceTitle} highlights`}
@@ -138,7 +139,7 @@ function ServiceSmartTags({
                 {label}
               </li>
             ))}
-          </motion.ul>
+          </m.ul>
         </AnimatePresence>
       </div>
 
@@ -174,9 +175,9 @@ function ServiceCard({
   const Icon = SERVICE_ICONS[service.icon];
 
   return (
-    <motion.article
+    <m.article
       data-testid={`service-card-${service.id}`}
-      initial={reducedMotion ? false : { opacity: 0, y: 18 }}
+      initial={reducedMotion ? false : { opacity: 0.99, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 'some' }}
       transition={{
@@ -285,7 +286,7 @@ function ServiceCard({
           </Link>
         </div>
       </div>
-    </motion.article>
+    </m.article>
   );
 }
 
@@ -335,21 +336,14 @@ export function ServicesSection() {
             'radial-gradient(ellipse 76% 68% at 74% 46%, #000 20%, rgba(0,0,0,0.45) 52%, transparent 88%)',
         }}
       >
-        <Image
-          src="/images/testimonials/dubai-skyline-light.webp"
+        <ThemeImage
+          lightSrc="/images/testimonials/dubai-skyline-light.webp"
+          darkSrc="/images/testimonials/dubai-skyline-dark.webp"
           alt=""
           width={1920}
           height={320}
           loading="lazy"
-          className="block h-full w-full object-cover object-right-bottom dark:hidden"
-        />
-        <Image
-          src="/images/testimonials/dubai-skyline-dark.webp"
-          alt=""
-          width={1920}
-          height={320}
-          loading="lazy"
-          className="hidden h-full w-full object-cover object-right-bottom dark:block"
+          className="block h-full w-full object-cover object-right-bottom"
         />
         {/* Seamless 4-Side Merge into Section Background */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#F8F7F2] via-[#F8F7F2]/80 to-transparent dark:from-[#050807] dark:via-[#050807]/80" />
@@ -360,8 +354,8 @@ export function ServicesSection() {
       {/* Main Content Container */}
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Centered Header */}
-        <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+        <m.div
+          initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 'some' }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -413,7 +407,7 @@ export function ServicesSection() {
             documentation for seamless company setup and regulatory support in
             the UAE.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* 2x2 Responsive Services Grid */}
         <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-7 md:grid-cols-2 lg:gap-5">

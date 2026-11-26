@@ -1,8 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
 import { cn } from '@/lib/utils';
+import { useSectionInView } from '@/hooks/use-section-in-view';
 
 export type PinTone = 'red' | 'green' | 'charcoal';
 
@@ -127,7 +128,7 @@ function ProcessCard({
 
   return (
     <m.div
-      initial={reducedMotion ? false : { opacity: 0, y: 18 }}
+      initial={reducedMotion ? false : { opacity: 0.99, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 'some' }}
       transition={{
@@ -195,11 +196,14 @@ export default function HowItWorks({
   stepPositions,
 }: HowItWorksProps) {
   const prefersReducedMotion = useReducedMotion();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const inView = useSectionInView(wrapperRef);
+  const shouldAnimate = !prefersReducedMotion && inView;
   const positions = stepPositions || DEFAULT_CARD_POSITIONS;
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className={cn('relative mx-auto w-full max-w-[980px]', className)}>
+      <div ref={wrapperRef} className={cn('relative mx-auto w-full max-w-[980px]', className)}>
         {/* Desktop & Tablet Staggered 3-Card Stage */}
         <div className="relative flex flex-col gap-5 pl-7 md:block md:h-[346px] md:gap-0 md:pl-0">
           {/* Mobile Vertical Timeline Line & Nodes */}
@@ -236,7 +240,7 @@ export default function HowItWorks({
                 fill="none"
                 initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
                 animate={
-                  prefersReducedMotion ? undefined : { strokeDashoffset: -72 }
+                  shouldAnimate ? { strokeDashoffset: -72 } : undefined
                 }
                 transition={{
                   duration: 4.5,
@@ -255,7 +259,7 @@ export default function HowItWorks({
                 fill="none"
                 initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
                 animate={
-                  prefersReducedMotion ? undefined : { strokeDashoffset: -72 }
+                  shouldAnimate ? { strokeDashoffset: -72 } : undefined
                 }
                 transition={{
                   duration: 4.5,

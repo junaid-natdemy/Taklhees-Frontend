@@ -2,11 +2,11 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, ShieldCheck, Briefcase, FileCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { DriftWall } from '@/components/ui/drift-wall';
 import { LiquidButton } from '@/components/ui/liquid-glass-button';
+import { ThemeImage } from '@/components/ui/theme-image';
 
 const TRUST_HIGHLIGHTS = [
   { icon: Briefcase, title: 'Business Setup' },
@@ -206,25 +206,17 @@ function DubaiSkylineSkeleton() {
       }}
       aria-hidden="true"
     >
-      {/* Light Mode: Crisp Recognizable Dubai Skyline Illustration */}
-      <Image
-        src="/images/dubai-skyline-hero-light.jpg"
+      <ThemeImage
+        lightSrc="/images/dubai-skyline-hero-light.webp"
+        darkSrc="/images/dubai-skyline-hero-dark.webp"
         alt="Dubai Skyline featuring Burj Khalifa, Emirates Towers, and Museum of the Future"
         width={1376}
         height={768}
         sizes="(max-width: 1024px) 92vw, 760px"
         priority
-        className="block h-full w-full object-cover object-left-bottom opacity-[0.65] mix-blend-multiply transition-opacity duration-300 dark:hidden"
-      />
-      {/* Dark Mode: Obsidian & Emerald-Gold Dubai Skyline Illustration */}
-      <Image
-        src="/images/dubai-skyline-hero-dark.jpg"
-        alt="Dubai Skyline featuring Burj Khalifa, Emirates Towers, and Museum of the Future"
-        width={1376}
-        height={768}
-        sizes="(max-width: 1024px) 92vw, 760px"
-        priority
-        className="hidden h-full w-full object-cover object-left-bottom opacity-[0.82] mix-blend-screen transition-opacity duration-300 dark:block"
+        lightClassName="opacity-[0.65] mix-blend-multiply"
+        darkClassName="opacity-[0.82] mix-blend-screen"
+        className="block h-full w-full object-cover object-left-bottom transition-opacity duration-300"
       />
     </div>
   );

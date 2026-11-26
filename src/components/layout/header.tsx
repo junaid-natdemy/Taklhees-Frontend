@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { ChevronDown, Menu, X, ArrowUpRight, ShieldCheck, Briefcase, FileCheck, Award, FileText } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'motion/react';
 import { ThemeToggle } from './theme-toggle';
 
 type Country = 'ae' | 'in';
@@ -289,7 +289,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full px-3 pb-1 pt-2 sm:pt-2.5 lg:pt-2 xl:pt-2.5 sm:px-5">
+    <header className="sticky top-0 z-50 w-full px-3 pb-1 pt-2 sm:pt-2.5 lg:pt-2 xl:pt-2.5 sm:px-5 transform-gpu will-change-transform">
       <div className="mx-auto max-w-[1160px]">
         {/* ============ THREE-PART CONNECTED NAVBAR ARCHITECTURE (DUAL SATIN RIBBONS & LIQUID GLASS) ============ */}
         <div className="relative flex items-center justify-between lg:justify-center w-full">
@@ -353,7 +353,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                     >
                       {/* Signature Liquid Glass Active Water Drop */}
                       {active && (
-                        <motion.span
+                        <m.span
                           layoutId={`liquid-glass-water-drop-${country}`}
                           transition={{ type: 'spring', stiffness: 420, damping: 30 }}
                           className="absolute inset-0 z-0 rounded-full bg-gradient-to-b from-white/95 via-white/40 to-emerald-500/15 border border-emerald-600/25 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-2px_4px_rgba(0,132,61,0.22),0_4px_14px_-2px_rgba(0,132,61,0.25)] backdrop-blur-md dark:from-white/20 dark:via-white/5 dark:to-[#16A05A]/25 dark:border-[#16A05A]/40 dark:shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(22,160,90,0.3),0_4px_16px_-2px_rgba(0,0,0,0.7),0_0_14px_-2px_rgba(22,160,90,0.35)]"
@@ -361,7 +361,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                         >
                           {/* Liquid surface tension water meniscus */}
                           <span className="pointer-events-none absolute inset-x-2 top-0.5 h-[40%] rounded-full bg-gradient-to-b from-white/80 to-transparent dark:from-white/35" />
-                        </motion.span>
+                        </m.span>
                       )}
                       {!active && (
                         <span
@@ -380,7 +380,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                     {/* Interactive Glass Services Dropdown */}
                     <AnimatePresence>
                       {servicesOpen && (
-                        <motion.div
+                        <m.div
                           initial={{ opacity: 0, y: 8, scale: 0.98 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 6, scale: 0.98 }}
@@ -418,7 +418,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                               );
                             })}
                           </div>
-                        </motion.div>
+                        </m.div>
                       )}
                     </AnimatePresence>
                   </div>
@@ -437,7 +437,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                 >
                   {/* Signature Liquid Glass Active Water Drop */}
                   {active && (
-                    <motion.span
+                    <m.span
                       layoutId={`liquid-glass-water-drop-${country}`}
                       transition={{ type: 'spring', stiffness: 420, damping: 30 }}
                       className="absolute inset-0 z-0 rounded-full bg-gradient-to-b from-white/95 via-white/40 to-emerald-500/15 border border-emerald-600/25 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-2px_4px_rgba(0,132,61,0.22),0_4px_14px_-2px_rgba(0,132,61,0.25)] backdrop-blur-md dark:from-white/20 dark:via-white/5 dark:to-[#16A05A]/25 dark:border-[#16A05A]/40 dark:shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(22,160,90,0.3),0_4px_16px_-2px_rgba(0,0,0,0.7),0_0_14px_-2px_rgba(22,160,90,0.35)]"
@@ -445,7 +445,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                     >
                       {/* Liquid surface tension water meniscus */}
                       <span className="pointer-events-none absolute inset-x-2 top-0.5 h-[40%] rounded-full bg-gradient-to-b from-white/80 to-transparent dark:from-white/35" />
-                    </motion.span>
+                    </m.span>
                   )}
                   {!active && (
                     <span
@@ -483,7 +483,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
 
               <AnimatePresence>
                 {countryOpen && (
-                  <motion.div
+                  <m.div
                     role="listbox"
                     initial={{ opacity: 0, y: 6, scale: 0.96 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -511,7 +511,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                         </button>
                       );
                     })}
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
@@ -537,7 +537,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
         {/* ================= MOBILE EXPANDED DRAWER ================= */}
         <AnimatePresence>
           {mobileOpen && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -10, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
@@ -564,7 +564,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                   );
                 })}
               </nav>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

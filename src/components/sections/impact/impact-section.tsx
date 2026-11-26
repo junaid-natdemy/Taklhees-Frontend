@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { m, AnimatePresence, useReducedMotion } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { IMPACT_METRICS } from './impact-data';
 import { ImpactGlobeBackdrop } from './impact-globe-backdrop';
@@ -132,8 +132,8 @@ export function ImpactSection() {
       {/* Main Content Container */}
       <div className="relative z-10 mx-auto max-w-[1260px] px-4 sm:px-6">
         {/* ================= SECTION HEADER ================= */}
-        <motion.header
-          initial={prefersReduced ? false : { opacity: 0, y: 18 }}
+        <m.header
+          initial={prefersReduced ? false : { opacity: 0.99, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 'some' }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -175,15 +175,15 @@ export function ImpactSection() {
           <p className="mt-4 text-pretty text-sm leading-relaxed text-neutral-600 dark:text-[#B5BEB9] sm:text-[15.5px]">
             Trusted by thousands of businesses, investors, and families across all seven Emirates.
           </p>
-        </motion.header>
+        </m.header>
 
         {/* ================= DESKTOP & LAPTOP 5-CARD ORBITAL PERSPECTIVE STAGE (lg+) ================= */}
-        <motion.div
+        <m.div
           role="region"
           aria-roledescription="interactive metrics showcase"
           aria-label="Takhlees impact statistics stage"
           onKeyDown={handleKeyDown}
-          initial={prefersReduced ? false : { opacity: 0, y: 24 }}
+          initial={prefersReduced ? false : { opacity: 0.99, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 'some' }}
           transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
@@ -222,7 +222,7 @@ export function ImpactSection() {
               className="absolute right-1 xl:right-4 top-[134px] xl:top-[144px] z-50"
             />
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ================= TABLET 3-CARD PERSPECTIVE DECK (md to <lg) ================= */}
         <div
@@ -296,7 +296,7 @@ export function ImpactSection() {
           {/* Active Featured Showcase Stage */}
           <div className="relative mx-auto max-w-[340px]">
             <AnimatePresence mode="wait" initial={false}>
-              <motion.div
+              <m.div
                 key={activeMetric.id}
                 initial={prefersReduced ? { opacity: 1 } : { opacity: 0, y: 8, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -310,7 +310,7 @@ export function ImpactSection() {
                   onSelect={handleNext}
                   delayMs={0}
                 />
-              </motion.div>
+              </m.div>
             </AnimatePresence>
 
             {/* Mobile Stage Arrows Bar */}

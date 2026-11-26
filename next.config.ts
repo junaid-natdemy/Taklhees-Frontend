@@ -4,9 +4,20 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  experimental: {
+    optimizePackageImports: [
+      'lucide-react',
+      'motion',
+      'date-fns',
+      '@radix-ui/react-avatar',
+    ],
+  },
   images: {
     unoptimized: process.env.NODE_ENV === 'development',
-    formats: ['image/webp'],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 2592000,
+    deviceSizes: [390, 640, 768, 1024, 1280, 1536, 1920],
+    imageSizes: [32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',

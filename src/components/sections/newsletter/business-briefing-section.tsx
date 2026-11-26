@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import Image from 'next/image';
+import { ThemeImage } from '@/components/ui/theme-image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -24,8 +24,8 @@ import {
   RotateCcw,
   ShieldCheck,
 } from 'lucide-react';
-import { GlassFilter } from '@/components/ui/liquid-glass-button';
 import { MotionTiltCard } from '@/components/ui/motion-tilt-card';
+import { useSectionInView } from '@/hooks/use-section-in-view';
 
 const briefingSchema = z.object({
   email: z
@@ -59,6 +59,9 @@ export function BusinessBriefingSection() {
   const [lockedPanelHeight, setLockedPanelHeight] = React.useState<
     number | null
   >(null);
+  const sectionRef = React.useRef<HTMLElement>(null);
+  const inView = useSectionInView(sectionRef);
+  const shouldAnimate = !prefersReducedMotion && inView;
   const panelRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -140,29 +143,19 @@ export function BusinessBriefingSection() {
   return (
     <LazyMotion features={domAnimation}>
       <section
+        ref={sectionRef}
         id="business-briefing"
         aria-labelledby="briefing-heading"
         className="relative flex min-h-[calc(100vh-76px)] items-center overflow-hidden bg-[#F8F7F2] py-20 transition-colors duration-300 dark:bg-[#050807] sm:py-24 lg:min-h-screen lg:py-28"
       >
-        {/* Reuse existing shared GlassFilter (#container-glass) from liquid-glass-button */}
-        <GlassFilter />
-
         {/* ================= LAYERED ATMOSPHERIC BACKGROUND ================= */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 select-none overflow-hidden"
         >
           {/* Warm Ivory & Golden-Hour Atmospheric Glow */}
-          <div className="absolute left-[10%] top-[20%] h-[420px] w-[540px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.9),transparent_72%)] blur-2xl dark:bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.12),transparent_72%)]" />
-          <m.div
-            animate={
-              prefersReducedMotion
-                ? undefined
-                : { scale: [1, 1.04, 1], opacity: [0.85, 1, 0.85] }
-            }
-            transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute right-[8%] top-[16%] h-[420px] w-[520px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,215,127,0.22),rgba(8,122,66,0.08)_55%,transparent_76%)] blur-3xl dark:bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.14),rgba(0,168,90,0.16)_52%,transparent_76%)]"
-          />
+          <div className="absolute left-[10%] top-[20%] h-[420px] w-[540px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.9),transparent_76%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.12),transparent_76%)]" />
+          <div className="absolute right-[8%] top-[16%] h-[420px] w-[520px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,215,127,0.22),rgba(8,122,66,0.08)_55%,transparent_78%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.14),rgba(0,168,90,0.16)_52%,transparent_78%)]" />
 
           {/* Golden-Hour Dubai Skyline on the Right Side */}
           <div
@@ -174,21 +167,14 @@ export function BusinessBriefingSection() {
                 'radial-gradient(ellipse 80% 80% at 80% 56%, #000 28%, rgba(0,0,0,0.5) 58%, transparent 88%)',
             }}
           >
-            <Image
-              src="/images/testimonials/dubai-skyline-light.webp"
+            <ThemeImage
+              lightSrc="/images/testimonials/dubai-skyline-light.webp"
+              darkSrc="/images/testimonials/dubai-skyline-dark.webp"
               alt=""
               width={1920}
               height={320}
               loading="lazy"
-              className="block h-full w-full object-cover object-right-bottom dark:hidden"
-            />
-            <Image
-              src="/images/testimonials/dubai-skyline-dark.webp"
-              alt=""
-              width={1920}
-              height={320}
-              loading="lazy"
-              className="hidden h-full w-full object-cover object-right-bottom dark:block"
+              className="block h-full w-full object-cover object-right-bottom"
             />
           </div>
 
@@ -299,7 +285,7 @@ export function BusinessBriefingSection() {
               filter="url(#briefingGoldGlow)"
               initial={prefersReducedMotion ? false : { strokeDashoffset: 0 }}
               animate={
-                prefersReducedMotion ? undefined : { strokeDashoffset: -1600 }
+                shouldAnimate ? { strokeDashoffset: -1600 } : undefined
               }
               transition={{
                 duration: 15,
@@ -309,8 +295,8 @@ export function BusinessBriefingSection() {
             />
           </svg>
 
-          {/* Smooth Emerald-to-Charcoal Transition Into Footer (#121212) */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-14 bg-gradient-to-b from-transparent via-[#062415]/60 to-[#121212]" />
+          {/* Smooth Emerald Transition Into Deep Forest Emerald Footer (#063D29) */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-14 bg-gradient-to-b from-transparent via-[#053624]/65 to-[#063D29]" />
         </div>
 
         {/* ================= MAIN EDITORIAL & GLASS COMPOSITION ================= */}
@@ -318,7 +304,7 @@ export function BusinessBriefingSection() {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
             {/* ---------- LEFT SIDE: EDITORIAL BRIEFING CONTENT ---------- */}
             <m.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+              initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 'some' }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -393,8 +379,7 @@ export function BusinessBriefingSection() {
                       />
                       <div
                         aria-hidden="true"
-                        className="pointer-events-none absolute inset-0 -z-10 rounded-xl"
-                        style={{ backdropFilter: 'url("#container-glass")' }}
+                        className="liquid-glass-refract-button pointer-events-none absolute inset-0 -z-10 rounded-xl"
                       />
                       <Icon
                         className="relative z-10 h-4.5 w-4.5 text-[#C2242B] dark:text-[#F25C63]"
@@ -412,7 +397,7 @@ export function BusinessBriefingSection() {
 
             {/* ---------- RIGHT SIDE: LIQUID GLASS SUBSCRIPTION PANEL ---------- */}
             <m.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+              initial={prefersReducedMotion ? false : { opacity: 0.99, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 'some' }}
               transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
@@ -428,7 +413,7 @@ export function BusinessBriefingSection() {
                   {/* Soft Emerald & Champagne Ambient Glow Beneath Glass Panel */}
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute -inset-4 bg-[radial-gradient(ellipse_at_55%_50%,rgba(8,122,66,0.16),rgba(229,193,88,0.18)_48%,transparent_75%)] blur-2xl dark:bg-[radial-gradient(ellipse_at_55%_50%,rgba(22,160,90,0.22),rgba(212,175,55,0.14)_48%,transparent_75%)]"
+                    className="pointer-events-none absolute -inset-4 bg-[radial-gradient(ellipse_at_55%_50%,rgba(8,122,66,0.16),rgba(229,193,88,0.18)_48%,transparent_78%)] dark:bg-[radial-gradient(ellipse_at_55%_50%,rgba(22,160,90,0.22),rgba(212,175,55,0.14)_48%,transparent_78%)]"
                   />
 
                   {/* Organic Sculpted Liquid-Glass Panel (locks exact height during success) */}
@@ -649,10 +634,7 @@ export function BusinessBriefingSection() {
                                 />
                                 <div
                                   aria-hidden="true"
-                                  className="pointer-events-none absolute inset-0 -z-10 rounded-2xl"
-                                  style={{
-                                    backdropFilter: 'url("#container-glass")',
-                                  }}
+                                  className="liquid-glass-refract-button pointer-events-none absolute inset-0 -z-10 rounded-2xl"
                                 />
                                 <Mail
                                   className="relative z-10 h-6 w-6 text-[#087A42] dark:text-[#2EB04B]"

@@ -970,6 +970,96 @@ html[data-splash-seen='1'] .takhlees-splash-overlay {
   will-change: transform;
 }
 
+@keyframes takhlees-curtain-top {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -108%, 0);
+  }
+}
+
+@keyframes takhlees-curtain-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-108%, 0, 0);
+  }
+}
+
+@keyframes takhlees-curtain-right {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(108%, 0, 0);
+  }
+}
+
+@keyframes takhlees-shard-top {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -210px, 0) scale(1.18);
+    opacity: 0;
+  }
+}
+
+@keyframes takhlees-shard-left {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-230px, 28px, 0) scale(1.18);
+    opacity: 0;
+  }
+}
+
+@keyframes takhlees-shard-right {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(230px, 28px, 0) scale(1.18);
+    opacity: 0;
+  }
+}
+
+.takhlees-curtain-top {
+  animation: takhlees-curtain-top 680ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  will-change: transform;
+}
+
+.takhlees-curtain-left {
+  animation: takhlees-curtain-left 680ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  will-change: transform;
+}
+
+.takhlees-curtain-right {
+  animation: takhlees-curtain-right 680ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  will-change: transform;
+}
+
+.takhlees-shard-top {
+  animation: takhlees-shard-top 620ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.takhlees-shard-left {
+  animation: takhlees-shard-left 620ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.takhlees-shard-right {
+  animation: takhlees-shard-right 620ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  will-change: transform, opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .takhlees-loader-arc-spin,
   .takhlees-loader-breathe,

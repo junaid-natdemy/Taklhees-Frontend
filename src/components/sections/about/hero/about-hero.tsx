@@ -14,6 +14,7 @@ const MOBILE_ARCH_CLIP =
 export function AboutHero() {
   return (
     <section
+      id="about-hero"
       aria-labelledby="about-hero-heading"
       className="relative overflow-hidden bg-[linear-gradient(155deg,#FCFBF8_0%,#F7F5EF_52%,#F1EEE5_100%)] transition-colors duration-300 dark:bg-[#050B08] dark:bg-none lg:min-h-[580px] lg:max-h-[680px]"
     >
@@ -53,7 +54,8 @@ export function AboutHero() {
             width={1920}
             height={620}
             sizes="(max-width: 1023px) 100vw, 70vw"
-            loading="lazy"
+            loading="eager"
+            unoptimized
             className="h-full w-full object-cover object-bottom opacity-60 mix-blend-multiply dark:opacity-30 dark:mix-blend-normal"
           />
         </div>
@@ -80,7 +82,9 @@ export function AboutHero() {
             src="/images/about/dubai-arch-golden-hour.webp"
             alt="Golden-hour view of the Dubai skyline, Burj Khalifa, waterfront, and palm trees framed through a UAE mashrabiya stone arch"
             fill
+            priority
             loading="eager"
+            unoptimized
             fetchPriority="high"
             sizes="58vw"
             className="object-cover object-[42%_50%] contrast-[1.02] saturate-[0.98]"
@@ -261,7 +265,7 @@ export function AboutHero() {
               alt="Golden-hour view of the Dubai skyline, Burj Khalifa, waterfront, and palm trees framed through a UAE mashrabiya stone arch"
               fill
               loading="eager"
-              fetchPriority="high"
+              unoptimized
               sizes="96vw"
               className="object-cover object-[42%_50%] contrast-[1.03] saturate-[1.03]"
             />

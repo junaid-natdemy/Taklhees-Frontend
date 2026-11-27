@@ -140,7 +140,8 @@ export function SampleCertificateSheet({
             alt=""
             width={22}
             height={22}
-            loading="lazy"
+            loading="eager"
+            unoptimized
             className={cn('object-contain', isSecondary ? 'h-4 w-4' : 'h-5 w-5')}
           />
         </div>

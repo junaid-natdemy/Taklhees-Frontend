@@ -80,7 +80,8 @@ export function OurStorySkylineBackdrop() {
           width={1920}
           height={620}
           sizes="(max-width: 767px) 92vw, 68vw"
-          loading="lazy"
+          loading="eager"
+          unoptimized
           className="h-full w-full object-cover object-bottom opacity-[0.42] mix-blend-multiply dark:opacity-[0.26] dark:mix-blend-normal"
         />
       </div>

@@ -188,7 +188,8 @@ export function WhoWeAreSection() {
                   alt="UAE corporate business consultation meeting in a bright modern office"
                   fill
                   sizes="(min-width: 1024px) 56vw, 92vw"
-                  loading="lazy"
+                  loading="eager"
+                  unoptimized
                   className="object-cover object-center"
                 />
               </div>
@@ -227,7 +228,8 @@ export function WhoWeAreSection() {
                   alt="UAE corporate business consultation meeting in a bright modern office"
                   fill
                   sizes="96vw"
-                  loading="lazy"
+                  loading="eager"
+                  unoptimized
                   className="object-cover object-center"
                 />
               </div>

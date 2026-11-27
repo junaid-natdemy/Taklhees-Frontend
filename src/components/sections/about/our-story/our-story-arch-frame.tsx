@@ -96,10 +96,11 @@ export function OurStoryArchFrame({
               alt={chapter.imageAlt}
               fill
               loading={
-                shouldLoadAllSlides && isAdjacent && activeIndex > 0
+                shouldLoadAllSlides && isAdjacent
                   ? 'eager'
                   : 'lazy'
               }
+              unoptimized
               sizes={sizes}
               aria-hidden={!isCurrent}
               className={cn(
@@ -200,7 +201,8 @@ export function OurStoryMobileArchImage({
           src={milestone.imageSrc}
           alt={milestone.imageAlt}
           fill
-          loading="lazy"
+          loading="eager"
+          unoptimized
           sizes="(max-width: 767px) 92vw, 520px"
           className={cn(
             'object-cover',

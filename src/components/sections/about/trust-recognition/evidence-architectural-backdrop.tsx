@@ -23,7 +23,8 @@ export function EvidenceArchitecturalBackdrop() {
         src="/images/about/trust-recognition-bg.webp"
         alt=""
         fill
-        loading="lazy"
+        loading="eager"
+        unoptimized
         sizes="100vw"
         className="object-cover object-center opacity-80 dark:hidden"
       />

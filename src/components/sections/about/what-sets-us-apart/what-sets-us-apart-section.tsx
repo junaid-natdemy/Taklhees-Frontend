@@ -32,7 +32,8 @@ export function WhatSetsUsApartSection() {
           src="/images/about/sets-us-apart-bg-ivory.webp"
           alt=""
           fill
-          loading="lazy"
+          loading="eager"
+          unoptimized
           sizes="100vw"
           className="object-cover object-center opacity-95 dark:hidden"
         />
@@ -43,15 +44,7 @@ export function WhatSetsUsApartSection() {
       </div>
 
       {/* ================= DESKTOP & TABLET FULL-BLEED LEFT ARCHITECTURE (md+) ================= */}
-      <m.div
-        initial={prefersReducedMotion ? false : { opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.12 }}
-        transition={
-          prefersReducedMotion
-            ? { duration: 0 }
-            : { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
-        }
+      <div
         className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[29%] max-w-[440px] md:block"
         style={{
           /* Multi-edge atmospheric mask: eliminates top, bottom, and right rectangular boundaries */
@@ -67,7 +60,8 @@ export function WhatSetsUsApartSection() {
           src="/images/about/sets-us-apart-arch-left.webp"
           alt="Traditional UAE sandstone and mashrabiya archway opening onto the Burj Khalifa and Dubai skyline at golden hour"
           fill
-          loading="lazy"
+          loading="eager"
+          unoptimized
           sizes="(min-width: 1280px) 28vw, 30vw"
           className="object-cover object-[48%_46%] dark:brightness-95"
         />
@@ -76,7 +70,7 @@ export function WhatSetsUsApartSection() {
           aria-hidden="true"
           className="absolute inset-0 bg-[linear-gradient(to_bottom,#F7F5EF_0%,transparent_18%,transparent_82%,#F7F5EF_100%),linear-gradient(to_right,transparent_58%,rgba(247,245,239,0.72)_88%,#F7F5EF_100%)] opacity-60 dark:bg-[linear-gradient(to_bottom,#050B08_0%,transparent_20%,transparent_80%,#050B08_100%),linear-gradient(to_right,transparent_58%,rgba(5,11,8,0.75)_88%,#050B08_100%)] dark:opacity-90"
         />
-      </m.div>
+      </div>
 
       {/* ================= DESKTOP & TABLET COMPOSITION (md+) ================= */}
       <div className="relative z-10 hidden md:block">
@@ -271,7 +265,8 @@ export function WhatSetsUsApartSection() {
             src="/images/about/sets-us-apart-arch-left.webp"
             alt="Traditional UAE sandstone archway overlooking Burj Khalifa at golden hour"
             fill
-            loading="lazy"
+            loading="eager"
+            unoptimized
             sizes="94vw"
             className="object-cover object-[48%_44%]"
           />

@@ -249,15 +249,7 @@ export function UaeWithinReachSection() {
       </div>
 
       {/* ================= DESKTOP 16:9 ARCHITECTURAL UAE SCENE (RIGHT-LOCKED, SEAMLESS IVORY BLEND) ================= */}
-      <m.div
-        initial={prefersReducedMotion ? false : { opacity: 0, scale: 1.012 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, amount: 0.12 }}
-        transition={
-          prefersReducedMotion
-            ? { duration: 0 }
-            : { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
-        }
+      <div
         className="pointer-events-none absolute inset-0 z-[5] hidden items-center justify-end overflow-hidden lg:flex"
       >
         {/* Aspect-locked 16:9 stage keeping markers, connectors, and pills geometry-locked without top/bottom fade strips */}
@@ -275,7 +267,8 @@ export function UaeWithinReachSection() {
             alt="Sculpted 3D warm ivory limestone and brushed champagne-gold architectural model of the United Arab Emirates with Downtown Dubai skyline over reflective water"
             fill
             quality={95}
-            loading="lazy"
+            loading="eager"
+            unoptimized
             sizes="(min-width: 1536px) 1440px, (min-width: 1280px) 1250px, 1000px"
             className="object-cover object-center"
           />
@@ -289,7 +282,7 @@ export function UaeWithinReachSection() {
           {/* Calibrated Normalized HTML/SVG Emirate Overlays (Desktop) */}
           <EmirateMarkerLayer variant="desktop" />
         </div>
-      </m.div>
+      </div>
 
       {/* ================= EDITORIAL CONTENT & MOBILE/TABLET STAGE ================= */}
       <div className="pointer-events-none relative z-10 mx-auto flex max-w-[1440px] flex-col justify-center px-5 pb-20 pt-20 sm:px-8 sm:pt-24 md:pb-24 lg:min-h-[600px] lg:px-12 lg:py-24 xl:min-h-[690px] xl:px-16">
@@ -390,7 +383,8 @@ export function UaeWithinReachSection() {
                 alt="Sculpted 3D ivory limestone architectural model of the United Arab Emirates"
                 fill
                 quality={85}
-                loading="lazy"
+                loading="eager"
+                unoptimized
                 sizes="(max-width: 768px) 100vw, 680px"
                 className="object-cover object-center"
               />

@@ -1,11 +1,41 @@
+import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+import {
+  AboutHero,
+  WhoWeAreSection,
+} from '@/components/sections/about';
+
+const WhatSetsUsApartSection = dynamic(
+  () => import('@/components/sections/about/what-sets-us-apart/what-sets-us-apart-section')
+);
+const OurStoryJourney = dynamic(
+  () => import('@/components/sections/about/our-story/our-story-journey')
+);
+const TrustRecognitionSection = dynamic(
+  () => import('@/components/sections/about/trust-recognition/trust-recognition-section')
+);
+const UaeWithinReachSection = dynamic(
+  () => import('@/components/sections/about/within-reach/uae-within-reach-section')
+);
+
+export const metadata: Metadata = {
+  title: 'About Us | Takhlees Business UAE',
+  description:
+    'Empowering businesses and investors with comprehensive setup, PRO and documentation support across the UAE since 2010.',
+  alternates: {
+    canonical: 'https://takhleesbusiness.com/ae/about',
+  },
+};
+
 export default function AboutPage() {
   return (
-    <div className="container mx-auto px-4 py-16 sm:px-6">
-      <div className="max-w-3xl mx-auto space-y-4 text-center">
-        <span className="text-xs font-bold uppercase tracking-widest text-[#00843D] dark:text-[#2EB04B]">About Us</span>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 dark:text-white">About Takhlees Business</h1>
-        <p className="text-neutral-600 dark:text-neutral-300">Empowering UAE corporate entities, document clearing, and typing services with 10+ years of excellence.</p>
-      </div>
-    </div>
+    <>
+      <AboutHero />
+      <WhoWeAreSection />
+      <WhatSetsUsApartSection />
+      <OurStoryJourney />
+      <TrustRecognitionSection />
+      <UaeWithinReachSection />
+    </>
   );
 }

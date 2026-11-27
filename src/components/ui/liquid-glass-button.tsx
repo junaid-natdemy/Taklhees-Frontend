@@ -73,9 +73,9 @@ const liquidbuttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         emerald:
-          "bg-[#0A6B36] text-white hover:bg-[#085C2E] shadow-[0_6px_20px_rgba(10,107,54,0.3)] hover:scale-105 duration-300 transition dark:bg-[#16A05A] dark:hover:bg-[#087A43] dark:shadow-[0_6px_20px_rgba(22,160,90,0.28)]",
+          "bg-[#0A6B36] text-white hover:bg-[#085C2E] shadow-[0_6px_20px_rgba(10,107,54,0.3)] hover:scale-105 duration-300 transition dark:bg-[#0B6B45] dark:text-[#F4F0E8] dark:hover:bg-[#0E7F52] dark:shadow-[0_8px_24px_rgba(0,0,0,0.45),0_0_20px_rgba(32,183,101,0.22)]",
         glass:
-          "bg-white/80 dark:bg-[#171717] backdrop-blur-md text-neutral-900 dark:text-[#F5F5F2] border border-black/10 dark:border-[#303432] hover:scale-105 duration-300 transition shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:bg-[#202222]",
+          "bg-white/80 dark:bg-[#0B1D15]/85 backdrop-blur-md text-neutral-900 dark:text-[#F4F0E8] border border-black/10 dark:border-[#C9A45C]/25 hover:scale-105 duration-300 transition shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.1)] dark:hover:bg-[#10291E]/90",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -136,7 +136,7 @@ const LiquidButton = React.forwardRef<HTMLButtonElement, LiquidButtonProps>(
                   className="pointer-events-none absolute inset-0 z-0 h-full w-full rounded-full 
                     shadow-[0_0_6px_rgba(0,0,0,0.03),0_2px_6px_rgba(0,0,0,0.08),inset_3px_3px_0.5px_-3px_rgba(0,0,0,0.9),inset_-3px_-3px_0.5px_-3px_rgba(0,0,0,0.85),inset_1px_1px_1px_-0.5px_rgba(0,0,0,0.6),inset_-1px_-1px_1px_-0.5px_rgba(0,0,0,0.6),inset_0_0_6px_6px_rgba(0,0,0,0.12),inset_0_0_2px_2px_rgba(0,0,0,0.06),0_0_12px_rgba(255,255,255,0.15)] 
                     transition-all duration-300
-                    dark:shadow-[0_0_8px_rgba(0,0,0,0.03),0_2px_6px_rgba(0,0,0,0.08),inset_3px_3px_0.5px_-3.5px_rgba(255,255,255,0.09),inset_-3px_-3px_0.5px_-3.5px_rgba(255,255,255,0.85),inset_1px_1px_1px_-0.5px_rgba(255,255,255,0.6),inset_-1px_-1px_1px_-0.5px_rgba(255,255,255,0.6),inset_0_0_6px_6px_rgba(255,255,255,0.12),inset_0_0_2px_2px_rgba(255,255,255,0.06),0_0_12px_rgba(0,0,0,0.15)]"
+                    dark:shadow-[0_12px_28px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12),inset_0_0_0_1px_rgba(205,170,104,0.22),inset_0_-2px_6px_rgba(0,0,0,0.6),inset_0_0_10px_2px_rgba(11,107,69,0.16)]"
                 />
                 <div
                   aria-hidden="true"

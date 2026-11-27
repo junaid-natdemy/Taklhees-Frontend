@@ -83,7 +83,7 @@ void main(){
  vec3 wc=mix(mix(vec3(.56,.92,.68),vec3(0.,.52,.24),depth),mix(vec3(.18,.69,.29),vec3(.04,.36,.19),depth),uDark);
  float cw=caus((p+n.xy*8.)*.09,uTime*.8);
  wc+=vec3(.80,1.,.88)*smoothstep(.55,1.,cw)*.32;
- wc=mix(wc,vec3(1.),fm*(1.-smoothstep(0.,2.5,-fd))*.7);
+ wc=mix(wc,mix(vec3(1.),vec3(.68,.84,.74),uDark),fm*(1.-smoothstep(0.,2.5,-fd))*.7*(1.-.3*uDark));
  float wa=fm*(.78+.1*uDark);
  vec3 c=wc*wa;float a=wa;
  /* drop shadow */
@@ -91,15 +91,15 @@ void main(){
  c=vec3(0.,.16,.08)*sh+c*(1.-sh);a=sh+a*(1.-sh);
  /* glass rim */
  float pa=clamp(pm*(fres*.5+spec*.9+spec2),0.,1.);
- c=mix(vec3(1.),irid,.5*fres)*pa+c*(1.-pa);a=pa+a*(1.-pa);
+ c=mix(mix(vec3(1.),vec3(.20,.46,.32),uDark),irid,.5*fres)*pa*(1.-.4*uDark)+c*(1.-pa*(1.-.4*uDark));a=pa*(1.-.4*uDark)+a*(1.-pa*(1.-.4*uDark));
  /* the drop */
  float th=lens(dd,11.);
  float cs=caus((p+n.xy*th*18.)*.085,uTime*.9);
- vec3 tint=mix(vec3(.93,.99,.95),vec3(.82,.95,.87),uDark);
+ vec3 tint=mix(vec3(.93,.99,.95),vec3(.05,.18,.11),uDark);
  float rim=dm*(1.-smoothstep(0.,8.,-dd));
  float cres=dm*smoothstep(.12,.55,dot(n.xy,normalize(vec2(.55,.85))))*smoothstep(0.,3.,-dd);
  float body=.5+.5*clamp(-n.y*3.,-1.,1.);
- float da=dm*(mix(.62,.76,uDark)+.18*body);vec3 dc=mix(tint,vec3(1.),body*.6);
+ float da=dm*(mix(.62,.74,uDark)+.18*body);vec3 dc=mix(tint,mix(vec3(1.),vec3(.14,.42,.26),uDark),body*.6);
  float la=rim*.3;vec3 lc=mix(vec3(0.,.45,.22),vec3(.10,.62,.32),uDark);dc=lc*la+dc*da*(1.-la);da=la+da*(1.-la);
  la=clamp(cres*.7+smoothstep(.6,1.,cs)*.28*th*dm,0.,1.);dc=vec3(1.)*la+dc*(1.-la);da=la+da*(1.-la);
  la=clamp(dm*(spec*1.2+spec2*.5),0.,1.);dc=vec3(1.)*la+dc*(1.-la);da=la+da*(1.-la);

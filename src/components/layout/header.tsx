@@ -78,7 +78,7 @@ function UAEFlag() {
   return (
     <span
       aria-hidden="true"
-      className="relative inline-block h-3.5 w-5 shrink-0 overflow-hidden rounded-[2px] border border-black/10 dark:border-white/20 shadow-xs"
+      className="relative inline-block h-3.5 w-5 shrink-0 overflow-hidden rounded-[2px] border border-black/10 dark:border-white/20 shadow-sm"
     >
       <span className="absolute inset-y-0 left-0 w-[28%] bg-[#E4002B]" />
       <span className="absolute left-[28%] right-0 top-0 h-1/3 bg-[#00732F]" />
@@ -92,7 +92,7 @@ function IndiaFlag() {
   return (
     <span
       aria-hidden="true"
-      className="relative inline-block h-3.5 w-5 shrink-0 overflow-hidden rounded-[2px] border border-black/10 dark:border-white/20 shadow-xs"
+      className="relative inline-block h-3.5 w-5 shrink-0 overflow-hidden rounded-[2px] border border-black/10 dark:border-white/20 shadow-sm"
     >
       <span className="absolute inset-x-0 top-0 h-1/3 bg-[#FF9933]" />
       <span className="absolute inset-x-0 top-1/3 flex h-1/3 items-center justify-center bg-white">
@@ -309,7 +309,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
 
           {/* ================= 2. CENTER SECTION — MAIN NAVIGATION CAPSULE (UAE FLAG COLOR FLOW BORDER) ================= */}
           <nav
-            className="nav-center-flag-border relative z-20 hidden flex-1 max-w-[650px] xl:max-w-[680px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/94 px-3 lg:flex xl:px-4 backdrop-blur-sm shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,0,0,0.04),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#111313]/90 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-[border-color,box-shadow] duration-150"
+            className="nav-center-flag-border relative z-20 hidden flex-1 max-w-[650px] xl:max-w-[680px] h-[48px] items-center justify-evenly rounded-full bg-[#FAF8F5]/[0.94] px-3 lg:flex xl:px-4 backdrop-blur-sm shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.95),inset_0_-1.5px_2px_0_rgba(0,0,0,0.04),0_8px_24px_-4px_rgba(0,0,0,0.08),0_2px_6px_0_rgba(0,0,0,0.04)] dark:bg-[#08140F]/[0.92] dark:border-[#C9A45C]/20 dark:shadow-[inset_0_1.5px_2px_0_rgba(255,255,255,0.16),inset_0_-1px_2px_0_rgba(0,0,0,0.6),0_12px_36px_-4px_rgba(0,0,0,0.75),0_2px_8px_0_rgba(0,0,0,0.5)] transition-[border-color,box-shadow] duration-150"
             aria-label="Main Navigation"
           >
             {links.map((link) => {
@@ -332,7 +332,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                       className={`group relative inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[12px] xl:text-[12.5px] 2xl:text-[13px] tracking-normal transition-colors duration-200 select-none ${
                         active
                           ? 'font-semibold text-[#00843D] dark:text-[#16A05A]'
-                          : 'font-medium text-neutral-700 hover:text-neutral-900 dark:text-[#A5AAA7] dark:hover:text-[#F5F5F2]'
+                          : 'font-medium text-neutral-700 hover:text-neutral-900 dark:text-[#C1C8C1] dark:hover:text-[#F4F0E8]'
                       }`}
                     >
                       {/* Signature Liquid Glass Active Water Drop */}
@@ -340,7 +340,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                         <m.span
                           layoutId={`liquid-glass-water-drop-${country}`}
                           transition={{ type: 'spring', stiffness: 420, damping: 30 }}
-                          className="absolute inset-0 z-0 rounded-full bg-gradient-to-b from-white/95 via-white/40 to-emerald-500/15 border border-emerald-600/25 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-2px_4px_rgba(0,132,61,0.22),0_4px_14px_-2px_rgba(0,132,61,0.25)] backdrop-blur-md dark:from-white/20 dark:via-white/5 dark:to-[#16A05A]/25 dark:border-[#16A05A]/40 dark:shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(22,160,90,0.3),0_4px_16px_-2px_rgba(0,0,0,0.7),0_0_14px_-2px_rgba(22,160,90,0.35)]"
+                          className="absolute inset-0 z-0 rounded-full bg-gradient-to-b from-white/95 via-white/40 to-emerald-500/15 border border-emerald-600/25 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-2px_4px_rgba(0,132,61,0.22),0_4px_14px_-2px_rgba(0,132,61,0.25)] backdrop-blur-md dark:from-[#20B765]/25 dark:via-[#0B6B45]/20 dark:to-[#08140F]/85 dark:border-[#16A05A]/40 dark:shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(22,160,90,0.3),0_4px_16px_-2px_rgba(0,0,0,0.7),0_0_14px_-2px_rgba(22,160,90,0.35)]"
                           aria-hidden="true"
                         >
                           {/* Liquid surface tension water meniscus */}
@@ -369,7 +369,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 6, scale: 0.98 }}
                           transition={{ duration: 0.16 }}
-                          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-80 rounded-2xl border border-white/90 bg-[#FAF8F5]/96 p-2 shadow-2xl backdrop-blur-md dark:border-white/12 dark:bg-[#111313]/96 z-50"
+                          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-80 rounded-2xl border border-white/90 bg-[#FAF8F5]/[0.96] p-2 shadow-2xl backdrop-blur-md dark:border-[#C9A45C]/20 dark:bg-[#0B1712]/[0.96] z-50"
                         >
                           <div className="px-3 py-1.5 border-b border-black/5 dark:border-white/5 mb-1">
                             <span className="text-[10.5px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
@@ -415,8 +415,8 @@ export function Header({ country = 'ae' }: HeaderProps) {
                   href={link.href}
                   className={`group relative inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[12px] xl:text-[12.5px] 2xl:text-[13px] tracking-normal transition-colors duration-200 select-none ${
                     active
-                      ? 'font-semibold text-[#00843D] dark:text-[#16A05A]'
-                      : 'font-medium text-neutral-700 hover:text-neutral-900 dark:text-[#A5AAA7] dark:hover:text-[#F5F5F2]'
+                      ? 'font-semibold text-[#00843D] dark:text-[#20B765]'
+                      : 'font-medium text-neutral-700 hover:text-neutral-900 dark:text-[#C1C8C1] dark:hover:text-[#F4F0E8]'
                   }`}
                 >
                   {/* Signature Liquid Glass Active Water Drop */}
@@ -424,11 +424,11 @@ export function Header({ country = 'ae' }: HeaderProps) {
                     <m.span
                       layoutId={`liquid-glass-water-drop-${country}`}
                       transition={{ type: 'spring', stiffness: 420, damping: 30 }}
-                      className="absolute inset-0 z-0 rounded-full bg-gradient-to-b from-white/95 via-white/40 to-emerald-500/15 border border-emerald-600/25 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-2px_4px_rgba(0,132,61,0.22),0_4px_14px_-2px_rgba(0,132,61,0.25)] backdrop-blur-md dark:from-white/20 dark:via-white/5 dark:to-[#16A05A]/25 dark:border-[#16A05A]/40 dark:shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(22,160,90,0.3),0_4px_16px_-2px_rgba(0,0,0,0.7),0_0_14px_-2px_rgba(22,160,90,0.35)]"
+                      className="absolute inset-0 z-0 rounded-full bg-gradient-to-b from-white/95 via-white/40 to-emerald-500/15 border border-emerald-600/25 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-2px_4px_rgba(0,132,61,0.22),0_4px_14px_-2px_rgba(0,132,61,0.25)] backdrop-blur-md dark:from-[#20B765]/25 dark:via-[#0B6B45]/20 dark:to-[#08140F]/85 dark:border-[#C9A45C]/30 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),inset_0_-2px_4px_rgba(0,0,0,0.45),0_4px_16px_-2px_rgba(0,0,0,0.75),0_0_14px_-2px_rgba(32,183,101,0.25)]"
                       aria-hidden="true"
                     >
                       {/* Liquid surface tension water meniscus */}
-                      <span className="pointer-events-none absolute inset-x-2 top-0.5 h-[40%] rounded-full bg-gradient-to-b from-white/80 to-transparent dark:from-white/35" />
+                      <span className="pointer-events-none absolute inset-x-2 top-0.5 h-[40%] rounded-full bg-gradient-to-b from-white/80 to-transparent dark:from-white/15" />
                     </m.span>
                   )}
                   {!active && (
@@ -473,7 +473,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 4, scale: 0.96 }}
                     transition={{ duration: 0.14 }}
-                    className="absolute right-0 z-50 mt-2 w-36 rounded-2xl border border-white/90 bg-[#FAF8F5]/98 p-1 shadow-xl backdrop-blur-md dark:border-white/12 dark:bg-[#111313]/98"
+                    className="absolute right-0 z-50 mt-2 w-36 rounded-2xl border border-white/90 bg-[#FAF8F5]/[0.98] p-1 shadow-xl backdrop-blur-md dark:border-[#C9A45C]/20 dark:bg-[#0B1712]/[0.98]"
                   >
                     {(['ae', 'in'] as const).map((c) => {
                       const selected = country === c;
@@ -527,7 +527,7 @@ export function Header({ country = 'ae' }: HeaderProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-2.5 rounded-3xl border border-black/10 bg-[#FAF8F5]/97 p-3 shadow-xl backdrop-blur-sm dark:border-white/12 dark:bg-[#111313]/97 lg:hidden z-50"
+              className="mt-2.5 rounded-3xl border border-black/10 bg-[#FAF8F5]/[0.97] p-3 shadow-xl backdrop-blur-sm dark:border-[#C9A45C]/20 dark:bg-[#0B1712]/[0.97] lg:hidden z-50"
             >
               <nav className="flex flex-col gap-1">
                 {links.map((link) => {

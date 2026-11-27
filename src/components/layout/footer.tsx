@@ -129,8 +129,8 @@ export function Footer({ country = 'ae' }: FooterProps) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden"
       >
-        {/* Seamless Top Emerald Bridge Continuing from Business Briefing Bottom Waves */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-16 bg-gradient-to-b from-[#032D18]/85 to-transparent" />
+        {/* Seamless Top Emerald Bridge Continuing from Section Bottom Waves */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-20 bg-gradient-to-b from-[#032D18] via-[#032D18]/85 to-transparent" />
 
         {/* Soft Atmospheric Emerald & Champagne-Gold Ambient Glows (zero blur kernel cost) */}
         <div className="absolute -left-24 top-0 h-[320px] w-[480px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(22,160,90,0.16),transparent_72%)]" />
@@ -215,14 +215,8 @@ export function Footer({ country = 'ae' }: FooterProps) {
         </svg>
       </div>
 
-      {/* Top Subtle Champagne-Gold Hairline Border */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none relative z-10 h-px w-full bg-gradient-to-r from-transparent via-[#D6B66C]/35 to-transparent"
-      />
-
       {/* ═══════════════ MAIN 4-COLUMN CONTENT ═══════════════ */}
-      <div className="relative z-10 mx-auto max-w-[1220px] px-4 pt-6 pb-0 sm:px-6 lg:px-8 lg:pt-6 lg:pb-0">
+      <div className="relative z-10 mx-auto max-w-[1220px] px-4 pt-7 pb-0 sm:px-6 lg:px-8 lg:pt-7 lg:pb-0">
         <m.div
           initial={prefersReducedMotion ? false : { opacity: 0.99, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}

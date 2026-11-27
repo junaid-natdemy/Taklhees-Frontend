@@ -15,50 +15,24 @@ export function OurStorySkylineBackdrop() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden"
     >
-      {/* Upper-Left Subtle Mashrabiya Architectural Veil */}
-      <svg
-        viewBox="0 0 260 240"
-        fill="none"
-        className="absolute left-0 top-0 h-32 w-32 opacity-55 dark:opacity-25 sm:h-44 sm:w-44 lg:h-52 lg:w-52"
-      >
-        <path
-          d="M0 198 C 66 174, 152 98, 212 0 L 0 0 Z"
-          fill="#EDE9DE"
-          className="dark:fill-[#0B1711]"
-        />
-        <path
-          d="M0 198 C 66 174, 152 98, 212 0"
-          stroke="#C9A45C"
-          strokeOpacity="0.48"
-          strokeWidth="1.15"
-        />
-        <path
-          d="M0 158 C 48 140, 114 78, 162 0"
-          stroke="#07563D"
-          strokeOpacity="0.16"
-          strokeWidth="0.85"
-          className="dark:stroke-[#2EB04B]"
-        />
-      </svg>
+      {/* Layer 1: Bespoke Full-Bleed UAE Architectural Gallery Backdrop (Light & Dark) */}
+      <ThemeImage
+        lightSrc="/images/about/our-story-bg-light.webp"
+        darkSrc="/images/about/our-story-bg-dark.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        loading="eager"
+        unoptimized
+        className="object-cover object-center opacity-90 dark:opacity-85"
+      />
 
-      {/* Delicate Upper-Right Ivory Horizon Curve */}
-      <svg
-        viewBox="0 0 600 260"
-        fill="none"
-        className="absolute right-0 top-0 h-40 w-64 opacity-45 dark:opacity-20 sm:h-52 sm:w-88 lg:h-60 lg:w-[440px]"
-      >
-        <path
-          d="M120 0 C 260 88, 440 120, 600 185 L 600 0 Z"
-          fill="#EFECE2"
-          className="dark:fill-[#09150F]"
-        />
-        <path
-          d="M140 0 C 280 86, 448 118, 600 180"
-          stroke="#C9A45C"
-          strokeOpacity="0.34"
-          strokeWidth="1"
-        />
-      </svg>
+      {/* Seamless Top & Bottom Section Boundary Feathering */}
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#F1EEE5] via-[#F1EEE5]/55 to-transparent dark:from-[#050B08] dark:via-[#050B08]/65" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#EFECE2] via-[#EFECE2]/45 to-transparent dark:from-[#050B08] dark:via-[#050B08]/55" />
+
+      {/* Readability Veil Protecting Left Editorial Copy Without Dimming Right Arches */}
+      <div className="absolute inset-0 bg-[radial-gradient(58%_68%_at_24%_52%,rgba(247,245,239,0.52)_0%,transparent_72%)] dark:bg-[radial-gradient(58%_68%_at_24%_52%,rgba(5,11,8,0.52)_0%,transparent_72%)]" />
 
       {/* Subtle Warm Ambient Glow Behind Right Architectural Photograph */}
       <div className="absolute right-[6%] top-[24%] h-[340px] w-[420px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(201,164,92,0.11)_0%,rgba(239,236,227,0.18)_48%,transparent_76%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(22,160,90,0.09)_0%,transparent_72%)]" />

@@ -177,35 +177,50 @@ export function ConsultationPartnersSection() {
         />
       </svg>
 
-      {/* Upper-Left Emerald & Gold Organic Accent Curve (top edge softly merged into background) */}
+      {/* Top Sweeping S-Curve Emerald, Sage & Champagne-Gold Horizon Wave */}
       <svg
         aria-hidden="true"
-        viewBox="0 0 300 280"
+        viewBox="0 0 1440 180"
+        preserveAspectRatio="none"
         fill="none"
-        className="pointer-events-none absolute -left-8 top-0 z-0 h-[180px] w-[180px] sm:h-[220px] sm:w-[220px]"
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[115px] w-full sm:h-[145px] lg:h-[165px]"
         style={{
           maskImage:
-            'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 24%, #000 56%)',
+            'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 18%, #000 44%, rgba(0,0,0,0.38) 78%, transparent 100%)',
           WebkitMaskImage:
-            'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 24%, #000 56%)',
+            'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 18%, #000 44%, rgba(0,0,0,0.38) 78%, transparent 100%)',
         }}
       >
         <defs>
-          <linearGradient id="consult-tl-emerald" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#054424" stopOpacity="0.92" />
-            <stop offset="65%" stopColor="#087A42" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="#087A42" stopOpacity="0" />
+          <linearGradient id="consult-top-sage" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#087A42" stopOpacity="0.14" />
+            <stop offset="52%" stopColor="#16A05A" stopOpacity="0.16" />
+            <stop offset="100%" stopColor="#C99726" stopOpacity="0.08" />
+          </linearGradient>
+          <linearGradient id="consult-top-emerald" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#054424" stopOpacity="0.54" />
+            <stop offset="42%" stopColor="#087A42" stopOpacity="0.34" />
+            <stop offset="100%" stopColor="#054424" stopOpacity="0.10" />
+          </linearGradient>
+          <linearGradient id="consult-top-gold" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%" stopColor="#C99726" stopOpacity="0.26" />
+            <stop offset="46%" stopColor="#F5DDA0" stopOpacity="0.88" />
+            <stop offset="82%" stopColor="#E5C158" stopOpacity="0.54" />
+            <stop offset="100%" stopColor="#C99726" stopOpacity="0.14" />
           </linearGradient>
         </defs>
         <path
-          d="M0 16 C 65 4, 130 14, 185 8 C 132 62, 74 134, 22 225 C 10 245, 4 262, 0 275 Z"
-          fill="url(#consult-tl-emerald)"
+          d="M0 0 L1440 0 L1440 86 C 1140 128, 860 36, 560 92 C 320 136, 130 96, 0 68 Z"
+          fill="url(#consult-top-sage)"
         />
         <path
-          d="M182 10 C 130 64, 72 136, 20 228"
-          stroke="#E5C158"
+          d="M0 0 L1440 0 L1440 52 C 1180 94, 880 18, 580 68 C 340 108, 145 72, 0 42 Z"
+          fill="url(#consult-top-emerald)"
+        />
+        <path
+          d="M0 42 C 145 72, 340 108, 580 68 C 880 18, 1180 94, 1440 52"
+          stroke="url(#consult-top-gold)"
           strokeWidth="1.5"
-          strokeOpacity="0.72"
         />
       </svg>
 

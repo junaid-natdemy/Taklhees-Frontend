@@ -129,6 +129,9 @@ export function Footer({ country = 'ae' }: FooterProps) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden"
       >
+        {/* Seamless Top Emerald Bridge Continuing from Business Briefing Bottom Waves */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-16 bg-gradient-to-b from-[#032D18]/85 to-transparent" />
+
         {/* Soft Atmospheric Emerald & Champagne-Gold Ambient Glows (zero blur kernel cost) */}
         <div className="absolute -left-24 top-0 h-[320px] w-[480px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(22,160,90,0.16),transparent_72%)]" />
         <div className="absolute right-[8%] top-[12%] h-[340px] w-[520px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(214,182,108,0.10),rgba(8,122,66,0.08)_55%,transparent_76%)]" />

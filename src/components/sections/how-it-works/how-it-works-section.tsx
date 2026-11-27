@@ -190,12 +190,18 @@ export function HowItWorksSection() {
           aria-hidden="true"
           viewBox="0 0 440 260"
           fill="none"
-          className="pointer-events-none absolute -right-10 bottom-0 z-0 h-[180px] w-[280px] opacity-85 sm:h-[210px] sm:w-[360px]"
+          className="pointer-events-none absolute -right-10 bottom-0 z-0 h-[180px] w-[280px] opacity-95 sm:h-[210px] sm:w-[360px]"
+          style={{
+            maskImage:
+              'linear-gradient(to bottom, #000 0%, #000 58%, rgba(0,0,0,0.45) 84%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to bottom, #000 0%, #000 58%, rgba(0,0,0,0.45) 84%, transparent 100%)',
+          }}
         >
           <defs>
             <linearGradient id="hiw-right-arc" x1="1" y1="0.2" x2="0" y2="1">
-              <stop offset="0%" stopColor="#087A42" stopOpacity="0.9" />
-              <stop offset="60%" stopColor="#16A05A" stopOpacity="0.38" />
+              <stop offset="0%" stopColor="#087A42" stopOpacity="0.98" />
+              <stop offset="60%" stopColor="#16A05A" stopOpacity="0.52" />
               <stop offset="100%" stopColor="#16A05A" stopOpacity="0" />
             </linearGradient>
           </defs>
@@ -205,15 +211,15 @@ export function HowItWorksSection() {
           />
         </svg>
 
-        {/* Panoramic Dubai Skyline & Emerald Wave Horizon Blend (matching Contact Section) */}
+        {/* Panoramic Dubai Skyline & Emerald Wave Horizon Blend (enriched top green, smooth bottom merge) */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[240px] select-none opacity-55 sm:h-[300px] lg:h-[350px] dark:opacity-28"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[240px] select-none opacity-75 sm:h-[300px] lg:h-[350px] dark:opacity-38"
           style={{
             maskImage:
-              'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 35%, #000 72%, #000 100%)',
+              'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 32%, #000 64%, rgba(0,0,0,0.42) 86%, transparent 100%)',
             WebkitMaskImage:
-              'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 35%, #000 72%, #000 100%)',
+              'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 32%, #000 64%, rgba(0,0,0,0.42) 86%, transparent 100%)',
           }}
         >
           <Image
@@ -224,7 +230,14 @@ export function HowItWorksSection() {
             loading="lazy"
             className="object-cover object-bottom dark:brightness-75 dark:contrast-110"
           />
+          <div className="pointer-events-none absolute inset-x-0 top-12 bottom-10 bg-gradient-to-b from-transparent via-[#087A42]/[0.08] to-[#087A42]/[0.14] dark:via-[#16A05A]/[0.08] dark:to-[#16A05A]/[0.14]" />
         </div>
+
+        {/* Soft Bottom Merge into Consultation Partners Section */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-14 bg-gradient-to-t from-[#F8F7F2] via-[#F8F7F2]/60 to-transparent dark:from-[#050807] dark:via-[#050807]/60 sm:h-16"
+        />
 
         {/* Main Content Container */}
         <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">

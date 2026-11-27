@@ -118,7 +118,7 @@ export function ImpactSection() {
     <section
       id="impact"
       aria-labelledby="impact-section-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-[#F7F6F1] py-16 sm:py-20 lg:py-24 dark:bg-[#050807] transition-colors duration-300"
+      className="relative scroll-mt-24 overflow-hidden bg-[linear-gradient(180deg,#F7F5F0_0%,#F7F6F1_18%,#F7F6F1_100%)] py-16 sm:py-20 lg:py-24 dark:bg-[linear-gradient(180deg,#080909_0%,#050807_18%,#050807_100%)] transition-colors duration-300"
     >
       {/* Subtle Top Transition Seam Separating Hero & Impact */}
       <div

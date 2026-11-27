@@ -309,57 +309,78 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
           {/* Subtle Atmospheric Depth Tint Only Behind Center Cards for Crisp Readability */}
           <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_75%_65%_at_38%_52%,rgba(250,248,243,0.34)_0%,transparent_72%)] dark:bg-[radial-gradient(ellipse_75%_65%_at_38%_52%,rgba(5,8,7,0.28)_0%,transparent_72%)]" />
 
-          {/* Upper-Left Flowing Emerald Wave with Champagne-Gold Rim */}
+          {/* Top Dual-Arch Curved Horizon Wave with Champagne-Gold Accents */}
           <svg
-            viewBox="0 0 380 380"
+            aria-hidden="true"
+            viewBox="0 0 1440 190"
+            preserveAspectRatio="none"
             fill="none"
-            className="absolute -left-8 -top-4 z-0 h-[200px] w-[210px] sm:h-[250px] sm:w-[260px]"
+            className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[120px] w-full sm:h-[150px] lg:h-[175px]"
             style={{
               maskImage:
-                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 22%, #000 55%)',
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.46) 16%, #000 44%, rgba(0,0,0,0.4) 78%, transparent 100%)',
               WebkitMaskImage:
-                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 22%, #000 55%)',
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.46) 16%, #000 44%, rgba(0,0,0,0.4) 78%, transparent 100%)',
             }}
           >
             <defs>
-              <linearGradient
-                id="blog-tl-emerald"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="1"
-              >
-                <stop offset="0%" stopColor="#043A1F" stopOpacity="0.94" />
-                <stop offset="58%" stopColor="#086E3B" stopOpacity="0.78" />
-                <stop offset="100%" stopColor="#087A42" stopOpacity="0.04" />
+              <linearGradient id="blog-top-sage" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#087A42" stopOpacity="0.18" />
+                <stop offset="50%" stopColor="#C99726" stopOpacity="0.08" />
+                <stop offset="100%" stopColor="#087A42" stopOpacity="0.18" />
               </linearGradient>
-              <linearGradient id="blog-tl-gold" x1="0" y1="1" x2="1" y2="0">
-                <stop offset="0%" stopColor="#E5C158" stopOpacity="0.12" />
-                <stop offset="50%" stopColor="#F5D77F" stopOpacity="0.82" />
-                <stop offset="100%" stopColor="#C99726" stopOpacity="0.36" />
+              <linearGradient id="blog-top-emerald" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#043A1F" stopOpacity="0.62" />
+                <stop offset="32%" stopColor="#086E3B" stopOpacity="0.22" />
+                <stop offset="50%" stopColor="#087A42" stopOpacity="0.05" />
+                <stop offset="68%" stopColor="#086E3B" stopOpacity="0.22" />
+                <stop offset="100%" stopColor="#043A1F" stopOpacity="0.62" />
+              </linearGradient>
+              <linearGradient id="blog-top-gold" x1="0%" y1="50%" x2="100%" y2="50%">
+                <stop offset="0%" stopColor="#C99726" stopOpacity="0.45" />
+                <stop offset="30%" stopColor="#F5DDA0" stopOpacity="0.88" />
+                <stop offset="50%" stopColor="#C99726" stopOpacity="0.32" />
+                <stop offset="70%" stopColor="#F5DDA0" stopOpacity="0.88" />
+                <stop offset="100%" stopColor="#C99726" stopOpacity="0.45" />
               </linearGradient>
             </defs>
             <path
-              d="M0 14 C 72 4, 148 16, 226 10 C 168 78, 98 166, 32 284 C 16 312, 6 336, 0 356 Z"
-              fill="url(#blog-tl-emerald)"
+              d="M0 0 L1440 0 L1440 112 C 1180 142, 950 56, 720 62 C 490 68, 260 142, 0 112 Z"
+              fill="url(#blog-top-sage)"
             />
             <path
-              d="M222 12 C 164 80, 96 168, 30 286"
-              stroke="url(#blog-tl-gold)"
-              strokeWidth="1.6"
+              d="M0 0 L1440 0 L1440 82 C 1200 108, 960 32, 720 38 C 480 44, 240 108, 0 82 Z"
+              fill="url(#blog-top-emerald)"
+            />
+            <path
+              d="M0 82 C 240 108, 480 44, 720 38 C 960 32, 1200 108, 1440 82"
+              stroke="url(#blog-top-gold)"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M0 112 C 260 142, 490 68, 720 62 C 950 56, 1180 142, 1440 112"
+              stroke="url(#blog-top-gold)"
+              strokeOpacity="0.36"
+              strokeWidth="1"
             />
           </svg>
 
           {/* Soft Cream-to-Emerald Horizon Transition & Bottom Flowing Organic Waves */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-32 bg-gradient-to-b from-transparent via-[#087A42]/[0.04] to-[#087A42]/[0.10] dark:via-[#16A05A]/[0.05] dark:to-[#16A05A]/[0.12]"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-44 bg-gradient-to-b from-transparent via-[#087A42]/[0.08] to-[#087A42]/[0.16] dark:via-[#16A05A]/[0.08] dark:to-[#16A05A]/[0.16] sm:h-52"
           />
           <svg
             viewBox="0 0 1440 240"
             preserveAspectRatio="none"
             fill="none"
-            className="absolute inset-x-0 bottom-0 z-0 h-[82px] w-full sm:h-[96px] lg:h-[112px]"
+            className="absolute inset-x-0 bottom-0 z-0 h-[165px] w-full sm:h-[205px] lg:h-[235px]"
+            style={{
+              maskImage:
+                'linear-gradient(to bottom, #000 0%, #000 42%, rgba(0,0,0,0.45) 76%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(to bottom, #000 0%, #000 42%, rgba(0,0,0,0.45) 76%, transparent 100%)',
+            }}
           >
             <defs>
               <linearGradient
@@ -369,9 +390,9 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                 x2="100%"
                 y2="0%"
               >
-                <stop offset="0%" stopColor="#04381E" stopOpacity="0.96" />
-                <stop offset="50%" stopColor="#076435" stopOpacity="0.88" />
-                <stop offset="100%" stopColor="#022412" stopOpacity="0.98" />
+                <stop offset="0%" stopColor="#066B37" stopOpacity="0.98" />
+                <stop offset="50%" stopColor="#0A8A4B" stopOpacity="0.94" />
+                <stop offset="100%" stopColor="#044A26" stopOpacity="0.98" />
               </linearGradient>
               <linearGradient
                 id="blog-wave-gold"
@@ -380,10 +401,10 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
                 x2="100%"
                 y2="50%"
               >
-                <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.22" />
-                <stop offset="42%" stopColor="#F5DDA0" stopOpacity="0.92" />
-                <stop offset="76%" stopColor="#C89B3C" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#E5C158" stopOpacity="0.38" />
+                <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.28" />
+                <stop offset="42%" stopColor="#F5DDA0" stopOpacity="0.95" />
+                <stop offset="76%" stopColor="#C89B3C" stopOpacity="0.86" />
+                <stop offset="100%" stopColor="#E5C158" stopOpacity="0.45" />
               </linearGradient>
             </defs>
             <m.g
@@ -402,12 +423,12 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
               <path
                 d="M0 162 C 210 112, 460 186, 780 148 C 1060 116, 1280 78, 1440 94 L1440 240 L0 240 Z"
                 fill="url(#blog-wave-emerald)"
-                fillOpacity="0.86"
+                fillOpacity="0.96"
               />
               <path
                 d="M0 162 C 210 112, 460 186, 780 148 C 1060 116, 1280 78, 1440 94"
                 stroke="url(#blog-wave-gold)"
-                strokeWidth="1.5"
+                strokeWidth="1.6"
               />
             </m.g>
             <m.g
@@ -430,10 +451,13 @@ export function BlogShowcaseSection({ articles }: BlogShowcaseSectionProps) {
               <path
                 d="M400 240 C 690 192, 980 180, 1235 126 C 1335 104, 1398 88, 1440 96"
                 stroke="url(#blog-wave-gold)"
-                strokeWidth="1.6"
+                strokeWidth="1.7"
               />
             </m.g>
           </svg>
+
+          {/* Soft Bottom Merge so Journal Wave Dissolves Seamlessly into Contact */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-14 bg-gradient-to-t from-[#ECE4D3] via-[#ECE4D3]/55 to-transparent dark:from-[#050907] dark:via-[#050907]/55 sm:h-16" />
         </div>
 
         {/* ═══════════════ MAIN CONTENT ═══════════════ */}

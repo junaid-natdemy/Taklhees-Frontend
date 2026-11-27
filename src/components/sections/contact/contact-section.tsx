@@ -398,7 +398,7 @@ export function ContactSection({
       id="contact"
       data-section-paused={!inView ? 'true' : undefined}
       aria-labelledby="contact-heading"
-      className="relative overflow-hidden bg-[linear-gradient(180deg,#FAF8F3_0%,#F3EDE0_55%,#EAE1CE_100%)] py-14 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#050807_0%,#07100C_55%,#050907_100%)] sm:py-16 lg:py-20"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#ECE4D3_0%,#F6F1E6_16%,#F3EDE0_58%,#EAE1CE_100%)] py-14 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#050807_0%,#07100C_55%,#050907_100%)] sm:py-16 lg:py-20"
     >
         {/* Organic clipPaths (shared #container-glass mounted once in Providers) */}
         <OrganicClipDefs />
@@ -408,6 +408,58 @@ export function ContactSection({
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 select-none overflow-hidden"
         >
+          {/* Top Asymmetrical Right-Sweeping Sage, Emerald & Dual-Gold Horizon Wave */}
+          <svg
+            viewBox="0 0 1440 190"
+            preserveAspectRatio="none"
+            fill="none"
+            className="absolute inset-x-0 top-0 z-0 h-[120px] w-full sm:h-[150px] lg:h-[175px]"
+            style={{
+              maskImage:
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.48) 16%, #000 44%, rgba(0,0,0,0.4) 78%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.48) 16%, #000 44%, rgba(0,0,0,0.4) 78%, transparent 100%)',
+            }}
+          >
+            <defs>
+              <linearGradient id="contact-top-sage" x1="100%" y1="0%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="#087A42" stopOpacity="0.20" />
+                <stop offset="48%" stopColor="#16A05A" stopOpacity="0.09" />
+                <stop offset="100%" stopColor="#C99726" stopOpacity="0.08" />
+              </linearGradient>
+              <linearGradient id="contact-top-emerald" x1="100%" y1="0%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="#043A1F" stopOpacity="0.72" />
+                <stop offset="46%" stopColor="#086E3B" stopOpacity="0.32" />
+                <stop offset="100%" stopColor="#087A42" stopOpacity="0.04" />
+              </linearGradient>
+              <linearGradient id="contact-top-gold" x1="100%" y1="50%" x2="0%" y2="50%">
+                <stop offset="0%" stopColor="#C99726" stopOpacity="0.48" />
+                <stop offset="42%" stopColor="#F5DDA0" stopOpacity="0.92" />
+                <stop offset="78%" stopColor="#E5C158" stopOpacity="0.46" />
+                <stop offset="100%" stopColor="#C99726" stopOpacity="0.08" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0 0 L1440 0 L1440 124 C 1220 72, 960 128, 680 78 C 420 32, 190 88, 0 54 Z"
+              fill="url(#contact-top-sage)"
+            />
+            <path
+              d="M0 0 L1440 0 L1440 94 C 1245 48, 1015 104, 740 58 C 495 16, 230 62, 0 28 Z"
+              fill="url(#contact-top-emerald)"
+            />
+            <path
+              d="M0 28 C 230 62, 495 16, 740 58 C 1015 104, 1245 48, 1440 94"
+              stroke="url(#contact-top-gold)"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M0 54 C 190 88, 420 32, 680 78 C 960 128, 1220 72, 1440 124"
+              stroke="url(#contact-top-gold)"
+              strokeOpacity="0.38"
+              strokeWidth="1"
+            />
+          </svg>
+
           {/* Warm Golden-Hour Horizon Glow & Emerald Ambient Reflections */}
           <div className="absolute left-[14%] top-[8%] h-[420px] w-[580px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,253,247,0.96),transparent_76%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.14),transparent_76%)]" />
           <div className="absolute right-[2%] top-[10%] h-[500px] w-[680px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(229,189,98,0.28),rgba(8,122,66,0.08)_54%,transparent_78%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,168,90,0.2),rgba(212,175,55,0.12)_55%,transparent_78%)]" />
@@ -417,9 +469,9 @@ export function ContactSection({
             className="absolute inset-x-0 bottom-0 z-0 mx-auto h-[420px] max-w-[1600px] opacity-85 sm:h-[480px] lg:h-[540px] dark:opacity-35"
             style={{
               maskImage:
-                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 26%, #000 58%, #000 100%)',
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 26%, #000 58%, #000 84%, transparent 100%)',
               WebkitMaskImage:
-                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 26%, #000 58%, #000 100%)',
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 26%, #000 58%, #000 84%, transparent 100%)',
             }}
           >
             <Image
@@ -432,59 +484,18 @@ export function ContactSection({
             />
           </div>
 
-          {/* Upper-Left Flowing Emerald Wave with Thin Champagne-Gold Boundary */}
-          <svg
-            viewBox="0 0 380 380"
-            fill="none"
-            className="absolute -left-8 -top-4 z-0 h-[210px] w-[220px] sm:h-[260px] sm:w-[270px]"
-            style={{
-              maskImage:
-                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 22%, #000 55%)',
-              WebkitMaskImage:
-                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 22%, #000 55%)',
-            }}
-          >
-            <defs>
-              <linearGradient
-                id="contact-tl-emerald"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="1"
-              >
-                <stop offset="0%" stopColor="#043A1F" stopOpacity="0.94" />
-                <stop offset="58%" stopColor="#086E3B" stopOpacity="0.78" />
-                <stop offset="100%" stopColor="#087A42" stopOpacity="0.04" />
-              </linearGradient>
-              <linearGradient
-                id="contact-tl-gold"
-                x1="0"
-                y1="1"
-                x2="1"
-                y2="0"
-              >
-                <stop offset="0%" stopColor="#E5C158" stopOpacity="0.12" />
-                <stop offset="50%" stopColor="#F5D77F" stopOpacity="0.82" />
-                <stop offset="100%" stopColor="#C99726" stopOpacity="0.36" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M0 14 C 72 4, 148 16, 226 10 C 168 78, 98 166, 32 284 C 16 312, 6 336, 0 356 Z"
-              fill="url(#contact-tl-emerald)"
-            />
-            <path
-              d="M222 12 C 164 80, 96 168, 30 286"
-              stroke="url(#contact-tl-gold)"
-              strokeWidth="1.6"
-            />
-          </svg>
-
           {/* Bottom Flowing Emerald Waves & Champagne-Gold Illuminated Boundaries */}
           <svg
             viewBox="0 0 1440 300"
             preserveAspectRatio="none"
             fill="none"
             className="absolute inset-x-0 bottom-0 z-0 h-[175px] w-full sm:h-[215px] lg:h-[240px]"
+            style={{
+              maskImage:
+                'linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,0.45) 80%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,0.45) 80%, transparent 100%)',
+            }}
           >
             <defs>
               <linearGradient
@@ -587,6 +598,9 @@ export function ContactSection({
               />
             </m.g>
           </svg>
+
+          {/* Soft Bottom Dissolve so Contact Wave & Skyline Merge Seamlessly into Business Briefing */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-16 bg-gradient-to-t from-[#EAE1CE] via-[#EAE1CE]/55 to-transparent dark:from-[#050807] dark:via-[#050807]/55 sm:h-20" />
         </div>
 
         {/* ═══════════════ MAIN CONTENT ═══════════════ */}

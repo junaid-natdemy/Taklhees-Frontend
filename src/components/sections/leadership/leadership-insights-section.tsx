@@ -293,7 +293,7 @@ export function LeadershipInsightsSection() {
       id="leadership"
       data-section-paused={!inView ? 'true' : undefined}
       aria-labelledby="leadership-heading"
-      className="relative overflow-hidden bg-[#F7F6F1] pt-16 pb-10 transition-colors duration-300 dark:bg-[#050807] sm:pt-20 sm:pb-12 lg:pt-22 lg:pb-10"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#F8F7F2_0%,#F7F6F1_14%,#F7F6F1_100%)] pt-16 pb-10 transition-colors duration-300 dark:bg-[#050807] dark:bg-none sm:pt-20 sm:pb-12 lg:pt-22 lg:pb-10"
     >
         {/* Hidden SVG Glass Distortion Filter */}
         <LeadershipGlassFilter />
@@ -442,6 +442,12 @@ export function LeadershipInsightsSection() {
           preserveAspectRatio="none"
           fill="none"
           className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[210px] w-full sm:h-[260px] lg:h-[300px]"
+          style={{
+            maskImage:
+              'linear-gradient(to bottom, #000 0%, #000 54%, rgba(0,0,0,0.45) 82%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to bottom, #000 0%, #000 54%, rgba(0,0,0,0.45) 82%, transparent 100%)',
+          }}
         >
           <defs>
             <linearGradient id="editorial-wave-back" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -701,13 +707,19 @@ export function LeadershipInsightsSection() {
           </div>
         </div>
 
-        {/* Foreground Translucent Emerald Wave Lip Blending Portrait Bases */}
+        {/* Foreground Translucent Emerald Wave Lip Blending Portrait Bases into Journal */}
         <svg
           aria-hidden="true"
           viewBox="0 0 1440 120"
           preserveAspectRatio="none"
           fill="none"
           className="pointer-events-none absolute inset-x-0 bottom-0 z-15 h-[68px] w-full sm:h-[86px] lg:h-[96px]"
+          style={{
+            maskImage:
+              'linear-gradient(to bottom, #000 0%, #000 32%, rgba(0,0,0,0.4) 70%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to bottom, #000 0%, #000 32%, rgba(0,0,0,0.4) 70%, transparent 100%)',
+          }}
         >
           <defs>
             <linearGradient id="editorial-wave-front" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -727,6 +739,12 @@ export function LeadershipInsightsSection() {
             strokeWidth="1.25"
           />
         </svg>
+
+        {/* Soft Bottom Ivory/Obsidian Dissolve so Emerald Wave Melts Seamlessly into Journal */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[16] h-16 bg-gradient-to-t from-[#FAF8F3] via-[#FAF8F3]/60 to-transparent dark:from-[#050807] dark:via-[#050807]/60 sm:h-20"
+        />
       </section>
   );
 }

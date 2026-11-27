@@ -200,27 +200,27 @@ export function EditorialShowcaseSection() {
 
             {/* Layer 2: Translucent Emerald Mist Wave */}
             <path
-              d="M390 760 C 520 630, 740 595, 980 610 C 1180 622, 1320 420, 1440 240 L1440 760 Z"
+              d="M390 760 C 560 680, 790 662, 1020 672 C 1210 680, 1335 470, 1440 280 L1440 760 Z"
               fill="#087A42"
-              fillOpacity="0.16"
+              fillOpacity="0.14"
             />
 
             {/* Layer 3: Deep Emerald Organic Shape Entering From Right & Bottom */}
             <path
-              d="M1440 35 C 1320 95, 1345 340, 1295 495 C 1235 675, 920 620, 650 650 C 430 675, 250 715, 140 760 L1440 760 Z"
+              d="M1440 35 C 1335 105, 1365 365, 1320 535 C 1275 700, 1020 688, 740 700 C 510 710, 310 732, 180 760 L1440 760 Z"
               fill="url(#editorial-emerald-flow)"
             />
 
             {/* Layer 4: Overlapping Secondary Emerald Contour Along Bottom-Right */}
             <path
-              d="M280 760 C 480 685, 760 660, 1020 655 C 1220 652, 1350 565, 1440 485 L1440 760 Z"
+              d="M320 760 C 530 712, 810 702, 1075 696 C 1255 692, 1368 615, 1440 535 L1440 760 Z"
               fill="url(#editorial-emerald-accent)"
               opacity="0.88"
             />
 
             {/* Layer 5: Soft Ivory Whisper Wave Overlapping Emerald Near Bottom-Right */}
             <path
-              d="M180 760 C 370 675, 680 650, 960 675 C 1180 695, 1340 615, 1440 535 L1440 595 C 1310 675, 1140 735, 900 725 C 640 715, 420 725, 290 760 Z"
+              d="M220 760 C 420 705, 720 692, 995 708 C 1200 720, 1345 655, 1440 580 L1440 635 C 1315 700, 1145 742, 920 736 C 670 728, 450 735, 310 760 Z"
               fill="#F7F6F1"
               fillOpacity="0.3"
               className="dark:fill-[#16A05A] dark:fill-opacity-[0.14]"
@@ -228,14 +228,14 @@ export function EditorialShowcaseSection() {
 
             {/* Champagne-Gold Illuminated Edge Along Primary Emerald Crest */}
             <path
-              d="M1440 35 C 1320 95, 1345 340, 1295 495 C 1235 675, 920 620, 650 650 C 430 675, 250 715, 140 760"
+              d="M1440 35 C 1335 105, 1365 365, 1320 535 C 1275 700, 1020 688, 740 700 C 510 710, 310 732, 180 760"
               stroke="url(#editorial-gold-edge)"
               strokeWidth="1.8"
             />
 
             {/* Secondary Champagne-Gold Contour Hairline */}
             <path
-              d="M280 760 C 480 685, 760 660, 1020 655 C 1220 652, 1350 565, 1440 485"
+              d="M320 760 C 530 712, 810 702, 1075 696 C 1255 692, 1368 615, 1440 535"
               stroke="#E5C158"
               strokeOpacity="0.45"
               strokeWidth="1.4"

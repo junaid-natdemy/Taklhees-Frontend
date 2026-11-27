@@ -180,15 +180,15 @@ export function TestimonialsSection() {
         />
       </svg>
 
-      {/* Bottom Panoramic Dubai Skyline & Emerald-Gold Wave */}
+      {/* Bottom Panoramic Dubai Skyline & Emerald-Gold Wave (rich top wave, smooth dissolve into Leadership Insights) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[240px] select-none sm:h-[300px] lg:h-[350px]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[250px] select-none sm:h-[310px] lg:h-[360px]"
         style={{
           maskImage:
-            'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 35%, #000 72%, #000 100%)',
+            'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.72) 22%, #000 48%, rgba(0,0,0,0.5) 86%, transparent 100%)',
           WebkitMaskImage:
-            'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 35%, #000 72%, #000 100%)',
+            'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.72) 22%, #000 48%, rgba(0,0,0,0.5) 86%, transparent 100%)',
         }}
       >
         <ThemeImage
@@ -198,10 +198,11 @@ export function TestimonialsSection() {
           fill
           sizes="100vw"
           loading="lazy"
-          lightClassName="opacity-75 mix-blend-multiply"
-          darkClassName="opacity-60 mix-blend-screen"
+          lightClassName="opacity-95 mix-blend-multiply"
+          darkClassName="opacity-80 mix-blend-screen"
           className="block object-cover object-bottom"
         />
+        <div className="pointer-events-none absolute inset-x-0 top-10 bottom-8 bg-gradient-to-b from-transparent via-[#087A42]/[0.08] to-[#087A42]/[0.14] dark:via-[#16A05A]/[0.08] dark:to-[#16A05A]/[0.14]" />
       </div>
 
       {/* Main Content Container */}
@@ -228,9 +229,11 @@ export function TestimonialsSection() {
           >
             Trusted by Businesses
             <br />
-            Across{' '}
-            <span className="relative inline-block italic text-[#087A42] dark:text-[#16A05A]">
-              the UAE.
+            Across the{' '}
+            <span className="relative inline-block italic">
+              <span className="text-[#C2242B] dark:text-[#E4002B]">U</span>
+              <span className="text-[#171717] dark:text-[#F5F5F2]">A</span>
+              <span className="text-[#00843D] dark:text-[#16A05A]">E.</span>
               <svg
                 aria-hidden="true"
                 viewBox="0 0 180 14"

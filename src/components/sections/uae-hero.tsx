@@ -244,61 +244,85 @@ export function UAEHero() {
           </svg>
         </div>
 
-        {/* Mobile-Only Bottom Emerald & Gold Horizon Wave */}
+        {/* Mobile-Only Bottom Emerald & Gold Horizon Wave (minimal & understated) */}
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-[108px] opacity-95 dark:opacity-55 sm:hidden"
+          className="absolute inset-x-0 bottom-0 h-[76px] opacity-85 dark:opacity-45 sm:hidden"
+          style={{
+            WebkitMaskImage:
+              'linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,0.4) 80%, transparent 100%)',
+            maskImage:
+              'linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,0.4) 80%, transparent 100%)',
+          }}
         >
           <svg viewBox="0 0 430 120" preserveAspectRatio="none" fill="none" className="h-full w-full">
             <defs>
               <linearGradient id="heroMobileEmeraldBack" x1="0" y1="0" x2="430" y2="120" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#086636" stopOpacity="0.92" />
-                <stop offset="55%" stopColor="#146736" stopOpacity="0.96" />
-                <stop offset="100%" stopColor="#053B1F" />
+                <stop offset="0%" stopColor="#086636" stopOpacity="0.82" />
+                <stop offset="55%" stopColor="#146736" stopOpacity="0.88" />
+                <stop offset="100%" stopColor="#053B1F" stopOpacity="0.92" />
               </linearGradient>
               <linearGradient id="heroMobileGoldLine" x1="0" y1="0" x2="430" y2="0" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#C99726" stopOpacity="0.2" />
-                <stop offset="52%" stopColor="#F5DDA0" stopOpacity="0.95" />
-                <stop offset="100%" stopColor="#C99726" stopOpacity="0.45" />
+                <stop offset="0%" stopColor="#C99726" stopOpacity="0.15" />
+                <stop offset="52%" stopColor="#F5DDA0" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#C99726" stopOpacity="0.35" />
               </linearGradient>
             </defs>
             <path
-              d="M0 94 C 115 74, 240 62, 430 28 L430 120 L0 120 Z"
+              d="M0 96 C 120 78, 250 68, 430 38 L430 120 L0 120 Z"
               fill="url(#heroMobileEmeraldBack)"
             />
             <path
-              d="M0 94 C 115 74, 240 62, 430 28"
+              d="M0 96 C 120 78, 250 68, 430 38"
               stroke="url(#heroMobileGoldLine)"
-              strokeWidth="1.75"
+              strokeWidth="1.4"
             />
           </svg>
         </div>
 
-        {/* UAE flag ribbons, bottom-right (tablet & desktop) */}
+        {/* Minimal UAE Emerald, Crimson & Gold Wave, Bottom-Right (tablet & desktop) */}
         <div
-          className="hidden sm:block absolute -bottom-10 -right-10 h-[240px] w-[440px] opacity-90 dark:opacity-30"
+          className="hidden sm:block absolute bottom-0 right-0 h-[140px] w-[min(62vw,760px)] opacity-75 dark:opacity-30 lg:h-[165px]"
           style={{
             WebkitMaskImage:
-              'linear-gradient(to bottom, #000 48%, rgba(0,0,0,0.4) 78%, transparent 100%), linear-gradient(to left, #000 62%, rgba(0,0,0,0.4) 86%, transparent 100%)',
+              'linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,0.4) 80%, transparent 100%), linear-gradient(to left, #000 56%, rgba(0,0,0,0.35) 84%, transparent 100%)',
             WebkitMaskComposite: 'source-in',
             maskImage:
-              'linear-gradient(to bottom, #000 48%, rgba(0,0,0,0.4) 78%, transparent 100%), linear-gradient(to left, #000 62%, rgba(0,0,0,0.4) 86%, transparent 100%)',
+              'linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,0.4) 80%, transparent 100%), linear-gradient(to left, #000 56%, rgba(0,0,0,0.35) 84%, transparent 100%)',
             maskComposite: 'intersect',
           }}
         >
-          <svg viewBox="0 0 640 370" fill="none" className="h-full w-full">
-            <path d="M 60 370 C 190 320, 330 250, 490 230 C 560 220, 610 230, 640 240 L 640 370 Z" fill="url(#heroRedWave)" />
-            <path d="M 0 370 C 170 300, 350 310, 500 280 C 570 265, 610 280, 640 290 L 640 370 Z" fill="url(#heroGreenWave)" />
+          <svg viewBox="0 0 1080 300" preserveAspectRatio="none" fill="none" className="h-full w-full">
             <defs>
-              <linearGradient id="heroRedWave" x1="100" y1="370" x2="640" y2="230" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#C2242B" stopOpacity="0.9" />
-                <stop offset="1" stopColor="#A31C1B" />
+              <linearGradient id="heroRedWave" x1="260" y1="300" x2="1080" y2="150" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#C2242B" stopOpacity="0.45" />
+                <stop offset="55%" stopColor="#B81F25" stopOpacity="0.68" />
+                <stop offset="100%" stopColor="#8F1718" stopOpacity="0.78" />
               </linearGradient>
-              <linearGradient id="heroGreenWave" x1="0" y1="370" x2="640" y2="280" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#146736" />
-                <stop offset="1" stopColor="#0B4223" />
+              <linearGradient id="heroGreenWave" x1="120" y1="300" x2="1080" y2="180" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#087A42" stopOpacity="0.74" />
+                <stop offset="55%" stopColor="#146736" stopOpacity="0.86" />
+                <stop offset="100%" stopColor="#073A1F" stopOpacity="0.92" />
+              </linearGradient>
+              <linearGradient id="heroGoldCrest" x1="220" y1="270" x2="1080" y2="160" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#C99726" stopOpacity="0.08" />
+                <stop offset="48%" stopColor="#F5DDA0" stopOpacity="0.82" />
+                <stop offset="100%" stopColor="#C99726" stopOpacity="0.35" />
               </linearGradient>
             </defs>
+            <path
+              d="M 190 300 C 410 262, 650 200, 880 162 C 965 148, 1030 150, 1080 158 L 1080 300 Z"
+              fill="url(#heroRedWave)"
+            />
+            <path
+              d="M 40 300 C 290 268, 540 258, 790 212 C 915 188, 1010 178, 1080 188 L 1080 300 Z"
+              fill="url(#heroGreenWave)"
+            />
+            <path
+              d="M 40 300 C 290 268, 540 258, 790 212 C 915 188, 1010 178, 1080 188"
+              stroke="url(#heroGoldCrest)"
+              strokeWidth="1.3"
+            />
           </svg>
         </div>
 
@@ -379,7 +403,12 @@ export function UAEHero() {
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
               </LiquidButton>
-              <LiquidButton variant="glass" size="md" asChild className="w-full sm:w-auto h-11 sm:h-10">
+              <LiquidButton
+                variant="glass"
+                size="md"
+                asChild
+                className="w-full sm:w-auto h-11 sm:h-10 bg-[#F4EFE4]/88 hover:bg-[#ECE5D5]/92 border-[#087A42]/16 text-[#171717] dark:bg-[#101814]/85 dark:hover:bg-[#16221C]/90 dark:border-white/15 dark:text-[#F5F5F2]"
+              >
                 <Link href="/ae/services">
                   <span>Explore Our Services</span>
                 </Link>

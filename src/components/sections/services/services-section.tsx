@@ -309,7 +309,7 @@ export function ServicesSection() {
     <section
       id="services"
       aria-labelledby="services-heading"
-      className="relative overflow-hidden bg-[#F8F7F2] py-8 transition-colors duration-300 dark:bg-[#050807] sm:py-10 lg:py-12"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#F7F6F1_0%,#F8F7F2_16%,#F8F7F2_100%)] py-8 transition-colors duration-300 dark:bg-[#050807] dark:bg-none sm:py-10 lg:py-12"
     >
       {/* Richer Ambient Emerald Lighting Behind Liquid Glass Cards */}
       <div
@@ -317,12 +317,18 @@ export function ServicesSection() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_55%,rgba(8,122,66,0.09),transparent_72%)] dark:bg-[radial-gradient(ellipse_75%_55%_at_50%_55%,rgba(0,168,90,0.14),transparent_72%)]"
       />
 
-      {/* Left Sweeping Emerald Ribbon */}
+      {/* Left Sweeping Emerald Ribbon (softly blended at top edge) */}
       <svg
         aria-hidden="true"
         viewBox="0 0 360 280"
         fill="none"
         className="pointer-events-none absolute -left-8 top-0 z-0 h-[190px] w-[250px] opacity-85 sm:h-[240px] sm:w-[320px]"
+        style={{
+          maskImage:
+            'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 18%, #000 42%)',
+          WebkitMaskImage:
+            'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 18%, #000 42%)',
+        }}
       >
         <defs>
           <linearGradient id="services-left-arc" x1="0" y1="0.8" x2="1" y2="0">

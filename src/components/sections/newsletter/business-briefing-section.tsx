@@ -153,13 +153,59 @@ export function BusinessBriefingSection() {
       ref={sectionRef}
       id="business-briefing"
       aria-labelledby="briefing-heading"
-      className="relative flex min-h-[calc(100vh-76px)] items-center overflow-hidden bg-[#F8F7F2] py-20 transition-colors duration-300 dark:bg-[#050807] sm:py-24 lg:min-h-screen lg:py-28"
+      className="relative flex min-h-[calc(100vh-76px)] items-center overflow-hidden bg-[linear-gradient(180deg,#EAE1CE_0%,#F4EFE4_12%,#F8F7F2_28%,#F8F7F2_100%)] py-20 transition-colors duration-300 dark:bg-[#050807] dark:bg-none sm:py-24 lg:min-h-screen lg:py-28"
     >
         {/* ================= LAYERED ATMOSPHERIC BACKGROUND ================= */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 select-none overflow-hidden"
         >
+          {/* Top Flowing Sage, Emerald & Champagne-Gold Horizon Wave */}
+          <svg
+            viewBox="0 0 1440 180"
+            preserveAspectRatio="none"
+            fill="none"
+            className="absolute inset-x-0 top-0 z-0 h-[110px] w-full sm:h-[140px] lg:h-[160px]"
+            style={{
+              maskImage:
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 16%, #000 42%, rgba(0,0,0,0.42) 78%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 16%, #000 42%, rgba(0,0,0,0.42) 78%, transparent 100%)',
+            }}
+          >
+            <defs>
+              <linearGradient id="briefing-top-sage" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#087A42" stopOpacity="0.18" />
+                <stop offset="50%" stopColor="#16A05A" stopOpacity="0.10" />
+                <stop offset="100%" stopColor="#087A42" stopOpacity="0.16" />
+              </linearGradient>
+              <linearGradient id="briefing-top-emerald" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#043A1F" stopOpacity="0.72" />
+                <stop offset="42%" stopColor="#086E3B" stopOpacity="0.34" />
+                <stop offset="100%" stopColor="#043A1F" stopOpacity="0.06" />
+              </linearGradient>
+              <linearGradient id="briefing-top-gold" x1="0%" y1="50%" x2="100%" y2="50%">
+                <stop offset="0%" stopColor="#C99726" stopOpacity="0.4" />
+                <stop offset="38%" stopColor="#F5DDA0" stopOpacity="0.88" />
+                <stop offset="78%" stopColor="#E5C158" stopOpacity="0.52" />
+                <stop offset="100%" stopColor="#C99726" stopOpacity="0.12" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0 0 L1440 0 L1440 62 C 1180 112, 860 44, 520 98 C 280 136, 120 82, 0 118 Z"
+              fill="url(#briefing-top-sage)"
+            />
+            <path
+              d="M0 0 L1440 0 L1440 34 C 1120 74, 780 18, 430 74 C 225 106, 95 66, 0 92 Z"
+              fill="url(#briefing-top-emerald)"
+            />
+            <path
+              d="M0 92 C 95 66, 225 106, 430 74 C 780 18, 1120 74, 1440 34"
+              stroke="url(#briefing-top-gold)"
+              strokeWidth="1.5"
+            />
+          </svg>
+
           {/* Warm Ivory & Golden-Hour Atmospheric Glow */}
           <div className="absolute left-[10%] top-[20%] h-[420px] w-[540px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.9),transparent_76%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(8,122,66,0.12),transparent_76%)]" />
           <div className="absolute right-[8%] top-[16%] h-[420px] w-[520px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,215,127,0.22),rgba(8,122,66,0.08)_55%,transparent_78%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.14),rgba(0,168,90,0.16)_52%,transparent_78%)]" />
@@ -185,16 +231,16 @@ export function BusinessBriefingSection() {
             />
           </div>
 
-          {/* Upper-Left Emerald Organic Curve (top edge softly merged into background) */}
+          {/* Upper-Left Emerald Organic Curve (connected cleanly at top edge) */}
           <svg
             viewBox="0 0 360 360"
             fill="none"
-            className="absolute -left-8 top-0 z-0 h-[210px] w-[210px] sm:h-[260px] sm:w-[270px]"
+            className="absolute -left-8 -top-8 z-0 h-[210px] w-[210px] sm:-top-10 sm:h-[260px] sm:w-[270px]"
             style={{
               maskImage:
-                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 24%, #000 56%)',
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.42) 28%, #000 56%, rgba(0,0,0,0.42) 84%, transparent 100%)',
               WebkitMaskImage:
-                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 24%, #000 56%)',
+                'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.42) 28%, #000 56%, rgba(0,0,0,0.42) 84%, transparent 100%)',
             }}
           >
             <defs>

@@ -8,6 +8,7 @@ import { ConsultationPartnersSection } from '@/components/sections/consultation/
 import { TestimonialsSection } from '@/components/sections/testimonials/testimonials-section';
 import { LeadershipInsightsSection } from '@/components/sections/leadership/leadership-insights-section';
 import { BlogShowcaseSection } from '@/components/sections/blog/blog-showcase-section';
+import { FaqSection } from '@/components/sections/faq/faq-section';
 import { ContactSection } from '@/components/sections/contact/contact-section';
 import { BusinessBriefingSection } from '@/components/sections/newsletter/business-briefing-section';
 import { getLandingBlogArticles } from '@/features/blog/data';
@@ -219,6 +220,7 @@ export default async function UAEPage() {
       <TestimonialsSection />
       <LeadershipInsightsSection />
       <BlogShowcaseSection articles={articles} />
+      <FaqSection />
       <ContactSection />
       <BusinessBriefingSection />
     </>

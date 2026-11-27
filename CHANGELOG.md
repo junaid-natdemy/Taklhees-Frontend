@@ -1578,3 +1578,129 @@ This document is the **single source of truth** for all architectural, database,
 * **Date & Time:** 2026-11-26 11:44 (IST)
 * **Scope:** `src/components/sections/contact/contact-section.tsx`, `src/components/sections/newsletter/business-briefing-section.tsx`
 * **Verification & Proof:** `npm run type-check`, `npm run lint`, and `npm run build` (`25/25` pages) exited with code `0`.
+
+
+---
+
+### Entry #064 — Homepage Performance Optimization, 3D Splash Loader, Emerald Footer Redesign & `ThemeImage`
+* **Date & Time:** 2026-11-26 14:49 (IST)
+* **Scope:** `src/components/ui/3d-effect-loader.tsx`, `src/components/ui/theme-image.tsx`, `src/components/ui/desktop-smooth-scroll.tsx`, `src/hooks/use-section-in-view.ts`, `src/components/layout/footer.tsx`, `src/app/ae/layout.tsx`, `src/app/ae/page.tsx`, `next.config.ts`, `public/images/`
+* **Changes Applied:**
+  - Added branded `TakhleesSplashLoader` (`3d-effect-loader.tsx`), `ThemeImage` (theme-aware single-asset preloading), `DesktopSmoothScroll`, and `useSectionInView` pause controls for off-screen animations.
+  - Optimized homepage hero, skyline, consultation, drift-wall, and globe orb assets to lightweight `.webp` files and redesigned the emerald corporate `Footer` in `footer.tsx`.
+* **Verification & Proof:** Commit `4e99ed4`; `npm run type-check`, `npm run lint`, and `npm run build` exited with code `0`.
+
+
+---
+
+### Entry #065 — `DriftWall` WebP Assets, Mobile Toggle Responsiveness & Font Build Tuning
+* **Date & Time:** 2026-11-26 15:36 (IST)
+* **Scope:** `src/components/ui/drift-wall.tsx`, `src/components/ui/liquid-glass-toggle.tsx`, `src/components/ui/desktop-smooth-scroll.tsx`, `src/components/sections/`
+* **Changes Applied:**
+  - Migrated `DriftWall` cards to optimized `.webp` photography with `unoptimized` rendering, reduced mobile liquid-glass blur overhead, and refined scroll smoothing and font preloading.
+* **Verification & Proof:** Commit `b25a22b`; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #066 — Relative Scroll Flow Header Positioning (`Header`)
+* **Date & Time:** 2026-11-26 15:46 (IST)
+* **Scope:** `src/components/layout/header.tsx`
+* **Changes Applied:** Switched navbar capsule flow to relative document positioning so the floating header sits cleanly at the top hero without overlapping scrolled sections.
+* **Verification & Proof:** Commit `ab4e542`; `npm run type-check` and `npm run build` passed.
+
+
+---
+
+### Entry #067 — 60fps GPU Organic Liquid View Transition Theme Toggle & Asset Cleanup
+* **Date & Time:** 2026-11-26 16:54 (IST)
+* **Scope:** `src/components/layout/theme-toggle.tsx`, `src/app/globals.css`, `public/images/`
+* **Changes Applied:** Implemented GPU-accelerated View Transitions circular liquid-ink theme reveal (`::view-transition-group(root)`) respecting `prefers-reduced-motion`, and removed unused legacy image assets.
+* **Verification & Proof:** Commit `968f162`; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #068 — Single-Card Mobile Carousels with Prev/Next Controls (`ServicesSection` & `BlogShowcaseSection`)
+* **Date & Time:** 2026-11-26 17:16 (IST)
+* **Scope:** `src/components/sections/services/services-section.tsx`, `src/components/sections/blog/blog-showcase-section.tsx`
+* **Changes Applied:** Added single-card mobile carousel mode with accessible previous/next buttons for Services and Takhlees Journal sections on `< md` viewports.
+* **Verification & Proof:** Commit `b1db42b`; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #069 — Mobile Hero Layout Refinement, Compact `DriftWall` Height & `320px` Header Fit
+* **Date & Time:** 2026-11-26 17:29 (IST)
+* **Scope:** `src/components/sections/uae-hero.tsx`, `src/components/ui/drift-wall.tsx`, `src/components/layout/header.tsx`
+* **Changes Applied:** Tuned mobile hero spacing, tightened `DriftWall` vertical footprint, and ensured zero horizontal overflow in the navbar down to `320px` mobile screens.
+* **Verification & Proof:** Commit `0692cab`; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #070 — Full-Reload 3D Splash Loader with Arabic Title, Full-Bleed Wave & 3-Way Emblem Exit
+* **Date & Time:** 2026-11-26 20:43 (IST)
+* **Scope:** `src/components/ui/3d-effect-loader.tsx`, `src/app/globals.css`
+* **Changes Applied:** Enhanced `TakhleesSplashLoader` to display on every reload with Arabic branding (`تـخـلـيـص`), full-bleed emerald wave bottom transition, and 3-way emblem split exit animation.
+* **Verification & Proof:** Commit `5bda244`; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #071 — Zero-Jump Luxury FAQ Section (`FaqSection`), Dark Mode Fixes & Seamless Homepage Wave Continuity
+* **Date & Time:** 2026-11-27 09:32 (IST)
+* **Scope:** `src/components/sections/faq/faq-section.tsx`, `src/components/sections/faq/faq-interactive-panel.tsx`, `public/images/faq/`, `src/components/layout/footer.tsx`, `src/app/ae/page.tsx`
+* **Changes Applied:** Added luxury `FaqSection` with zero-layout-shift accordion transitions, paired Light/Dark Dubai skyline backdrops, refined homepage dark-mode contrast, and unified wave transitions into `Footer`.
+* **Verification & Proof:** Commit `ec51837`; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #072 — Complete Responsive `/ae/about` Page, 3D UAE Map CTA, Compact Trust Section & Global Dark Mode Audit
+* **Date & Time:** 2026-11-27 20:34 (IST)
+* **Scope:** `src/app/ae/about/page.tsx`, `src/app/globals.css`, `src/components/layout/header.tsx`, `src/components/layout/footer.tsx`, `src/components/ui/liquid-glass-button.tsx`, `src/components/ui/liquid-glass-navbar.tsx`, `src/components/ui/liquid-glass-toggle.tsx`, `src/components/sections/about/**`, `public/images/about/**`
+* **Problem Description:**
+  - `/ae/about` needed all 6 editorial sections (`AboutHero`, `WhoWeAreSection`, `WhatSetsUsApartSection`, `OurStoryJourney`, `TrustRecognitionSection`, `UaeWithinReachSection`) with bespoke luxury 3D UAE map artwork and accurate Emirate coordinate markers.
+  - Global Dark Mode had contrast and surface leaks: Tailwind v3 dropped non-standard opacity modifiers (`/78`, `/28`, `/12`, `/94`–`/98`, `shadow-xs`), `bg-[linear-gradient(...)]` overrode `dark:bg-*` on Trust category tabs and Emirate pills, `LiquidButton` had chalky white inset shadows, WebGL shaders tinted dark liquid drops mint/white, and the CTA section had a harsh center blend over a dimmed map.
+* **Changes Applied:**
+  - **About Page Architecture:** Built all 6 responsive sections in `src/components/sections/about/`, featuring normalized 7-Emirate markers over crisp 4K 3D limestone-and-gold UAE artwork (`uae-within-reach-3d.webp` & `uae-within-reach-3d-mobile.webp`), non-modal hover highlights, and seamless sculpted emerald/gold waves.
+  - **Compact Trust & Recognition Proportions:** Balanced section spacing (`760px` desktop height), scaled 3D glass exhibition plates (`276px` active / `240px` side) and marble pedestal, while preserving warm ivory certificate sheets inside smoked obsidian-emerald plates.
+  - **Global Dark Mode System & Shared Glass:** Updated `.dark` tokens in `globals.css` (`#050B08`, `#08140F`, `#0B1D15`, `#F4F0E8`, `#C1C8C1`, `#929D95`, `#20B765`, `#C9A45C`), moved `@media (hover: none)` blur caps below `.evidence-viewer-glass`, fixed `LiquidButton` dark shadows, tuned `liquid-glass-navbar` and `liquid-glass-toggle` GLSL `uDark` shaders, fixed `header.tsx` opacity classes and dropdown glass, and replaced dropped `/78` & `/28` classes across all About components.
+  - **CTA Half-Image Split Blend:** Restored 100% sunlit map brightness (`uae-within-reach-3d.webp`) with a smooth multi-stop horizontal emerald-black blend (`#050B08` → `transparent 55%`) and hid the pale top-wave mist in Dark Mode.
+* **Verification & Proof:** Commit `00d58b6`; Playwright verified across `1440×900`, `1280×800`, `1024×768`, `768×1024`, and `390×844` in both Dark and Light Modes (`0` console errors, `overflowX: false`); `npm run type-check`, `npm run lint`, and `npm run build` (`25/25` routes) passed with exit code `0`.
+
+
+---
+
+### Entry #073 — Production Client-Navigation Image Loading Fix (`unoptimized` WebP CDN Serving & Direct Section Imports)
+* **Date & Time:** 2026-11-27 22:42 (IST)
+* **Scope:** `next.config.ts`, `src/app/ae/about/page.tsx`, `src/components/sections/about/**`
+* **Problem Description:** On production client-side navigation (`/ae` → `/ae/about`), images across About sections stayed unloaded until a browser reload due to simultaneous cold-start `/_next/image` AVIF transcoding stalls (including `w=3840`), `next/dynamic` chunk waterfalls, `loading="lazy"` on primary visuals, and `whileInView` `opacity: 0` image wrappers.
+* **Changes Applied:**
+  - Removed `'image/avif'` from `images.formats` in `next.config.ts` (retaining fast `'image/webp'`).
+  - Switched `src/app/ae/about/page.tsx` from `next/dynamic` to direct static imports (`revalidate = 3600`).
+  - Added `unoptimized` and `loading="eager"` (`priority` on hero arch) for pre-compressed static `.webp` assets across all 6 About sections, enabled eager slide loading starting at Chapter 0 in `our-story-arch-frame.tsx`, and removed `initial={{ opacity: 0 }}` traps around primary scene image containers.
+* **Verification & Proof:** Commit `db4e27f`; verified via `next start` Playwright soft-navigation test (`/ae` → `/ae/about` without reload) confirming `complete: true`, full `naturalWidth`, and HTTP `200` on all visible images; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #074 — Bespoke Light & Dark Architectural Gallery Backdrops (`OurStoryJourney`)
+* **Date & Time:** 2026-11-27 22:48 (IST)
+* **Scope:** `public/images/about/our-story-bg-light.webp`, `public/images/about/our-story-bg-dark.webp`, `src/components/sections/about/our-story/our-story-skyline.tsx`
+* **Problem Description:** The **Our Story & Journey** background felt visually empty compared to adjacent architectural sections.
+* **Changes Applied:**
+  - Generated and compressed `our-story-bg-light.webp` (`21 KB`, sunlit travertine limestone colonnade arches, champagne-gold inlays, upper-right palm shadows, misty skyline floor reflection) and `our-story-bg-dark.webp` (`15 KB`, obsidian-emerald stone gallery with gold rim highlights and ambient mist).
+  - Integrated both via `<ThemeImage>` (`unoptimized`, `loading="eager"`) with top/bottom boundary feathering and a localized left-side readability veil.
+* **Verification & Proof:** Commit `50afe3e`; visually verified Light & Dark Mode Playwright captures at `1440×900` and `390×844`; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #075 — Optical Liquid-Glass Bezel Frame Around `OurStoryArchFrame`
+* **Date & Time:** 2026-11-27 23:08 (IST)
+* **Scope:** `src/components/sections/about/our-story/our-story-arch-frame.tsx`
+* **Changes Applied:**
+  - Upgraded both `OurStoryArchFrame` (Desktop/Tablet) and `OurStoryMobileArchImage` (Mobile) with a translucent optical liquid-glass bezel collar (`backdrop-blur-md backdrop-saturate-150`), radial upper-left specular meniscus glare, emerald-to-champagne-gold refraction gradient, shared `ArchGlassBezelOverlay` SVG outer/inner specular rim strokes, and unclipped `drop-shadow` depth.
+* **Verification & Proof:** Commit `fc278b6`; visually verified Light & Dark Mode Playwright captures at `1440×900` and `390×844`; `npm run type-check`, `npm run lint`, and `npm run build` passed (`25/25` routes).

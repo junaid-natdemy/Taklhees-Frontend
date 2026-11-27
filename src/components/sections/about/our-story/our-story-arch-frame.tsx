@@ -37,8 +37,88 @@ interface OurStoryArchFrameProps {
 }
 
 /**
- * Multi-layered sculpted UAE architectural photograph container for Desktop & Tablet.
- * Keeps frame geometry 100% stable across chapter crossfades with zero layout shift.
+ * Shared optical liquid-glass SVG bezel strokes (outer specular edge, champagne-gold
+ * refraction contour, and subtle inner meniscus reflection) aligned to the organic arch.
+ */
+function ArchGlassBezelOverlay({
+  gradPrefix,
+  subtle = false,
+}: {
+  gradPrefix: string;
+  subtle?: boolean;
+}) {
+  const outerRimId = `${gradPrefix}-outer-rim`;
+  const innerRimId = `${gradPrefix}-inner-rim`;
+
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      className="pointer-events-none absolute inset-0 z-[3] h-full w-full"
+    >
+      <defs>
+        <linearGradient id={outerRimId} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
+          <stop offset="28%" stopColor="#E5C883" stopOpacity="0.88" />
+          <stop offset="62%" stopColor="#0A6B36" stopOpacity="0.28" />
+          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.85" />
+        </linearGradient>
+        <linearGradient id={innerRimId} x1="0.1" y1="0" x2="0.9" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.88" />
+          <stop offset="45%" stopColor="#C9A45C" stopOpacity="0.65" />
+          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.68" />
+        </linearGradient>
+      </defs>
+
+      {/* Soft refractive glass bevel halo */}
+      <path
+        d={ARCH_OUTLINE_100}
+        fill="none"
+        stroke="rgba(255,255,255,0.42)"
+        strokeWidth={subtle ? '2.4' : '2.8'}
+        vectorEffect="non-scaling-stroke"
+        className="dark:stroke-[#20B765]/20"
+      />
+
+      {/* Primary outer liquid-glass perimeter edge (Light Mode) */}
+      <path
+        d={ARCH_OUTLINE_100}
+        fill="none"
+        stroke={`url(#${outerRimId})`}
+        strokeWidth={subtle ? '1.35' : '1.55'}
+        vectorEffect="non-scaling-stroke"
+        className="dark:hidden"
+      />
+
+      {/* Primary outer smoked-gold liquid-glass rim (Dark Mode) */}
+      <path
+        d={ARCH_OUTLINE_100}
+        fill="none"
+        stroke={`url(#${innerRimId})`}
+        strokeOpacity="0.58"
+        strokeWidth={subtle ? '1.25' : '1.45'}
+        vectorEffect="non-scaling-stroke"
+        className="hidden dark:block"
+      />
+
+      {/* Upper crown liquid meniscus specular highlight */}
+      <path
+        d={GOLD_CONTOUR_RIM}
+        fill="none"
+        stroke="rgba(255,255,255,0.82)"
+        strokeWidth={subtle ? '1.3' : '1.6'}
+        strokeLinecap="round"
+        vectorEffect="non-scaling-stroke"
+        className="dark:stroke-white/25"
+      />
+    </svg>
+  );
+}
+
+/**
+ * Multi-layered sculpted UAE architectural photograph container with a translucent
+ * optical liquid-glass frame for Desktop & Tablet.
  */
 export function OurStoryArchFrame({
   milestones,
@@ -47,10 +127,16 @@ export function OurStoryArchFrame({
   shouldLoadAllSlides = true,
   className,
 }: OurStoryArchFrameProps) {
-  const clipId = `arch-clip-${useId().replace(/:/g, '')}`;
+  const uid = useId().replace(/:/g, '');
+  const clipId = `arch-clip-${uid}`;
 
   return (
-    <div className={cn('relative aspect-[3/2] w-full', className)}>
+    <div
+      className={cn(
+        'relative aspect-[3/2] w-full [filter:drop-shadow(0_22px_36px_rgba(6,61,41,0.16))] dark:[filter:drop-shadow(0_26px_42px_rgba(0,0,0,0.72))]',
+        className
+      )}
+    >
       <svg
         className="pointer-events-none absolute h-0 w-0 overflow-hidden"
         aria-hidden="true"
@@ -62,7 +148,7 @@ export function OurStoryArchFrame({
         </defs>
       </svg>
 
-      {/* Layer 2: Coordinated Deep Emerald Depth Silhouette */}
+      {/* Layer 0: Coordinated Deep Emerald Depth Silhouette */}
       <svg
         aria-hidden="true"
         viewBox="0 0 100 100"
@@ -77,75 +163,82 @@ export function OurStoryArchFrame({
         />
       </svg>
 
-      {/* Layer 1: Sculpted Photographic Arch Container (Crossfade Only) */}
+      {/* Layer 1: Optical Liquid-Glass Outer Frame & Refracting Border Collar */}
       <div
-        className="relative z-[1] h-full w-full overflow-hidden bg-[#E8E3D5] shadow-[0_24px_52px_-20px_rgba(6,61,41,0.22)] dark:bg-[#08140F]"
+        className="relative z-[1] h-full w-full overflow-hidden bg-[linear-gradient(142deg,rgba(255,255,255,0.68)_0%,rgba(240,247,243,0.34)_48%,rgba(255,252,244,0.60)_100%)] p-[10px] backdrop-blur-md backdrop-saturate-150 dark:bg-[linear-gradient(142deg,rgba(18,42,30,0.78)_0%,rgba(10,24,17,0.62)_50%,rgba(14,34,24,0.74)_100%)] sm:p-[12px] lg:p-[14px]"
         style={{
           clipPath: `url(#${clipId})`,
           WebkitClipPath: `url(#${clipId})`,
         }}
       >
-        {milestones.map((chapter, index) => {
-          const isCurrent = activeIndex === index;
-          const isAdjacent = Math.abs(activeIndex - index) <= 1;
-
-          return (
-              <Image
-              key={chapter.id}
-              src={chapter.imageSrc}
-              alt={chapter.imageAlt}
-              fill
-              loading={
-                shouldLoadAllSlides && isAdjacent
-                  ? 'eager'
-                  : 'lazy'
-              }
-              unoptimized
-              sizes={sizes}
-              aria-hidden={!isCurrent}
-              className={cn(
-                'object-cover transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
-                chapter.imagePosition ?? 'object-center',
-                isCurrent
-                  ? 'scale-100 opacity-100 motion-reduce:scale-100'
-                  : 'scale-[1.025] opacity-0 motion-reduce:scale-100'
-              )}
-            />
-          );
-        })}
-
-        {/* Subtle Inner Architectural Edge Vignette */}
+        {/* Curved Liquid-Glass Specular Meniscus Across Border & Upper Rim */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_64%,rgba(6,61,41,0.16)_100%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_64%,rgba(5,11,8,0.42)_100%)]"
+          className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(88%_58%_at_18%_8%,rgba(255,255,255,0.82)_0%,transparent_58%),linear-gradient(135deg,rgba(20,103,54,0.10)_0%,transparent_38%,transparent_66%,rgba(201,164,92,0.18)_100%)] dark:bg-[radial-gradient(88%_58%_at_18%_8%,rgba(255,255,255,0.16)_0%,transparent_58%),linear-gradient(135deg,rgba(32,183,101,0.14)_0%,transparent_38%,transparent_66%,rgba(205,170,104,0.20)_100%)]"
         />
+
+        {/* Layer 2: Inner Sculpted Photographic Arch Seated Inside Liquid Glass */}
+        <div
+          className="relative z-[1] h-full w-full overflow-hidden bg-[#E8E3D5] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.75)] dark:bg-[#08140F] dark:shadow-[inset_0_0_0_1px_rgba(205,170,104,0.28)]"
+          style={{
+            clipPath: `url(#${clipId})`,
+            WebkitClipPath: `url(#${clipId})`,
+          }}
+        >
+          {milestones.map((chapter, index) => {
+            const isCurrent = activeIndex === index;
+            const isAdjacent = Math.abs(activeIndex - index) <= 1;
+
+            return (
+              <Image
+                key={chapter.id}
+                src={chapter.imageSrc}
+                alt={chapter.imageAlt}
+                fill
+                loading={
+                  shouldLoadAllSlides && isAdjacent
+                    ? 'eager'
+                    : 'lazy'
+                }
+                unoptimized
+                sizes={sizes}
+                aria-hidden={!isCurrent}
+                className={cn(
+                  'object-cover transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
+                  chapter.imagePosition ?? 'object-center',
+                  isCurrent
+                    ? 'scale-100 opacity-100 motion-reduce:scale-100'
+                    : 'scale-[1.025] opacity-0 motion-reduce:scale-100'
+                )}
+              />
+            );
+          })}
+
+          {/* Subtle Inner Architectural Edge Vignette & Glass Lip */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_64%,rgba(6,61,41,0.16)_100%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_64%,rgba(5,11,8,0.42)_100%)]"
+          />
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-0 z-10 h-full w-full"
+          >
+            <path
+              d={ARCH_OUTLINE_100}
+              fill="none"
+              stroke="rgba(255,255,255,0.72)"
+              strokeWidth="1.25"
+              vectorEffect="non-scaling-stroke"
+              className="dark:stroke-[#C9A45C]/35"
+            />
+          </svg>
+        </div>
       </div>
 
-      {/* Layer 3: Refined Thin Champagne-Gold Architectural Rim */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        className="pointer-events-none absolute inset-0 z-[2] h-full w-full"
-      >
-        <path
-          d={ARCH_OUTLINE_100}
-          fill="none"
-          stroke="#C9A45C"
-          strokeOpacity="0.28"
-          strokeWidth="0.9"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d={GOLD_CONTOUR_RIM}
-          fill="none"
-          stroke="#C9A45C"
-          strokeOpacity="0.72"
-          strokeWidth="1.45"
-          strokeLinecap="round"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
+      {/* Layer 3: Crisp Outer Optical Liquid-Glass Rim & Crown Specular Arc */}
+      <ArchGlassBezelOverlay gradPrefix={`desk-${uid}`} />
     </div>
   );
 }
@@ -155,16 +248,17 @@ interface OurStoryMobileArchCardProps {
 }
 
 /**
- * Lightweight single-image UAE architectural frame for mobile vertical cards
+ * Lightweight single-image UAE architectural optical liquid-glass frame for mobile vertical cards
  * so mobile never downloads off-screen desktop slide images.
  */
 export function OurStoryMobileArchImage({
   milestone,
 }: OurStoryMobileArchCardProps) {
-  const clipId = `arch-mob-clip-${useId().replace(/:/g, '')}`;
+  const uid = useId().replace(/:/g, '');
+  const clipId = `arch-mob-clip-${uid}`;
 
   return (
-    <div className="relative aspect-[3/2] w-full">
+    <div className="relative aspect-[3/2] w-full [filter:drop-shadow(0_16px_26px_rgba(6,61,41,0.14))] dark:[filter:drop-shadow(0_18px_28px_rgba(0,0,0,0.7))]">
       <svg
         className="pointer-events-none absolute h-0 w-0 overflow-hidden"
         aria-hidden="true"
@@ -190,43 +284,57 @@ export function OurStoryMobileArchImage({
         />
       </svg>
 
+      {/* Mobile Optical Liquid-Glass Outer Frame */}
       <div
-        className="relative z-[1] h-full w-full overflow-hidden bg-[#E8E3D5] shadow-[0_16px_34px_-16px_rgba(6,61,41,0.22)] dark:bg-[#08140F]"
+        className="relative z-[1] h-full w-full overflow-hidden bg-[linear-gradient(142deg,rgba(255,255,255,0.68)_0%,rgba(240,247,243,0.34)_48%,rgba(255,252,244,0.60)_100%)] p-[8px] backdrop-blur-md backdrop-saturate-150 dark:bg-[linear-gradient(142deg,rgba(18,42,30,0.78)_0%,rgba(10,24,17,0.62)_50%,rgba(14,34,24,0.74)_100%)] sm:p-[10px]"
         style={{
           clipPath: `url(#${clipId})`,
           WebkitClipPath: `url(#${clipId})`,
         }}
       >
-        <Image
-          src={milestone.imageSrc}
-          alt={milestone.imageAlt}
-          fill
-          loading="eager"
-          unoptimized
-          sizes="(max-width: 767px) 92vw, 520px"
-          className={cn(
-            'object-cover',
-            milestone.imagePosition ?? 'object-center'
-          )}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(88%_58%_at_18%_8%,rgba(255,255,255,0.80)_0%,transparent_58%),linear-gradient(135deg,rgba(20,103,54,0.10)_0%,transparent_38%,transparent_66%,rgba(201,164,92,0.18)_100%)] dark:bg-[radial-gradient(88%_58%_at_18%_8%,rgba(255,255,255,0.14)_0%,transparent_58%),linear-gradient(135deg,rgba(32,183,101,0.12)_0%,transparent_38%,transparent_66%,rgba(205,170,104,0.18)_100%)]"
         />
+
+        <div
+          className="relative z-[1] h-full w-full overflow-hidden bg-[#E8E3D5] dark:bg-[#08140F]"
+          style={{
+            clipPath: `url(#${clipId})`,
+            WebkitClipPath: `url(#${clipId})`,
+          }}
+        >
+          <Image
+            src={milestone.imageSrc}
+            alt={milestone.imageAlt}
+            fill
+            loading="eager"
+            unoptimized
+            sizes="(max-width: 767px) 92vw, 520px"
+            className={cn(
+              'object-cover',
+              milestone.imagePosition ?? 'object-center'
+            )}
+          />
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-0 z-10 h-full w-full"
+          >
+            <path
+              d={ARCH_OUTLINE_100}
+              fill="none"
+              stroke="rgba(255,255,255,0.70)"
+              strokeWidth="1.15"
+              vectorEffect="non-scaling-stroke"
+              className="dark:stroke-[#C9A45C]/35"
+            />
+          </svg>
+        </div>
       </div>
 
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        className="pointer-events-none absolute inset-0 z-[2] h-full w-full"
-      >
-        <path
-          d={GOLD_CONTOUR_RIM}
-          fill="none"
-          stroke="#C9A45C"
-          strokeOpacity="0.65"
-          strokeWidth="1.25"
-          strokeLinecap="round"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
+      <ArchGlassBezelOverlay gradPrefix={`mob-${uid}`} subtle />
     </div>
   );
 }

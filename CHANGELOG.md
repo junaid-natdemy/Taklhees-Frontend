@@ -1704,3 +1704,67 @@ This document is the **single source of truth** for all architectural, database,
 * **Changes Applied:**
   - Upgraded both `OurStoryArchFrame` (Desktop/Tablet) and `OurStoryMobileArchImage` (Mobile) with a translucent optical liquid-glass bezel collar (`backdrop-blur-md backdrop-saturate-150`), radial upper-left specular meniscus glare, emerald-to-champagne-gold refraction gradient, shared `ArchGlassBezelOverlay` SVG outer/inner specular rim strokes, and unclipped `drop-shadow` depth.
 * **Verification & Proof:** Commit `fc278b6`; visually verified Light & Dark Mode Playwright captures at `1440×900` and `390×844`; `npm run type-check`, `npm run lint`, and `npm run build` passed (`25/25` routes).
+
+
+---
+
+### Entry #076 — Branch Discovery Hero Final Implementation (`BranchHero` Phase 1)
+* **Date & Time:** 2026-11-28 10:08 (IST)
+* **Scope:** `public/images/branches/branch-hero-desktop.webp`, `public/images/branches/branch-hero-mobile.webp`, `src/components/sections/branches/branch-hero.tsx`, `src/components/sections/branches/index.ts`, `src/app/ae/branches/page.tsx`
+* **Problem Description:** Replaced previous Branch Hero iterations with the final architectural art direction aligned with the supplied visual reference while remaining visually distinct from the About Hero.
+* **Changes Applied:**
+  - Created two native-resolution unbranded architectural photographs (`branch-hero-desktop.webp` `1376×768`, `148.2 KB`; `branch-hero-mobile.webp` `896×1200`, `107.0 KB`) of a contemporary UAE travertine limestone pavilion with cantilevered illuminated mashrabiya canopy, receding colonnade with date palms, warm glass lobby, and polished stone plaza reflections.
+  - Built a full-width hero (`xl:min-h-[660px]`) with slightly zoomed-out architectural framing (`md:w-[92%] lg:w-[86%] xl:w-[84%]` anchored right with seamless top and left background blending into `#FAF9F5` / `#050B08`), framed by a sweeping fine champagne-gold-to-emerald architectural contour arc (`svg` `pathLength` reveal), layered emerald & champagne-gold bottom waves, upper-left editorial typography (`OUR BRANCH NETWORK`, single `<h1>` `Find Your Nearest Takhlees Branch` with champagne `Branch` and signature curved SVG underline, supporting description), and the existing `LiquidButton` (`variant="emerald"`) scrolling to `#branch-directory` (`-72px` header offset).
+  - Removed all generic stats bars, feature rows, secondary CTAs, floating cards, and About-Hero arch/wave patterns.
+  - Configured theme-aware Light Mode (`#FAF9F5` subtle sky feathering, `#0B3B28` / `#146736` typography) and Dark Mode (`#050B08` / `#061810` controlled dusk sky & left scrims preserving warm lit stone, `#F4F0E8` / `#D2B475` typography).
+* **Verification & Proof:** Visually verified Light & Dark Mode Playwright captures (`1440×900`, `1024×768`, `768×1024`, `390×844`) with `h1Count: 1`, `overflowX: false`, and zero console/page errors; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #077 — Featured Branch Experience (`FeaturedBranchExperience`, Section 02)
+* **Date & Time:** 2026-11-28 10:47 (IST)
+* **Scope:** `src/components/ui/polaroid-line-carousel.tsx`, `src/features/branches/featured-branches.ts`, `src/components/sections/branches/featured-branch-experience.tsx`, `src/components/sections/branches/index.ts`, `src/app/ae/branches/page.tsx`
+* **Changes Applied:**
+  - Integrated `PolaroidLineCarousel` into `src/components/ui/polaroid-line-carousel.tsx` with spring-damped rope-hang physics, curved champagne-gold rope, metallic gold clips, translucent liquid-glass Polaroid frames (`backdrop-filter: blur(16px) saturate(165%)`, optical meniscus inset shadows, upper-left specular glare), `IntersectionObserver` offscreen pause, `prefers-reduced-motion` support, keyboard `ArrowLeft`/`ArrowRight` navigation, and `initialIndex={2}` centering.
+  - Created `src/features/branches/featured-branches.ts` with a curated 5-branch subset (`Al Zahiyah`, `Khalidiya`, `Madina Zayed`, `Al Ain`, `MBZ 12`), 5 distinct optimized architectural branch photographs (`featured-*.webp`, `760×646`), and verified Google Maps search links (`mapUrl`).
+  - Implemented `FeaturedBranchExperience` with architectural gallery backdrops (`our-story-bg-light.webp` / `our-story-bg-dark.webp`), layered emerald & champagne-gold top and bottom waves, `Explore Our Key Branches` `<h2>` (with curved SVG underline), `LiquidButton` (`variant="glass"`, `size="icon"`) `< >` controls, clickable pagination indicators (`01/05`–`05/05`), and synchronized `View on Map` action on the active branch.
+* **Verification & Proof:** Verified Playwright Light & Dark Mode captures (`1440×900`, `1024×768`, `390×844`), `overflowX: false`, zero console/page errors; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #078 — Dual-Mode Branch Directory V3 (`BranchDirectorySection`, Section 03)
+* **Date & Time:** 2026-11-28 12:58 (IST)
+* **Scope:** `src/features/branches/branches-data.ts`, `src/components/sections/branches/directory/*`, `src/components/sections/branches/branch-directory-section.tsx`, `src/components/sections/branches/index.ts`, `src/app/ae/branches/page.tsx`
+* **Changes Applied:**
+  - Created single canonical 17-branch dataset `BRANCHES` in `src/features/branches/branches-data.ts` preserving exact branch names (`1. MBZ 12` through `17. Khalidiya`), stable unique IDs, and detail routes (`/ae/branches/[slug]`) without inventing unverified addresses, hours, phone numbers, or emirate assignments.
+  - Upgraded `BranchDirectoryToolbar` with bespoke liquid-glass search (`backdrop-blur-xl`, optical meniscus inset shadows), liquid-glass filter pills (`All Locations (17)`, `Featured (5)`), and glass sort control (`Default Order`, `Name: A–Z`, `Name: Z–A`), synchronized across both modes.
+  - Upgraded **Mode A (`BranchNavigator`)** to **V3 Architectural Liquid Glass**: asymmetrical flowing ribbon silhouettes with curved S-wave `clipPath` photo-to-glass boundaries, genuine translucent warm-ivory/smoked-emerald glass (`backdrop-blur-xl backdrop-saturate-150`, diagonal liquid sheen, 3D meniscus inset highlights), deep emerald translucent active ribbon, neutral travertine-and-bronze geometric fallback plates (`BranchVisualPlate`, zero logo-in-photo-box), curved champagne-gold vertical rail, glass medallions (`01`–`05`), circular liquid-glass bottom navigation arrows, editorial `01–05 OF 17 LOCATIONS` counter + progress bar, and 5-by-5 windowed replacement (`1–5` → `6–10` → `11–15` → `16–17`).
+  - Upgraded **Mode B (`BranchCardGallery`)** with coordinated `AnimatePresence` mode transitions, `ALL BRANCH LOCATIONS` subheader, responsive 1/2/3/4-column architectural card grid displaying all matching branches immediately, `Show Less ↑` restoration, and organic top/bottom emerald & champagne waves over a subtle architectural gallery backdrop.
+* **Verification & Proof:** All Playwright V2 acceptance tests (5-by-5 replacement paging `01–05`→`06–10`→`01–05`, live search, empty state + reset, filter, sort, expand/collapse) passed with `overflowX: false` and zero console/page errors across `1440×900`, `1024×768`, and `390×844` Light & Dark modes; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #077 — Featured Branch Experience (`FeaturedBranchExperience`, Section 02)
+* **Date & Time:** 2026-11-28 10:47 (IST)
+* **Scope:** `src/components/ui/polaroid-line-carousel.tsx`, `src/features/branches/featured-branches.ts`, `src/components/sections/branches/featured-branch-experience.tsx`, `src/components/sections/branches/index.ts`, `src/app/ae/branches/page.tsx`
+* **Changes Applied:**
+  - Integrated `PolaroidLineCarousel` into `src/components/ui/polaroid-line-carousel.tsx` with spring-damped rope-hang physics, curved champagne-gold rope, metallic gold clips, translucent liquid-glass Polaroid frames (`backdrop-filter: blur(16px) saturate(165%)`, optical meniscus inset shadows, upper-left specular glare), `IntersectionObserver` offscreen pause, `prefers-reduced-motion` support, keyboard `ArrowLeft`/`ArrowRight` navigation, and `initialIndex={2}` centering.
+  - Created `src/features/branches/featured-branches.ts` with a curated 5-branch subset (`Al Zahiyah`, `Khalidiya`, `Madina Zayed`, `Al Ain`, `MBZ 12`), 5 distinct optimized architectural branch photographs (`featured-*.webp`, `760×646`), and verified Google Maps search links (`mapUrl`).
+  - Implemented `FeaturedBranchExperience` with architectural gallery backdrops (`our-story-bg-light.webp` / `our-story-bg-dark.webp`), layered emerald & champagne-gold top and bottom waves, `Explore Our Key Branches` `<h2>` (with curved SVG underline), `LiquidButton` (`variant="glass"`, `size="icon"`) `< >` controls, clickable pagination indicators (`01/05`–`05/05`), and synchronized `View on Map` action on the active branch.
+* **Verification & Proof:** Verified Playwright Light & Dark Mode captures (`1440×900`, `1024×768`, `390×844`), `overflowX: false`, zero console/page errors; `npm run type-check`, `npm run lint`, and `npm run build` passed.
+
+
+---
+
+### Entry #078 — Dual-Mode Branch Directory V3 (`BranchDirectorySection`, Section 03)
+* **Date & Time:** 2026-11-28 12:58 (IST)
+* **Scope:** `src/features/branches/branches-data.ts`, `src/components/sections/branches/directory/*`, `src/components/sections/branches/branch-directory-section.tsx`, `src/components/sections/branches/index.ts`, `src/app/ae/branches/page.tsx`
+* **Changes Applied:**
+  - Created single canonical 17-branch dataset `BRANCHES` in `src/features/branches/branches-data.ts` preserving exact branch names (`1. MBZ 12` through `17. Khalidiya`), stable unique IDs, and detail routes (`/ae/branches/[slug]`) without inventing unverified addresses, hours, phone numbers, or emirate assignments.
+  - Upgraded `BranchDirectoryToolbar` with bespoke liquid-glass search (`backdrop-blur-xl`, optical meniscus inset shadows), liquid-glass filter pills (`All Locations (17)`, `Featured (5)`), and glass sort control (`Default Order`, `Name: A–Z`, `Name: Z–A`), synchronized across both modes.
+  - Upgraded **Mode A (`BranchNavigator`)** to **V3 Architectural Liquid Glass**: asymmetrical flowing ribbon silhouettes with curved S-wave `clipPath` photo-to-glass boundaries, genuine translucent warm-ivory/smoked-emerald glass (`backdrop-blur-xl backdrop-saturate-150`, diagonal liquid sheen, 3D meniscus inset highlights), deep emerald translucent active ribbon, neutral travertine-and-bronze geometric fallback plates (`BranchVisualPlate`, zero logo-in-photo-box), curved champagne-gold vertical rail, glass medallions (`01`–`05`), circular liquid-glass bottom navigation arrows, editorial `01–05 OF 17 LOCATIONS` counter + progress bar, and 5-by-5 windowed replacement (`1–5` → `6–10` → `11–15` → `16–17`).
+  - Upgraded **Mode B (`BranchCardGallery`)** with coordinated `AnimatePresence` mode transitions, `ALL BRANCH LOCATIONS` subheader, responsive 1/2/3/4-column architectural card grid displaying all matching branches immediately, `Show Less ↑` restoration, and organic top/bottom emerald & champagne waves over a subtle architectural gallery backdrop.
+* **Verification & Proof:** All Playwright V2 acceptance tests (5-by-5 replacement paging `01–05`→`06–10`→`01–05`, live search, empty state + reset, filter, sort, expand/collapse) passed with `overflowX: false` and zero console/page errors across `1440×900`, `1024×768`, and `390×844` Light & Dark modes; `npm run type-check`, `npm run lint`, and `npm run build` passed.
